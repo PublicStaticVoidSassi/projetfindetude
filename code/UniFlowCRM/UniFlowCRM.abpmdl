@@ -1,0 +1,104 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.LeptonXLiteTheme": {
+      "version": "5.2.0",
+      "isInstalled": true,
+      "creationTime": "04/20/2026 08:16:45 +00:00"
+    },
+    "Volo.Abp.Account": {
+      "version": "10.2.0",
+      "isInstalled": true,
+      "creationTime": "04/20/2026 08:16:45 +00:00"
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "10.2.0",
+      "isInstalled": true,
+      "creationTime": "04/20/2026 08:16:45 +00:00"
+    },
+    "Volo.Abp.Identity": {
+      "version": "10.2.0",
+      "isInstalled": true,
+      "creationTime": "04/20/2026 08:16:45 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "10.2.0",
+      "isInstalled": true,
+      "creationTime": "04/20/2026 08:16:45 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "10.2.0",
+      "isInstalled": true,
+      "creationTime": "04/20/2026 08:16:45 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "10.2.0",
+      "isInstalled": true,
+      "creationTime": "04/20/2026 08:16:45 +00:00"
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "UniFlowCRM.Application": {
+      "path": "src/UniFlowCRM.Application/UniFlowCRM.Application.abppkg",
+      "folder": "src"
+    },
+    "UniFlowCRM.Application.Tests": {
+      "path": "test/UniFlowCRM.Application.Tests/UniFlowCRM.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "UniFlowCRM.Domain.Shared": {
+      "path": "src/UniFlowCRM.Domain.Shared/UniFlowCRM.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "UniFlowCRM.Application.Contracts": {
+      "path": "src/UniFlowCRM.Application.Contracts/UniFlowCRM.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "UniFlowCRM.HttpApi": {
+      "path": "src/UniFlowCRM.HttpApi/UniFlowCRM.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "UniFlowCRM.HttpApi.Client": {
+      "path": "src/UniFlowCRM.HttpApi.Client/UniFlowCRM.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "UniFlowCRM.EntityFrameworkCore.Tests": {
+      "path": "test/UniFlowCRM.EntityFrameworkCore.Tests/UniFlowCRM.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "UniFlowCRM.EntityFrameworkCore": {
+      "path": "src/UniFlowCRM.EntityFrameworkCore/UniFlowCRM.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "UniFlowCRM.TestBase": {
+      "path": "test/UniFlowCRM.TestBase/UniFlowCRM.TestBase.abppkg",
+      "folder": "test"
+    },
+    "UniFlowCRM.Domain.Tests": {
+      "path": "test/UniFlowCRM.Domain.Tests/UniFlowCRM.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "UniFlowCRM.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/UniFlowCRM.HttpApi.Client.ConsoleTestApp/UniFlowCRM.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "UniFlowCRM.DbMigrator": {
+      "path": "src/UniFlowCRM.DbMigrator/UniFlowCRM.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "UniFlowCRM.HttpApi.Host": {
+      "path": "src/UniFlowCRM.HttpApi.Host/UniFlowCRM.HttpApi.Host.abppkg",
+      "folder": "src"
+    },
+    "UniFlowCRM.Domain": {
+      "path": "src/UniFlowCRM.Domain/UniFlowCRM.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}

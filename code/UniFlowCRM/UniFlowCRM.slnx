@@ -1,0 +1,20 @@
+<Solution>
+    <Folder Name="/src/">
+        <Project Path="src/UniFlowCRM.Application.Contracts/UniFlowCRM.Application.Contracts.csproj" />
+        <Project Path="src/UniFlowCRM.Application/UniFlowCRM.Application.csproj" />
+        <Project Path="src/UniFlowCRM.DbMigrator/UniFlowCRM.DbMigrator.csproj" />
+        <Project Path="src/UniFlowCRM.Domain.Shared/UniFlowCRM.Domain.Shared.csproj" />
+        <Project Path="src/UniFlowCRM.Domain/UniFlowCRM.Domain.csproj" />
+        <Project Path="src/UniFlowCRM.EntityFrameworkCore/UniFlowCRM.EntityFrameworkCore.csproj" />
+        <Project Path="src/UniFlowCRM.HttpApi.Client/UniFlowCRM.HttpApi.Client.csproj" />
+        <Project Path="src/UniFlowCRM.HttpApi.Host/UniFlowCRM.HttpApi.Host.csproj" />
+    </Folder>
+    <Folder Name="/test/">
+        <Project Path="src/UniFlowCRM.HttpApi/UniFlowCRM.HttpApi.csproj" />
+        <Project Path="test/UniFlowCRM.Application.Tests/UniFlowCRM.Application.Tests.csproj" />
+        <Project Path="test/UniFlowCRM.Domain.Tests/UniFlowCRM.Domain.Tests.csproj" />
+        <Project Path="test/UniFlowCRM.EntityFrameworkCore.Tests/UniFlowCRM.EntityFrameworkCore.Tests.csproj" />
+        <Project Path="test/UniFlowCRM.HttpApi.Client.ConsoleTestApp/UniFlowCRM.HttpApi.Client.ConsoleTestApp.csproj" />
+        <Project Path="test/UniFlowCRM.TestBase/UniFlowCRM.TestBase.csproj" />
+    </Folder>
+</Solution>
