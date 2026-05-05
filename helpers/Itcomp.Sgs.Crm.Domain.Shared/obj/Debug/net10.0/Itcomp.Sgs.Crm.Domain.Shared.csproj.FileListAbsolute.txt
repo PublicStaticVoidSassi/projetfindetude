@@ -1,0 +1,15 @@
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\bin\Debug\net10.0\Itcomp.Sgs.Crm.Domain.Shared.deps.json
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\bin\Debug\net10.0\Itcomp.Sgs.Crm.Domain.Shared.dll
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\bin\Debug\net10.0\Itcomp.Sgs.Crm.Domain.Shared.pdb
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\obj\Debug\net10.0\Itcomp.Sgs.Crm.Domain.Shared.csproj.AssemblyReference.cache
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\obj\Debug\net10.0\Itcomp.Sgs.Crm.Domain.Shared.EmbeddedFilesManifest.cache
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\obj\Debug\net10.0\Itcomp.Sgs.Crm.Domain.Shared.GeneratedMSBuildEditorConfig.editorconfig
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\obj\Debug\net10.0\Itcomp.Sgs.Crm.Domain.Shared.AssemblyInfoInputs.cache
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\obj\Debug\net10.0\Itcomp.Sgs.Crm.Domain.Shared.AssemblyInfo.cs
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\obj\Debug\net10.0\Itcomp.Sgs.Crm.Domain.Shared.csproj.CoreCompileInputs.cache
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\obj\Debug\net10.0\Itcomp.Sgs.Crm.Domain.Shared.sourcelink.json
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\obj\Debug\net10.0\Itcomp.Sgs.Crm.Domain.Shared.csproj.Fody.CopyLocal.cache
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\obj\Debug\net10.0\Itcomp.Sgs.Crm.Domain.Shared.dll
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\obj\Debug\net10.0\refint\Itcomp.Sgs.Crm.Domain.Shared.dll
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\obj\Debug\net10.0\Itcomp.Sgs.Crm.Domain.Shared.pdb
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain.Shared\obj\Debug\net10.0\ref\Itcomp.Sgs.Crm.Domain.Shared.dll

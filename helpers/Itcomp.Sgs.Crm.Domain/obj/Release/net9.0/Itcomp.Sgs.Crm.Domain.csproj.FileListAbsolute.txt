@@ -1,0 +1,17 @@
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\bin\Release\net9.0\Itcomp.Sgs.Crm.Domain.deps.json
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\bin\Release\net9.0\Itcomp.Sgs.Crm.Domain.dll
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\bin\Release\net9.0\Itcomp.Sgs.Crm.Domain.pdb
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\bin\Release\net9.0\Itcomp.Sgs.Crm.Domain.Shared.dll
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\bin\Release\net9.0\Itcomp.Sgs.Crm.Domain.Shared.pdb
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\obj\Release\net9.0\Itcomp.Sgs.Crm.Domain.csproj.AssemblyReference.cache
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\obj\Release\net9.0\Itcomp.Sgs.Crm.Domain.GeneratedMSBuildEditorConfig.editorconfig
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\obj\Release\net9.0\Itcomp.Sgs.Crm.Domain.AssemblyInfoInputs.cache
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\obj\Release\net9.0\Itcomp.Sgs.Crm.Domain.AssemblyInfo.cs
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\obj\Release\net9.0\Itcomp.Sgs.Crm.Domain.csproj.CoreCompileInputs.cache
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\obj\Release\net9.0\Itcomp.Sgs.Crm.Domain.sourcelink.json
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\obj\Release\net9.0\Itcomp.Sgs.Crm.Domain.csproj.Fody.CopyLocal.cache
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\obj\Release\net9.0\Itcomp.S.6B855954.Up2Date
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\obj\Release\net9.0\Itcomp.Sgs.Crm.Domain.dll
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\obj\Release\net9.0\refint\Itcomp.Sgs.Crm.Domain.dll
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\obj\Release\net9.0\Itcomp.Sgs.Crm.Domain.pdb
+F:\source\repos\itcomp\uniflow\crm\src\Itcomp.Sgs.Crm.Domain\obj\Release\net9.0\ref\Itcomp.Sgs.Crm.Domain.dll

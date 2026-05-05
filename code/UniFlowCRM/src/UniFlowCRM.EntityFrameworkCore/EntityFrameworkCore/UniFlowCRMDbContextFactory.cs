@@ -16,6 +16,7 @@ public class UniFlowCRMDbContextFactory : IDesignTimeDbContextFactory<UniFlowCRM
         
         UniFlowCRMEfCoreEntityExtensionMappings.Configure();
 
+        //TODO: UseSqlServer()
         var builder = new DbContextOptionsBuilder<UniFlowCRMDbContext>()
             .UseSqlite(configuration.GetConnectionString("Default"));
         

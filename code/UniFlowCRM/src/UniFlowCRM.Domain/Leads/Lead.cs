@@ -28,6 +28,7 @@ public class Lead : FullAuditedAggregateRoot<Guid>
     public Guid? AccountID { get; private set; } // Account FK
 
     public Lead(
+        Guid id,
     string firstName,
     string? middleName,
     string lastName,
@@ -40,7 +41,7 @@ public class Lead : FullAuditedAggregateRoot<Guid>
     URL? website,
     Address? address,
     string? job,
-    string? departement)
+    string? departement): base(id)
     {
         ArgumentException.ThrowIfNullOrEmpty(firstName);
         ArgumentException.ThrowIfNullOrEmpty(lastName);

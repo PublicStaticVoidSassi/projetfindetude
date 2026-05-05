@@ -13,6 +13,9 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.Studio;
+using UniFlowCRM.Leads;
+using UniFlowCRM.Accounts;
+using UniFlowCRM.Contacts;
 
 namespace UniFlowCRM.EntityFrameworkCore;
 
@@ -42,7 +45,12 @@ public class UniFlowCRMEntityFrameworkCoreModule : AbpModule
         {
                 /* Remove "includeAllEntities: true" to create
                  * default repositories only for aggregate roots */
-            options.AddDefaultRepositories(includeAllEntities: true);
+            // options.AddDefaultRepositories(includeAllEntities: true);
+            options.AddDefaultRepositories();
+
+            options.AddRepository<Lead,LeadsRepository>();
+            options.AddRepository<Account,AccountsRepository>();
+            options.AddRepository<Contact,ContactsRepository>();
         });
 
         if (AbpStudioAnalyzeHelper.IsInAnalyzeMode)
@@ -54,7 +62,7 @@ public class UniFlowCRMEntityFrameworkCoreModule : AbpModule
         {
             /* The main point to change your DBMS.
              * See also UniFlowCRMDbContextFactory for EF Core tooling. */
-
+            //TODO : Use SQLSERVER
             options.UseSqlite();
 
         });

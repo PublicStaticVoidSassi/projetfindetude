@@ -1,0 +1,224 @@
+{
+  "format": 1,
+  "restore": {
+    "F:\\source\\repos\\itcomp\\uniflow\\crm\\src\\Itcomp.Sgs.Crm.Domain\\Itcomp.Sgs.Crm.Domain.csproj": {}
+  },
+  "projects": {
+    "F:\\source\\repos\\itcomp\\uniflow\\crm\\src\\Itcomp.Sgs.Crm.Domain.Shared\\Itcomp.Sgs.Crm.Domain.Shared.csproj": {
+      "version": "0.1.0",
+      "restore": {
+        "projectUniqueName": "F:\\source\\repos\\itcomp\\uniflow\\crm\\src\\Itcomp.Sgs.Crm.Domain.Shared\\Itcomp.Sgs.Crm.Domain.Shared.csproj",
+        "projectName": "Itcomp.Sgs.Crm.Domain.Shared",
+        "projectPath": "F:\\source\\repos\\itcomp\\uniflow\\crm\\src\\Itcomp.Sgs.Crm.Domain.Shared\\Itcomp.Sgs.Crm.Domain.Shared.csproj",
+        "packagesPath": "E:\\.nuget\\packages",
+        "outputPath": "F:\\source\\repos\\itcomp\\uniflow\\crm\\src\\Itcomp.Sgs.Crm.Domain.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\DevExpress 21.1\\Components\\Offline Packages",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "F:\\source\\repos\\itcomp\\uniflow\\crm\\NuGet.Config",
+          "C:\\Users\\f_belhocine\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "http://nuget.itcomp.com/nuget": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.abp.io/3e7c535f-33ff-4a54-9f9c-cf26e891642f/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "ConfigureAwait.Fody": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.3.1, )"
+            },
+            "Fody": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.5.3, )"
+            },
+            "Microsoft.Extensions.FileProviders.Embedded": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Volo.Abp.Ddd.Domain.Shared": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Volo.Abp.Validation": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.12, 9.0.12]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.12, 9.0.12]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[9.0.12, 9.0.12]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "F:\\source\\repos\\itcomp\\uniflow\\crm\\src\\Itcomp.Sgs.Crm.Domain\\Itcomp.Sgs.Crm.Domain.csproj": {
+      "version": "0.1.0",
+      "restore": {
+        "projectUniqueName": "F:\\source\\repos\\itcomp\\uniflow\\crm\\src\\Itcomp.Sgs.Crm.Domain\\Itcomp.Sgs.Crm.Domain.csproj",
+        "projectName": "Itcomp.Sgs.Crm.Domain",
+        "projectPath": "F:\\source\\repos\\itcomp\\uniflow\\crm\\src\\Itcomp.Sgs.Crm.Domain\\Itcomp.Sgs.Crm.Domain.csproj",
+        "packagesPath": "E:\\.nuget\\packages",
+        "outputPath": "F:\\source\\repos\\itcomp\\uniflow\\crm\\src\\Itcomp.Sgs.Crm.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\DevExpress 21.1\\Components\\Offline Packages",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "F:\\source\\repos\\itcomp\\uniflow\\crm\\NuGet.Config",
+          "C:\\Users\\f_belhocine\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.1.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "http://nuget.itcomp.com/nuget": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.abp.io/3e7c535f-33ff-4a54-9f9c-cf26e891642f/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "F:\\source\\repos\\itcomp\\uniflow\\crm\\src\\Itcomp.Sgs.Crm.Domain.Shared\\Itcomp.Sgs.Crm.Domain.Shared.csproj": {
+                "projectPath": "F:\\source\\repos\\itcomp\\uniflow\\crm\\src\\Itcomp.Sgs.Crm.Domain.Shared\\Itcomp.Sgs.Crm.Domain.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "ConfigureAwait.Fody": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.3.1, )"
+            },
+            "Fody": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.5.3, )"
+            },
+            "Volo.Abp.Ddd.Domain": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.12, 9.0.12]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.12, 9.0.12]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[9.0.12, 9.0.12]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

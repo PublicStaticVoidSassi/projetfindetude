@@ -27,6 +27,7 @@ public class Account : FullAuditedAggregateRoot<Guid>
     protected Account() { }
 
     public Account(
+        Guid id,
         string name,
         PhoneNumber? phone,
         PhoneNumber? fax,
@@ -37,7 +38,7 @@ public class Account : FullAuditedAggregateRoot<Guid>
         AccountIndustry industry,
         ValueObjects.Money? revenue,
         int? employees,
-        Address address)
+        Address address):base(id)
     {
         Name = name;
         Phone = phone;

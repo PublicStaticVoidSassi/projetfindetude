@@ -1,0 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Volo.Abp.Application.Dtos;
+using Volo.Abp.Application.Services;
+
+namespace UniFlowCRM.Contacts
+{
+    interface IContactsAppService: ICrudAppService<ContactDto,Guid,PagedAndSortedResultRequestDto,CreateUpdateContactDto>
+    {
+    }
+}

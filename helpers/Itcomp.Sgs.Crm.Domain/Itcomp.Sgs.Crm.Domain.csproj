@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Itcomp.Sgs.Crm</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="10.0.0" />
+    <ProjectReference Include="..\Itcomp.Sgs.Crm.Domain.Shared\Itcomp.Sgs.Crm.Domain.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
