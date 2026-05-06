@@ -1,14 +1,12 @@
 ﻿using System;
 using Volo.Abp.Domain.Entities.Auditing;
 using UniFlowCRM.ValueObjects;
-
 namespace UniFlowCRM.Leads;
 
 public class Lead : FullAuditedAggregateRoot<Guid>
 {
     public string FirstName { get; private set; }
-    public string? MiddleName { get; private set; }
-    public string LastName { get; private set; }
+    public string? LastName { get; private set; }
 
     public string? Description { get; private set; }
 
@@ -16,52 +14,63 @@ public class Lead : FullAuditedAggregateRoot<Guid>
     public LeadSource Source { get; private set; }
 
     public PhoneNumber? Phone { get; private set; }
-    public PhoneNumber? Fax { get; private set; }
     public EmailAddress? Email { get; private set; }
-    public URL? Website { get; private set; }
-    public Address? Address { get; private set; }
-
-    public string? Job { get; private set; } // I want one
-    public string? Departement { get; private set; }
 
     public Guid UserID { get; private set; } // user FK
     public Guid? AccountID { get; private set; } // Account FK
 
-    public Lead(
-        Guid id,
-    string firstName,
-    string? middleName,
-    string lastName,
-    string? description,
-    LeadStatus status,
-    LeadSource source,
-    PhoneNumber? phone,
-    PhoneNumber? fax,
-    EmailAddress? email,
-    URL? website,
-    Address? address,
-    string? job,
-    string? departement): base(id)
+    public Lead(Guid id,string firstName): base(id)
     {
-        ArgumentException.ThrowIfNullOrEmpty(firstName);
-        ArgumentException.ThrowIfNullOrEmpty(lastName);
         FirstName = firstName;
-        MiddleName = middleName;
-        LastName = lastName;
+        Status = LeadStatus.New;
+        Source = LeadSource.Unset;
+    }
+    public void SetFirstName(string firstName)
+    {
+        if (string.IsNullOrWhiteSpace(firstName))
+            throw new ArgumentException("First name cannot be empty.", nameof(firstName));
 
-        Description = description;
+        FirstName = firstName;
+    }
 
+    public void SetLastName(string? lastName)
+    {
+        LastName = string.IsNullOrWhiteSpace(lastName) ? null : lastName;
+    }
+
+    public void SetDescription(string? description)
+    {
+        Description = string.IsNullOrWhiteSpace(description) ? null : description;
+    }
+
+    public void SetStatus(LeadStatus status)
+    {
         Status = status;
+    }
+
+    public void SetSource(LeadSource source)
+    {
         Source = source;
+    }
 
+    public void SetPhone(PhoneNumber phone)
+    {
         Phone = phone;
-        Fax = fax;
-        Email = email;
-        Website = website;
-        Address = address;
+    }
 
-        Job = job;
-        Departement = departement;
+    public void SetEmail(EmailAddress email)
+    {
+        Email = email;
+    }
+
+    public void AssignToUser(Guid userId)
+    {
+        UserID = userId;
+    }
+
+    public void AssignToAccount(Guid accountId)
+    {
+        AccountID = accountId;
     }
     protected Lead() { } // one day EF wont need this. but its not today
 }

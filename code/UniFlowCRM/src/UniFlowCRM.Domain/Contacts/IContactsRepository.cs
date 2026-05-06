@@ -5,7 +5,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace UniFlowCRM.Contacts
 {
-    public interface IContactsRepository: IRepository<Contact>
+    public interface IContactsRepository: IRepository<Contact,Guid>
     {
     }
 }

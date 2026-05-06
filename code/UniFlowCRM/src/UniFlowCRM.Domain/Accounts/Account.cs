@@ -13,11 +13,11 @@ public class Account : FullAuditedAggregateRoot<Guid>
     public PhoneNumber? Fax { get; private set; }
     public EmailAddress? Email { get; private set; }
     public URL? Website { get; private set; }
-    public Address Address { get; private set; }
+    public Address? Address { get; private set; }
 
 
     public AccountType Type { get; private set; }
-    public AccountIndustry Industry { get; private set; }
+    public AccountIndustry? Industry { get; private set; }
 
     public ValueObjects.Money? Revenue { get; private set; }
     public int? Employees { get; private set; }
@@ -29,27 +29,74 @@ public class Account : FullAuditedAggregateRoot<Guid>
     public Account(
         Guid id,
         string name,
-        PhoneNumber? phone,
-        PhoneNumber? fax,
-        EmailAddress? email,
-        URL? website,
-        string? description,
-        AccountType type,
-        AccountIndustry industry,
-        ValueObjects.Money? revenue,
-        int? employees,
-        Address address):base(id)
+        Guid userID
+    ):base(id)
     {
         Name = name;
-        Phone = phone;
-        Fax = fax;
-        Email = email;
-        Website = website;
+        Type = AccountType.Prospect;
+        UserID = userID;
+    }
+
+    public void SetName(string name)
+    {
+        Name = name;
+    }
+
+    public void SetDescription(string? description)
+    {
         Description = description;
-        Type = type;
-        Industry = industry;
-        Revenue = revenue;
-        Employees = employees;
+    }
+
+    public void SetPhone(PhoneNumber? phone)
+    {
+        Phone = phone;
+    }
+
+    public void SetFax(PhoneNumber? fax)
+    {
+        Fax = fax;
+    }
+
+    public void SetEmail(EmailAddress? email)
+    {
+        Email = email;
+    }
+
+    public void SetWebsite(URL? website)
+    {
+        Website = website;
+    }
+
+    public void SetAddress(Address? address)
+    {
         Address = address;
+    }
+
+    public void SetType(AccountType type)
+    {
+        Type = type;
+    }
+
+    public void SetIndustry(AccountIndustry? industry)
+    {
+        Industry = industry;
+    }
+
+    public void SetRevenue(ValueObjects.Money? revenue)
+    {
+        Revenue = revenue;
+    }
+
+    public void SetEmployees(int? employees)
+    {
+        Employees = employees;
+    }
+    private void SetUserId(Guid userId)
+    {
+        UserID = userId;
+    }
+    public void AssignTo(Guid userId)
+    {
+        SetUserId(userId);
     }
 }

@@ -23,7 +23,6 @@ namespace UniFlowCRM.Migrations
             modelBuilder.Entity("UniFlowCRM.Accounts.Account", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -68,7 +67,7 @@ namespace UniFlowCRM.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("Fax");
 
-                    b.Property<int>("Industry")
+                    b.Property<int?>("Industry")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsDeleted")
@@ -162,10 +161,9 @@ namespace UniFlowCRM.Migrations
                     b.ToTable("Books", "CRM");
                 });
 
-            modelBuilder.Entity("UniFlowCRM.Leads.Contact", b =>
+            modelBuilder.Entity("UniFlowCRM.Contacts.Contact", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<Guid?>("AccountID")
@@ -194,7 +192,7 @@ namespace UniFlowCRM.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("DeletionTime");
 
-                    b.Property<string>("Departement")
+                    b.Property<string>("Department")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -235,7 +233,9 @@ namespace UniFlowCRM.Migrations
                         .HasColumnName("LastModifierId");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("LeadID")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("MiddleName")
@@ -261,6 +261,8 @@ namespace UniFlowCRM.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AccountID");
+
+                    b.HasIndex("LeadID");
 
                     b.HasIndex("UserID");
 
@@ -298,9 +300,6 @@ namespace UniFlowCRM.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("DeletionTime");
 
-                    b.Property<string>("Departement")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
@@ -313,10 +312,6 @@ namespace UniFlowCRM.Migrations
                         .HasColumnType("TEXT")
                         .HasColumnName("ExtraProperties");
 
-                    b.Property<string>("Fax")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Fax");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -327,9 +322,6 @@ namespace UniFlowCRM.Migrations
                         .HasDefaultValue(false)
                         .HasColumnName("IsDeleted");
 
-                    b.Property<string>("Job")
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("TEXT")
                         .HasColumnName("LastModificationTime");
@@ -339,10 +331,6 @@ namespace UniFlowCRM.Migrations
                         .HasColumnName("LastModifierId");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("MiddleName")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
@@ -358,10 +346,6 @@ namespace UniFlowCRM.Migrations
                     b.Property<Guid>("UserID")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Website")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Website");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AccountID");
@@ -369,6 +353,103 @@ namespace UniFlowCRM.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("Leads", "CRM");
+                });
+
+            modelBuilder.Entity("UniFlowCRM.Opportunities.Opportunity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("AccountID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ClosedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<Guid?>("ContactID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid?>("LeadID")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NextStep")
+                        .HasColumnType("TEXT");
+
+                    b.Property<short>("Probability")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SaleStage")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Stage")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("UserID")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountID");
+
+                    b.HasIndex("ContactID");
+
+                    b.HasIndex("LeadID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Opportunities", "CRM");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
@@ -2297,17 +2378,20 @@ namespace UniFlowCRM.Migrations
                                 .HasForeignKey("AccountId");
                         });
 
-                    b.Navigation("Address")
-                        .IsRequired();
+                    b.Navigation("Address");
 
                     b.Navigation("Revenue");
                 });
 
-            modelBuilder.Entity("UniFlowCRM.Leads.Contact", b =>
+            modelBuilder.Entity("UniFlowCRM.Contacts.Contact", b =>
                 {
                     b.HasOne("UniFlowCRM.Accounts.Account", null)
                         .WithMany()
                         .HasForeignKey("AccountID");
+
+                    b.HasOne("UniFlowCRM.Leads.Lead", null)
+                        .WithMany()
+                        .HasForeignKey("LeadID");
 
                     b.HasOne("Volo.Abp.Identity.IdentityUser", null)
                         .WithMany()
@@ -2358,37 +2442,51 @@ namespace UniFlowCRM.Migrations
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.OwnsOne("UniFlowCRM.ValueObjects.Address", "Address", b1 =>
+            modelBuilder.Entity("UniFlowCRM.Opportunities.Opportunity", b =>
+                {
+                    b.HasOne("UniFlowCRM.Accounts.Account", null)
+                        .WithMany()
+                        .HasForeignKey("AccountID");
+
+                    b.HasOne("UniFlowCRM.Contacts.Contact", null)
+                        .WithMany()
+                        .HasForeignKey("ContactID");
+
+                    b.HasOne("UniFlowCRM.Leads.Lead", null)
+                        .WithMany()
+                        .HasForeignKey("LeadID");
+
+                    b.HasOne("Volo.Abp.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("UniFlowCRM.ValueObjects.Money", "Amount", b1 =>
                         {
-                            b1.Property<Guid>("LeadId")
+                            b1.Property<Guid>("OpportunityId")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<string>("City")
-                                .HasColumnType("TEXT")
-                                .HasColumnName("City");
-
-                            b1.Property<string>("Country")
-                                .HasColumnType("TEXT")
-                                .HasColumnName("Country");
-
-                            b1.Property<int?>("PostalCode")
+                            b1.Property<int>("Currency")
                                 .HasColumnType("INTEGER")
-                                .HasColumnName("PostalCode");
+                                .HasColumnName("AmountCurrency");
 
-                            b1.Property<string>("Street")
+                            b1.Property<decimal>("Value")
                                 .HasColumnType("TEXT")
-                                .HasColumnName("Street");
+                                .HasColumnName("AmountValue");
 
-                            b1.HasKey("LeadId");
+                            b1.HasKey("OpportunityId");
 
-                            b1.ToTable("Leads", "CRM");
+                            b1.ToTable("Opportunities", "CRM");
 
                             b1.WithOwner()
-                                .HasForeignKey("LeadId");
+                                .HasForeignKey("OpportunityId");
                         });
 
-                    b.Navigation("Address");
+                    b.Navigation("Amount")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>

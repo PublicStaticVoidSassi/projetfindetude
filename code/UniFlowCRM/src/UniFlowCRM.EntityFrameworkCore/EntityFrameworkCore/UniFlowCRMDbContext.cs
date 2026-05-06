@@ -15,6 +15,8 @@ using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using UniFlowCRM.Leads;
 using UniFlowCRM.Accounts;
+using UniFlowCRM.Contacts;
+using UniFlowCRM.Opportunities;
 
 namespace UniFlowCRM.EntityFrameworkCore;
 
@@ -29,6 +31,9 @@ public class UniFlowCRMDbContext :
     public DbSet<Book> Books { get; set; } // keeping it as a good luck charm
 
     public DbSet<Lead> Leads { get; set; }
+    public DbSet<Account> Accounts { get; set; }
+    public DbSet<Contact> Contacts { get; set; }
+    public DbSet<Opportunity> Opportunities { get; set; }
 
     #region Entities from the modules
 
@@ -112,7 +117,7 @@ public class UniFlowCRMDbContext :
             b.Property(l => l.Website)
             .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new ValueObjects.URL(v))
             .HasColumnName("Website");
-            b.OwnsOne<ValueObjects.Money>(l=>l.Revenue, r =>
+            b.OwnsOne<ValueObjects.Money>(l => l.Revenue, r =>
             {
                 r.Property(r => r.Value).HasColumnName("IncomeValue");
                 r.Property(r => r.Currency).HasColumnName("IncomeCurrency");
@@ -123,38 +128,6 @@ public class UniFlowCRMDbContext :
         builder.Entity<Lead>(b =>
         {
             b.ToTable(UniFlowCRMConsts.DbTablePrefix + "Leads",
-                UniFlowCRMConsts.DbSchema);
-            b.ConfigureByConvention();
-            b.HasOne<IdentityUser>().WithMany().HasForeignKey(l=>l.UserID).IsRequired();
-            b.HasOne<Account>().WithMany().HasForeignKey(l => l.AccountID).IsRequired(false);
-            b.Property(l => l.Email)
-            .HasConversion(
-                v => v==null?null:v.ToString(), // write
-                v => v==null?null:new EmailAddress(v)  // read
-            )
-            .HasColumnName("Email");
-            b.Property(l => l.Phone)
-            .HasConversion(v => v==null?null:v.ToString(), v => v==null?null:new ValueObjects.PhoneNumber(v))
-            .HasColumnName("Phone");
-            b.Property(l => l.Fax)
-            .HasConversion(v => v==null?null:v.ToString(), v => v==null?null:new ValueObjects.PhoneNumber(v))
-            .HasColumnName("Fax");
-            b.OwnsOne(l => l.Address, a =>
-            {
-                a.Property(a => a.Street).HasColumnName("Street");
-                a.Property(a => a.City).HasColumnName("City");
-                a.Property(a => a.Country).HasColumnName("Country");
-                a.Property(a => a.PostalCode).HasColumnName("PostalCode");
-            });
-            b.Property(l => l.Website)
-            .HasConversion(v => v == null? null : v.ToString(), v => v==null?null:new ValueObjects.URL(v))
-            .HasColumnName("Website");
-        });
-        #endregion
-        #region Contacts
-        builder.Entity<Contact>(b =>
-        {
-            b.ToTable(UniFlowCRMConsts.DbTablePrefix + "Contacts",
                 UniFlowCRMConsts.DbSchema);
             b.ConfigureByConvention();
             b.HasOne<IdentityUser>().WithMany().HasForeignKey(l => l.UserID).IsRequired();
@@ -168,19 +141,57 @@ public class UniFlowCRMDbContext :
             b.Property(l => l.Phone)
             .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new ValueObjects.PhoneNumber(v))
             .HasColumnName("Phone");
-            b.Property(l => l.Fax)
-            .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new ValueObjects.PhoneNumber(v))
-            .HasColumnName("Fax");
-            b.OwnsOne(l => l.Address, a =>
+
+        #endregion
+        #region Contacts
+            builder.Entity<Contact>(b =>
             {
-                a.Property(a => a.Street).HasColumnName("Street");
-                a.Property(a => a.City).HasColumnName("City");
-                a.Property(a => a.Country).HasColumnName("Country");
-                a.Property(a => a.PostalCode).HasColumnName("PostalCode");
+                b.ToTable(UniFlowCRMConsts.DbTablePrefix + "Contacts",
+                    UniFlowCRMConsts.DbSchema);
+                b.ConfigureByConvention();
+                b.HasOne<Lead>().WithMany().HasForeignKey(c => c.LeadID).IsRequired(false);
+                b.HasOne<IdentityUser>().WithMany().HasForeignKey(l => l.UserID).IsRequired();
+                b.HasOne<Account>().WithMany().HasForeignKey(l => l.AccountID).IsRequired(false);
+                b.Property(l => l.Email)
+                .HasConversion(
+                    v => v == null ? null : v.ToString(), // write
+                    v => v == null ? null : new EmailAddress(v)  // read
+                )
+                .HasColumnName("Email");
+                b.Property(l => l.Phone)
+                .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new ValueObjects.PhoneNumber(v))
+                .HasColumnName("Phone");
+                b.Property(l => l.Fax)
+                .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new ValueObjects.PhoneNumber(v))
+                .HasColumnName("Fax");
+                b.OwnsOne(l => l.Address, a =>
+                {
+                    a.Property(a => a.Street).HasColumnName("Street");
+                    a.Property(a => a.City).HasColumnName("City");
+                    a.Property(a => a.Country).HasColumnName("Country");
+                    a.Property(a => a.PostalCode).HasColumnName("PostalCode");
+                });
+                b.Property(l => l.Website)
+                .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new ValueObjects.URL(v))
+                .HasColumnName("Website");
             });
-            b.Property(l => l.Website)
-            .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new ValueObjects.URL(v))
-            .HasColumnName("Website");
+            #endregion
+        #region Opporunities
+            builder.Entity<Opportunity>(b =>
+            {
+                b.ToTable(UniFlowCRMConsts.DbTablePrefix + "Opportunities",
+                    UniFlowCRMConsts.DbSchema);
+                b.ConfigureByConvention();
+                b.HasOne<IdentityUser>().WithMany().HasForeignKey(l => l.UserID).IsRequired();
+                b.HasOne<Account>().WithMany().HasForeignKey(l => l.AccountID).IsRequired(false);
+                b.HasOne<Lead>().WithMany().HasForeignKey(l => l.LeadID).IsRequired(false);
+                b.HasOne<Contact>().WithMany().HasForeignKey(l => l.ContactID).IsRequired(false);
+                b.OwnsOne<ValueObjects.Money>(l => l.Amount, r =>
+                {
+                    r.Property(r => r.Value).HasColumnName("AmountValue");
+                    r.Property(r => r.Currency).HasColumnName("AmountCurrency");
+                });
+            });
         });
         #endregion
     }

@@ -5,7 +5,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace UniFlowCRM.Leads
 {
-    public interface ILeadsRepository: IRepository<Lead>
+    public interface ILeadsRepository: IRepository<Lead,Guid>
     {
     }
 }

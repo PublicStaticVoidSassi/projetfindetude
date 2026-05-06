@@ -6,7 +6,7 @@ namespace UniFlowCRM.Leads
 {
     public enum LeadSource
     {
-        ColdCall = 0,
+        Unset = 0,
         ExistingCustomer = 1,
         SelfGenerated = 2,
         Employee = 3,
@@ -19,6 +19,7 @@ namespace UniFlowCRM.Leads
         WordOfMouth = 10,
         Email = 11,
         Campaign = 12,
-        Other = 13
+        ColdCall = 13,
+        Other = 14,
     }
 }

@@ -12,19 +12,19 @@ namespace UniFlowCRM.ValueObjects
         public int? PostalCode { get; private set; }
 
         public Address() { }
-        public Address AddStreet(string street) {
+        public Address AddStreet(string? street) {
             Street = street;
             return this;
         }
-        public Address AddCity(string city) {
+        public Address AddCity(string? city) {
             City = city;
             return this;
         }
-        public Address AddCountry(string country) {
+        public Address AddCountry(string? country) {
             Country = country;
             return this;
         }
-        public Address AddPostalCode(int postalcode) {
+        public Address AddPostalCode(int? postalcode) {
             PostalCode = postalcode;
             return this;
         }

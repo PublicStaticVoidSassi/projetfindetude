@@ -7,7 +7,7 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace UniFlowCRM.Contacts
 {
-    internal class ContactsRepository : EfCoreRepository<UniFlowCRMDbContext, Contact>, IContactsRepository
+    internal class ContactsRepository : EfCoreRepository<UniFlowCRMDbContext, Contact,Guid>, IContactsRepository
     {
         public ContactsRepository(IDbContextProvider<UniFlowCRMDbContext> dbContextProvider) : base(dbContextProvider)
         {

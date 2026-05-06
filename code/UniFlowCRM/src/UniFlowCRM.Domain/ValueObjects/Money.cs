@@ -25,7 +25,10 @@ namespace UniFlowCRM.ValueObjects
 
         public Money(decimal value, Currency currency)
         {
-            Check.Positive(Value, "Money");
+            if (value < 0)
+            {
+                throw new ArgumentException("Money cant be negative");
+            }
             Value = value;
             Currency = currency;
         }

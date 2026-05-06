@@ -7,7 +7,7 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace UniFlowCRM.Accounts
 {
-    internal class AccountsRepository : EfCoreRepository<UniFlowCRMDbContext, Account>, IAccountsRepository
+    internal class AccountsRepository : EfCoreRepository<UniFlowCRMDbContext, Account,Guid>, IAccountsRepository
     {
         public AccountsRepository(IDbContextProvider<UniFlowCRMDbContext> dbContextProvider) : base(dbContextProvider)
         {

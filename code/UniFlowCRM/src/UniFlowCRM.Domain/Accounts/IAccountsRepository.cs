@@ -5,7 +5,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace UniFlowCRM.Accounts
 {
-    public interface IAccountsRepository : IRepository<Account>
+    public interface IAccountsRepository : IRepository<Account,Guid>
     {
     }
 }

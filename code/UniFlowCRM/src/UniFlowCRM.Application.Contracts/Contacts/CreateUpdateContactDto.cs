@@ -5,7 +5,33 @@ using Volo.Abp.Application.Dtos;
 
 namespace UniFlowCRM.Contacts
 {
-    internal class CreateUpdateContactDto: EntityDto<Guid>
+    public class CreateUpdateContactDto: EntityDto<Guid>
     {
+        public string FirstName { get; set; }
+        public string? MiddleName { get; set; }
+        public string? LastName { get; set; }
+
+        public string? Description { get; set; }
+
+        public ContactStatus Status { get; set; }
+        public ContactSource Source { get; set; }
+
+        public string? PhoneCode { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? FaxCode { get; set; }
+        public string? FaxNumber { get; set; }
+        public string? Email { get; set; }
+        public string? Website { get; set; }
+        public string? Country { get; set; }
+        public string? City { get; set; }
+        public string? Street { get; set; }
+        public int? PostalCode { get; set; }
+
+        public string? Job { get; set; } // I want one
+        public string? Departement { get; set; }
+
+        public Guid? UserID { get; set; } // user FK
+        public Guid? LeadID { get; set; }
+        public Guid? AccountID { get; set; } // Account FK
     }
 }

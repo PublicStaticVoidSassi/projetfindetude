@@ -4,17 +4,17 @@ using UniFlowCRM.ValueObjects;
 
 namespace UniFlowCRM.Contacts
 {
-    // Copied from Lead.cs
+    
     public class Contact : FullAuditedAggregateRoot<Guid>
     {
         public string FirstName { get; private set; }
         public string? MiddleName { get; private set; }
-        public string LastName { get; private set; }
+        public string? LastName { get; private set; }
 
         public string? Description { get; private set; }
 
-        public LeadStatus Status { get; private set; }
-        public LeadSource Source { get; private set; }
+        public ContactStatus Status { get; private set; }
+        public ContactSource Source { get; private set; }
 
         public PhoneNumber? Phone { get; private set; }
         public PhoneNumber? Fax { get; private set; }
@@ -23,46 +23,102 @@ namespace UniFlowCRM.Contacts
         public Address? Address { get; private set; }
 
         public string? Job { get; private set; } // I want one
-        public string? Departement { get; private set; }
+        public string? Department { get; private set; }
 
         public Guid UserID { get; private set; } // user FK
+        public Guid? LeadID { get; private set; }
         public Guid? AccountID { get; private set; } // Account FK
 
         public Contact(
         Guid id,
-        string firstName,
-        string? middleName,
-        string lastName,
-        string? description,
-        LeadStatus status,
-        LeadSource source,
-        PhoneNumber? phone,
-        PhoneNumber? fax,
-        EmailAddress? email,
-        URL? website,
-        Address? address,
-        string? job,
-        string? departement):base(id)
+        string firstName):base(id)
         {
-            ArgumentException.ThrowIfNullOrEmpty(firstName);
-            ArgumentException.ThrowIfNullOrEmpty(lastName);
             FirstName = firstName;
-            MiddleName = middleName;
-            LastName = lastName;
+        }
+        public void SetFirstName(string firstName)
+        {
+            if (string.IsNullOrWhiteSpace(firstName))
+                throw new ArgumentException("First name cannot be empty.", nameof(firstName));
 
-            Description = description;
+            FirstName = firstName;
+        }
 
+        public void SetMiddleName(string? middleName)
+        {
+            MiddleName = string.IsNullOrWhiteSpace(middleName) ? null : middleName;
+        }
+
+        public void SetLastName(string? lastName)
+        {
+            LastName = string.IsNullOrWhiteSpace(lastName) ? null : lastName;
+        }
+
+        public void SetDescription(string? description)
+        {
+            Description = string.IsNullOrWhiteSpace(description) ? null : description;
+        }
+
+        public void SetStatus(ContactStatus status)
+        {
             Status = status;
+        }
+
+        public void SetSource(ContactSource source)
+        {
             Source = source;
+        }
 
+        public void SetPhone(PhoneNumber? phone)
+        {
             Phone = phone;
-            Fax = fax;
-            Email = email;
-            Website = website;
-            Address = address;
+        }
 
-            Job = job;
-            Departement = departement;
+        public void SetFax(PhoneNumber? fax)
+        {
+            Fax = fax;
+        }
+
+        public void SetEmail(EmailAddress? email)
+        {
+            Email = email;
+        }
+
+        public void SetWebsite(URL? website)
+        {
+            Website = website;
+        }
+
+        public void SetAddress(Address? address)
+        {
+            Address = address;
+        }
+
+        public void SetJob(string? job)
+        {
+            Job = string.IsNullOrWhiteSpace(job) ? null : job;
+        }
+
+        public void SetDepartment(string? department)
+        {
+            Department = string.IsNullOrWhiteSpace(department) ? null : department;
+        }
+
+        public void AssignUser(Guid userId)
+        {
+            if (userId == Guid.Empty)
+                throw new ArgumentException("UserId cannot be empty.", nameof(userId));
+
+            UserID = userId;
+        }
+
+        public void AssignLead(Guid? leadId)
+        {
+            LeadID = leadId;
+        }
+
+        public void AssignAccount(Guid? accountId)
+        {
+            AccountID = accountId;
         }
         protected Contact() { } // one day EF wont need this. but its not today
     }
