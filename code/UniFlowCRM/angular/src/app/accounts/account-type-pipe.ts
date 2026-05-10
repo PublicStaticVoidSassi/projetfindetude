@@ -6,7 +6,7 @@ import {Accounts as Acc} from '../proxy';
 export class AccountTypePipe implements PipeTransform {
 
   transform(value: number): string {
-    return `::Accounts:Type:${Acc.AccountType[value]}`;
+    return `::Accounts:Type:${value}`;
   }
 
 }

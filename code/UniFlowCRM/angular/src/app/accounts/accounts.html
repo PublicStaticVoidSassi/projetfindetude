@@ -41,57 +41,57 @@
     </ngx-datatable-column>
 
     <ngx-datatable-column
-      [name]="'::Name' | abpLocalization"
+      [name]="'::Client:Name' | abpLocalization"
       prop="name">
     </ngx-datatable-column>
 
 <!--    <ngx-datatable-column-->
-<!--      [name]="'::Description' | abpLocalization"-->
+<!--      [name]="'::Client:Description' | abpLocalization"-->
 <!--      prop="description">-->
 <!--    </ngx-datatable-column>-->
 
     <ngx-datatable-column
-      [name]="'::Phone' | abpLocalization"
+      [name]="'::Client:Phone' | abpLocalization"
       prop="phone">
     </ngx-datatable-column>
 
 <!--    <ngx-datatable-column-->
-<!--      [name]="'::Fax' | abpLocalization"-->
+<!--      [name]="'::Client:Fax' | abpLocalization"-->
 <!--      prop="fax">-->
 <!--    </ngx-datatable-column>-->
 
     <ngx-datatable-column
-      [name]="'::Email' | abpLocalization"
+      [name]="'::Client:Email' | abpLocalization"
       prop="email">
     </ngx-datatable-column>
 
 <!--    <ngx-datatable-column-->
-<!--      [name]="'::Website' | abpLocalization"-->
+<!--      [name]="'::Client:Website' | abpLocalization"-->
 <!--      prop="website">-->
 <!--    </ngx-datatable-column>-->
 
 <!--    <ngx-datatable-column-->
-<!--      [name]="'::City' | abpLocalization"-->
+<!--      [name]="'::Client:City' | abpLocalization"-->
 <!--      prop="city">-->
 <!--    </ngx-datatable-column>-->
 
     <ngx-datatable-column
-      [name]="'::Street' | abpLocalization"
+      [name]="'::Client:Street' | abpLocalization"
       prop="street">
     </ngx-datatable-column>
 
 <!--    <ngx-datatable-column-->
-<!--      [name]="'::Country' | abpLocalization"-->
+<!--      [name]="'::Client:Country' | abpLocalization"-->
 <!--      prop="country">-->
 <!--    </ngx-datatable-column>-->
 
 <!--    <ngx-datatable-column-->
-<!--      [name]="'::PostalCode' | abpLocalization"-->
+<!--      [name]="'::Client:PostalCode' | abpLocalization"-->
 <!--      prop="postalCode">-->
 <!--    </ngx-datatable-column>-->
 
     <ngx-datatable-column
-      [name]="'::Type' | abpLocalization"
+      [name]="'::Account:Type' | abpLocalization" prop="type"
     >
       <ng-template ngx-datatable-cell-template let-row="row">
         {{row.type | accountTypePipe | abpLocalization}}
@@ -99,7 +99,7 @@
     </ngx-datatable-column>
 
     <ngx-datatable-column
-      [name]="'::Industry' | abpLocalization"
+      [name]="'::Account:Industry' | abpLocalization" prop="industry"
     >
       <ng-template ngx-datatable-cell-template let-row="row">
         {{row.industry | accountIndustryPipe | abpLocalization}}
@@ -107,7 +107,7 @@
     </ngx-datatable-column>
 
     <ngx-datatable-column
-      [name]="'::Revenue' | abpLocalization" prop="Revenue.Value">
+      [name]="'::Account:Revenue' | abpLocalization" prop="Revenue.Value">
 
       <ng-template ngx-datatable-cell-template let-row="row">
         {{ row.revenueValue | mycurrency: row.revenueCurrency }}
@@ -116,12 +116,12 @@
     </ngx-datatable-column>
 
     <ngx-datatable-column
-      [name]="'::Employees' | abpLocalization"
+      [name]="'::Account:Employees' | abpLocalization"
       prop="employees">
     </ngx-datatable-column>
 
 <!--    <ngx-datatable-column-->
-<!--      [name]="'::UserID' | abpLocalization"-->
+<!--      [name]="'::Client:UserID' | abpLocalization"-->
 <!--      prop="userID">-->
 <!--    </ngx-datatable-column>-->
   </ngx-datatable>

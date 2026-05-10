@@ -6,7 +6,7 @@ import {Accounts as acc} from '../proxy';
 export class AccountIndustryPipe implements PipeTransform {
 
   transform(value: number): string {
-    return `::Accounts:Industry:${acc.AccountIndustry[value]}`;
+    return `::Accounts:Industry:${value}`;
   }
 
 }

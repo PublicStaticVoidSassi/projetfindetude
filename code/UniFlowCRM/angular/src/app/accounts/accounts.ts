@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import {Accounts as AccountsModule} from '../proxy/index';
 import { ListService, PagedResultDto, PermissionDirective } from '@abp/ng.core';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+// import { NumberPipe } from '@angular/common';
 import {
   NgxDatatableListDirective,
   NgxDatatableDefaultDirective,
@@ -61,7 +62,7 @@ export class AccountsComponent implements OnInit{
     // this.router.navigate(['/Accounts/form/'+id]);
   }
   create(){
-    this.toaster.error("not implemented yet");
-    // this.router.navigate(['/Accounts/form/']);
+    // this.toaster.error("not implemented yet");
+    this.router.navigate(['/Accounts/form/']);
   }
 }
