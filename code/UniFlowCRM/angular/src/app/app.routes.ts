@@ -8,6 +8,13 @@ export const APP_ROUTES: Routes = [
     loadComponent: () => import('./home/home.component').then(c => c.HomeComponent),
   },
   {
+    path: 'Accounts',
+    loadChildren: () =>
+      import('./accounts/accounts.routes')
+        .then(r => r.ACCOUNTS_ROUTES),
+    canActivate: [authGuard, permissionGuard]
+  },
+  {
     path: 'account',
     loadChildren: () => import('@abp/ng.account').then(c => c.createRoutes()),
   },

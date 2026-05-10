@@ -1,0 +1,36 @@
+import { mapEnumToOptions } from '@abp/ng.core';
+
+export enum AccountIndustry {
+  Apparel = 0,
+  Banking = 1,
+  Biotechnology = 2,
+  Chemicals = 3,
+  Communications = 4,
+  Construction = 5,
+  Consulting = 6,
+  Education = 7,
+  Electronics = 8,
+  Energy = 9,
+  Engineering = 10,
+  Entertainment = 11,
+  Environmental = 12,
+  Finance = 13,
+  Government = 14,
+  Healthcare = 15,
+  Hospitality = 16,
+  Insurance = 17,
+  Machinery = 18,
+  Manufacturing = 19,
+  Media = 20,
+  NotForProfit = 21,
+  Recreation = 22,
+  Retail = 23,
+  Shipping = 24,
+  Technology = 25,
+  Telecommunications = 26,
+  Transportation = 27,
+  Utilities = 28,
+  Other = 29,
+}
+
+export const accountIndustryOptions = mapEnumToOptions(AccountIndustry);

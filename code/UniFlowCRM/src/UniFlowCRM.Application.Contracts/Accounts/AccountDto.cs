@@ -29,5 +29,7 @@ namespace UniFlowCRM.Accounts
         public int? Employees { get;  set; }
 
         public Guid UserID { get;  set; } // user fk
+        public string? Username { get; set; }
+        public string? creatorName { get; set; }
     }
 }

@@ -1,0 +1,134 @@
+<app-return-btn></app-return-btn>
+  <!-- HEADER -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <h3 class="mb-1">{{'::Client:Name'| abpLocalization }} : {{ account.name }}</h3>
+      <p class="mb-1">{{'::Client:AssignedTo'| abpLocalization }} : {{ account.username }}</p>
+      <p class="text-muted mb-0">{{ account.description }}</p>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <!-- CONTACT -->
+    <div class="col-md-12">
+      <div class="card h-100">
+        <div class="card-header">
+          {{ 'Client::Contact' | abpLocalization }}
+        </div>
+        <div class="card-body">
+
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span>{{ 'Client::Email' | abpLocalization }}</span>
+            <strong>{{ account.email }}</strong>
+          </div>
+
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span>{{ 'Client::Phone' | abpLocalization }}</span>
+            <strong>{{ account.phone }}</strong>
+          </div>
+
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span>{{ 'Client::Fax' | abpLocalization }}</span>
+            <strong>{{ account.fax }}</strong>
+          </div>
+
+          <div class="d-flex justify-content-between py-1">
+            <span>{{ 'Client::Website' | abpLocalization }}</span>
+            <strong>{{ account.website }}</strong>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ADDRESS -->
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-header">
+          {{ 'Client::Address' | abpLocalization }}
+        </div>
+        <div class="card-body">
+
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span>{{ 'Client::Street' | abpLocalization }}</span>
+            <strong>{{ account.street }}</strong>
+          </div>
+
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span>{{ 'Client::City' | abpLocalization }}</span>
+            <strong>{{ account.city }}</strong>
+          </div>
+
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span>{{ 'Client::Country' | abpLocalization }}</span>
+            <strong>{{ account.country }}</strong>
+          </div>
+
+          <div class="d-flex justify-content-between py-1">
+            <span>{{ 'Client::PostalCode' | abpLocalization }}</span>
+            <strong>{{ account.postalCode }}</strong>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- BUSINESS -->
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-header">
+          {{ 'Client::Business' | abpLocalization }}
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span>{{ 'Account::Type' | abpLocalization }}</span>
+            <strong>{{ account.type | accountTypePipe | abpLocalization}}</strong>
+          </div>
+
+          <div class="d-flex justify-content-between py-1">
+            <span>{{ 'Account::Industry' | abpLocalization }}</span>
+            <strong>{{ account.industry | accountIndustryPipe | abpLocalization}}</strong>
+          </div>
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span>{{ 'Client::Revenue' | abpLocalization }}</span>
+            <strong>{{ account.revenueValue |mycurrency: account.revenueCurrency }}</strong>
+          </div>
+
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span>{{ 'Client::Employees' | abpLocalization }}</span>
+            <strong>{{ account.employees }}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUDIT (ABP inherited fields) -->
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          {{ 'Client::AuditInformation' | abpLocalization }}
+        </div>
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
+              <span>{{ 'Client::CreationTime' | abpLocalization }}</span>
+              <strong>{{ account.creationTime | date:'medium' }}</strong>
+            </div>
+
+            <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
+              <span>{{ 'Client::Creator' | abpLocalization }}</span>
+              <strong>{{ account.creatorName}}</strong>
+            </div>
+
+            <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
+              <span>{{ 'Client::LastModificationTime' | abpLocalization }}</span>
+              <strong>{{ account.lastModificationTime | date:'medium' }}</strong>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>

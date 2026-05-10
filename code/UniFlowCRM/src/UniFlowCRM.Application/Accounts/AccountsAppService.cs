@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Management;
 using System.Text;
@@ -9,13 +10,16 @@ using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Identity;
 
 namespace UniFlowCRM.Accounts
 {
     public class AccountsAppService : CrudAppService<Account, AccountDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateAccountDto>, IAccountsAppService
     {
-        public AccountsAppService(IRepository<Account, Guid> repository) : base(repository)
+        private readonly IRepository<IdentityUser, Guid> _userRepository;
+        public AccountsAppService(IRepository<Account, Guid> repository,IRepository<IdentityUser,Guid> usersrepository) : base(repository)
         {
+            _userRepository = usersrepository;
         }
         private Account Initialize(Account acc, CreateUpdateAccountDto input)
         {
@@ -47,6 +51,15 @@ namespace UniFlowCRM.Accounts
                 .AddPostalCode(input.PostalCode)
             );
             return acc;
+        }
+        public override async Task<AccountDto> GetAsync(Guid id)
+        {
+            var dto = await base.GetAsync(id);
+            var username = (await _userRepository.FindAsync(dto.UserID))!.UserName;
+            var creatorname = (await _userRepository.FindAsync((Guid)dto.CreatorId!))!.UserName;
+            dto.Username = username;
+            dto.creatorName = creatorname;
+            return dto;
         }
         public override async Task<AccountDto> CreateAsync(CreateUpdateAccountDto input)
         {

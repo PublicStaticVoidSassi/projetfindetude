@@ -1,0 +1,129 @@
+<div class="card">
+  <div class="card-header">
+    <h1>{{'::Accounts'|abpLocalization}}</h1>
+    </div>
+  <div class="d-flex justify-content-end px-1">
+    <button (click)="create()"class="btn btn-success ">
+      <i class="fa fa-add"></i>
+      {{'::Client:Add' | abpLocalization}}
+    </button>
+  </div>
+  <div class="card-body">
+  <ngx-datatable [rows]="Accounts.items" [count]="Accounts.totalCount" [list]="List" default>
+    <ngx-datatable-column   [sortable]="false">
+      <ng-template ngx-datatable-cell-template let-row="row">
+        <div ngbDropdown container="body" class="d-inline-block">
+          <button
+            class="btn btn-brand btn-sm dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            ngbDropdownToggle
+          >
+            <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+          </button>
+          <div ngbDropdownMenu>
+            <button ngbDropdownItem class="btn 5" (click)="openDetails(row.id)">
+              <i class="fa fa-plus-circle p-1  bg-primary text-white rounded-5"></i>
+              {{ '::Action:Info' | abpLocalization }}
+            </button>
+            <button ngbDropdownItem class="btn " (click)="delete(row.id)">
+              <i class="fa fa-trash p-1 bg-danger text-white rounded-5"></i>
+              {{ '::Action:Delete' | abpLocalization }}
+            </button>
+            <button ngbDropdownItem class="btn " (click)="edit(row.id)">
+              <i class="fa fa-pen p-1 bg-success text-white rounded-5"></i>
+              {{ '::Action:Edit' | abpLocalization }}            </button>
+          </div>
+        </div>
+<!--        -->
+
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column
+      [name]="'::Name' | abpLocalization"
+      prop="name">
+    </ngx-datatable-column>
+
+<!--    <ngx-datatable-column-->
+<!--      [name]="'::Description' | abpLocalization"-->
+<!--      prop="description">-->
+<!--    </ngx-datatable-column>-->
+
+    <ngx-datatable-column
+      [name]="'::Phone' | abpLocalization"
+      prop="phone">
+    </ngx-datatable-column>
+
+<!--    <ngx-datatable-column-->
+<!--      [name]="'::Fax' | abpLocalization"-->
+<!--      prop="fax">-->
+<!--    </ngx-datatable-column>-->
+
+    <ngx-datatable-column
+      [name]="'::Email' | abpLocalization"
+      prop="email">
+    </ngx-datatable-column>
+
+<!--    <ngx-datatable-column-->
+<!--      [name]="'::Website' | abpLocalization"-->
+<!--      prop="website">-->
+<!--    </ngx-datatable-column>-->
+
+<!--    <ngx-datatable-column-->
+<!--      [name]="'::City' | abpLocalization"-->
+<!--      prop="city">-->
+<!--    </ngx-datatable-column>-->
+
+    <ngx-datatable-column
+      [name]="'::Street' | abpLocalization"
+      prop="street">
+    </ngx-datatable-column>
+
+<!--    <ngx-datatable-column-->
+<!--      [name]="'::Country' | abpLocalization"-->
+<!--      prop="country">-->
+<!--    </ngx-datatable-column>-->
+
+<!--    <ngx-datatable-column-->
+<!--      [name]="'::PostalCode' | abpLocalization"-->
+<!--      prop="postalCode">-->
+<!--    </ngx-datatable-column>-->
+
+    <ngx-datatable-column
+      [name]="'::Type' | abpLocalization"
+    >
+      <ng-template ngx-datatable-cell-template let-row="row">
+        {{row.type | accountTypePipe | abpLocalization}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column
+      [name]="'::Industry' | abpLocalization"
+    >
+      <ng-template ngx-datatable-cell-template let-row="row">
+        {{row.industry | accountIndustryPipe | abpLocalization}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column
+      [name]="'::Revenue' | abpLocalization" prop="Revenue.Value">
+
+      <ng-template ngx-datatable-cell-template let-row="row">
+        {{ row.revenueValue | mycurrency: row.revenueCurrency }}
+      </ng-template>
+
+    </ngx-datatable-column>
+
+    <ngx-datatable-column
+      [name]="'::Employees' | abpLocalization"
+      prop="employees">
+    </ngx-datatable-column>
+
+<!--    <ngx-datatable-column-->
+<!--      [name]="'::UserID' | abpLocalization"-->
+<!--      prop="userID">-->
+<!--    </ngx-datatable-column>-->
+  </ngx-datatable>
+</div>
+</div>
