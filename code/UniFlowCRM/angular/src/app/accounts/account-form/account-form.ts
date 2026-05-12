@@ -2,7 +2,7 @@
 import {enumToDropdown} from '../../shared/enum-to-dropdown';
 import {ReturnBtn} from '../../shared/return-btn/return-btn';
 import { IdentityUserDto, IdentityUserService } from '@abp/ng.identity/proxy';
-import { Component,inject } from '@angular/core';
+import { Component,inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 // import  {Accounts} from '../../proxy';
@@ -13,6 +13,7 @@ import {LocalizationPipe} from '@abp/ng.core';
 import { AccountsService } from '../../proxy/accounts/accounts.service';
 import { ToasterService } from '@abp/ng.theme.shared';
 import { ActivatedRoute } from '@angular/router';
+// import { AccountIndustry } from '../../proxy/accounts/account-industry.enum';
 // enum AccountType = Accounts.AccountType;
 
 @Component({
@@ -20,7 +21,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './account-form.html',
   imports: [ReturnBtn,ReactiveFormsModule, LocalizationPipe, ReturnBtn]
 })
-export class AccountFormComponent {
+export class AccountFormComponent implements OnInit {
   private fb = inject(FormBuilder);
   private userService = inject(IdentityUserService);
   private accountsService = inject(AccountsService);

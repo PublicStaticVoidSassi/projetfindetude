@@ -7,10 +7,14 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace UniFlowCRM.Leads
 {
-    class LeadsRepository : EfCoreRepository<UniFlowCRMDbContext, Lead,Guid>, ILeadsRepository
+    class LeadsRepository : EfCoreRepository<UniFlowCRMDbContext, Lead, Guid>, ILeadsRepository
     {
         public LeadsRepository(IDbContextProvider<UniFlowCRMDbContext> dbContextProvider) : base(dbContextProvider)
         {
         }
+        /*public async Task<LeadAccountUser> GetFull()
+        {
+
+        }*/
     }
 }

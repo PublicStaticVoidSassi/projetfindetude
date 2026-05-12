@@ -3,6 +3,7 @@ using Volo.Abp.Mapperly;
 using UniFlowCRM.Books;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Contacts;
+using UniFlowCRM.Opportunities;
 using UniFlowCRM.Leads;
 using UniFlowCRM.ValueObjects;
 namespace UniFlowCRM;
@@ -71,4 +72,14 @@ public partial class UniFlowCRMCreateUpdateBookDtoToBookMapper : MapperBase<Crea
     public override partial Book Map(CreateUpdateBookDto source);
 
     public override partial void Map(CreateUpdateBookDto source, Book destination);
+}
+
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+[UseStaticMapper(typeof(UniFlowCRMValueObjectMapper))]
+public partial class UniFlowCRMOpportunityToOpportunityDtoMapper : MapperBase<Opportunity, OpportunityDto>
+{
+    public override partial OpportunityDto Map(Opportunity source);
+
+    public override partial void Map(Opportunity source, OpportunityDto destination);
 }

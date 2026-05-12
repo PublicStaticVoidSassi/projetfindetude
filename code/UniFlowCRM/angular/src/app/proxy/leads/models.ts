@@ -24,5 +24,7 @@ export interface LeadDto extends FullAuditedEntityDto<string> {
   phone?: string | null;
   email?: string | null;
   userID?: string;
+  userName?: string | null;
   accountID?: string | null;
+  accountName?: string | null;
 }

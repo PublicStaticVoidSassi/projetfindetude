@@ -1,0 +1,210 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="container">
+
+  <div class="card shadow-sm border-0">
+    <div class="card-body px-4">
+
+      <app-return-btn></app-return-btn>
+
+      <h1 class="Display-6 fw-bold mb-4">
+
+        @if (isUpdate) {
+
+          {{ '::Contact:Action:Update' | abpLocalization }}
+
+          <span class="text-primary">
+            {{ form.get('firstName')?.value || '' }}
+            {{ form.get('lastName')?.value || '' }}
+          </span>
+
+        } @else {
+
+          {{ '::Contact:Action:Create' | abpLocalization }}
+
+        }
+
+      </h1>
+
+      <div class="row g-3">
+
+        <!-- First Name -->
+        <div class="col-md-4">
+          <label class="form-label">{{ '::Contact:FirstName' | abpLocalization }}</label>
+          <input class="form-control" formControlName="firstName" />
+        </div>
+
+        <!-- Middle Name -->
+        <div class="col-md-4">
+          <label class="form-label">{{ '::Contact:MiddleName' | abpLocalization }}</label>
+          <input class="form-control" formControlName="middleName" />
+        </div>
+
+        <!-- Last Name -->
+        <div class="col-md-4">
+          <label class="form-label">{{ '::Contact:LastName' | abpLocalization }}</label>
+          <input class="form-control" formControlName="lastName" />
+        </div>
+
+        <!-- Email -->
+        <div class="col-md-6">
+          <label class="form-label">{{ '::Contact:Email' | abpLocalization }}</label>
+          <input class="form-control" formControlName="email" />
+        </div>
+
+        <!-- Website -->
+        <div class="col-md-6">
+          <label class="form-label">{{ '::Contact:Website' | abpLocalization }}</label>
+          <input class="form-control" formControlName="website" />
+        </div>
+
+        <!-- Description -->
+        <div class="col-12">
+          <label class="form-label">{{ '::Contact:Description' | abpLocalization }}</label>
+          <textarea class="form-control" rows="3" formControlName="description"></textarea>
+        </div>
+
+        <!-- Phone -->
+        <div class="col-md-2">
+          <label class="form-label">{{ '::Contact:PhoneCode' | abpLocalization }}</label>
+          <input class="form-control" formControlName="phoneCode" placeholder="+213" />
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">{{ '::Contact:PhoneNumber' | abpLocalization }}</label>
+          <input class="form-control" formControlName="phoneNumber" />
+        </div>
+
+        <!-- Fax -->
+        <div class="col-md-2">
+          <label class="form-label">{{ '::Contact:FaxCode' | abpLocalization }}</label>
+          <input class="form-control" formControlName="faxCode" />
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">{{ '::Contact:FaxNumber' | abpLocalization }}</label>
+          <input class="form-control" formControlName="faxNumber" />
+        </div>
+
+        <!-- Status -->
+        <div class="col-md-3">
+          <label class="form-label">{{ '::Contact:Status' | abpLocalization }}</label>
+
+          <select class="form-select" formControlName="status">
+            @for (status of contactStatuses; track status) {
+              <option [ngValue]="status">
+                {{ '::' + status | abpLocalization }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <!-- Source -->
+        <div class="col-md-3">
+          <label class="form-label">{{ '::Contact:Source' | abpLocalization }}</label>
+
+          <select class="form-select" formControlName="source">
+            @for (source of contactSources; track source) {
+              <option [ngValue]="source">
+                {{ '::' + source | abpLocalization }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <!-- Country -->
+        <div class="col-md-3">
+          <label class="form-label">{{ '::Contact:Country' | abpLocalization }}</label>
+          <input class="form-control" formControlName="country" />
+        </div>
+
+        <!-- City -->
+        <div class="col-md-3">
+          <label class="form-label">{{ '::Contact:City' | abpLocalization }}</label>
+          <input class="form-control" formControlName="city" />
+        </div>
+
+        <!-- Street -->
+        <div class="col-md-6">
+          <label class="form-label">{{ '::Contact:Street' | abpLocalization }}</label>
+          <input class="form-control" formControlName="street" />
+        </div>
+
+        <!-- Postal -->
+        <div class="col-md-3">
+          <label class="form-label">{{ '::Contact:PostalCode' | abpLocalization }}</label>
+          <input type="number" class="form-control" formControlName="postalCode" />
+        </div>
+
+        <!-- Job -->
+        <div class="col-md-3">
+          <label class="form-label">{{ '::Contact:Job' | abpLocalization }}</label>
+          <input class="form-control" formControlName="job" />
+        </div>
+
+        <!-- Department -->
+        <div class="col-md-6">
+          <label class="form-label">{{ '::Contact:Department' | abpLocalization }}</label>
+          <input class="form-control" formControlName="departement" />
+        </div>
+
+        <!-- Assigned User -->
+        <div class="col-md-6">
+          <label class="form-label">{{ '::Contact:AssignTo' | abpLocalization }}</label>
+
+          <select class="form-select" formControlName="userID">
+            @for (user of users; track user.id) {
+              <option [ngValue]="user.id">
+                {{ user.userName }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <!-- Lead
+        <div class="col-md-6">
+          <label class="form-label">{{ '::Contact:Lead' | abpLocalization }}</label>
+
+          <select class="form-select" formControlName="leadID">
+            @for (lead of leads; track lead.id) {
+              <option [ngValue]="lead.id">
+                {{ lead.firstName }} {{ lead.lastName }}
+              </option>
+            }
+          </select>
+        </div> -->
+
+        <!-- Account -->
+        <div class="col-md-6">
+          <label class="form-label">{{ '::Contact:Account' | abpLocalization }}</label>
+
+          <select class="form-select" formControlName="accountID">
+            @for (acc of accounts; track acc.id) {
+              <option [ngValue]="acc.id">
+                {{ acc.name }}
+              </option>
+            }
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Actions -->
+      <div class="d-flex justify-content-end gap-2 mt-4">
+
+        <button type="button"
+                class="btn btn-outline-secondary"
+                (click)="form.reset()">
+          {{ '::Reset' | abpLocalization }}
+        </button>
+
+        <button type="submit"
+                class="btn btn-primary"
+                [disabled]="form.invalid">
+          {{ '::Save' | abpLocalization }}
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+</form>

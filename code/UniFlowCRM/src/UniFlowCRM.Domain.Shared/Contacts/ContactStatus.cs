@@ -1,11 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace UniFlowCRM.Contacts
 {
-    // TODO
     public enum ContactStatus
     {
+        New = 0,
+        Active = 1,
+        Inactive = 2,
+        Engaged = 3,
+        DoNotContact = 4,
+        Converted = 5,
+        Archived = 6,
     }
 }

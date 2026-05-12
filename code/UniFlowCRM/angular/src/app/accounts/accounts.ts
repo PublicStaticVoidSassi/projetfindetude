@@ -57,9 +57,9 @@ export class AccountsComponent implements OnInit{
     )
   }
   edit(id: string){
-    this.toaster.error("not implemented yet");
+    // this.toaster.error("not implemented yet");
 
-    // this.router.navigate(['/Accounts/form/'+id]);
+    this.router.navigate(['/Accounts/form/'+id]);
   }
   create(){
     // this.toaster.error("not implemented yet");

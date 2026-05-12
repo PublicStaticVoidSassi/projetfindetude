@@ -1,0 +1,199 @@
+<app-return-btn></app-return-btn>
+
+<!-- HEADER -->
+<div class="card shadow-sm mb-4">
+  <div class="card-body">
+
+    <h1 class="mb-1 text-brand">
+      {{ contact.firstName }} {{ contact.middleName }} {{ contact.lastName }}
+    </h1>
+
+    <p class="mb-1">
+      {{ '::Contact:Email' | abpLocalization }} : {{ contact.email }}
+    </p>
+
+    <p class="text-muted mb-0 rounded-1">
+      {{ contact.description }}
+    </p>
+
+  </div>
+</div>
+
+<div class="row g-3">
+
+  <!-- CONTACT -->
+  <div class="col-md-12">
+    <div class="card h-100">
+
+      <div class="card-header">
+        {{ '::Contact:Contact' | abpLocalization }}
+      </div>
+
+      <div class="card-body">
+
+        <div class="d-flex justify-content-between border-bottom py-1">
+          <span>{{ '::Contact:Phone' | abpLocalization }}</span>
+          <strong>{{ contact.phone }}</strong>
+        </div>
+
+        <div class="d-flex justify-content-between border-bottom py-1">
+          <span>{{ '::Contact:Fax' | abpLocalization }}</span>
+          <strong>{{ contact.fax }}</strong>
+        </div>
+
+        <div class="d-flex justify-content-between py-1">
+          <span>{{ '::Contact:Website' | abpLocalization }}</span>
+          <strong>{{ contact.website }}</strong>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ADDRESS -->
+  <div class="col-md-6">
+    <div class="card h-100">
+
+      <div class="card-header">
+        {{ '::Contact:Address' | abpLocalization }}
+      </div>
+
+      <div class="card-body">
+
+        <div class="d-flex justify-content-between border-bottom py-1">
+          <span>{{ '::Contact:Street' | abpLocalization }}</span>
+          <strong>{{ contact.street }}</strong>
+        </div>
+
+        <div class="d-flex justify-content-between border-bottom py-1">
+          <span>{{ '::Contact:City' | abpLocalization }}</span>
+          <strong>{{ contact.city }}</strong>
+        </div>
+
+        <div class="d-flex justify-content-between border-bottom py-1">
+          <span>{{ '::Contact:Country' | abpLocalization }}</span>
+          <strong>{{ contact.country }}</strong>
+        </div>
+
+        <div class="d-flex justify-content-between py-1">
+          <span>{{ '::Contact:PostalCode' | abpLocalization }}</span>
+          <strong>{{ contact.postalCode }}</strong>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BUSINESS -->
+  <div class="col-md-6">
+    <div class="card h-100">
+
+      <div class="card-header">
+        {{ '::Contact:Business' | abpLocalization }}
+      </div>
+
+      <div class="card-body">
+
+        <div class="d-flex justify-content-between border-bottom py-1">
+          <span>{{ '::Contact:Job' | abpLocalization }}</span>
+          <strong>{{ contact.job }}</strong>
+        </div>
+
+        <div class="d-flex justify-content-between border-bottom py-1">
+          <span>{{ '::Contact:Department' | abpLocalization }}</span>
+          <strong>{{ contact.departement }}</strong>
+        </div>
+
+        <div class="d-flex justify-content-between border-bottom py-1">
+          <span>{{ '::Contact:Status' | abpLocalization }}</span>
+          <strong>
+            {{ contact.status | contactstatuspipe}}
+          </strong>
+        </div>
+
+        <div class="d-flex justify-content-between py-1">
+          <span>{{ '::Contact:Source' | abpLocalization }}</span>
+          <strong>
+            {{ contact.source | contactsourcepipe }}
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RELATIONS -->
+  <div class="col-md-6">
+    <div class="card h-100">
+
+      <div class="card-header">
+        {{ '::Contact:Relations' | abpLocalization }}
+      </div>
+
+      <div class="card-body">
+
+        <div class="d-flex justify-content-between border-bottom py-1">
+          <span>{{ '::Contact:AssignedTo' | abpLocalization }}</span>
+          <strong>{{ contact.userID }}</strong>
+        </div>
+
+        <div class="d-flex justify-content-between border-bottom py-1">
+          <span>{{ '::Contact:Lead' | abpLocalization }}</span>
+          <strong>{{ contact.leadID }}</strong>
+        </div>
+
+        <div class="d-flex justify-content-between py-1">
+          <span>{{ '::Contact:Account' | abpLocalization }}</span>
+          <strong>{{ contact.accountID }}</strong>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AUDIT -->
+  <div class="col-12">
+    <div class="card">
+
+      <div class="card-header">
+        {{ '::Contact:AuditInformation' | abpLocalization }}
+      </div>
+
+      <div class="card-body">
+
+        <div class="row">
+
+          <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
+            <span>{{ '::Contact:CreationTime' | abpLocalization }}</span>
+            <strong>{{ contact.creationTime | date:'medium' }}</strong>
+          </div>
+
+          <!-- <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
+            <span>{{ '::Contact:Creator' | abpLocalization }}</span>
+            <strong>{{ contact.creatorName }}</strong>
+          </div> -->
+
+          <!-- @if (contact.lastModificationTime) {
+            <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
+              <span>{{ '::Contact:LastModificationTime' | abpLocalization }}</span>
+              <strong>{{ contact.lastModificationTime | date:'medium' }}</strong>
+            </div>
+          } -->
+
+          <!-- <div class="col-md-6 d-flex justify-content-between py-1">
+            <span>{{ '::Contact:LastModifier' | abpLocalization }}</span>
+            <strong>{{ contact.lastModifierName }}</strong>
+          </div> -->
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

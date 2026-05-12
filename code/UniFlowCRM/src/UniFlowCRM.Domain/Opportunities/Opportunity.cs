@@ -34,5 +34,69 @@ namespace UniFlowCRM.Opportunities
 
         }
         protected Opportunity() { }
+        public void SetName(string name)
+{
+    Name = name;
+}
+
+public void SetDescription(string? description)
+{
+    Description = description;
+}
+
+public void SetAmount(ValueObjects.Money amount)
+{
+    Amount = amount;
+}
+
+public void SetStage(OpportunityStage stage)
+{
+    Stage = stage;
+}
+
+public void SetType(OpportunityType type)
+{
+    Type = type;
+}
+
+public void SetSaleStage(SaleStage saleStage)
+{
+    SaleStage = saleStage;
+}
+
+public void SetProbability(short probability)
+{
+    Probability = probability;
+}
+
+public void SetNextStep(string? nextStep)
+{
+    NextStep = nextStep;
+}
+
+public void SetClosedAt(DateTime? closedAt)
+{
+    ClosedAt = closedAt;
+}
+
+public void AssignTo(Guid userID)
+{
+    UserID = userID;
+}
+
+public void SetLead(Guid? leadID)
+{
+    LeadID = leadID;
+}
+
+public void SetAccount(Guid? accountID)
+{
+    AccountID = accountID;
+}
+
+public void SetContact(Guid? contactID)
+{
+    ContactID = contactID;
+}
     }
 }
