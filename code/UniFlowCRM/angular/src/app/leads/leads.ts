@@ -1,7 +1,3 @@
-// import {Accounts as AccountsModule} from '../proxy/index';
-// import { NumberPipe } from '@angular/common';
-// import {AccountTypePipe,AccountIndustryPipe} from './pipes';
-// type AccountDto = AccountsModule.AccountDto;
 import { Component, inject, OnInit } from '@angular/core';
 import { ListService, PagedResultDto, PermissionDirective } from '@abp/ng.core';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';

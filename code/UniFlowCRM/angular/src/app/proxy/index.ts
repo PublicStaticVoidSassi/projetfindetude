@@ -3,4 +3,6 @@ import * as Books from './books';
 import * as Contacts from './contacts';
 import * as Leads from './leads';
 import * as Money from './money';
-export { Accounts, Books, Contacts, Leads, Money };
+import * as Opportunities from './opportunities';
+import * as Volo from './volo';
+export { Accounts, Books, Contacts, Leads, Money, Opportunities, Volo };

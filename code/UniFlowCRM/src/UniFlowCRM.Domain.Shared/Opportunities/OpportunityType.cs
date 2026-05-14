@@ -6,5 +6,8 @@ namespace UniFlowCRM.Opportunities
 {
     public enum OpportunityType
     {
+        NewBusiness = 0,
+        ExistingBusiness = 1,
+        Renewal = 2
     }
 }

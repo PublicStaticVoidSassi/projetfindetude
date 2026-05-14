@@ -16,6 +16,7 @@ export enum ContactSource {
   Campaign = 12,
   ColdCall = 13,
   Other = 14,
+  ConvertedFromLead = 15,
 }
 
 export const contactSourceOptions = mapEnumToOptions(ContactSource);

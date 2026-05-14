@@ -28,7 +28,7 @@ namespace UniFlowCRM.ValueObjects
         }
         private void CheckNumber(string number)
         {
-            if (!number.Length.IsBetween(Constraints.PhoneNumber.MinLength, Constraints.PhoneNumber.MaxLength))
+            if (!number.Length.IsBetween(Constraints.PhoneNumberConstraints.MinLength, Constraints.PhoneNumberConstraints.MaxLength))
             {
                 throw new UserFriendlyException("PhoneNumber:Number:Invalid");
             }
@@ -38,8 +38,8 @@ namespace UniFlowCRM.ValueObjects
             if (
                 !code.StartsWith('+') ||
                 !(code.Length.IsBetween(
-                    Constraints.PhoneNumber.CodeMinLength,
-                    Constraints.PhoneNumber.CodeMaxLength
+                    Constraints.PhoneNumberConstraints.CodeMinLength,
+                    Constraints.PhoneNumberConstraints.CodeMaxLength
                 ))){
                 throw new UserFriendlyException("PhoneNumber:CountryCode:Invalid");
             }

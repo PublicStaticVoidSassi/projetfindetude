@@ -16,7 +16,7 @@ namespace UniFlowCRM.ValueObjects
             Value = url;
         }
         private void Validate(string url) {
-            if (!url.Length.IsBetween(Constraints.URL.MinLength, Constraints.URL.MaxLength))
+            if (!url.Length.IsBetween(Constraints.URLConstraints.MinLength, Constraints.URLConstraints.MaxLength))
             {
                 throw new UserFriendlyException("Url:Invalid");
             }

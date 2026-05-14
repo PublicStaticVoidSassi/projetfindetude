@@ -62,7 +62,7 @@
 
     <ngx-datatable-column
       [name]="'::Client:Email' | abpLocalization"
-      prop="email">
+      prop="email" minWidth="200">
     </ngx-datatable-column>
 
 <!--    <ngx-datatable-column-->
@@ -110,7 +110,7 @@
       [name]="'::Account:Revenue' | abpLocalization" prop="Revenue.Value">
 
       <ng-template ngx-datatable-cell-template let-row="row">
-        {{ row.revenueValue | mycurrency: row.revenueCurrency }}
+        @if(!!row.revenueValue){{{ row.revenueValue | mycurrency: row.revenueCurrency }}}
       </ng-template>
 
     </ngx-datatable-column>

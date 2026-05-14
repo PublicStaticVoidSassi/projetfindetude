@@ -55,8 +55,8 @@ namespace UniFlowCRM.Accounts
         public override async Task<AccountDto> GetAsync(Guid id)
         {
             var dto = await base.GetAsync(id);
-            var username = (await _userRepository.FindAsync(dto.UserID))!.UserName;
-            var creatorname = (await _userRepository.FindAsync((Guid)dto.CreatorId!))!.UserName;
+            var username = (await _userRepository.GetAsync(dto.UserID))!.UserName;
+            var creatorname = (dto.CreatorId is not null)? (await _userRepository.FindAsync((Guid)dto.CreatorId!))?.UserName : "system";
             dto.Username = username;
             dto.creatorName = creatorname;
             return dto;

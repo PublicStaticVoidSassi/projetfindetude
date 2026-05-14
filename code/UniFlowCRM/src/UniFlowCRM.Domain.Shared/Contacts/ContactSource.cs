@@ -17,5 +17,6 @@
         Campaign = 12,
         ColdCall = 13,
         Other = 14,
+        ConvertedFromLead = 15
     }
 }

@@ -29,6 +29,13 @@ export const APP_ROUTES: Routes = [
     canActivate: [authGuard, permissionGuard]
   },
   {
+    path: 'Opportunities',
+    loadChildren: () =>
+      import('./opportunities/opportunities.routes')
+        .then(r => r.OPPORTUNITIES_ROUTES),
+    canActivate: [authGuard, permissionGuard]
+  },
+  {
     path: 'account',
     loadChildren: () => import('@abp/ng.account').then(c => c.createRoutes()),
   },

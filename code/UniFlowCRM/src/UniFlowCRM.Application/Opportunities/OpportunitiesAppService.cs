@@ -8,6 +8,7 @@ using UniFlowCRM.Contacts;
 namespace UniFlowCRM.Opportunities;
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 public class OpportunitiesAppService : CrudAppService<
                                        Opportunity,
@@ -110,5 +111,18 @@ public class OpportunitiesAppService : CrudAppService<
             dto.Contact = ObjectMapper.Map<Contact, ContactDto>(await _contactRepository.GetAsync((Guid)dto.ContactID));
         return dto;
     }
-    
+
+    public override async Task<PagedResultDto<OpportunityDto>> GetListAsync(PagedAndSortedResultRequestDto input)
+    {
+        var result = await base.GetListAsync(input);
+
+        var newdtos = await Task.WhenAll(
+            result.Items.Select(AddNavigationProperties)
+        );
+
+        return new PagedResultDto<OpportunityDto>(
+            result.TotalCount,
+            newdtos
+        );
+    }
 }
