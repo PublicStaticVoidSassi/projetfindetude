@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
-using UniFlowCRM.ValueObjects;
 using Volo.Abp.Domain.Entities;
 using UniFlowCRM.Accounts;
+using UniFlowCRM.EmailAddresses;
+using UniFlowCRM.PhoneNumbers;
 using Volo.Abp.Identity;
 
 namespace UniFlowCRM.Leads

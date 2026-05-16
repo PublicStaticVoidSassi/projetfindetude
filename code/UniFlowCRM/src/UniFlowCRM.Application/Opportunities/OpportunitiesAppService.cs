@@ -40,7 +40,7 @@ public class OpportunitiesAppService : CrudAppService<
         opportunity.SetDescription(input.Description);
 
         opportunity.SetAmount(
-            new ValueObjects.Money(
+            new Moneys.Money(
               input.AmountValue ?? 0,
                 input.AmountCurrency!.Value
 

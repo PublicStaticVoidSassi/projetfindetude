@@ -3,9 +3,11 @@ using Volo.Abp.Mapperly;
 using UniFlowCRM.Books;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Contacts;
+using UniFlowCRM.EmailAddresses;
 using UniFlowCRM.Opportunities;
 using UniFlowCRM.Leads;
-using UniFlowCRM.ValueObjects;
+using UniFlowCRM.PhoneNumbers;
+
 namespace UniFlowCRM;
 
 [Mapper]

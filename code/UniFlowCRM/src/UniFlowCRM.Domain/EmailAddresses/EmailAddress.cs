@@ -3,6 +3,7 @@ using System.Net.Mail;
 using Volo.Abp;
 using Volo.Abp.Domain.Values;
 
+namespace UniFlowCRM.EmailAddresses;
 public class EmailAddress : ValueObject
 {
     public string Name { get; private init; }

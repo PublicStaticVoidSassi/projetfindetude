@@ -5827,7 +5827,7 @@
         {
           "name": "RevenueCurrency",
           "jsonName": null,
-          "type": "UniFlowCRM.Money.Currency?",
+          "type": "UniFlowCRM.Moneys.Currency?",
           "typeSimple": "enum?",
           "isRequired": false,
           "minLength": null,
@@ -6196,7 +6196,7 @@
         {
           "name": "RevenueCurrency",
           "jsonName": null,
-          "type": "UniFlowCRM.Money.Currency?",
+          "type": "UniFlowCRM.Moneys.Currency?",
           "typeSimple": "enum?",
           "isRequired": false,
           "minLength": null,
@@ -7331,7 +7331,7 @@
       "genericArguments": null,
       "properties": null
     },
-    "UniFlowCRM.Money.Currency": {
+    "UniFlowCRM.Moneys.Currency": {
       "baseType": "System.Enum",
       "isEnum": true,
       "enumNames": [
@@ -7383,7 +7383,7 @@
         {
           "name": "AmountCurrency",
           "jsonName": null,
-          "type": "UniFlowCRM.Money.Currency?",
+          "type": "UniFlowCRM.Moneys.Currency?",
           "typeSimple": "enum?",
           "isRequired": false,
           "minLength": null,
@@ -7574,7 +7574,7 @@
         {
           "name": "AmountCurrency",
           "jsonName": null,
-          "type": "UniFlowCRM.Money.Currency?",
+          "type": "UniFlowCRM.Moneys.Currency?",
           "typeSimple": "enum?",
           "isRequired": false,
           "minLength": null,

@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Management;
 using System.Text;
 using System.Threading.Tasks;
-using UniFlowCRM.Money;
-using UniFlowCRM.ValueObjects;
+using UniFlowCRM.Addresses;
+using UniFlowCRM.EmailAddresses;
+using UniFlowCRM.Moneys;
+using UniFlowCRM.PhoneNumbers;
+using UniFlowCRM.URLs;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Entities;
@@ -37,7 +40,7 @@ namespace UniFlowCRM.Accounts
             acc.SetType(input.Type);
             acc.SetIndustry(input.Industry);
             if (input.RevenueCurrency != null && input.RevenueAmount != null)
-                acc.SetRevenue(new ValueObjects.Money((decimal)input.RevenueAmount, (Currency)input.RevenueCurrency));
+                acc.SetRevenue(new Moneys.Money((decimal)input.RevenueAmount, (Currency)input.RevenueCurrency));
             acc.SetEmployees(input.Employees);
             if (input.UserID is not null)
                 acc.AssignTo((Guid)input.UserID);

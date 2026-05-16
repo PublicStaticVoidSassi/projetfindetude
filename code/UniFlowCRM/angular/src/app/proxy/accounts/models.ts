@@ -1,7 +1,7 @@
 import type { EntityDto, FullAuditedEntityDto } from '@abp/ng.core';
 import type { AccountType } from './account-type.enum';
 import type { AccountIndustry } from './account-industry.enum';
-import type { Currency } from '../money/currency.enum';
+import type { Currency } from '../moneys/currency.enum';
 
 export interface AccountDto extends FullAuditedEntityDto<string> {
   name: string;

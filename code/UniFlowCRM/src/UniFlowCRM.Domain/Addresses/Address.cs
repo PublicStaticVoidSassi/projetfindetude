@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Volo.Abp.Domain.Values;
 
-namespace UniFlowCRM.ValueObjects
+namespace UniFlowCRM.Addresses
 {
     public class Address : ValueObject {
         public string? Street { get; private set; }

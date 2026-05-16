@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using UniFlowCRM.Addresses;
+using UniFlowCRM.EmailAddresses;
+using UniFlowCRM.PhoneNumbers;
+using UniFlowCRM.URLs;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
-using UniFlowCRM.ValueObjects;
+
 namespace UniFlowCRM.Contacts
 {
     public class ContactsAppService: CrudAppService<Contact,ContactDto,Guid,PagedAndSortedResultRequestDto,CreateUpdateContactDto>,IContactsAppService

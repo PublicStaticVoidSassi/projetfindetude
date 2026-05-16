@@ -16,7 +16,9 @@ using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using UniFlowCRM.Leads;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Contacts;
+using UniFlowCRM.EmailAddresses;
 using UniFlowCRM.Opportunities;
+using UniFlowCRM.URLs;
 
 namespace UniFlowCRM.EntityFrameworkCore;
 
@@ -102,10 +104,10 @@ public class UniFlowCRMDbContext :
             )
             .HasColumnName("Email");
             b.Property(l => l.Phone)
-            .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new ValueObjects.PhoneNumber(v))
+            .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new PhoneNumbers.PhoneNumber(v))
             .HasColumnName("Phone");
             b.Property(l => l.Fax)
-            .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new ValueObjects.PhoneNumber(v))
+            .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new PhoneNumbers.PhoneNumber(v))
             .HasColumnName("Fax");
             b.OwnsOne(l => l.Address, a =>
             {
@@ -115,9 +117,9 @@ public class UniFlowCRMDbContext :
                 a.Property(a => a.PostalCode).HasColumnName("PostalCode");
             });
             b.Property(l => l.Website)
-            .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new ValueObjects.URL(v))
+            .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new URL(v))
             .HasColumnName("Website");
-            b.OwnsOne<ValueObjects.Money>(l => l.Revenue, r =>
+            b.OwnsOne<Moneys.Money>(l => l.Revenue, r =>
             {
                 r.Property(r => r.Value).HasColumnName("IncomeValue");
                 r.Property(r => r.Currency).HasColumnName("IncomeCurrency");
@@ -139,7 +141,7 @@ public class UniFlowCRMDbContext :
             )
             .HasColumnName("Email");
             b.Property(l => l.Phone)
-            .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new ValueObjects.PhoneNumber(v))
+            .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new PhoneNumbers.PhoneNumber(v))
             .HasColumnName("Phone");
 
         #endregion
@@ -159,10 +161,10 @@ public class UniFlowCRMDbContext :
                 )
                 .HasColumnName("Email");
                 b.Property(l => l.Phone)
-                .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new ValueObjects.PhoneNumber(v))
+                .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new PhoneNumbers.PhoneNumber(v))
                 .HasColumnName("Phone");
                 b.Property(l => l.Fax)
-                .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new ValueObjects.PhoneNumber(v))
+                .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new PhoneNumbers.PhoneNumber(v))
                 .HasColumnName("Fax");
                 b.OwnsOne(l => l.Address, a =>
                 {
@@ -172,7 +174,7 @@ public class UniFlowCRMDbContext :
                     a.Property(a => a.PostalCode).HasColumnName("PostalCode");
                 });
                 b.Property(l => l.Website)
-                .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new ValueObjects.URL(v))
+                .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new URL(v))
                 .HasColumnName("Website");
             });
             #endregion
@@ -186,7 +188,7 @@ public class UniFlowCRMDbContext :
                 b.HasOne<Account>().WithMany().HasForeignKey(l => l.AccountID).IsRequired(false);
                 b.HasOne<Lead>().WithMany().HasForeignKey(l => l.LeadID).IsRequired(false);
                 b.HasOne<Contact>().WithMany().HasForeignKey(l => l.ContactID).IsRequired(false);
-                b.OwnsOne<ValueObjects.Money>(l => l.Amount, r =>
+                b.OwnsOne<Moneys.Money>(l => l.Amount, r =>
                 {
                     r.Property(r => r.Value).HasColumnName("AmountValue");
                     r.Property(r => r.Currency).HasColumnName("AmountCurrency");

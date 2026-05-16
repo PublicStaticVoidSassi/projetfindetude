@@ -1,6 +1,9 @@
 ﻿using System;
 using Volo.Abp.Domain.Entities.Auditing;
-using UniFlowCRM.ValueObjects;
+using UniFlowCRM.PhoneNumbers;
+using UniFlowCRM.EmailAddresses;
+using UniFlowCRM.URLs;
+using UniFlowCRM.Addresses;
 
 namespace UniFlowCRM.Contacts
 {
@@ -68,12 +71,12 @@ namespace UniFlowCRM.Contacts
             Source = source;
         }
 
-        public void SetPhone(PhoneNumber? phone)
+        public void SetPhone(PhoneNumbers.PhoneNumber? phone)
         {
             Phone = phone;
         }
 
-        public void SetFax(PhoneNumber? fax)
+        public void SetFax(PhoneNumbers.PhoneNumber? fax)
         {
             Fax = fax;
         }

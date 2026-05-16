@@ -1,6 +1,8 @@
 ﻿using System;
+using UniFlowCRM.EmailAddresses;
+using UniFlowCRM.PhoneNumbers;
 using Volo.Abp.Domain.Entities.Auditing;
-using UniFlowCRM.ValueObjects;
+
 namespace UniFlowCRM.Leads;
 
 public class Lead : FullAuditedAggregateRoot<Guid>
