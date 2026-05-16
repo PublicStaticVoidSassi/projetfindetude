@@ -6,9 +6,9 @@ import { Component,inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 // import  {Accounts} from '../../proxy';
-import { AccountType,AccountIndustry,CreateUpdateAccountDto } from '../../proxy/accounts';
+import { accountTypeOptions,accountIndustryOptions,CreateUpdateAccountDto } from '../../proxy/accounts';
 // import { AccountType } from './account-type.enum';
-import { Currency } from '../../proxy/money';
+import { Currency, currencyOptions } from '../../proxy/moneys';
 import {LocalizationPipe} from '@abp/ng.core';
 import { AccountsService } from '../../proxy/accounts/accounts.service';
 import { ToasterService } from '@abp/ng.theme.shared';
@@ -28,9 +28,9 @@ export class AccountFormComponent implements OnInit {
   private toaster = inject(ToasterService);
   private route = inject(ActivatedRoute);
 
-  accountTypes = enumToDropdown(AccountType);
-  accountIndustries = enumToDropdown(AccountIndustry);
-  currencies = enumToDropdown(Currency);
+  accountTypes = accountTypeOptions;
+  accountIndustries = accountIndustryOptions;
+  currencies = currencyOptions;
 
   users: IdentityUserDto[] = [];
 

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using UniFlowCRM.Accounts;
+using UniFlowCRM.Leads;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Identity;
 
 namespace UniFlowCRM.Contacts
 {
@@ -30,7 +33,12 @@ namespace UniFlowCRM.Contacts
         public string? Departement { get;  set; }
 
         public Guid UserID { get;  set; } // user FK
+        public IdentityUserDto? Owner { get; set; }
+        public IdentityUserDto? Modifier { get; set; }
+        public IdentityUserDto? Creator { get; set; }
         public Guid? LeadID { get; set; }
+        public LeadDto? Lead { get; set; }
         public Guid? AccountID { get;  set; } // Account FK
+        public AccountDto? Account { get; set; }
     }
 }

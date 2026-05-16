@@ -19,6 +19,8 @@ using UniFlowCRM.Contacts;
 using UniFlowCRM.EmailAddresses;
 using UniFlowCRM.Opportunities;
 using UniFlowCRM.URLs;
+using UniFlowCRM.Notes;
+
 
 namespace UniFlowCRM.EntityFrameworkCore;
 
@@ -36,7 +38,7 @@ public class UniFlowCRMDbContext :
     public DbSet<Account> Accounts { get; set; }
     public DbSet<Contact> Contacts { get; set; }
     public DbSet<Opportunity> Opportunities { get; set; }
-
+    public DbSet<Note> Notes { get; set; }
     #region Entities from the modules
 
     /* Notice: We only implemented IIdentityProDbContext 
@@ -178,6 +180,7 @@ public class UniFlowCRMDbContext :
                 .HasColumnName("Website");
             });
             #endregion
+            
         #region Opporunities
             builder.Entity<Opportunity>(b =>
             {
@@ -195,6 +198,20 @@ public class UniFlowCRMDbContext :
                 });
             });
         });
+        #endregion
+
+        #region Notes
+
+        builder.Entity<Note>(b =>
+        {
+            b.ConfigureByConvention();
+            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadId).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountId).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactId).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityId).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+        });
+
+
         #endregion
     }
 }

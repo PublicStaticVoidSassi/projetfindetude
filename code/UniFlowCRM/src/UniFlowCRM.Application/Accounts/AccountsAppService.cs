@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Management;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,12 +19,107 @@ using Volo.Abp.Identity;
 
 namespace UniFlowCRM.Accounts
 {
+    public class AccountJoined
+    {
+        public AccountDto Account { get; set; }
+        public IdentityUserDto? Owner { get; set; }
+        public IdentityUserDto? Creator { get; set; }
+        public IdentityUserDto? LastModifier { get; set; }
+    }
     public class AccountsAppService : CrudAppService<Account, AccountDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateAccountDto>, IAccountsAppService
     {
         private readonly IRepository<IdentityUser, Guid> _userRepository;
         public AccountsAppService(IRepository<Account, Guid> repository,IRepository<IdentityUser,Guid> usersrepository) : base(repository)
         {
             _userRepository = usersrepository;
+        }
+        private async Task<IQueryable<AccountJoined>> GetQueryableAsync(PagedAndSortedResultRequestDto input)
+        {
+            var accounts = await Repository.GetQueryableAsync();
+
+            
+
+            var users = await _userRepository.GetQueryableAsync();
+
+            var query =
+                from account in accounts
+                orderby input.Sorting
+                join owner in users
+                    on account.UserID equals owner.Id
+                    into ownerJoin
+                from owner in ownerJoin.DefaultIfEmpty()
+
+                join creator in users
+                    on account.CreatorId equals creator.Id
+                    into creatorJoin
+                from creator in creatorJoin.DefaultIfEmpty()
+
+                join modifier in users
+                    on account.LastModifierId equals modifier.Id
+                    into modifierJoin
+                from modifier in modifierJoin.DefaultIfEmpty()
+
+                select new AccountJoined
+                {
+                    Account = ObjectMapper.Map<Account, AccountDto>(account),
+
+                    Owner = owner != null
+                        ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(owner)
+                        : null,
+
+                    Creator = creator != null
+                        ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator)
+                        : null,
+
+                    LastModifier = modifier != null
+                        ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(modifier)
+                        : null
+                };
+            return query;
+        }
+        private async Task<IQueryable<AccountJoined>> GetQueryableAsync(Guid id)
+        {
+            var accounts = await Repository.GetQueryableAsync();
+
+            
+
+            var users = await _userRepository.GetQueryableAsync();
+
+            var query =
+                from account in accounts
+                where account.Id == id
+                join owner in users
+                    on account.UserID equals owner.Id
+                    into ownerJoin
+                from owner in ownerJoin.DefaultIfEmpty()
+
+                join creator in users
+                    on account.CreatorId equals creator.Id
+                    into creatorJoin
+                from creator in creatorJoin.DefaultIfEmpty()
+
+                join modifier in users
+                    on account.LastModifierId equals modifier.Id
+                    into modifierJoin
+                from modifier in modifierJoin.DefaultIfEmpty()
+
+                select new AccountJoined
+                {
+                    Account = ObjectMapper.Map<Account, AccountDto>(account),
+
+                    Owner = owner != null
+                        ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(owner)
+                        : null,
+
+                    Creator = creator != null
+                        ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator)
+                        : null,
+
+                    LastModifier = modifier != null
+                        ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(modifier)
+                        : null
+                };
+            return query;
         }
         private Account Initialize(Account acc, CreateUpdateAccountDto input)
         {
@@ -57,13 +154,30 @@ namespace UniFlowCRM.Accounts
         }
         public override async Task<AccountDto> GetAsync(Guid id)
         {
-            var dto = await base.GetAsync(id);
-            var username = (await _userRepository.GetAsync(dto.UserID))!.UserName;
-            var creatorname = (dto.CreatorId is not null)? (await _userRepository.FindAsync((Guid)dto.CreatorId!))?.UserName : "system";
-            dto.Username = username;
-            dto.creatorName = creatorname;
+            var query = await GetQueryableAsync(id);
+            var res = await AsyncExecuter.FirstAsync(query);
+            var dto = res.Account;
+            dto.Owner = res.Owner;
+            dto.Creator = res.Creator;
+            dto.Modifier = res.LastModifier;
             return dto;
         }
+
+        public override async Task<PagedResultDto<AccountDto>> GetListAsync(PagedAndSortedResultRequestDto input)
+        {
+            var q = await GetQueryableAsync(input);
+            var res = await AsyncExecuter.ToListAsync(q);
+            var dtos = res.Select(res =>
+            {
+                var dto = res.Account;
+                dto.Owner = res.Owner;
+                dto.Creator = res.Creator;
+                dto.Modifier = res.LastModifier;
+                return dto;
+            }).ToList();
+            return new PagedResultDto<AccountDto>(dtos.Count,dtos);
+        }
+
         public override async Task<AccountDto> CreateAsync(CreateUpdateAccountDto input)
         {
             Account acc = new Account(id: input.Id , name: input.Name, userID: CurrentUser.Id!.Value);

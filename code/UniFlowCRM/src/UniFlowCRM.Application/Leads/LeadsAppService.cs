@@ -14,6 +14,14 @@ using Volo.Abp.Identity;
 
 namespace UniFlowCRM.Leads
 {
+    public class LeadJoined
+    {
+        public LeadDto Lead {get;set;}
+        public AccountDto? Account {get;set;}
+        public IdentityUserDto? Owner {get;set;}
+        public IdentityUserDto? Creator {get;set;}
+        public IdentityUserDto? LastModifier {get;set;}
+    }
     public class LeadsAppService :
         CrudAppService<Lead, LeadDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateLeadDto>
         , ILeadsAppService
@@ -29,44 +37,119 @@ namespace UniFlowCRM.Leads
             _userRepository = userRepository;
             _accountsRepository = accountsRepository;
         }
+
+        private async Task<IQueryable<LeadJoined>> GetQueryableAsync(Guid id)
+        {
+            var leads = await Repository.GetQueryableAsync();
+            var users = await _userRepository.GetQueryableAsync();
+            var accounts = await _accountsRepository.GetQueryableAsync();
+
+            var query =
+                from lead in leads
+                where lead.Id == id
+                join account in accounts
+                    on lead.AccountID equals account.Id
+                    into accountJoin
+                from account in accountJoin.DefaultIfEmpty()
+
+                join owner in users
+                    on lead.UserID equals owner.Id
+                    into ownerJoin
+                from owner in ownerJoin.DefaultIfEmpty()
+
+                join creator in users
+                    on lead.CreatorId equals creator.Id
+                    into creatorJoin
+                from creator in creatorJoin.DefaultIfEmpty()
+
+                join modifier in users
+                    on lead.LastModifierId equals modifier.Id
+                    into modifierJoin
+                from modifier in modifierJoin.DefaultIfEmpty()
+                select new LeadJoined
+                {
+                    Lead = ObjectMapper.Map<Lead,LeadDto>(lead),
+                    Account = ObjectMapper.Map<Account,AccountDto>(account),
+                    Owner = ObjectMapper.Map<IdentityUser,IdentityUserDto>(owner),
+                    Creator = ObjectMapper.Map<IdentityUser,IdentityUserDto>(creator),
+                    LastModifier = ObjectMapper.Map<IdentityUser,IdentityUserDto>(modifier)
+                };
+
+            return query;
+        }
+        private async Task<IQueryable<LeadJoined>> GetQueryableAsync(PagedAndSortedResultRequestDto input)
+        {
+            var leads = await Repository.GetQueryableAsync();
+            var users = await _userRepository.GetQueryableAsync();
+            var accounts = await _accountsRepository.GetQueryableAsync();
+
+            var query =
+                from lead in leads
+
+                join account in accounts
+                    on lead.AccountID equals account.Id
+                    into accountJoin
+                from account in accountJoin.DefaultIfEmpty()
+
+                join owner in users
+                    on lead.UserID equals owner.Id
+                    into ownerJoin
+                from owner in ownerJoin.DefaultIfEmpty()
+
+                join creator in users
+                    on lead.CreatorId equals creator.Id
+                    into creatorJoin
+                from creator in creatorJoin.DefaultIfEmpty()
+
+                join modifier in users
+                    on lead.LastModifierId equals modifier.Id
+                    into modifierJoin
+                from modifier in modifierJoin.DefaultIfEmpty()
+                orderby input.Sorting
+                select new LeadJoined
+                {
+                    Lead = ObjectMapper.Map<Lead,LeadDto>(lead),
+                    Account = ObjectMapper.Map<Account,AccountDto>(account),
+                    Owner = ObjectMapper.Map<IdentityUser,IdentityUserDto>(owner),
+                    Creator = ObjectMapper.Map<IdentityUser,IdentityUserDto>(creator),
+                    LastModifier = ObjectMapper.Map<IdentityUser,IdentityUserDto>(modifier)
+                };
+
+            return query;
+        }
+
         public override async Task<LeadDto> GetAsync(Guid id)
         {
-            var dto = await base.GetAsync(id) ?? throw new EntityNotFoundException();
-            dto = await dereferenceFKs(dto);
+            var query = (await GetQueryableAsync(id));
+            var joineddto = await AsyncExecuter.FirstAsync(query);
+            LeadDto dto = joineddto.Lead;
+            dto.Account = joineddto.Account;
+            dto.Owner = joineddto.Owner;
+            dto.Modifier = joineddto.LastModifier;
+            dto.Creator = joineddto.Creator;
             return dto;
         }
 
         public override async Task<PagedResultDto<LeadDto>> GetListAsync(PagedAndSortedResultRequestDto input)
         {
-            var result = await base.GetListAsync(input);
-
-            var newDtos = (await Task.WhenAll(result.Items
-                .Select(e=> dereferenceFKs(e))))
-                .ToList();
-
+            var query = (await GetQueryableAsync(input)).
+                Skip(input.SkipCount).Take(input.MaxResultCount);
+            var result = (await AsyncExecuter.ToListAsync(query)).Select<LeadJoined,LeadDto>(e =>
+                {
+                    var result = e.Lead;
+                    result.Account = e.Account;
+                    result.Owner = e.Owner;
+                    result.Creator = e.Creator;
+                    result.Modifier = e.LastModifier;
+                    return result;
+                }
+            ).ToList();
             return new PagedResultDto<LeadDto>(
-                result.TotalCount,
-                newDtos
+                result.Count,
+                result
             );
         }
-
-        private async Task<LeadDto> dereferenceFKs(LeadDto dto)
-        {
-            try
-            {
-                dto.UserName = (await _userRepository.GetAsync(dto.UserID)).UserName;
-                if (dto.AccountID is not null)
-                {
-                    dto.AccountName = (await _accountsRepository.GetAsync((Guid)dto.AccountID)).Name;
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-            return dto;
-            
-            }
+        
         private Lead Initialize(Lead lead, CreateUpdateLeadDto input)
         {
             lead.SetFirstName(input.FirstName);

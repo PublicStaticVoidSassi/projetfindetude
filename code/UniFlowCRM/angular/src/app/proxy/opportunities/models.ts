@@ -37,7 +37,9 @@ export interface OpportunityDto extends FullAuditedEntityDto<string> {
   nextStep?: string | null;
   closedAt?: string | null;
   userID?: string | null;
-  user?: IdentityUserDto | null;
+  owner?: IdentityUserDto | null;
+  creator?: IdentityUserDto | null;
+  modifier?: IdentityUserDto | null;
   leadID?: string | null;
   lead?: LeadDto | null;
   accountID?: string | null;

@@ -1,5 +1,5 @@
 import { inject, Pipe, PipeTransform } from '@angular/core';
-import { Money } from '../proxy';
+import { Moneys } from '../proxy';
 import {CurrencyPipe as originalCurrencyPipe} from '@angular/common';
 
 @Pipe({
@@ -9,7 +9,7 @@ import {CurrencyPipe as originalCurrencyPipe} from '@angular/common';
 export class myCurrencyPipe implements PipeTransform {
 
   transform(value: number, symbol: number): string {
-    return `${value} ${Money.Currency[symbol]}`;
+    return `${value} ${Moneys.Currency[symbol]}`;
   }
 
 }

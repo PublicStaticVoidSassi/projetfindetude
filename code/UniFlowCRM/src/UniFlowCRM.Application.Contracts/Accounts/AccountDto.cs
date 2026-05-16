@@ -4,9 +4,11 @@ using System.Net;
 using System.Text;
 using UniFlowCRM.Moneys;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Identity;
 
 namespace UniFlowCRM.Accounts
 {
+    
     public class AccountDto: FullAuditedEntityDto<Guid>
     {
         public required string Name { get;  set; }
@@ -29,7 +31,8 @@ namespace UniFlowCRM.Accounts
         public int? Employees { get;  set; }
 
         public Guid UserID { get;  set; } // user fk
-        public string? Username { get; set; }
-        public string? creatorName { get; set; }
+        public IdentityUserDto? Owner {get;set;}
+        public IdentityUserDto? Creator {get;set;}
+        public IdentityUserDto? Modifier {get;set;}
     }
 }

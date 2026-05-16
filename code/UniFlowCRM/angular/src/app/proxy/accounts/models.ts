@@ -2,6 +2,7 @@ import type { EntityDto, FullAuditedEntityDto } from '@abp/ng.core';
 import type { AccountType } from './account-type.enum';
 import type { AccountIndustry } from './account-industry.enum';
 import type { Currency } from '../moneys/currency.enum';
+import type { IdentityUserDto } from '../volo/abp/identity/models';
 
 export interface AccountDto extends FullAuditedEntityDto<string> {
   name: string;
@@ -20,8 +21,9 @@ export interface AccountDto extends FullAuditedEntityDto<string> {
   revenueCurrency?: Currency | null;
   employees?: number | null;
   userID?: string;
-  username?: string | null;
-  creatorName?: string | null;
+  owner?: IdentityUserDto | null;
+  creator?: IdentityUserDto | null;
+  modifier?: IdentityUserDto | null;
 }
 
 export interface CreateUpdateAccountDto extends EntityDto<string> {

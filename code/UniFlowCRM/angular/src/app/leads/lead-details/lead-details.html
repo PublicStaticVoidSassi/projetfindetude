@@ -87,12 +87,12 @@
 
         <div class="d-flex justify-content-between border-bottom py-1">
           <span>{{ '::Lead:AssignedTo' | abpLocalization }}</span>
-          <strong>{{ lead.userName }}</strong>
+          <strong>{{ lead.owner.userName }}</strong>
         </div>
 
         <div class="d-flex justify-content-between py-1">
           <span>{{ '::Lead:ParentAccount' | abpLocalization }}</span>
-          <strong>{{ lead.accountName }}</strong>
+          <strong>{{ lead.account.name }}</strong>
         </div>
 
       </div>

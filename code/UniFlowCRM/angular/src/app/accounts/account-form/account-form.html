@@ -1,8 +1,9 @@
+<app-return-btn></app-return-btn>
 <form [formGroup]="form" (ngSubmit)="submit()" class="container">
 
   <div class="card shadow-sm border-0">
     <div class="card-body px-4">
-      <app-return-btn></app-return-btn>
+      
 
       <!-- Header -->
       <h1 class="Display-6 fw-bold mb-4">
@@ -113,9 +114,9 @@
         <div class="col-md-4">
           <label class="form-label">{{ '::Account:Type' | abpLocalization }}</label>
           <select class="form-select" formControlName="type">
-            @for (type of accountTypes; track type) {
-              <option [NgValue]="type">
-                {{ '::' + type | abpLocalization }}
+            @for (type of accountTypes; track type.value) {
+              <option [value]="type.value">
+                {{ '::Account:Type:' + type.value | abpLocalization }}
               </option>
             }
           </select>
@@ -125,9 +126,9 @@
         <div class="col-md-4">
           <label class="form-label">{{ '::Account:Industry' | abpLocalization }}</label>
           <select class="form-select" formControlName="industry">
-            @for (industry of accountIndustries; track industry) {
-              <option [ngValue]="industry">
-                {{ '::' + industry | abpLocalization }}
+            @for (industry of accountIndustries; track industry.value) {
+              <option [value]="industry.value">
+                {{ '::Account:Industry:' + industry.value | abpLocalization }}
               </option>
             }
           </select>
@@ -149,9 +150,9 @@
         <div class="col-md-6">
           <label class="form-label">{{ '::Account:RevenueCurrency' | abpLocalization }}</label>
           <select class="form-select" formControlName="revenueCurrency">
-            @for (currency of currencies; track currency) {
-              <option [ngValue]="currency">
-                {{ currency }}
+            @for (currency of currencies; track currency.value) {
+              <option [value]="currency.value">
+                {{ currency.key }}
               </option>
             }
           </select>

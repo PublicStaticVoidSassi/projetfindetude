@@ -51,6 +51,10 @@ public class UniFlowCRMDataSeederContributor
 
     public async Task SeedAsync(DataSeedContext context)
     {
+        if (await _accountRepository.GetCountAsync() != 0)
+        {
+            return;
+        }
         // getting the admin user
         IdentityUser defaultUser = await _userRepository.FindAsync(e=>e.UserName=="admin")??throw new Exception("default user not found");
         // seedings accounts 

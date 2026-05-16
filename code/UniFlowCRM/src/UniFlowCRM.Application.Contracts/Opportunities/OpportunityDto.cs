@@ -20,7 +20,9 @@ public class OpportunityDto : FullAuditedEntityDto<Guid>
     public string? NextStep { get; set; }
     public DateTime? ClosedAt { get; set; }
     public Guid? UserID { get; set; }
-    public IdentityUserDto? User { get; set; }
+    public IdentityUserDto? Owner { get; set; }
+    public IdentityUserDto? Creator { get; set; }
+    public IdentityUserDto? Modifier { get; set; }
     public Guid? LeadID { get; set; }
     public LeadDto? Lead { get; set; }
     public Guid? AccountID { get; set; }

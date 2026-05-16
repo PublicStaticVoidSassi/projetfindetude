@@ -1,3 +1,4 @@
+using System;
 using Riok.Mapperly.Abstractions;
 using Volo.Abp.Mapperly;
 using UniFlowCRM.Books;
@@ -6,6 +7,7 @@ using UniFlowCRM.Contacts;
 using UniFlowCRM.EmailAddresses;
 using UniFlowCRM.Opportunities;
 using UniFlowCRM.Leads;
+using UniFlowCRM.Notes;
 using UniFlowCRM.PhoneNumbers;
 
 namespace UniFlowCRM;
@@ -84,4 +86,38 @@ public partial class UniFlowCRMOpportunityToOpportunityDtoMapper : MapperBase<Op
     public override partial OpportunityDto Map(Opportunity source);
 
     public override partial void Map(Opportunity source, OpportunityDto destination);
+}
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+[UseStaticMapper(typeof(UniFlowCRMValueObjectMapper))]
+public partial class UniFlowCRMNoteToNoteDtoMapper : MapperBase<Note, NoteDto>
+{
+    public override partial NoteDto Map(Note source);
+
+    public override partial void Map(Note source, NoteDto destination);
+}
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+[UseStaticMapper(typeof(UniFlowCRMValueObjectMapper))]
+public partial class UniFlowCRMNoteDtoToNoteMapper : MapperBase<CreateUpdateNoteDto, Note>
+{
+    public override Note Map(CreateUpdateNoteDto source)
+    {
+        var output = new Note(source.Id,source.Title,source.Content);
+        if (source.AccountId is not null) output.LinkToAccount((Guid)source.AccountId);
+        if (source.ContactId is not null) output.LinkToContact((Guid)source.ContactId);
+        if (source.OpportunityId is not null) output.LinkToOpportunity((Guid)source.OpportunityId);
+        if (source.LeadId is not null) output.LinkToLead((Guid)source.LeadId);
+        return output;
+    }
+
+    public override partial void Map(CreateUpdateNoteDto source, Note destination);
+}
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+[UseStaticMapper(typeof(UniFlowCRMValueObjectMapper))]
+public partial class UniFlowCRMLeadJoinedToLeadDtoMapper : MapperBase<LeadJoined, LeadDto>
+{
+    public override partial LeadDto Map(LeadJoined source);
+
+    public override partial void Map(LeadJoined source, LeadDto destination);
 }
