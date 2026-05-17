@@ -1,0 +1,234 @@
+<app-return-btn></app-return-btn>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="container">
+
+  <div class="card shadow-sm border-0">
+    <div class="card-body px-4">
+
+      <!-- TITLE -->
+      <h1 class="display-6 fw-bold mb-4">
+
+        @if (isUpdate) {
+
+          {{ '::Opportunity:Action:Update' | abpLocalization }}
+
+          <span class="text-primary">
+            {{ form.get('name')?.value }}
+          </span>
+
+        } @else {
+
+          {{ '::Opportunity:Action:Create' | abpLocalization }}
+
+        }
+
+      </h1>
+
+      <div class="row g-3">
+
+        <!-- Name -->
+        <div class="col-md-7">
+          <label class="form-label">
+            {{ '::Opportunity:Name' | abpLocalization }}
+          </label>
+          <input class="form-control" formControlName="name" />
+        </div>
+
+        <!-- Amount -->
+        <div class="col-md-3">
+          <label class="form-label">
+            {{ '::Opportunity:Amount' | abpLocalization }}
+          </label>
+          <input type="number" class="form-control" formControlName="amountValue" />
+        </div>
+
+        <!-- Currency -->
+        <div class="col-md-2">
+          <label class="form-label">
+            {{ '::Opportunity:Currency' | abpLocalization }}
+          </label>
+
+          <select class="form-select" formControlName="amountCurrency">
+            @for (c of currencies; track c.value) {
+              <option [value]="c.value">
+                {{ c.key }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <!-- Description -->
+        <div class="col-12">
+          <label class="form-label">
+            {{ '::Opportunity:Description' | abpLocalization }}
+          </label>
+
+          <textarea
+            class="form-control"
+            rows="3"
+            formControlName="description"
+            placeholder="'....' | abpLocalization">
+          </textarea>
+        </div>
+
+        <!-- Probability -->
+        <div class="col-md-3">
+          <label class="form-label">
+            {{ '::Opportunity:Probability' | abpLocalization }} : {{form.get("probability")?.value}}%
+          </label>
+          <div class="h-50 d-flex flex-column justify-content-center">
+          <input type="range" min="0" max="100" class="form-control form-range" formControlName="probability" />
+          </div>
+          </div>
+
+        <!-- Stage -->
+        <div class="col-md-3">
+          <label class="form-label">
+            {{ '::Opportunity:Stage' | abpLocalization }}
+          </label>
+
+          <select class="form-select" formControlName="stage">
+            @for (s of opportunityStageOptions; track s.value) {-->
+                            <option [value]="s.value">
+                              {{ '::Opportunity:Stage:' + s.value | abpLocalization }}
+                            </option>
+                          }
+          </select>
+        </div>
+
+        <!-- Type -->
+        <div class="col-md-3">
+          <label class="form-label">
+            {{ '::Opportunity:Type' | abpLocalization }}
+          </label>
+
+          <select class="form-select" formControlName="type">
+            @for (t of types; track t.value) {
+              <option [value]="t.value">
+                {{ '::Opportunity:Type:' + t.value | abpLocalization }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <!-- Sale Stage -->
+        <div class="col-md-3">
+          <label class="form-label">
+            {{ '::Opportunity:SaleStage' | abpLocalization }}
+          </label>
+
+          <select class="form-select" formControlName="saleStage">
+            @for (s of saleStages; track s.value) {
+              <option [value]="s.value">
+                {{ '::Opportunity:SaleStage:' + s.value | abpLocalization }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <!-- Lead -->
+        <div class="col-md-4">
+          <label class="form-label">
+            {{ '::Opportunity:Lead' | abpLocalization }}
+          </label>
+
+          <select class="form-select" formControlName="leadID">
+            <option [ngValue]="null"></option>
+            @for (l of leads; track l.id) {
+              <option [value]="l.id">
+                {{ l.firstName }} {{ l.lastName }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <!-- Account -->
+        <div class="col-md-4">
+          <label class="form-label">
+            {{ '::Opportunity:Account' | abpLocalization }}
+          </label>
+
+          <select class="form-select" formControlName="accountID">
+            <option [ngValue]="null"></option>
+            @for (a of accounts; track a.id) {
+              <option [value]="a.id">
+                {{ a.name }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <!-- Contact -->
+        <div class="col-md-4">
+          <label class="form-label">
+            {{ '::Opportunity:Contact' | abpLocalization }}
+          </label>
+
+          <select class="form-select" formControlName="contactID">
+            <option [ngValue]="null"></option>
+            @for (c of contacts; track c.id) {
+              <option [value]="c.id">
+                {{ c.firstName }} {{ c.lastName }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <!-- Owner -->
+        <div class="col-md-4">
+          <label class="form-label">
+            {{ '::Opportunity:Owner' | abpLocalization }}
+          </label>
+
+          <select class="form-select" formControlName="userID">
+            <option [ngValue]="null"></option>
+            @for (u of users; track u.id) {
+              <option [value]="u.id">
+                {{ u.userName }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <!-- Next Step -->
+        <div class="col-12">
+          <label class="form-label">
+            {{ '::Opportunity:NextStep' | abpLocalization }}
+          </label>
+
+          <textarea
+            class="form-control"
+            formControlName="nextStep"
+            rows="2">
+          </textarea>
+        </div>
+
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="d-flex justify-content-end gap-2 mt-4">
+
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="form.reset()">
+
+          {{ '::Reset' | abpLocalization }}
+
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="form.invalid">
+
+          {{ '::Save' | abpLocalization }}
+
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+</form>

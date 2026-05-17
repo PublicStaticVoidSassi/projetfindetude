@@ -1,0 +1,137 @@
+<app-return-btn></app-return-btn>
+
+<!-- HEADER -->
+<div class="card shadow-sm mb-4">
+  <div class="card-body">
+
+    <h1 class="mb-1 text-brand">
+      {{ opportunity.name }}
+    </h1>
+
+    <p class="mb-1">
+      {{ '::Opportunity:Amount' | abpLocalization }} :
+      {{ opportunity.amountValue | mycurrency : opportunity.amountCurrency }}
+    </p>
+
+    <p class="text-muted mb-0 rounded-1">
+      {{ opportunity.description }}
+    </p>
+
+  </div>
+</div>
+
+<div class="row g-3">
+
+  <!-- MAIN INFO -->
+  <div class="col-md-6">
+    <div class="card h-100">
+
+      <div class="card-header">
+        {{ '::Opportunity:Information' | abpLocalization }}
+      </div>
+
+      <div class="card-body">
+
+        <div class="d-flex justify-content-between border-bottom py-1">
+          <span>{{ '::Opportunity:Stage' | abpLocalization }}</span>
+          <strong>
+            {{ ('::Opportunity:Stage:' + opportunity.stage) | abpLocalization }}
+          </strong>
+        </div>
+
+        <div class="d-flex justify-content-between border-bottom py-1">
+          <span>{{ '::Opportunity:Type' | abpLocalization }}</span>
+          <strong>
+            {{ ('::Opportunity:Type:' + opportunity.type) | abpLocalization }}
+          </strong>
+        </div>
+
+        <div class="d-flex justify-content-between py-1">
+          <span>{{ '::Opportunity:SaleStage' | abpLocalization }}</span>
+          <strong>
+            {{ ('::Opportunity:SaleStage:' + opportunity.saleStage) | abpLocalization }}
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RELATIONS -->
+  <div class="col-md-6">
+    <div class="card h-100">
+
+      <div class="card-header">
+        {{ '::Opportunity:Relations' | abpLocalization }}
+      </div>
+
+      <div class="card-body">
+
+        @if (!!opportunity.accountID) {
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span>{{ '::Opportunity:Account' | abpLocalization }}</span>
+            <strong>
+              <a [routerLink]="['/Accounts', opportunity.accountID]">
+                {{ opportunity.account?.name }}
+              </a>
+            </strong>
+          </div>
+        }
+
+        @if (!!opportunity.leadID) {
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span>{{ '::Opportunity:Lead' | abpLocalization }}</span>
+            <strong>
+              <a [routerLink]="['/Leads', opportunity.leadID]">
+                {{ opportunity.lead?.firstName }} {{ opportunity.lead?.lastName }}
+              </a>
+            </strong>
+          </div>
+        }
+
+        @if (!!opportunity.contactID) {
+          <div class="d-flex justify-content-between border-bottom py-1">
+            <span>{{ '::Opportunity:Contact' | abpLocalization }}</span>
+            <strong>
+              <a class="text-brand" [routerLink]="['/Contacts', opportunity.contactID]">
+                {{ opportunity.contact?.firstName }} {{ opportunity.contact?.lastName }}
+              </a>
+            </strong>
+          </div>
+        }
+
+        <div class="d-flex justify-content-between py-1">
+          <span>{{ '::Opportunity:Owner' | abpLocalization }}</span>
+          <strong>{{ opportunity.user?.userName }}</strong>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- AUDIT -->
+  <div class="col-12">
+    <div class="card">
+
+      <div class="card-header">
+        {{ '::Opportunity:AuditInformation' | abpLocalization }}
+      </div>
+
+      <div class="card-body">
+
+        <div class="row">
+
+          <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
+            <span>{{ '::Opportunity:CreationTime' | abpLocalization }}</span>
+            <strong>{{ opportunity.creationTime | date:'medium' }}</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
