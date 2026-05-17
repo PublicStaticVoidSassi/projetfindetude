@@ -24,7 +24,9 @@ import {
 import {
   LeadStatus,
   LeadSource,
-  CreateUpdateLeadDto
+  CreateUpdateLeadDto,
+  leadStatusOptions,
+  leadSourceOptions
 } from '../../proxy/leads';
 
 import { LocalizationPipe } from '@abp/ng.core';
@@ -58,9 +60,9 @@ export class LeadFormComponent implements OnInit {
 
   private route = inject(ActivatedRoute);
 
-  leadStatuses = enumToDropdown(LeadStatus);
+  leadStatuses = leadStatusOptions;
 
-  leadSources = enumToDropdown(LeadSource);
+  leadSources = leadSourceOptions;
 
   users: IdentityUserDto[] = [];
   accounts: AccountDto[] = [];
@@ -74,9 +76,9 @@ export class LeadFormComponent implements OnInit {
 
     description: [null],
 
-    status: [LeadStatus[this.leadStatuses[0] as keyof typeof LeadStatus]],
+    status: [0],
 
-    source: [LeadSource[this.leadSources[0] as keyof typeof LeadSource]],
+    source: [0],
 
     phoneCode: [null],
 

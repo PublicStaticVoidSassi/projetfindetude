@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using UniFlowCRM.Money;
 using Volo.Abp;
 using Volo.Abp.Domain.Values;
 
-namespace UniFlowCRM.ValueObjects
+namespace UniFlowCRM.Moneys
 {
     public class Money : ValueObject
     {

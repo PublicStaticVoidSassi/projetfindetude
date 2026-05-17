@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using UniFlowCRM.Constraints;
+using UniFlowCRM.Accounts;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Identity;
 
 namespace UniFlowCRM.Leads
 {
@@ -20,8 +21,10 @@ namespace UniFlowCRM.Leads
         public string? Email { get; set; }
 
         public Guid UserID { get; set; } // user FK
-        public string? UserName { get; set; } // user Assigned to
+        public IdentityUserDto? Owner { get; set; }
+        public IdentityUserDto? Creator { get; set; }
+        public IdentityUserDto? Modifier { get; set; }
+        public AccountDto? Account { get; set; }
         public Guid? AccountID { get; set; } // Account FK
-        public string? AccountName { get; set; } // Account Name
     }
 }

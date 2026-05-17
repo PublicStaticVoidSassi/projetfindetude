@@ -3,7 +3,7 @@
   <div class="card shadow-sm mb-4">
     <div class="card-body">
       <h1 class="mb-1 text-brand">{{ account.name }}</h1>
-      <p class="mb-1">{{'::Client:AssignedTo'| abpLocalization }} : {{ account.username }}</p>
+      <p class="mb-1">{{'::Client:AssignedTo'| abpLocalization }} : {{ account.owner.userName }}</p>
       <p class="text-muted mb-0 rounded-1">{{ account.description }}</p>
     </div>
   </div>
@@ -118,7 +118,7 @@
 
             <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
               <span>{{ 'Client::Creator' | abpLocalization }}</span>
-              <strong>{{ account.creatorName}}</strong>
+              <strong>{{ account.creator.userName}}</strong>
             </div>
           @if(account.lastModificationTime){
             <div class="col-md-6 d-flex justify-content-between border-bottom py-1">

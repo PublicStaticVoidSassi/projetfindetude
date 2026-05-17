@@ -9,7 +9,7 @@ namespace UniFlowCRM.Opportunities
 
         public string? Description{get; protected set;}
 
-        public ValueObjects.Money Amount{get; protected set;}
+        public Moneys.Money Amount{get; protected set;}
 
 
         public OpportunityStage Stage{get; protected set;}
@@ -44,7 +44,7 @@ public void SetDescription(string? description)
     Description = description;
 }
 
-public void SetAmount(ValueObjects.Money amount)
+public void SetAmount(Moneys.Money amount)
 {
     Amount = amount;
 }

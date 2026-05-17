@@ -46,11 +46,46 @@ function configureRoutes() {
     {
       path: '/Opportunities',
       name: '::Menu:Opportunities',
-      iconClass: 'fas fa-dollar',
+      iconClass: 'fas fa-handshake',
       order: 40,
       layout: eLayoutType.application,
-      parentName: '::Menu:CRM:Objects'
+      parentName: '::Menu:CRM:Sales'
 
+    },
+    {
+      path: '/Calls',
+      name: '::Menu:Calls',
+      iconClass: 'fas fa-phone',
+      layout: eLayoutType.application,
+      parentName: "::Menu:CRM:Activities",
+    },
+    {
+      path: '/Meetings',
+      name: '::Menu:Meetings',
+      iconClass: 'fas fa-users',
+      layout: eLayoutType.application,
+      parentName: "::Menu:CRM:Activities",
+    },
+    {
+      path: '/Tasks',
+      name: '::Menu:Tasks',
+      iconClass: 'fas fa-random',
+      layout: eLayoutType.application,
+      parentName: "::Menu:CRM:Activities",
+    },
+    {
+      path: '/Emails',
+      name: '::Menu:Emails',
+      iconClass: 'fas fa-envelope',
+      layout: eLayoutType.application,
+      parentName: "::Menu:CRM:Extras",
+    },
+    {
+      path: '/Notes',
+      name: '::Menu:Notes',
+      iconClass: 'fas fa-sticky-note',
+      layout: eLayoutType.application,
+      parentName: "::Menu:CRM:Extras",
     },
     {
         path: '/books',
@@ -60,6 +95,11 @@ function configureRoutes() {
         requiredPolicy: 'UniFlowCRM.Books',
         parentName: "::Menu:CRM:Testing",
     },
+
+
+
+
+    // big ones
     {
       name: "::Menu:CRM:Testing",
       iconClass: 'fas fa-paper',
@@ -70,13 +110,25 @@ function configureRoutes() {
       name: "::Menu:CRM:Objects",
       iconClass: 'fas fa-address-book',
       layout: eLayoutType.application,
-      order: 100,
+      order: 2,
+    },
+    {
+      name: "::Menu:CRM:Sales",
+      iconClass: 'fas fa-usd',
+      layout: eLayoutType.application,
+      order: 3,
     },
     {
       name: "::Menu:CRM:Activities",
-      iconClass: 'fas fa-layer-book',
+      iconClass: 'fas fa-list-ul',
       layout: eLayoutType.application,
-      order: 101,
+      order: 4,
+    },
+    {
+      name: "::Menu:CRM:Extras",
+      iconClass: 'fas fa-star',
+      layout: eLayoutType.application,
+      order: 5
     }
   ]);
 }

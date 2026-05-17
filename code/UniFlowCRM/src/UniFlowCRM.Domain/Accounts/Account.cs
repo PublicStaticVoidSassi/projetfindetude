@@ -1,5 +1,8 @@
 ﻿using System;
-using UniFlowCRM.ValueObjects;
+using UniFlowCRM.Addresses;
+using UniFlowCRM.EmailAddresses;
+using UniFlowCRM.PhoneNumbers;
+using UniFlowCRM.URLs;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace UniFlowCRM.Accounts;
@@ -19,7 +22,7 @@ public class Account : FullAuditedAggregateRoot<Guid>
     public AccountType Type { get; private set; }
     public AccountIndustry? Industry { get; private set; }
 
-    public ValueObjects.Money? Revenue { get; private set; }
+    public Moneys.Money? Revenue { get; private set; }
     public int? Employees { get; private set; }
 
     public Guid UserID { get; private set; } // user fk
@@ -47,12 +50,12 @@ public class Account : FullAuditedAggregateRoot<Guid>
         Description = description;
     }
 
-    public void SetPhone(PhoneNumber? phone)
+    public void SetPhone(PhoneNumbers.PhoneNumber? phone)
     {
         Phone = phone;
     }
 
-    public void SetFax(PhoneNumber? fax)
+    public void SetFax(PhoneNumbers.PhoneNumber? fax)
     {
         Fax = fax;
     }
@@ -82,7 +85,7 @@ public class Account : FullAuditedAggregateRoot<Guid>
         Industry = industry;
     }
 
-    public void SetRevenue(ValueObjects.Money? revenue)
+    public void SetRevenue(Moneys.Money? revenue)
     {
         Revenue = revenue;
     }

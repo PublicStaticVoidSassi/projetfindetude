@@ -1,6 +1,8 @@
 import type { EntityDto, FullAuditedEntityDto } from '@abp/ng.core';
 import type { LeadStatus } from './lead-status.enum';
 import type { LeadSource } from './lead-source.enum';
+import type { IdentityUserDto } from '../volo/abp/identity/models';
+import type { AccountDto } from '../accounts/models';
 
 export interface CreateUpdateLeadDto extends EntityDto<string> {
   firstName?: string;
@@ -24,7 +26,9 @@ export interface LeadDto extends FullAuditedEntityDto<string> {
   phone?: string | null;
   email?: string | null;
   userID?: string;
-  userName?: string | null;
+  owner?: IdentityUserDto | null;
+  creator?: IdentityUserDto | null;
+  modifier?: IdentityUserDto | null;
+  account?: AccountDto | null;
   accountID?: string | null;
-  accountName?: string | null;
 }

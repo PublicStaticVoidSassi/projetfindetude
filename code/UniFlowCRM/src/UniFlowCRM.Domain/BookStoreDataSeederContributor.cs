@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
 using UniFlowCRM.Accounts;
+using UniFlowCRM.Addresses;
 using UniFlowCRM.Books;
 using UniFlowCRM.Contacts;
+using UniFlowCRM.EmailAddresses;
 using UniFlowCRM.Leads;
+using UniFlowCRM.Moneys;
 using UniFlowCRM.Opportunities;
-using UniFlowCRM.ValueObjects;
+using UniFlowCRM.PhoneNumbers;
+using UniFlowCRM.URLs;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;
@@ -47,39 +51,43 @@ public class UniFlowCRMDataSeederContributor
 
     public async Task SeedAsync(DataSeedContext context)
     {
+        if (await _accountRepository.GetCountAsync() != 0)
+        {
+            return;
+        }
         // getting the admin user
         IdentityUser defaultUser = await _userRepository.FindAsync(e=>e.UserName=="admin")??throw new Exception("default user not found");
         // seedings accounts 
         Account ITComp = new Account(_guidGenerator.Create(), "ITComp", defaultUser.Id);
-        ITComp.SetAddress(new ValueObjects.Address().AddCity("Algiers").AddCountry("Algeria").AddStreet("les sources").AddPostalCode(123));
+        ITComp.SetAddress(new Address().AddCity("Algiers").AddCountry("Algeria").AddStreet("les sources").AddPostalCode(123));
         ITComp.SetDescription("We deliver more than just software");
         ITComp.SetEmployees(132);
         ITComp.SetIndustry(AccountIndustry.Technology);
         ITComp.SetEmail(new EmailAddress("contact@itcomp.dz"));
         ITComp.SetType(AccountType.Partner);
-        ITComp.SetPhone(new ValueObjects.PhoneNumber("123456789","+213"));
+        ITComp.SetPhone(new PhoneNumbers.PhoneNumber("123456789","+213"));
         Account NASA = new Account(_guidGenerator.Create(), "NASA", defaultUser.Id);
-        NASA.SetAddress(new ValueObjects.Address().AddCity("Washington DC").AddCountry("USA").AddStreet("wall ST"));
+        NASA.SetAddress(new Address().AddCity("Washington DC").AddCountry("USA").AddStreet("wall ST"));
         NASA.SetDescription("To infinity and beyond");
         NASA.SetEmployees(5000);
         NASA.SetIndustry(AccountIndustry.Engineering);
         NASA.SetEmail(new EmailAddress("marketting@nasa.gov.us"));
         NASA.SetType(AccountType.Analyst);
-        NASA.SetPhone(new ValueObjects.PhoneNumber("456789", "+1"));
+        NASA.SetPhone(new PhoneNumbers.PhoneNumber("456789", "+1"));
         Account AirAlgerie = new Account(_guidGenerator.Create(), "Air Algerie", defaultUser.Id);
-        AirAlgerie.SetAddress(new ValueObjects.Address().AddCity("Algiers").AddCountry("Algeria"));
+        AirAlgerie.SetAddress(new Address().AddCity("Algiers").AddCountry("Algeria"));
         AirAlgerie.SetEmployees(2500);
         AirAlgerie.SetIndustry(AccountIndustry.Engineering);
         AirAlgerie.SetEmail(new EmailAddress("admin@airalgerie.dz"));
         AirAlgerie.SetType(AccountType.Competitor);
-        AirAlgerie.SetPhone(new ValueObjects.PhoneNumber("4512289", "+213"));
+        AirAlgerie.SetPhone(new PhoneNumbers.PhoneNumber("4512289", "+213"));
         Account SCPFoundation = new Account(_guidGenerator.Create(), "The SCP Foundation", defaultUser.Id);
-        SCPFoundation.SetAddress(new ValueObjects.Address().AddCity("???").AddCountry("???").AddStreet("???").AddPostalCode(0));
+        SCPFoundation.SetAddress(new Address().AddCity("???").AddCountry("???").AddStreet("???").AddPostalCode(0));
         SCPFoundation.SetEmployees(99999999);
         SCPFoundation.SetIndustry(AccountIndustry.Other);
         SCPFoundation.SetEmail(new EmailAddress("researcher@thescpfoundation.earth"));
         SCPFoundation.SetType(AccountType.Other);
-        SCPFoundation.SetRevenue(new ValueObjects.Money(99999999, Money.Currency.USD));
+        SCPFoundation.SetRevenue(new Moneys.Money(99999999, Currency.USD));
 
         await _accountRepository.InsertManyAsync([ITComp,NASA,AirAlgerie,SCPFoundation]);
         // leads

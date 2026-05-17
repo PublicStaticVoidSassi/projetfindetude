@@ -1,9 +1,10 @@
+<app-return-btn></app-return-btn>
 <form [formGroup]="form" (ngSubmit)="submit()" class="container">
 
     <div class="card shadow-sm border-0">
       <div class="card-body px-4">
   
-        <app-return-btn></app-return-btn>
+        
   
         <h1 class="Display-6 fw-bold mb-4">
   
@@ -112,9 +113,9 @@
             </label>
   
             <select class="form-select" formControlName="status">
-                @for (status of leadStatuses; track status) {
-                  <option [ngValue]="status">
-                    {{ '::' + status | abpLocalization }}
+                @for (status of leadStatuses; track status.value) {
+                  <option [value]="status.value">
+                    {{ '::Lead:Status:' + status.value | abpLocalization }}
                   </option>
                 }
               </select>
@@ -128,10 +129,10 @@
   
             <select class="form-select" formControlName="source">
   
-              @for (source of leadSources; track source) {
+              @for (source of leadSources; track source.value) {
   
-                <option [ngValue]="source">
-                  {{ '::' + source | abpLocalization }}
+                <option [value]="source.value">
+                  {{ '::Lead:Source:' + source.value | abpLocalization }}
                 </option>
   
               }

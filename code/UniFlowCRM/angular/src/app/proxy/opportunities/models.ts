@@ -1,5 +1,5 @@
 import type { EntityDto, FullAuditedEntityDto } from '@abp/ng.core';
-import type { Currency } from '../money/currency.enum';
+import type { Currency } from '../moneys/currency.enum';
 import type { OpportunityStage } from './opportunity-stage.enum';
 import type { OpportunityType } from './opportunity-type.enum';
 import type { SaleStage } from './sale-stage.enum';
@@ -37,7 +37,9 @@ export interface OpportunityDto extends FullAuditedEntityDto<string> {
   nextStep?: string | null;
   closedAt?: string | null;
   userID?: string | null;
-  user?: IdentityUserDto | null;
+  owner?: IdentityUserDto | null;
+  creator?: IdentityUserDto | null;
+  modifier?: IdentityUserDto | null;
   leadID?: string | null;
   lead?: LeadDto | null;
   accountID?: string | null;

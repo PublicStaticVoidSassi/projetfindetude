@@ -1,5 +1,5 @@
 using System;
-using UniFlowCRM.Money;
+using UniFlowCRM.Moneys;
 using Volo.Abp.Application.Dtos;
 namespace UniFlowCRM.Opportunities;
 

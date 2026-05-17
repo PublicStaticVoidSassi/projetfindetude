@@ -355,6 +355,67 @@ namespace UniFlowCRM.Migrations
                     b.ToTable("Leads", "CRM");
                 });
 
+            modelBuilder.Entity("UniFlowCRM.Notes.Note", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("AccountId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<Guid?>("ContactId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<Guid?>("LeadId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("OpportunityId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.HasIndex("ContactId");
+
+                    b.HasIndex("LeadId");
+
+                    b.HasIndex("OpportunityId");
+
+                    b.ToTable("Notes");
+                });
+
             modelBuilder.Entity("UniFlowCRM.Opportunities.Opportunity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2328,7 +2389,7 @@ namespace UniFlowCRM.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("UniFlowCRM.ValueObjects.Address", "Address", b1 =>
+                    b.OwnsOne("UniFlowCRM.Addresses.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("AccountId")
                                 .HasColumnType("TEXT");
@@ -2357,7 +2418,7 @@ namespace UniFlowCRM.Migrations
                                 .HasForeignKey("AccountId");
                         });
 
-                    b.OwnsOne("UniFlowCRM.ValueObjects.Money", "Revenue", b1 =>
+                    b.OwnsOne("UniFlowCRM.Moneys.Money", "Revenue", b1 =>
                         {
                             b1.Property<Guid>("AccountId")
                                 .HasColumnType("TEXT");
@@ -2399,7 +2460,7 @@ namespace UniFlowCRM.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("UniFlowCRM.ValueObjects.Address", "Address", b1 =>
+                    b.OwnsOne("UniFlowCRM.Addresses.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("ContactId")
                                 .HasColumnType("TEXT");
@@ -2444,6 +2505,29 @@ namespace UniFlowCRM.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("UniFlowCRM.Notes.Note", b =>
+                {
+                    b.HasOne("UniFlowCRM.Accounts.Account", null)
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("UniFlowCRM.Contacts.Contact", null)
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("UniFlowCRM.Leads.Lead", null)
+                        .WithMany()
+                        .HasForeignKey("LeadId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("UniFlowCRM.Opportunities.Opportunity", null)
+                        .WithMany()
+                        .HasForeignKey("OpportunityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("UniFlowCRM.Opportunities.Opportunity", b =>
                 {
                     b.HasOne("UniFlowCRM.Accounts.Account", null)
@@ -2464,7 +2548,7 @@ namespace UniFlowCRM.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("UniFlowCRM.ValueObjects.Money", "Amount", b1 =>
+                    b.OwnsOne("UniFlowCRM.Moneys.Money", "Amount", b1 =>
                         {
                             b1.Property<Guid>("OpportunityId")
                                 .HasColumnType("TEXT");

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Volo.Abp;
 using Volo.Abp.Domain.Values;
 
-namespace UniFlowCRM.ValueObjects
+namespace UniFlowCRM.URLs
 {
     public class URL : ValueObject
     {
@@ -16,7 +16,7 @@ namespace UniFlowCRM.ValueObjects
             Value = url;
         }
         private void Validate(string url) {
-            if (!url.Length.IsBetween(Constraints.URLConstraints.MinLength, Constraints.URLConstraints.MaxLength))
+            if (!url.Length.IsBetween(URLConstraints.MinLength, URLConstraints.MaxLength))
             {
                 throw new UserFriendlyException("Url:Invalid");
             }

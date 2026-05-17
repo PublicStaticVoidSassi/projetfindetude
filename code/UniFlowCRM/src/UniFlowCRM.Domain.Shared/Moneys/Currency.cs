@@ -1,4 +1,4 @@
-﻿namespace UniFlowCRM.Money
+﻿namespace UniFlowCRM.Moneys
 {
     public enum Currency
     {

@@ -22,13 +22,15 @@ import {
 import {
   ContactStatus,
   ContactSource,
-  CreateUpdateContactDto
+  CreateUpdateContactDto,
+  contactStatusOptions,
+  contactSourceOptions
 } from '../../proxy/contacts';
 
 import { LocalizationPipe, validateMinAge } from '@abp/ng.core';
 
 import { ContactsService } from '../../proxy/contacts/contacts.service';
-import { ToasterService } from '@abp/ng.theme.shared';
+import { ToasterService, AbpVisibleDirective } from '@abp/ng.theme.shared';
 import { ActivatedRoute } from '@angular/router';
 
 import { AccountDto, AccountsService } from 'src/app/proxy/accounts';
@@ -38,8 +40,9 @@ import { AccountDto, AccountsService } from 'src/app/proxy/accounts';
   imports: [
     ReturnBtn,
     ReactiveFormsModule,
-    LocalizationPipe
-  ],
+    LocalizationPipe,
+    AbpVisibleDirective
+],
   templateUrl: './contact-form.html',
 })
 export class ContactFormComponent implements OnInit {
@@ -52,8 +55,8 @@ export class ContactFormComponent implements OnInit {
   private toaster = inject(ToasterService);
   private route = inject(ActivatedRoute);
 
-  contactStatuses = enumToDropdown(ContactStatus);
-  contactSources = enumToDropdown(ContactSource);
+  contactStatuses = contactStatusOptions;
+  contactSources = contactSourceOptions;
 
   users: IdentityUserDto[] = [];
   accounts: AccountDto[] = [];

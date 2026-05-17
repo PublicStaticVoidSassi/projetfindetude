@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Volo.Abp;
 using Volo.Abp.Domain.Values;
 
-namespace UniFlowCRM.ValueObjects
+namespace UniFlowCRM.PhoneNumbers
 {
     public class PhoneNumber : ValueObject
     {
@@ -28,7 +27,7 @@ namespace UniFlowCRM.ValueObjects
         }
         private void CheckNumber(string number)
         {
-            if (!number.Length.IsBetween(Constraints.PhoneNumberConstraints.MinLength, Constraints.PhoneNumberConstraints.MaxLength))
+            if (!number.Length.IsBetween(PhoneNumberConstraints.MinLength, PhoneNumberConstraints.MaxLength))
             {
                 throw new UserFriendlyException("PhoneNumber:Number:Invalid");
             }
@@ -38,8 +37,8 @@ namespace UniFlowCRM.ValueObjects
             if (
                 !code.StartsWith('+') ||
                 !(code.Length.IsBetween(
-                    Constraints.PhoneNumberConstraints.CodeMinLength,
-                    Constraints.PhoneNumberConstraints.CodeMaxLength
+                    PhoneNumberConstraints.CodeMinLength,
+                    PhoneNumberConstraints.CodeMaxLength
                 ))){
                 throw new UserFriendlyException("PhoneNumber:CountryCode:Invalid");
             }

@@ -28,11 +28,18 @@ export const APP_ROUTES: Routes = [
         .then(r => r.CONTACTS_ROUTES),
     canActivate: [authGuard, permissionGuard]
   },
-  {
-    path: 'Opportunities',
+  // {
+  //   path: 'Opportunities',
+  //   loadChildren: () =>
+  //     import('./opportunities/opportunities.routes')
+  //       .then(r => r.OPPORTUNITIES_ROUTES),
+  //   canActivate: [authGuard, permissionGuard]
+  // },
+    {
+    path: 'Notes',
     loadChildren: () =>
-      import('./opportunities/opportunities.routes')
-        .then(r => r.OPPORTUNITIES_ROUTES),
+      import('./notes/notes.routes')
+        .then(r => r.NOTES_ROUTES),
     canActivate: [authGuard, permissionGuard]
   },
   {

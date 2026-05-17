@@ -105,7 +105,7 @@
         prop="status">
 
         <ng-template ngx-datatable-cell-template let-row="row">
-          {{ row.status }}
+          {{ '::Contact:Status'+row.status|abpLocalization}}
         </ng-template>
 
       </ngx-datatable-column>
@@ -116,7 +116,7 @@
         prop="source">
 
         <ng-template ngx-datatable-cell-template let-row="row">
-          {{ row.source }}
+          {{ "::Contact:Source:"+row.source|abpLocalization}}
         </ng-template>
 
       </ngx-datatable-column>

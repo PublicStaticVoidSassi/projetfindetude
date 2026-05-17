@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using UniFlowCRM.Money;
+using UniFlowCRM.Moneys;
 using Volo.Abp.Application.Dtos;
 
 namespace UniFlowCRM.Accounts
