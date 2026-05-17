@@ -9,13 +9,13 @@ import {
 } from '@abp/ng.theme.shared';
 import {LocalizationPipe} from '@abp/ng.core';
 import {myCurrencyPipe} from '../shared/currency-pipe';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap'
 import { LeadDto,LeadSource,LeadStatus,LeadsService } from '../proxy/leads';
 import { LeadsourcePipe,LeadstatusPipe } from './pipes';
 @Component({
   selector: 'app-leads',
-  imports: [LeadsourcePipe,LeadstatusPipe,NgbDropdownModule, myCurrencyPipe, NgxDatatableModule, NgxDatatableListDirective, NgxDatatableDefaultDirective, LocalizationPipe, PermissionDirective],
+  imports: [LeadsourcePipe, LeadstatusPipe, NgbDropdownModule, myCurrencyPipe, NgxDatatableModule, NgxDatatableListDirective, NgxDatatableDefaultDirective, LocalizationPipe, PermissionDirective, RouterLink],
   templateUrl: './leads.html',
   styleUrl: './leads.scss',
   providers: [ListService]

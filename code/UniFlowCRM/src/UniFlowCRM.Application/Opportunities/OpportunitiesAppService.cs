@@ -8,6 +8,7 @@ using UniFlowCRM.Contacts;
 
 using System;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 namespace UniFlowCRM.Opportunities;
 
@@ -44,10 +45,12 @@ public class OpportunitiesAppService : CrudAppService<
         _contactRepository = c;
         _accountRepository = a;
     }
-    private async Task<IQueryable<OpportunityJoined>> GetQueryableAsync(
-    PagedAndSortedResultRequestDto input)
-{
-    var opportunities = await Repository.GetQueryableAsync();
+    private async Task<IQueryable<OpportunityJoined>> GetQueryableAsync(PagedAndSortedResultRequestDto input)
+    {
+    var opportunities = (await Repository.GetQueryableAsync())
+            .OrderBy(input.Sorting??"creationTime desc")
+            .Skip(input.SkipCount)
+            .Take(input.MaxResultCount);
 
     var users = await _userRepository.GetQueryableAsync();
     var accounts = await _accountRepository.GetQueryableAsync();
@@ -284,9 +287,7 @@ public class OpportunitiesAppService : CrudAppService<
 
     public override async Task<PagedResultDto<OpportunityDto>> GetListAsync(PagedAndSortedResultRequestDto input)
     {
-        var query = (await GetQueryableAsync(input))
-            .Skip(input.SkipCount)
-            .Take(input.MaxResultCount);
+        var query = (await GetQueryableAsync(input));
         var res = (await AsyncExecuter.ToListAsync(query)).Select<OpportunityJoined, OpportunityDto>(res =>
         {
             var dto = res.Opportunity;

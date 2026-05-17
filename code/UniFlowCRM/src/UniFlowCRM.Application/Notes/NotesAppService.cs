@@ -42,7 +42,7 @@ public class NotesAppService : CrudAppService<Note,NoteDto,Guid,PagedAndSortedRe
 
     private async Task<IQueryable<NoteDto>> GetQueryableAsync(Guid id)
     {
-        var notes = await Repository.GetQueryableAsync();
+        var notes = (await Repository.GetQueryableAsync());
         var users = await _userRepository.GetQueryableAsync();
         var leads = await _leadRepository.GetQueryableAsync();
         var accounts = await _accountRepository.GetQueryableAsync();
@@ -111,7 +111,7 @@ public class NotesAppService : CrudAppService<Note,NoteDto,Guid,PagedAndSortedRe
     }
     private async Task<IQueryable<NoteDto>> GetQueryableAsync(PagedAndSortedResultRequestDto input)
     {
-        var notes = await Repository.GetQueryableAsync();
+        var notes = (await Repository.GetQueryableAsync()).OrderBy(input.Sorting??"creationtime desc").Skip(input.SkipCount).Take(input.MaxResultCount);
         var users = await _userRepository.GetQueryableAsync();
         var leads = await _leadRepository.GetQueryableAsync();
         var accounts = await _accountRepository.GetQueryableAsync();

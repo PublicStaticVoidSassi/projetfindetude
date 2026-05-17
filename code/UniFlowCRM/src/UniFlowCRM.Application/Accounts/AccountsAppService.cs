@@ -35,7 +35,10 @@ namespace UniFlowCRM.Accounts
         }
         private async Task<IQueryable<AccountJoined>> GetQueryableAsync(PagedAndSortedResultRequestDto input)
         {
-            var accounts = await Repository.GetQueryableAsync();
+            var accounts = (await Repository.GetQueryableAsync())
+                .OrderBy(input.Sorting ?? "CreationTime desc")
+                .Skip(input.SkipCount)
+                .Take(input.MaxResultCount);
 
             
 
@@ -43,7 +46,7 @@ namespace UniFlowCRM.Accounts
 
             var query =
                 from account in accounts
-                orderby input.Sorting
+                // orderby input.Sorting
                 join owner in users
                     on account.UserID equals owner.Id
                     into ownerJoin

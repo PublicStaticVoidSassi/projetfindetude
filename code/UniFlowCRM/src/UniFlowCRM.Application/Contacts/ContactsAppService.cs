@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Text;
 using System.Threading.Tasks;
 using UniFlowCRM.Accounts;
@@ -55,8 +56,7 @@ namespace UniFlowCRM.Contacts
         }
         public override async Task<PagedResultDto<ContactDto>> GetListAsync(PagedAndSortedResultRequestDto input)
         {
-            var query = (await GetQueryableAsync(input)).
-                Skip(input.SkipCount).Take(input.MaxResultCount);
+            var query = (await GetQueryableAsync(input));
             var result = (await AsyncExecuter.ToListAsync(query)).Select<ContactJoined,ContactDto>(e =>
                 {
                     var result = e.Contact;
@@ -110,8 +110,8 @@ namespace UniFlowCRM.Contacts
             return con;
         }
         private async Task<IQueryable<ContactJoined>> GetQueryableAsync(PagedAndSortedResultRequestDto input)
-{
-    var contacts = await Repository.GetQueryableAsync();
+        {
+    var contacts = (await Repository.GetQueryableAsync()).OrderBy(input.Sorting ?? "creationTime desc").Skip(input.SkipCount).Take(input.MaxResultCount);
     var users = await _userRepository.GetQueryableAsync();
     var accounts = await _accountsRepository.GetQueryableAsync();
     var leads = await _leadRepository.GetQueryableAsync();

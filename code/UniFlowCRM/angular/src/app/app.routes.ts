@@ -28,13 +28,13 @@ export const APP_ROUTES: Routes = [
         .then(r => r.CONTACTS_ROUTES),
     canActivate: [authGuard, permissionGuard]
   },
-  // {
-  //   path: 'Opportunities',
-  //   loadChildren: () =>
-  //     import('./opportunities/opportunities.routes')
-  //       .then(r => r.OPPORTUNITIES_ROUTES),
-  //   canActivate: [authGuard, permissionGuard]
-  // },
+  {
+    path: 'Opportunities',
+    loadChildren: () =>
+      import('./opportunities/opportunities.routes')
+        .then(r => r.OPPORTUNITIES_ROUTES),
+    canActivate: [authGuard, permissionGuard]
+  },
     {
     path: 'Notes',
     loadChildren: () =>

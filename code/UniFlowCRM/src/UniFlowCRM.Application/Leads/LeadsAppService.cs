@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;   
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
@@ -79,7 +80,10 @@ namespace UniFlowCRM.Leads
         }
         private async Task<IQueryable<LeadJoined>> GetQueryableAsync(PagedAndSortedResultRequestDto input)
         {
-            var leads = await Repository.GetQueryableAsync();
+            var leads = (await Repository.GetQueryableAsync())
+                .OrderBy(input.Sorting??"creationTime desc")
+                .Skip(input.SkipCount).
+                Take(input.MaxResultCount);
             var users = await _userRepository.GetQueryableAsync();
             var accounts = await _accountsRepository.GetQueryableAsync();
 
@@ -132,8 +136,7 @@ namespace UniFlowCRM.Leads
 
         public override async Task<PagedResultDto<LeadDto>> GetListAsync(PagedAndSortedResultRequestDto input)
         {
-            var query = (await GetQueryableAsync(input)).
-                Skip(input.SkipCount).Take(input.MaxResultCount);
+            var query = (await GetQueryableAsync(input));
             var result = (await AsyncExecuter.ToListAsync(query)).Select<LeadJoined,LeadDto>(e =>
                 {
                     var result = e.Lead;

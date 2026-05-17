@@ -64,7 +64,7 @@
 
       <ngx-datatable-column
         [name]="'::Opportunity:Amount' | abpLocalization"
-        prop="amountValue">
+        prop="amount.Value">
 
         <ng-template ngx-datatable-cell-template let-row="row">
           {{ row.amountValue | mycurrency : row.amountCurrency }}

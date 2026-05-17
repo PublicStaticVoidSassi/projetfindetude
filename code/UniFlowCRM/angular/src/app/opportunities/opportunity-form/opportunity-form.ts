@@ -5,10 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { LocalizationPipe } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
 import {saleStageOptions} from '../../proxy/opportunities/sale-stage.enum'
-import {currencyOptions} from '../../proxy/money/currency.enum'
+import {currencyOptions} from '../../proxy/moneys/currency.enum'
 import { ReturnBtn } from '../../shared/return-btn/return-btn';
 import { enumToDropdown } from '../../shared/enum-to-dropdown';
-import { Currency } from '../../proxy/money';
+import { Currency } from '../../proxy/moneys';
 
 import {
   OpportunitiesService,
