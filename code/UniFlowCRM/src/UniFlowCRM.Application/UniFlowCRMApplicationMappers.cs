@@ -1,14 +1,17 @@
 using System;
+using System.Globalization;
 using Riok.Mapperly.Abstractions;
 using Volo.Abp.Mapperly;
 using UniFlowCRM.Books;
 using UniFlowCRM.Accounts;
+using UniFlowCRM.Calls;
 using UniFlowCRM.Contacts;
 using UniFlowCRM.EmailAddresses;
 using UniFlowCRM.Opportunities;
 using UniFlowCRM.Leads;
 using UniFlowCRM.Notes;
 using UniFlowCRM.PhoneNumbers;
+using UniFlowCRM.Tasks;
 
 namespace UniFlowCRM;
 
@@ -120,4 +123,18 @@ public partial class UniFlowCRMLeadJoinedToLeadDtoMapper : MapperBase<LeadJoined
     public override partial LeadDto Map(LeadJoined source);
 
     public override partial void Map(LeadJoined source, LeadDto destination);
+}
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+public partial class TaskToDto : MapperBase<Task, TaskDto>
+{
+    public override partial TaskDto Map(Task source);
+    public override partial void Map(Task source, TaskDto destination);
+}
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+public partial class CallToDto : MapperBase<Call, CallDto>
+{
+    public override partial CallDto Map(Call source);
+    public override partial void Map(Call source, CallDto destination);
 }

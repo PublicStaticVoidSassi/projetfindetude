@@ -1,23 +1,6 @@
 using System;
 using Volo.Abp.Domain.Entities.Auditing;
 namespace UniFlowCRM.Tasks;
-// TODO : place better
-public enum TaskStatus
-{
-    NotStarted = 0,
-    InProgress = 1,
-    Completed = 2,
-    Deferred = 3,
-    Cancelled = 4
-}
-
-public enum TaskPriority
-{
-    Low = 0,
-    Normal = 1,
-    High = 2,
-    Urgent = 3
-}
 public class Task : FullAuditedAggregateRoot<Guid>
 {
     public string Name { get; protected set; }
