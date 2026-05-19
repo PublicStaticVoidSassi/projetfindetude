@@ -20,6 +20,10 @@ using UniFlowCRM.EmailAddresses;
 using UniFlowCRM.Opportunities;
 using UniFlowCRM.URLs;
 using UniFlowCRM.Notes;
+using UniFlowCRM.Tasks;
+using UniFlowCRM.Calls;
+using UniFlowCRM.Meetings;
+using UniFlowCRM.Emails;
 
 
 namespace UniFlowCRM.EntityFrameworkCore;
@@ -39,6 +43,10 @@ public class UniFlowCRMDbContext :
     public DbSet<Contact> Contacts { get; set; }
     public DbSet<Opportunity> Opportunities { get; set; }
     public DbSet<Note> Notes { get; set; }
+    public DbSet<Task> Tasks { get; set; }
+    public DbSet<Call> Calls { get; set; }
+    public DbSet<Meeting> Meetings { get; set; }
+    public DbSet<Email> Emails { get; set; }
     #region Entities from the modules
 
     /* Notice: We only implemented IIdentityProDbContext 
@@ -146,8 +154,8 @@ public class UniFlowCRMDbContext :
             .HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new PhoneNumbers.PhoneNumber(v))
             .HasColumnName("Phone");
 
-        #endregion
-        #region Contacts
+            #endregion
+            #region Contacts
             builder.Entity<Contact>(b =>
             {
                 b.ToTable(UniFlowCRMConsts.DbTablePrefix + "Contacts",
@@ -180,8 +188,8 @@ public class UniFlowCRMDbContext :
                 .HasColumnName("Website");
             });
             #endregion
-            
-        #region Opporunities
+
+            #region Opporunities
             builder.Entity<Opportunity>(b =>
             {
                 b.ToTable(UniFlowCRMConsts.DbTablePrefix + "Opportunities",
@@ -213,5 +221,50 @@ public class UniFlowCRMDbContext :
 
 
         #endregion
+
+        #region Tasks
+        builder.Entity<Task>(b =>
+        {
+            b.ConfigureByConvention();
+            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+        });
+        #endregion
+        #region Calls
+        builder.Entity<Call>(b =>
+        {
+            b.ConfigureByConvention();
+            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+        });
+        #endregion
+        #region Meetings
+        builder.Entity<Meeting>(b =>
+        {
+            b.ConfigureByConvention();
+            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+        });
+        #endregion
+        #region Emails
+        builder.Entity<Email>(b =>
+        {
+            b.ConfigureByConvention();
+            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+        });
+        #endregion
+
+
+
+
     }
 }
