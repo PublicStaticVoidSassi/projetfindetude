@@ -133,12 +133,27 @@ public partial class TaskToDto : MapperBase<Task, TaskDto>
     public override partial TaskDto Map(Task source);
     public override partial void Map(Task source, TaskDto destination);
 }
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+public partial class DtoToTask : MapperBase<CreateUpdateTaskDto, Task>
+{
+    public override partial Task Map(CreateUpdateTaskDto source);
+
+    public override partial void Map(CreateUpdateTaskDto source, Task destination);
+}
 
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 public partial class CallToDto : MapperBase<Call, CallDto>
 {
     public override partial CallDto Map(Call source);
     public override partial void Map(Call source, CallDto destination);
+}
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+public partial class DtoToCall : MapperBase<CreateUpdateCallDto, Call>
+{
+    public override partial Call Map(CreateUpdateCallDto source);
+
+    public override partial void Map(CreateUpdateCallDto source, Call destination);
 }
 // Email
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
@@ -148,6 +163,13 @@ public partial class EmailToDto : MapperBase<Email, EmailDto>
 
     public override partial void Map(Email source, EmailDto destination);
 }
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+public partial class DtoToEmail : MapperBase<CreateUpdateEmailDto, Email>
+{
+    public override partial Email Map(CreateUpdateEmailDto source);
+
+    public override partial void Map(CreateUpdateEmailDto source, Email destination);
+}
 // Meeting
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 public partial class MeetingToDto : MapperBase<Meeting, MeetingDto>
@@ -155,4 +177,13 @@ public partial class MeetingToDto : MapperBase<Meeting, MeetingDto>
     public override partial MeetingDto Map(Meeting source);
 
     public override partial void Map(Meeting source, MeetingDto destination);
+}
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+public partial class DtoToMeeting : MapperBase<CreateUpdateMeetingDto, Meeting>
+{
+    public override partial Meeting Map(CreateUpdateMeetingDto source);
+
+
+    public override partial void Map(CreateUpdateMeetingDto source, Meeting destination);
 }

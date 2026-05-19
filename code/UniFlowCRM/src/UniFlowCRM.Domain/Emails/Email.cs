@@ -6,22 +6,22 @@ namespace UniFlowCRM.Emails;
 public class Email : FullAuditedAggregateRoot<Guid>
 {
 
-    public string Subject { get; protected set; } // Subject
-    public string? Body { get; protected set; }
-    public EmailStatus Status { get; protected set; }
-    public string? From { get; protected set; }
-    public string? To { get; protected set; }
-    public string? Cc { get; protected set; }
-    public string? Bcc { get; protected set; }
-    public DateTime? SentAt { get; protected set; }
-    public bool IsHtml { get; protected set; }
+    public string Subject { get; set; } // Subject
+    public string? Body { get; set; }
+    public EmailStatus Status { get; set; }
+    public string? From { get; set; }
+    public string? To { get; set; }
+    public string? Cc { get; set; }
+    public string? Bcc { get; set; }
+    public DateTime? SentAt { get; set; }
+    public bool IsHtml { get; set; }
 
-    public Guid? AccountID { get; protected set; }
-    public Guid? ContactID { get; protected set; }
-    public Guid? OpportunityID { get; protected set; }
-    public Guid? LeadID { get; protected set; }
+    public Guid? AccountID { get; set; }
+    public Guid? ContactID { get; set; }
+    public Guid? OpportunityID { get; set; }
+    public Guid? LeadID { get; set; }
 
-    public Guid? OwnerID { get; protected set; }
+    public Guid? OwnerID { get; set; }
     public Email(Guid id, string subject)
     {
         SetSubject(subject);

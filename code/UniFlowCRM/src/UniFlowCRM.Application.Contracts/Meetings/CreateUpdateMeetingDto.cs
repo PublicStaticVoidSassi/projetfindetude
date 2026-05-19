@@ -2,7 +2,7 @@ using System;
 using Volo.Abp.Application.Dtos;
 namespace UniFlowCRM.Meetings;
 
-public class CreateUpdateMeetingDto : FullAuditedEntityDto<Guid>
+public class CreateUpdateMeetingDto : EntityDto<Guid>
 {
 
     public string Name { get; set; }

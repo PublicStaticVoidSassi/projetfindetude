@@ -5,19 +5,19 @@ namespace UniFlowCRM.Meetings;
 public class Meeting : FullAuditedAggregateRoot<Guid>
 {
 
-    public string Name { get; protected set; }
-    public string? Description { get; protected set; }
-    public MeetingStatus Status { get; protected set; }
-    public DateTime StartTime { get; protected set; }
-    public DateTime EndTime { get; protected set; }
-    public string? Location { get; protected set; }
-    public Guid? AccountID { get; protected set; }
-    public Guid? ContactID { get; protected set; }
-    public Guid? OpportunityID { get; protected set; }
-    public Guid? LeadID { get; protected set; }
+    public string Name { get; set; }
+    public string? Description { get; set; }
+    public MeetingStatus Status { get; set; }
+    public DateTime StartTime { get; set; }
+    public DateTime EndTime { get; set; }
+    public string? Location { get; set; }
+    public Guid? AccountID { get; set; }
+    public Guid? ContactID { get; set; }
+    public Guid? OpportunityID { get; set; }
+    public Guid? LeadID { get; set; }
 
     // Assignation
-    public Guid? OwnerID { get; protected set; }
+    public Guid? OwnerID { get; set; }
     public Meeting(Guid id, string name) : base(id)
     {
         SetName(name);

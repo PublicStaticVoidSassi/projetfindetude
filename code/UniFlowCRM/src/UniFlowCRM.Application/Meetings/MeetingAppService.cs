@@ -5,6 +5,7 @@ using Volo.Abp.Domain.Repositories;
 namespace UniFlowCRM.Meetings;
 
 public class MeetingAppService :
+
   CrudAppService<Meeting, MeetingDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateMeetingDto>,
   IMeetingAppService
 {

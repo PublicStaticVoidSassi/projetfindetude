@@ -9,22 +9,22 @@ namespace UniFlowCRM.Emails;
 
 public class EmailDto : FullAuditedEntityDto<Guid>
 {
-    public string Subject { get; protected set; } // Subject
-    public string? Body { get; protected set; }
-    public EmailStatus Status { get; protected set; } = EmailStatus.Draft;
-    public string From { get; protected set; }
-    public string To { get; protected set; }
-    public string? Cc { get; protected set; }
-    public string? Bcc { get; protected set; }
-    public DateTime? SentAt { get; protected set; }
-    public bool IsHtml { get; protected set; } = false;
+    public string Subject { get; set; } // Subject
+    public string? Body { get; set; }
+    public EmailStatus Status { get; set; } = EmailStatus.Draft;
+    public string From { get; set; }
+    public string To { get; set; }
+    public string? Cc { get; set; }
+    public string? Bcc { get; set; }
+    public DateTime? SentAt { get; set; }
+    public bool IsHtml { get; set; } = false;
 
-    public AccountDto? Account { get; protected set; }
-    public ContactDto? Contact { get; protected set; }
-    public OpportunityDto? Opportunity { get; protected set; }
-    public LeadDto? Lead { get; protected set; }
+    public AccountDto? Account { get; set; }
+    public ContactDto? Contact { get; set; }
+    public OpportunityDto? Opportunity { get; set; }
+    public LeadDto? Lead { get; set; }
 
-    public IdentityUserDto? Owner { get; protected set; }
-    public IdentityUserDto? Creator { get; protected set; }
-    public IdentityUserDto? Modifier { get; protected set; }
+    public IdentityUserDto? Owner { get; set; }
+    public IdentityUserDto? Creator { get; set; }
+    public IdentityUserDto? Modifier { get; set; }
 }
