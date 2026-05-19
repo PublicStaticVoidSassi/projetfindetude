@@ -13,13 +13,13 @@ public class UniFlowCRMDbContextFactory : IDesignTimeDbContextFactory<UniFlowCRM
     public UniFlowCRMDbContext CreateDbContext(string[] args)
     {
         var configuration = BuildConfiguration();
-        
+
         UniFlowCRMEfCoreEntityExtensionMappings.Configure();
 
         //TODO: UseSqlServer()
         var builder = new DbContextOptionsBuilder<UniFlowCRMDbContext>()
             .UseSqlite(configuration.GetConnectionString("Default"));
-        
+
         return new UniFlowCRMDbContext(builder.Options);
     }
 

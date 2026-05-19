@@ -17,7 +17,7 @@
     },
     "UniFlowCRM.HttpApi.Host": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "applicationUrl": "https://localhost:44308",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

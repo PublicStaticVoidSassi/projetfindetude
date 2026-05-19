@@ -103,7 +103,7 @@ public class UniFlowCRMHttpApiHostModule : AbpModule
             {
                 options.DisableTransportSecurityRequirement = true;
             });
-            
+
             Configure<ForwardedHeadersOptions>(options =>
             {
                 options.ForwardedHeaders = ForwardedHeaders.XForwardedProto;
@@ -123,7 +123,7 @@ public class UniFlowCRMHttpApiHostModule : AbpModule
         ConfigureUrls(configuration);
         ConfigureBundles(hostingEnvironment);
         ConfigureConventionalControllers();
-        ConfigureHealthChecks(context);
+        // ConfigureHealthChecks(context); no more annoying HealthChecks for me
         ConfigureSwagger(context, configuration);
         ConfigureVirtualFileSystem(context);
         ConfigureCors(context, configuration);
