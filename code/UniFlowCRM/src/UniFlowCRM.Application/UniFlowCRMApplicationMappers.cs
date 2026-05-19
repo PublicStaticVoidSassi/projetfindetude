@@ -12,6 +12,8 @@ using UniFlowCRM.Leads;
 using UniFlowCRM.Notes;
 using UniFlowCRM.PhoneNumbers;
 using UniFlowCRM.Tasks;
+using UniFlowCRM.Meetings;
+using UniFlowCRM.Emails;
 
 namespace UniFlowCRM;
 
@@ -105,7 +107,7 @@ public partial class UniFlowCRMNoteDtoToNoteMapper : MapperBase<CreateUpdateNote
 {
     public override Note Map(CreateUpdateNoteDto source)
     {
-        var output = new Note(source.Id,source.Title,source.Content);
+        var output = new Note(source.Id, source.Title, source.Content);
         if (source.AccountId is not null) output.LinkToAccount((Guid)source.AccountId);
         if (source.ContactId is not null) output.LinkToContact((Guid)source.ContactId);
         if (source.OpportunityId is not null) output.LinkToOpportunity((Guid)source.OpportunityId);
@@ -137,4 +139,20 @@ public partial class CallToDto : MapperBase<Call, CallDto>
 {
     public override partial CallDto Map(Call source);
     public override partial void Map(Call source, CallDto destination);
+}
+// Email
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+public partial class EmailToDto : MapperBase<Email, EmailDto>
+{
+    public override partial EmailDto Map(Email source);
+
+    public override partial void Map(Email source, EmailDto destination);
+}
+// Meeting
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+public partial class MeetingToDto : MapperBase<Meeting, MeetingDto>
+{
+    public override partial MeetingDto Map(Meeting source);
+
+    public override partial void Map(Meeting source, MeetingDto destination);
 }

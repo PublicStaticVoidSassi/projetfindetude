@@ -29,15 +29,15 @@ namespace UniFlowCRM.Accounts
     public class AccountsAppService : CrudAppService<Account, AccountDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateAccountDto>, IAccountsAppService
     {
         private readonly IRepository<IdentityUser, Guid> _userRepository;
-        public AccountsAppService(IRepository<Account, Guid> repository,IRepository<IdentityUser,Guid> usersrepository) : base(repository)
+        public AccountsAppService(IRepository<Account, Guid> repository, IRepository<IdentityUser, Guid> usersrepository) : base(repository)
         {
             _userRepository = usersrepository;
         }
         private async Task<IQueryable<AccountJoined>> GetQueryableAsync(PagedAndSortedResultRequestDto input)
         {
-            var accounts = await Repository.GetQueryableAsync();
+            var accounts = (await Repository.GetQueryableAsync()).Skip(input.SkipCount).Take(input.MaxResultCount);
 
-            
+
 
             var users = await _userRepository.GetQueryableAsync();
 
@@ -81,7 +81,7 @@ namespace UniFlowCRM.Accounts
         {
             var accounts = await Repository.GetQueryableAsync();
 
-            
+
 
             var users = await _userRepository.GetQueryableAsync();
 
@@ -175,17 +175,17 @@ namespace UniFlowCRM.Accounts
                 dto.Modifier = res.LastModifier;
                 return dto;
             }).ToList();
-            return new PagedResultDto<AccountDto>(dtos.Count,dtos);
+            return new PagedResultDto<AccountDto>(dtos.Count, dtos);
         }
 
         public override async Task<AccountDto> CreateAsync(CreateUpdateAccountDto input)
         {
-            Account acc = new Account(id: input.Id , name: input.Name, userID: CurrentUser.Id!.Value);
-            acc = Initialize(acc,input);
+            Account acc = new Account(id: input.Id, name: input.Name, userID: CurrentUser.Id!.Value);
+            acc = Initialize(acc, input);
             await Repository.InsertAsync(acc);
             return ObjectMapper.Map<Account, AccountDto>(acc);
         }
-        public override async Task<AccountDto> UpdateAsync(Guid id,CreateUpdateAccountDto input)
+        public override async Task<AccountDto> UpdateAsync(Guid id, CreateUpdateAccountDto input)
         {
             Account? acc = await Repository.FindAsync(id) ?? throw new EntityNotFoundException();
             acc = Initialize(acc, input);

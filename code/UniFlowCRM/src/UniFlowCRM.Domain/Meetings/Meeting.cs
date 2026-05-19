@@ -2,13 +2,6 @@ using System;
 using Volo.Abp.Domain.Entities.Auditing;
 namespace UniFlowCRM.Meetings;
 
-public enum MeetingStatus
-{
-    Planned = 0,
-    Held = 1,
-    NotHeld = 2,
-    Cancelled = 3
-}
 public class Meeting : FullAuditedAggregateRoot<Guid>
 {
 
