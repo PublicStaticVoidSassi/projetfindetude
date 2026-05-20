@@ -9,14 +9,15 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
 namespace UniFlowCRM.Tasks;
-public class TaskAppService : CrudAppService<Task,TaskDto,Guid,PagedAndSortedResultRequestDto,CreateUpdateTaskDto>, ITaskAppService
+
+public class TasksAppService : CrudAppService<Task, TaskDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateTaskDto>, ITaskAppService
 {
     private readonly IRepository<Account, Guid> _accountRepository;
     private readonly IRepository<Lead, Guid> _leadRepository;
     private readonly IRepository<Contact, Guid> _contactRepository;
     private readonly IRepository<Opportunity, Guid> _opportunityRepository;
     private readonly IRepository<IdentityUser, Guid> _userRepository;
-    public TaskAppService(
+    public TasksAppService(
         IRepository<Task, Guid> repository,
         IRepository<Account, Guid> accountRepository,
         IRepository<Lead, Guid> leadRepository,

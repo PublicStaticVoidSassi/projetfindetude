@@ -4,7 +4,7 @@ using Volo.Abp.Application.Dtos;
 using Volo.Abp.Domain.Repositories;
 namespace UniFlowCRM.Emails;
 
-public class EmailAppService :
+public class EmailsAppService :
   CrudAppService<Email,
   EmailDto,
   Guid,
@@ -12,7 +12,7 @@ public class EmailAppService :
   CreateUpdateEmailDto
   >, IEmailAppService
 {
-    public EmailAppService(IRepository<Email, Guid> repository) : base(repository)
+    public EmailsAppService(IRepository<Email, Guid> repository) : base(repository)
     {
 
     }
