@@ -16,6 +16,7 @@ export const environment = {
   application: {
     baseUrl,
     name: 'UniFlowCRM',
+    // logoUrl: '/assets/images/logo.png',
   },
   oAuthConfig,
   apis: {
