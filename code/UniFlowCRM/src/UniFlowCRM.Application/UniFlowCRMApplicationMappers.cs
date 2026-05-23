@@ -95,7 +95,7 @@ public partial class UniFlowCRMOpportunityToOpportunityDtoMapper : MapperBase<Op
 
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 [UseStaticMapper(typeof(UniFlowCRMValueObjectMapper))]
-public partial class UniFlowCRMNoteToNoteDtoMapper : MapperBase<Note, NoteDto>
+public partial class NoteToDto : MapperBase<Note, NoteDto>
 {
     public override partial NoteDto Map(Note source);
 
@@ -103,17 +103,9 @@ public partial class UniFlowCRMNoteToNoteDtoMapper : MapperBase<Note, NoteDto>
 }
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 [UseStaticMapper(typeof(UniFlowCRMValueObjectMapper))]
-public partial class UniFlowCRMNoteDtoToNoteMapper : MapperBase<CreateUpdateNoteDto, Note>
+public partial class DtoToNote : MapperBase<CreateUpdateNoteDto, Note>
 {
-    public override Note Map(CreateUpdateNoteDto source)
-    {
-        var output = new Note(source.Id, source.Title, source.Content);
-        if (source.AccountId is not null) output.LinkToAccount((Guid)source.AccountId);
-        if (source.ContactId is not null) output.LinkToContact((Guid)source.ContactId);
-        if (source.OpportunityId is not null) output.LinkToOpportunity((Guid)source.OpportunityId);
-        if (source.LeadId is not null) output.LinkToLead((Guid)source.LeadId);
-        return output;
-    }
+    public override partial Note Map(CreateUpdateNoteDto source);
 
     public override partial void Map(CreateUpdateNoteDto source, Note destination);
 }

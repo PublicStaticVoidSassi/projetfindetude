@@ -3,6 +3,7 @@ using UniFlowCRM.Calls;
 using Volo.Abp.Application.Dtos;
 
 namespace UniFlowCRM.Calls;
+
 public class CreateUpdateCallDto : EntityDto<Guid>
 {
 
@@ -14,9 +15,9 @@ public class CreateUpdateCallDto : EntityDto<Guid>
     public DateTime? EndTime { get; set; }
     public int? Duration { get; set; }
     public string? PhoneNumber { get; set; }
-    public Guid? AccountId { get; set; }
-    public Guid? ContactId { get; set; }
-    public Guid? OpportunityId { get; set; }
-    public Guid? LeadId { get; set; }
-    public Guid? Owner { get; set; }
+    public Guid? AccountID { get; set; }
+    public Guid? ContactID { get; set; }
+    public Guid? OpportunityID { get; set; }
+    public Guid? LeadID { get; set; }
+    public Guid? OwnerID { get; set; }
 }

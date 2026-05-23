@@ -45,25 +45,25 @@ export const APP_ROUTES: Routes = [
     path: 'Calls',
     loadChildren: () =>
       import('./calls/calls.routes')
-        .then(r => r.ROUTES),
+        .then(r => r.CALLS_ROUTES),
     canActivate: [authGuard, permissionGuard]
   }, {
     path: 'Meetings',
     loadChildren: () =>
       import('./meetings/meetings.routes')
-        .then(r => r.ROUTES),
+        .then(r => r.MEETINGS_ROUTES),
     canActivate: [authGuard, permissionGuard]
   }, {
     path: 'Tasks',
     loadChildren: () =>
       import('./tasks/tasks.routes')
-        .then(r => r.ROUTES),
+        .then(r => r.TASKS_ROUTES),
     canActivate: [authGuard, permissionGuard]
   }, {
     path: 'Emails',
     loadChildren: () =>
       import('./emails/emails.routes')
-        .then(r => r.ROUTES),
+        .then(r => r.EMAILS_ROUTES),
     canActivate: [authGuard, permissionGuard]
   },
   {

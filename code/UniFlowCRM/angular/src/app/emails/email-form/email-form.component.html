@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title">{{ (id ? '::Edit' : '::NewEmail') | abpLocalization }}</h5>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="form-group mb-3">
+        <label for="to-address">{{ '::To' | abpLocalization }}</label><span> * </span>
+        <input id="to-address" type="email" class="form-control" formControlName="toAddress" autofocus />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="subject">{{ '::Subject' | abpLocalization }}</label><span> * </span>
+        <input id="subject" type="text" class="form-control" formControlName="subject" />
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="body">{{ '::Body' | abpLocalization }}</label><span> * </span>
+        <textarea id="body" class="form-control" formControlName="body" rows="10"></textarea>
+      </div>
+      
+      <div class="text-end">
+        <button type="button" class="btn btn-secondary me-2" (click)="cancel()">
+          {{ '::Cancel' | abpLocalization }}
+        </button>
+        <button class="btn btn-primary" [disabled]="form.invalid || loading()">
+          <i class="fa fa-check me-1"></i>
+          {{ '::Save' | abpLocalization }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

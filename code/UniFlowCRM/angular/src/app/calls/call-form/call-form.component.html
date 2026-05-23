@@ -1,0 +1,97 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title">{{ (id ? '::Edit' : '::NewCall') | abpLocalization }}</h5>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label for="call-name">{{ '::Name' | abpLocalization }}</label><span> * </span>
+            <input id="call-name" type="text" class="form-control" formControlName="name" autofocus />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="call-phone">{{ '::PhoneNumber' | abpLocalization }}</label>
+            <input id="call-phone" type="text" class="form-control" formControlName="phoneNumber" />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="call-start">{{ '::StartTime' | abpLocalization }}</label>
+            <input id="call-start" type="datetime-local" class="form-control" formControlName="startTime" />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label for="call-duration">{{ '::Duration' | abpLocalization }}</label>
+            <input id="call-duration" type="number" class="form-control" formControlName="duration" />
+          </div>
+
+          <div class="mb-3">
+            <users-lookup formControlName="owner"></users-lookup>
+          </div>
+          <div class="mb-3">
+            <leads-lookup formControlName="leadId"></leads-lookup>
+          </div>
+          
+          <div class="mb-3">
+            <accounts-lookup formControlName="accountId"></accounts-lookup>
+          </div>
+          <div class="mb-3">
+            <contacts-lookup formControlName="contactId"></contacts-lookup>
+          </div>
+          <div class="mb-3">
+            <opportunities-lookup formControlName="opportunityId"></opportunities-lookup>
+          </div>
+          <div class="form-group mb-3">
+            <label for="call-end">{{ '::EndTime' | abpLocalization }}</label>
+            <input id="call-end" type="datetime-local" class="form-control" formControlName="endTime" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label for="call-status">{{ '::Status' | abpLocalization }}</label>
+            <select id="call-status" class="form-control" formControlName="status">
+              <option [ngValue]="null" disabled selected>{{ '::SelectValue' | abpLocalization }}</option>
+              @for (status of callstatuses; track status.value) {
+                  <option [value]="status.value">{{ '::Call:Status:'+status.value | abpLocalization }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label for="call-direction">{{ '::Direction' | abpLocalization }}</label>
+            <select id="call-direction" class="form-control" formControlName="direction">
+              <option [ngValue]="null" disabled selected>{{ '::SelectValue' | abpLocalization }}</option>
+              @for (status of calldirections; track status.value) {
+                  <option [value]="status.value">{{ '::Call:Direction:'+status.value | abpLocalization }}</option>
+              }
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="call-description">{{ '::Description' | abpLocalization }}</label>
+        <textarea id="call-description" class="form-control" formControlName="description" rows="3"></textarea>
+      </div>
+
+      <!-- Relation sections (Opportunity, Account, Lead, Contact) can be added below using lookups -->
+
+      <div class="text-end">
+        <button type="button" class="btn btn-secondary me-2" (click)="cancel()">
+          {{ '::Cancel' | abpLocalization }}
+        </button>
+        <button class="btn btn-primary" >
+          <i class="fa fa-check me-1"></i>
+          {{ '::Save' | abpLocalization }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

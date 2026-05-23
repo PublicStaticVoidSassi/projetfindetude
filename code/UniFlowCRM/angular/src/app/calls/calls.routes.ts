@@ -1,21 +1,23 @@
 import { Routes } from '@angular/router';
-import { Calls } from './calls';
-export const ROUTES: Routes = [
+import { CallsComponent } from './calls';
+import { CallFormComponent } from './call-form/call-form.component';
+import { CallDetailsComponent } from './call-details/call-details.component';
+
+export const CALLS_ROUTES: Routes = [
   {
     path: '',
-    component: Calls,
+    component: CallsComponent,
   },
-  // {
-  //   path: 'form',
-  //   component: LeadFormComponent
-  // },
-  // {
-  //   path: 'form/:id',
-  //   component: LeadFormComponent
-  // },
-  // {
-  //   path: ':id',
-  //   component: LeadDetailsComponent,
-  // },
-
+  {
+    path: 'form',
+    component: CallFormComponent,
+  },
+  {
+    path: 'form/:id',
+    component: CallFormComponent,
+  },
+  {
+    path: ':id',
+    component: CallDetailsComponent,
+  },
 ];

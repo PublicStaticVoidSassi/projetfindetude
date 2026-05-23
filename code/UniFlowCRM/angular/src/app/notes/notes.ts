@@ -43,7 +43,7 @@ export class NotesComponent implements OnInit {
   List = inject(ListService);
 
   notes = {} as PagedResultDto<NoteDto>;
-
+  notetypes= noteTypeOptions;
   refreshList = () => {
     this.List.get();
   };

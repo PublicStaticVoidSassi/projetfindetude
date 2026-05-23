@@ -1,0 +1,122 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title">
+      {{ (id ? '::Edit' : '::NewNote') | abpLocalization }}
+    </h5>
+  </div>
+
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="row">
+        <div class="col-12 mb-3">
+          <label for="title" class="form-label">
+            {{ '::Title' | abpLocalization }}
+          </label>
+          <span> * </span>
+
+          <input
+            id="title"
+            type="text"
+            class="form-control"
+            formControlName="title"
+            maxlength="128"
+            autofocus
+          />
+
+          <div
+            class="text-danger mt-1"
+            *ngIf="
+              form.get('title')?.invalid &&
+              form.get('title')?.touched
+            "
+          >
+            {{ '::ThisFieldIsRequired' | abpLocalization }}
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="type" class="form-label">
+            {{ '::Type' | abpLocalization }}
+          </label>
+          <span> * </span>
+
+          <select
+            id="type"
+            class="form-select"
+            formControlName="type"
+          >
+            <option [ngValue]="null">
+              {{ '::Select' | abpLocalization }}
+            </option>
+
+            <option
+              *ngFor="let type of noteTypes"
+              [ngValue]="type.value"
+            >
+              {{ type.key }}
+            </option>
+          </select>
+
+          <div
+            class="text-danger mt-1"
+            *ngIf="
+              form.get('type')?.invalid &&
+              form.get('type')?.touched
+            "
+          >
+            {{ '::ThisFieldIsRequired' | abpLocalization }}
+          </div>
+        </div>
+        <div class="row" >
+          <leads-lookup formControlName="leadId"></leads-lookup>
+          <accounts-lookup formControlName="accountId"></accounts-lookup>
+          <opportunities-lookup formControlName="opportunityId"></opportunities-lookup>
+          <contacts-lookup formControlName="contactId"></contacts-lookup>
+        </div>
+        <div class="col-12 mb-3">
+          <label for="content" class="form-label">
+            {{ '::Content' | abpLocalization }}
+          </label>
+          <span> * </span>
+
+          <textarea
+            id="content"
+            class="form-control"
+            formControlName="content"
+            rows="6"
+          ></textarea>
+
+          <div
+            class="text-danger mt-1"
+            *ngIf="
+              form.get('content')?.invalid &&
+              form.get('content')?.touched
+            "
+          >
+            {{ '::ThisFieldIsRequired' | abpLocalization }}
+          </div>
+        </div>
+      </div>
+
+      <div class="text-end">
+        <button
+          type="button"
+          class="btn btn-secondary me-2"
+          (click)="cancel()"
+        >
+          {{ '::Cancel' | abpLocalization }}
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="form.invalid || loading()"
+        >
+          <i class="fa fa-check me-1"></i>
+
+          {{ '::Save' | abpLocalization }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,9 +1,13 @@
 import * as Accounts from './accounts';
 import * as Books from './books';
+import * as Calls from './calls';
 import * as Contacts from './contacts';
+import * as Emails from './emails';
 import * as Leads from './leads';
+import * as Meetings from './meetings';
 import * as Moneys from './moneys';
 import * as Notes from './notes';
 import * as Opportunities from './opportunities';
+import * as Tasks from './tasks';
 import * as Volo from './volo';
-export { Accounts, Books, Contacts, Leads, Moneys, Notes, Opportunities, Volo };
+export { Accounts, Books, Calls, Contacts, Emails, Leads, Meetings, Moneys, Notes, Opportunities, Tasks, Volo };

@@ -1,0 +1,34 @@
+<div class="card" *ngIf="task()">
+  <div class="card-header">
+    <div class="row align-items-center">
+      <div class="col col-md-6">
+        <h5 class="card-title">{{ '::TaskDetails' | abpLocalization }}</h5>
+      </div>
+      <div class="text-end col col-md-6">
+        <button class="btn btn-secondary btn-sm me-2" (click)="goBack()">
+          <i class="fa fa-arrow-left me-1"></i>
+          {{ '::Back' | abpLocalization }}
+        </button>
+        <button class="btn btn-primary btn-sm me-2" (click)="edit()">
+          <i class="fa fa-edit me-1"></i>
+          {{ '::Edit' | abpLocalization }}
+        </button>
+        <button class="btn btn-danger btn-sm" (click)="delete()">
+          <i class="fa fa-trash me-1"></i>
+          {{ '::Delete' | abpLocalization }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12">
+        <label class="text-muted small d-block">{{ '::Title' | abpLocalization }}</label>
+        <p class="mt-1 lead">{{ task().title }}</p>
+        
+        <label class="text-muted small d-block">{{ '::Description' | abpLocalization }}</label>
+        <p class="mt-1">{{ task().description }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,222 @@
+<!-- *ngIf="call()" -->
+<div class="card">
+  <div class="card-header">
+    <div class="row align-items-center">
+      <div class="col col-md-6">
+        <h5 class="card-title">
+          {{ '::CallDetails' | abpLocalization }}
+        </h5>
+      </div>
+
+      <div class="text-end col col-md-6">
+        <app-return-btn></app-return-btn>
+
+        <button class="btn btn-primary btn-sm me-2" (click)="edit()">
+          <i class="fa fa-edit me-1"></i>
+          {{ '::Edit' | abpLocalization }}
+        </button>
+
+        <button class="btn btn-danger btn-sm" (click)="delete()">
+          <i class="fa fa-trash me-1"></i>
+          {{ '::Delete' | abpLocalization }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+
+      <!-- LEFT COLUMN -->
+      <div class="col-md-6">
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Name' | abpLocalization }}
+          </label>
+
+          <p class="mt-1 lead">
+            {{ call().name }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Description' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ call().description || '-' }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::PhoneNumber' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ call().phoneNumber || '-' }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Duration' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ call().duration ?? '-' }} {{"::minutes" | abpLocalization }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::StartTime' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ call().startTime | date:'medium' }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::EndTime' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ call().endTime | date:'medium' }}
+          </p>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="col-md-6">
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Status' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ '::Call:Status:' + call().status | abpLocalization }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Direction' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ '::Call:Direction:' + call().direction | abpLocalization }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Owner' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ call().owner?.userName || '-' }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Account' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ call().account?.name || '-' }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Contact' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ call().contact?.name || '-' }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Lead' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ call().lead?.firstName +' '+ call().lead?.lastName  || '-' }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Opportunity' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ call().opportunity?.name || '-' }}
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <hr />
+
+    <!-- AUDIT INFO -->
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Creator' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ call().creator?.userName || '-' }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::CreationTime' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ call().creationTime | date:'medium' }}
+          </p>
+        </div>
+      </div>
+      @if (!!call().lastModificationTime)
+      {<div class="col-md-6">
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Modifier' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ call().modifier?.userName || '-' }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::LastModificationTime' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ call().lastModificationTime | date:'medium' }}
+          </p>
+        </div>
+      </div>}
+
+    </div>
+  </div>
+</div>

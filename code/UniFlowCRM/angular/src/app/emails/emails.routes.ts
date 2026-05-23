@@ -1,21 +1,23 @@
 import { Routes } from '@angular/router';
-import {Emails} from './emails';
-export const ROUTES: Routes = [
+import { EmailsComponent } from './emails.component';
+import { EmailFormComponent } from './email-form/email-form.component';
+import { EmailDetailsComponent } from './email-details/email-details.component';
+
+export const EMAILS_ROUTES: Routes = [
   {
     path: '',
-    component: Emails,
+    component: EmailsComponent,
   },
-  // {
-  //   path: 'form',
-  //   component: LeadFormComponent
-  // },
-  // {
-  //   path: 'form/:id',
-  //   component: LeadFormComponent
-  // },
-  // {
-  //   path: ':id',
-  //   component: LeadDetailsComponent,
-  // },
-
+  {
+    path: 'form',
+    component: EmailFormComponent,
+  },
+  {
+    path: 'form/:id',
+    component: EmailFormComponent,
+  },
+  {
+    path: ':id',
+    component: EmailDetailsComponent,
+  },
 ];
