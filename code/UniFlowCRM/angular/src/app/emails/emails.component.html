@@ -45,7 +45,12 @@
       </ngx-datatable-column>
       <ngx-datatable-column [name]="'::Subject' | abpLocalization" prop="subject">
       </ngx-datatable-column>
-      <ngx-datatable-column [name]="'::To' | abpLocalization" prop="toAddress">
+      <ngx-datatable-column [name]="'::To' | abpLocalization" prop="to">
+      </ngx-datatable-column>
+      <ngx-datatable-column [name]="'Client::AssignedTo' | abpLocalization" prop="ownerID">
+        <ng-template ngx-datatable-cell-template let-row="row">
+          {{row.owner?.userName}}
+        </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>
   </div>

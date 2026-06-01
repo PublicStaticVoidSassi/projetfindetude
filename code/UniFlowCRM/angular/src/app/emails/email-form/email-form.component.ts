@@ -3,12 +3,14 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService, ThemeSharedModule } from '@abp/ng.theme.shared';
 import { EmailsService } from '../../proxy/emails/emails.service';
+import { emailStatusOptions } from '../../proxy/emails';
 import { CommonModule } from '@angular/common';
+import {AccountsLookup,ContactsLookup,LeadsLookup,OpportunitiesLookup,UsersLookup} from "../../shared/lookup-components";
 import {LocalizationPipe} from '@abp/ng.core';
 @Component({
   selector: 'app-email-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, LocalizationPipe,ThemeSharedModule],
+  imports: [AccountsLookup,ContactsLookup,LeadsLookup,OpportunitiesLookup,UsersLookup,CommonModule, ReactiveFormsModule, LocalizationPipe,ThemeSharedModule],
   templateUrl: './email-form.component.html',
 })
 export class EmailFormComponent implements OnInit {
@@ -17,7 +19,7 @@ export class EmailFormComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly toaster = inject(ToasterService);
-
+  emailStatuses = emailStatusOptions;
   form: FormGroup = this.fb.group({});
   id: string | null = null;
   loading = signal(false);
@@ -37,9 +39,23 @@ export class EmailFormComponent implements OnInit {
 
   buildForm() {
     this.form = this.fb.group({
-      toAddress: ['', [Validators.required, Validators.email]],
       subject: ['', [Validators.required, Validators.maxLength(256)]],
       body: ['', [Validators.required]],
+      status: [null],
+
+      from: ['', [Validators.email]],
+      to: ['', [Validators.required, Validators.email]],
+      cc: [''],
+      bcc: [''],
+
+      sentAt: [null],
+      isHtml: [false],
+
+      accountID: [null],
+      contactID: [null],
+      opportunityID: [null],
+      leadID: [null],
+      ownerID: [null],
     });
   }
 

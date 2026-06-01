@@ -77,6 +77,14 @@
         prop="phone">
       </ngx-datatable-column>
 
+      <!-- Assigned to-->
+      <ngx-datatable-column
+        [name]="'::Client:AssignedTo' | abpLocalization"
+        prop="UserID" minWidth="200">
+        <ng-template ngx-datatable-cell-template let-row="row">
+          {{'@'+row.owner?.userName}}
+        </ng-template>
+      </ngx-datatable-column>
       <!-- ACCOUNT -->
       <ngx-datatable-column
         [name]="'::Contact:Account' | abpLocalization"

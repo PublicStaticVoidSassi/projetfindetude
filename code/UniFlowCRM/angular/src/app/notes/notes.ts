@@ -15,7 +15,7 @@ import {
 } from '@abp/ng.theme.shared';
 
 import { LocalizationPipe } from '@abp/ng.core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NotesService, NoteDto, noteTypeOptions } from '../proxy/notes';
@@ -29,6 +29,7 @@ import { NotesService, NoteDto, noteTypeOptions } from '../proxy/notes';
     NgxDatatableDefaultDirective,
     LocalizationPipe,
     PermissionDirective,
+    RouterLink
   ],
   templateUrl: './notes.html',
   styleUrl: './notes.scss',

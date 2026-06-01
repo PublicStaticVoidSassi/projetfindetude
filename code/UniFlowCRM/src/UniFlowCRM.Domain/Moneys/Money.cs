@@ -23,7 +23,7 @@ namespace UniFlowCRM.Moneys
 
         public Money(decimal value, Currency currency)
         {
-            Check.Positive(Value, nameof(Value));
+            Check.Positive(value, nameof(value));
             Value = value;
             Currency = currency;
         }

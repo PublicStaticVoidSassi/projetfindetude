@@ -60,10 +60,10 @@ public class CallsAppService : CrudAppService<Call, CallDto, Guid, PagedAndSorte
         _userRepository = userRepository;
     }
 
-    /*public override Task<CallDto> CreateAsync(CreateUpdateCallDto input)
+    public override Task<CallDto> CreateAsync(CreateUpdateCallDto input)
     {
         return base.CreateAsync(input);
-    }*/
+    }
 
     public override async Task<CallDto> GetAsync(Guid id)
     {

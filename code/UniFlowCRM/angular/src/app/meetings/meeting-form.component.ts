@@ -2,21 +2,48 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService, ThemeSharedModule } from '@abp/ng.theme.shared';
-import { MeetingService } from '../proxy/meetings/meeting.service';
+
+import {
+  MeetingsService,
+  meetingStatusOptions
+} from '../proxy/meetings';
+
 import { CommonModule } from '@angular/common';
-import {LocalizationPipe} from '@abp/ng.core';
+import { LocalizationPipe } from '@abp/ng.core';
+
+import {
+  AccountsLookup,
+  ContactsLookup,
+  LeadsLookup,
+  OpportunitiesLookup,
+  UsersLookup
+} from '../shared/lookup-components';
+
 @Component({
   selector: 'app-meeting-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ThemeSharedModule, LocalizationPipe],
+  imports: [
+    AccountsLookup,
+    ContactsLookup,
+    LeadsLookup,
+    OpportunitiesLookup,
+    UsersLookup,
+    LocalizationPipe,
+    CommonModule,
+    ReactiveFormsModule,
+    ThemeSharedModule
+  ],
   templateUrl: './meeting-form.component.html',
 })
 export class MeetingFormComponent implements OnInit {
+
   private readonly fb = inject(FormBuilder);
-  private readonly meetingService = inject(MeetingService);
+  private readonly meetingService = inject(MeetingsService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly toaster = inject(ToasterService);
+
+  meetingStatuses = meetingStatusOptions;
 
   form: FormGroup = this.fb.group({});
   id: string | null = null;
@@ -28,6 +55,7 @@ export class MeetingFormComponent implements OnInit {
 
     if (this.id) {
       this.loading.set(true);
+
       this.meetingService.get(this.id).subscribe((meeting) => {
         this.form.patchValue(meeting);
         this.loading.set(false);
@@ -37,16 +65,29 @@ export class MeetingFormComponent implements OnInit {
 
   buildForm() {
     this.form = this.fb.group({
-      title: ['', [Validators.required, Validators.maxLength(128)]],
-      description: ['', [Validators.maxLength(500)]],
-      location: ['', [Validators.maxLength(256)]],
+      name: ['', [Validators.required]],
+      description: [''],
+      status: [null],
+      startTime: [null, [Validators.required]],
+      endTime: [null],
+      location: [''],
+
+      accountID: [null],
+      contactID: [null],
+      opportunityID: [null],
+      leadID: [null],
+      ownerID: [null],
     });
   }
 
   save() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      console.log(this.form.errors);
+      return;
+    }
 
     this.loading.set(true);
+
     const request = this.id
       ? this.meetingService.update(this.id, this.form.value)
       : this.meetingService.create(this.form.value);

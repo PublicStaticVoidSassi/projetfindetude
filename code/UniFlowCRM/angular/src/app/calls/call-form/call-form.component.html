@@ -29,12 +29,12 @@
           </div>
 
           <div class="mb-3">
-            <users-lookup formControlName="owner"></users-lookup>
+            <users-lookup formControlName="ownerID"></users-lookup>
           </div>
           <div class="mb-3">
             <leads-lookup formControlName="leadId"></leads-lookup>
           </div>
-          
+
           <div class="mb-3">
             <accounts-lookup formControlName="accountId"></accounts-lookup>
           </div>
@@ -56,7 +56,7 @@
           <div class="form-group mb-3">
             <label for="call-status">{{ '::Status' | abpLocalization }}</label>
             <select id="call-status" class="form-control" formControlName="status">
-              <option [ngValue]="null" disabled selected>{{ '::SelectValue' | abpLocalization }}</option>
+              <option [value]="null" disabled selected>{{ '::SelectValue' | abpLocalization }}</option>
               @for (status of callstatuses; track status.value) {
                   <option [value]="status.value">{{ '::Call:Status:'+status.value | abpLocalization }}</option>
               }
@@ -67,7 +67,7 @@
           <div class="form-group mb-3">
             <label for="call-direction">{{ '::Direction' | abpLocalization }}</label>
             <select id="call-direction" class="form-control" formControlName="direction">
-              <option [ngValue]="null" disabled selected>{{ '::SelectValue' | abpLocalization }}</option>
+              <option [value]="null" disabled selected>{{ '::SelectValue' | abpLocalization }}</option>
               @for (status of calldirections; track status.value) {
                   <option [value]="status.value">{{ '::Call:Direction:'+status.value | abpLocalization }}</option>
               }

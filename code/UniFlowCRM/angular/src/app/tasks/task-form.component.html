@@ -1,29 +1,141 @@
 <div class="card">
   <div class="card-header">
-    <h5 class="card-title">{{ (id ? '::Edit' : '::NewTask') | abpLocalization }}</h5>
+    <h5 class="card-title">
+      {{ (id ? '::Edit' : '::NewTask') | abpLocalization }}
+    </h5>
   </div>
+
   <div class="card-body">
     <form [formGroup]="form" (ngSubmit)="save()">
-      <div class="form-group mb-3">
-        <label for="title">{{ '::Title' | abpLocalization }}</label><span> * </span>
-        <input id="title" type="text" class="form-control" formControlName="title" autofocus />
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label for="task-name">{{ '::Name' | abpLocalization }}</label><span> * </span>
+            <input
+              id="task-name"
+              type="text"
+              class="form-control"
+              formControlName="name"
+              autofocus />
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="task-start">{{ '::StartTime' | abpLocalization }}</label>
+            <input
+              id="task-start"
+              type="datetime-local"
+              class="form-control"
+              formControlName="startTime" />
+          </div>
+
+<!--          <div class="form-group mb-3">-->
+<!--            <label for="task-completed">{{ '::CompletedAt' | abpLocalization }}</label>-->
+<!--            <input-->
+<!--              id="task-completed"-->
+<!--              type="datetime-local"-->
+<!--              class="form-control"-->
+<!--              formControlName="completedAt" />-->
+<!--          </div>-->
+
+          <div class="mb-3">
+            <users-lookup formControlName="owner"></users-lookup>
+          </div>
+
+          <div class="mb-3">
+            <leads-lookup formControlName="leadID"></leads-lookup>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label for="task-end">{{ '::EndTime' | abpLocalization }}</label>
+            <input
+              id="task-end"
+              type="datetime-local"
+              class="form-control"
+              formControlName="endTime" />
+          </div>
+
+          <div class="mb-3">
+            <accounts-lookup formControlName="accountID"></accounts-lookup>
+          </div>
+
+          <div class="mb-3">
+            <contacts-lookup formControlName="contactID"></contacts-lookup>
+          </div>
+
+          <div class="mb-3">
+            <opportunities-lookup formControlName="opportunityID"></opportunities-lookup>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label for="task-status">{{ '::Status' | abpLocalization }}</label>
+            <select
+              id="task-status"
+              class="form-control"
+              formControlName="status">
+              <option disabled [value]="null">
+                {{ '::SelectValue' | abpLocalization }}
+              </option>
+
+              @for (status of taskStatuses; track status.value) {
+                <option [value]="status.value">
+                  {{ '::Task:Status:' + status.value | abpLocalization }}
+                </option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label for="task-priority">{{ '::Priority' | abpLocalization }}</label>
+            <select
+              id="task-priority"
+              class="form-control"
+              formControlName="priority">
+              <option disabled [value]="null">
+                {{ '::SelectValue' | abpLocalization }}
+              </option>
+
+              @for (priority of taskPriorities; track priority.value) {
+                <option [value]="priority.value">
+                  {{ '::Task:Priority:' + priority.value | abpLocalization }}
+                </option>
+              }
+            </select>
+          </div>
+        </div>
       </div>
 
       <div class="form-group mb-3">
-        <label for="due-date">{{ '::DueDate' | abpLocalization }}</label>
-        <input id="due-date" type="date" class="form-control" formControlName="dueDate" />
+        <label for="task-description">{{ '::Description' | abpLocalization }}</label>
+        <textarea
+          id="task-description"
+          class="form-control"
+          formControlName="description"
+          rows="3"></textarea>
       </div>
 
-      <div class="form-group mb-3">
-        <label for="description">{{ '::Description' | abpLocalization }}</label>
-        <textarea id="description" class="form-control" formControlName="description" rows="5"></textarea>
-      </div>
-      
+<!--      <leads-lookup formControlName="leadId"></leads-lookup>-->
+<!--      <accounts-lookup formControlName="accountId"></accounts-lookup>-->
+<!--      <contacts-lookup formControlName="contactId"></contacts-lookup>-->
+<!--      <opportunities-lookup formControlName="opportunityId"></opportunities-lookup>-->
+<!--      <users-lookup formControlName="owner"></users-lookup>-->
+
       <div class="text-end">
-        <button type="button" class="btn btn-secondary me-2" (click)="cancel()">
+        <button
+          type="button"
+          class="btn btn-secondary me-2"
+          (click)="cancel()">
           {{ '::Cancel' | abpLocalization }}
         </button>
-        <button class="btn btn-primary" [disabled]="form.invalid || loading()">
+
+        <button class="btn btn-primary">
           <i class="fa fa-check me-1"></i>
           {{ '::Save' | abpLocalization }}
         </button>

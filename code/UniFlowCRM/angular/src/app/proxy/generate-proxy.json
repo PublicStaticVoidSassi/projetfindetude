@@ -1725,6 +1725,44 @@
             }
           ],
           "actions": {
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/app/calls/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "UniFlowCRM.Calls.CallDto",
+                "typeSimple": "UniFlowCRM.Calls.CallDto"
+              },
+              "allowAnonymous": null,
+              "authorizeDatas": [],
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Calls.CallDto,UniFlowCRM.Calls.CallDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
+            },
             "CreateAsyncByInput": {
               "uniqueName": "CreateAsyncByInput",
               "name": "CreateAsync",
@@ -1858,44 +1896,6 @@
               "allowAnonymous": null,
               "authorizeDatas": [],
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
-            },
-            "GetAsyncById": {
-              "uniqueName": "GetAsyncById",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/app/calls/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "UniFlowCRM.Calls.CallDto",
-                "typeSimple": "UniFlowCRM.Calls.CallDto"
-              },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Calls.CallDto,UniFlowCRM.Calls.CallDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
             },
             "GetListAsyncByInput": {
               "uniqueName": "GetListAsyncByInput",
@@ -2996,13 +2996,13 @@
             }
           }
         },
-        "UniFlowCRM.Meetings.MeetingAppService": {
-          "controllerName": "Meeting",
-          "controllerGroupName": "Meeting",
+        "UniFlowCRM.Meetings.MeetingsAppService": {
+          "controllerName": "Meetings",
+          "controllerGroupName": "Meetings",
           "isRemoteService": true,
           "isIntegrationService": false,
           "apiVersion": null,
-          "type": "UniFlowCRM.Meetings.MeetingAppService",
+          "type": "UniFlowCRM.Meetings.MeetingsAppService",
           "interfaces": [
             {
               "type": "UniFlowCRM.Meetings.IMeetingAppService",
@@ -3109,7 +3109,7 @@
               "uniqueName": "CreateAsyncByInput",
               "name": "CreateAsync",
               "httpMethod": "POST",
-              "url": "api/app/meeting",
+              "url": "api/app/meetings",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
@@ -3147,7 +3147,7 @@
               "uniqueName": "UpdateAsyncByIdAndInput",
               "name": "UpdateAsync",
               "httpMethod": "PUT",
-              "url": "api/app/meeting/{id}",
+              "url": "api/app/meetings/{id}",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
@@ -3205,7 +3205,7 @@
               "uniqueName": "DeleteAsyncById",
               "name": "DeleteAsync",
               "httpMethod": "DELETE",
-              "url": "api/app/meeting/{id}",
+              "url": "api/app/meetings/{id}",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
@@ -3243,7 +3243,7 @@
               "uniqueName": "GetAsyncById",
               "name": "GetAsync",
               "httpMethod": "GET",
-              "url": "api/app/meeting/{id}",
+              "url": "api/app/meetings/{id}",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
@@ -3281,7 +3281,7 @@
               "uniqueName": "GetListAsyncByInput",
               "name": "GetListAsync",
               "httpMethod": "GET",
-              "url": "api/app/meeting",
+              "url": "api/app/meetings",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
@@ -8690,7 +8690,7 @@
           "isNullable": true
         },
         {
-          "name": "AccountId",
+          "name": "AccountID",
           "jsonName": null,
           "type": "System.Guid?",
           "typeSimple": "string?",
@@ -8703,7 +8703,7 @@
           "isNullable": true
         },
         {
-          "name": "ContactId",
+          "name": "ContactID",
           "jsonName": null,
           "type": "System.Guid?",
           "typeSimple": "string?",
@@ -8716,7 +8716,7 @@
           "isNullable": true
         },
         {
-          "name": "OpportunityId",
+          "name": "OpportunityID",
           "jsonName": null,
           "type": "System.Guid?",
           "typeSimple": "string?",
@@ -8729,7 +8729,7 @@
           "isNullable": true
         },
         {
-          "name": "LeadId",
+          "name": "LeadID",
           "jsonName": null,
           "type": "System.Guid?",
           "typeSimple": "string?",
@@ -8742,7 +8742,7 @@
           "isNullable": true
         },
         {
-          "name": "Owner",
+          "name": "OwnerID",
           "jsonName": null,
           "type": "System.Guid?",
           "typeSimple": "string?",

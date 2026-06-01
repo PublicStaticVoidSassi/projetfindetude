@@ -1,33 +1,115 @@
 <div class="card">
   <div class="card-header">
-    <h5 class="card-title">{{ (id ? '::Edit' : '::NewEmail') | abpLocalization }}</h5>
+    <h5 class="card-title">
+      {{ (id ? '::Edit' : '::NewEmail') | abpLocalization }}
+    </h5>
   </div>
+
   <div class="card-body">
     <form [formGroup]="form" (ngSubmit)="save()">
-      <div class="form-group mb-3">
-        <label for="to-address">{{ '::To' | abpLocalization }}</label><span> * </span>
-        <input id="to-address" type="email" class="form-control" formControlName="toAddress" autofocus />
+
+      <!-- FROM -->
+      <div class="row">
+
+      <div class="form-group col-6 mb-3">
+        <label for="from">{{ '::From' | abpLocalization }}</label>
+        <input id="from" type="email" class="form-control" formControlName="from" />
       </div>
 
-      <div class="form-group mb-3">
+      <!-- TO -->
+      <div class="form-group  col-6 mb-3">
+        <label for="to">{{ '::To' | abpLocalization }}</label><span> * </span>
+        <input id="to" type="email" class="form-control" formControlName="to" autofocus />
+      </div>
+      </div>
+      <div class="row">
+
+      <!-- CC -->
+      <div class="form-group col-6 mb-3">
+        <label for="cc">{{ '::Cc' | abpLocalization }}</label>
+        <input id="cc" type="email" class="form-control" formControlName="cc" />
+      </div>
+
+      <!-- BCC -->
+      <div class="form-group col-6 mb-3">
+        <label for="bcc">{{ '::Bcc' | abpLocalization }}</label>
+        <input id="bcc" type="email" class="form-control" formControlName="bcc" />
+      </div>
+      </div>
+      <!-- SUBJECT -->
+      <div class="row">
+      <div class="form-group mb-3 col-9">
         <label for="subject">{{ '::Subject' | abpLocalization }}</label><span> * </span>
         <input id="subject" type="text" class="form-control" formControlName="subject" />
       </div>
+      <div class="form-group mb-3 col-3">
+        <label for="status">{{ '::Email:Status' | abpLocalization }}</label><span> * </span>
+        <select class="form-control" formControlName="status" >
+          <option value="null" disabled>email status</option>
+          @for(status of emailStatuses; track status.value){
+              <option [value]="status.value">{{'::Email:Status:'+status.value | abpLocalization}}</option>
+          }
+          </select>
+      </div>
+      </div>
 
+      <!-- BODY -->
       <div class="form-group mb-3">
         <label for="body">{{ '::Body' | abpLocalization }}</label><span> * </span>
-        <textarea id="body" class="form-control" formControlName="body" rows="10"></textarea>
+        <textarea
+          id="body"
+          class="form-control"
+          formControlName="body"
+          rows="10"
+        ></textarea>
       </div>
-      
+
+      <!-- IS HTML -->
+      <div class="form-check mb-3">
+        <input id="isHtml" type="checkbox" class="form-check-input" formControlName="isHtml" />
+        <label class="form-check-label" for="isHtml">
+          {{ '::IsHtml' | abpLocalization }}
+        </label>
+      </div>
+      <div class="mb-3">
+        <users-lookup formControlName="ownerID"></users-lookup>
+      </div>
+      <div class="row">
+      <div class="mb-3 col-6">
+        <leads-lookup formControlName="leadID"></leads-lookup>
+      </div>
+
+      <div class="mb-3 col-6">
+        <accounts-lookup formControlName="accountID"></accounts-lookup>
+      </div>
+      </div>
+      <div class="row">
+      <div class="mb-3 col-6">
+        <contacts-lookup formControlName="contactID"></contacts-lookup>
+      </div>
+      <div class="mb-3 col-6">
+        <opportunities-lookup formControlName="opportunityID"></opportunities-lookup>
+      </div>
+      </div>
+      <!-- ACTIONS -->
       <div class="text-end">
-        <button type="button" class="btn btn-secondary me-2" (click)="cancel()">
+        <button
+          type="button"
+          class="btn btn-secondary me-2"
+          (click)="cancel()"
+        >
           {{ '::Cancel' | abpLocalization }}
         </button>
-        <button class="btn btn-primary" [disabled]="form.invalid || loading()">
+
+        <button
+          class="btn btn-primary"
+          [disabled]="form.invalid || loading()"
+        >
           <i class="fa fa-check me-1"></i>
           {{ '::Save' | abpLocalization }}
         </button>
       </div>
+
     </form>
   </div>
 </div>

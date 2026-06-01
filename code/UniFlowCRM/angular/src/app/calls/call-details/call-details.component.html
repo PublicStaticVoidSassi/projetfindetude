@@ -125,46 +125,60 @@
           </p>
         </div>
 
-        <div class="mb-3">
+        @if(call().account){
+          <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Account' | abpLocalization }}
-          </label>
+        {{ '::Account' | abpLocalization }}
+        </label>
 
-          <p class="mt-1">
-            {{ call().account?.name || '-' }}
-          </p>
-        </div>
+        <p class="mt-1">
 
+          <a class="text-brand" [routerLink]="['/Accounts',call().account?.id]">
+        {{ call().account?.name || '-' }}
+        </a>
+      </p>
+    </div>}
+        @if(call().contact){
         <div class="mb-3">
           <label class="text-muted small d-block">
             {{ '::Contact' | abpLocalization }}
           </label>
 
           <p class="mt-1">
-            {{ call().contact?.name || '-' }}
+
+            <a class="text-brand" [routerLink]="['/Contacts',call().contact?.id]">
+              {{ call().contact?.firstName + ' ' + call().contact?.lastName|| '-' }}
+            </a>
           </p>
         </div>
+        }
+        @if(call().lead) {
+          <div class="mb-3">
+            <label class="text-muted small d-block">
+              {{ '::Lead' | abpLocalization }}
+            </label>
 
-        <div class="mb-3">
-          <label class="text-muted small d-block">
-            {{ '::Lead' | abpLocalization }}
-          </label>
+            <p class="mt-1">
+              <a class="text-brand" [routerLink]="['/Leads',call().lead?.id]">
+                {{ call().lead?.firstName + ' ' + call().lead?.lastName || '-' }}
+              </a>
+            </p>
+          </div>
+        }
+        @if(call().opportunity) {
+          <div class="mb-3">
+            <label class="text-muted small d-block">
+              {{ '::Opportunity' | abpLocalization }}
+            </label>
 
-          <p class="mt-1">
-            {{ call().lead?.firstName +' '+ call().lead?.lastName  || '-' }}
-          </p>
-        </div>
+            <p class="mt-1">
 
-        <div class="mb-3">
-          <label class="text-muted small d-block">
-            {{ '::Opportunity' | abpLocalization }}
-          </label>
-
-          <p class="mt-1">
-            {{ call().opportunity?.name || '-' }}
-          </p>
-        </div>
-
+              <a class="text-brand" [routerLink]="['/Opportunities',call().opportunity?.id]">
+                {{ call().opportunity?.name || '-' }}
+              </a>
+            </p>
+          </div>
+        }
       </div>
     </div>
 

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CallsService } from '../../proxy/calls/calls.service';
 import { CommonModule } from '@angular/common';
 import { ThemeSharedModule, ConfirmationService, ToasterService, Confirmation } from '@abp/ng.theme.shared';
@@ -8,7 +8,7 @@ import { ReturnBtn } from "../../shared/return-btn/return-btn";
 @Component({
   selector: 'app-call-details',
   standalone: true,
-  imports: [LocalizationPipe, CommonModule, ThemeSharedModule, ReturnBtn],
+  imports: [LocalizationPipe, CommonModule, ThemeSharedModule, ReturnBtn, RouterLink],
   templateUrl: './call-details.component.html',
 })
 export class CallDetailsComponent implements OnInit {

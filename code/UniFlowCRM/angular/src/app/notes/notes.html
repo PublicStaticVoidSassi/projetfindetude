@@ -2,14 +2,14 @@
     <div class="card-header">
       <h1>{{ '::Notes' | abpLocalization }}</h1>
     </div>
-  
+
     <div class="d-flex justify-content-end px-1">
       <button (click)="create()" class="btn btn-success">
         <i class="fa fa-add"></i>
         {{ '::Note:Add' | abpLocalization }}
       </button>
     </div>
-  
+
     <div class="card-body">
       <ngx-datatable
         [rows]="notes.items"
@@ -17,11 +17,11 @@
         [list]="List"
         default
       >
-  
+
         <!-- ACTIONS -->
         <ngx-datatable-column maxWidth="150" [sortable]="false">
           <ng-template ngx-datatable-cell-template let-row="row">
-  
+
             <div ngbDropdown container="body" class="d-inline-block">
               <button
                 class="btn btn-brand btn-sm dropdown-toggle"
@@ -30,77 +30,95 @@
                 <i class="fa fa-cog me-1"></i>
                 {{ '::Actions' | abpLocalization }}
               </button>
-  
+
               <div ngbDropdownMenu>
-  
+
                 <button ngbDropdownItem (click)="openDetails(row.id)">
                   <i class="fa fa-plus-circle p-1 bg-primary text-white rounded-5"></i>
                   {{ '::Action:Info' | abpLocalization }}
                 </button>
-  
+
                 <button ngbDropdownItem (click)="delete(row.id)">
                   <i class="fa fa-trash p-1 bg-danger text-white rounded-5"></i>
                   {{ '::Action:Delete' | abpLocalization }}
                 </button>
-  
+
                 <button ngbDropdownItem (click)="edit(row.id)">
                   <i class="fa fa-pen p-1 bg-success text-white rounded-5"></i>
                   {{ '::Action:Edit' | abpLocalization }}
                 </button>
-  
+
               </div>
             </div>
-  
+
           </ng-template>
         </ngx-datatable-column>
-  
+
         <!-- TITLE -->
         <ngx-datatable-column
           [name]="'::Note:Title' | abpLocalization"
           prop="title">
         </ngx-datatable-column>
-  
+
         <!-- CONTENT -->
         <ngx-datatable-column
           [name]="'::Note:Content' | abpLocalization"
           prop="content">
-  
+
           <ng-template ngx-datatable-cell-template let-row="row">
             {{ row.content }}
           </ng-template>
-  
+
         </ngx-datatable-column>
-  
+
         <!-- TYPE -->
         <ngx-datatable-column
           [name]="'::Note:Type' | abpLocalization"
           prop="type">
-  
+
           <ng-template ngx-datatable-cell-template let-row="row">
             <div >
-            {{ '::Notes:Type:'+row.type | abpLocalization}}
+            {{ '::Note:Type:'+row.type | abpLocalization}}
             </div>
           </ng-template>
-  
+
         </ngx-datatable-column>
         <!-- Linked to -->
         <ngx-datatable-column
           [name]="'::Note:linkedTo' | abpLocalization"
-          prop="type">
-  
-          <!-- <ng-template ngx-datatable-cell-template let-row="row">
+          sortable="false">
+
+          <ng-template ngx-datatable-cell-template let-row="row">
             <div >
-            {{ '::Notes:Type:'+row.type | abpLocalization}}
+              @if(row.lead)
+              {<a class="text-brand d-block" [routerLink]="['Leads',row.lead?.id]">
+              {{ row.lead?.firstName + ' ' + row.lead?.lastName}}
+              </a>}
+              @if(row.contact)
+              {<a class="text-brand d-block" [routerLink]="['Contacts',row.contact?.id]">
+                {{ row.contact?.firstName + ' ' + row.contact?.lastName}}
+              </a>}
+              @if(row.account)
+              {<a class="text-brand d-block" [routerLink]="['Accounts',row.account?.id]">
+                {{ row.account?.Name }}
+              </a>}
+              @if(row.opportunity)
+              {<a class="text-brand d-block" [routerLink]="['Opportunities',row.opportunity?.id]">
+                {{ row.opportunity?.Name }}
+              </a>}
+
             </div>
-          </ng-template> -->
-  
+          </ng-template>
+
         </ngx-datatable-column>
         <!-- Creator -->
         <ngx-datatable-column
           [name]="'::Note:Creator' | abpLocalization"
           prop="CreatorId">
-  
-  
+          <ng-template ngx-datatable-cell-template let-row="row">
+            {{row.creator.userName}}
+          </ng-template>
+
         </ngx-datatable-column>
       </ngx-datatable>
     </div>

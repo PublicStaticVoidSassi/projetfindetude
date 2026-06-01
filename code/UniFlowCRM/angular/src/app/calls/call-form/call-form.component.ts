@@ -43,22 +43,23 @@ export class CallFormComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       description: [''],
-      status: [null,Validators.required],
-      direction: [null,Validators.required],
-      startTime: [null,Validators.required],
-      endTime: [null],
+      status: [null],
+      direction: [null],
+      startTime: ["",Validators.required],
+      endTime: [''],
       duration: [null, [Validators.required,Validators.min(0)]],
       phoneNumber: ['', [Validators.required,Validators.maxLength(32)]],
       accountId: [null],
       contactId: [null],
       opportunityId: [null],
       leadId: [null],
-      owner: [null],
+      ownerID: [null],
     });
   }
 
   save() {
-    if (this.form.invalid) return;
+    if (this.form.invalid)
+      console.log(this.form.errors);
 
     this.loading.set(true);
     const request = this.id

@@ -34,9 +34,9 @@ export interface CreateUpdateCallDto extends EntityDto<string> {
   endTime?: string | null;
   duration?: number | null;
   phoneNumber?: string | null;
-  accountId?: string | null;
-  contactId?: string | null;
-  opportunityId?: string | null;
-  leadId?: string | null;
-  owner?: string | null;
+  accountID?: string | null;
+  contactID?: string | null;
+  opportunityID?: string | null;
+  leadID?: string | null;
+  ownerID?: string | null;
 }

@@ -60,7 +60,13 @@
           [name]="'::Lead:LastName' | abpLocalization"
           prop="lastName">
         </ngx-datatable-column>
-
+        <ngx-datatable-column
+          [name]="'::Client:AssignedTo' | abpLocalization"
+          prop="UserID" minWidth="200">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            {{'@'+row.owner?.userName}}
+          </ng-template>
+        </ngx-datatable-column>
         <ngx-datatable-column
           [name]="'::Lead:Account' | abpLocalization"
           prop="AccountId">

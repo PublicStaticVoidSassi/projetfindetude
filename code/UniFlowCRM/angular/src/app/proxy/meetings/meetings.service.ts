@@ -6,7 +6,7 @@ import { Injectable, inject } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class MeetingService {
+export class MeetingsService {
   private restService = inject(RestService);
   apiName = 'Default';
   
@@ -14,7 +14,7 @@ export class MeetingService {
   create = (input: CreateUpdateMeetingDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, MeetingDto>({
       method: 'POST',
-      url: '/api/app/meeting',
+      url: '/api/app/meetings',
       body: input,
     },
     { apiName: this.apiName,...config });
@@ -23,7 +23,7 @@ export class MeetingService {
   delete = (id: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'DELETE',
-      url: `/api/app/meeting/${id}`,
+      url: `/api/app/meetings/${id}`,
     },
     { apiName: this.apiName,...config });
   
@@ -31,7 +31,7 @@ export class MeetingService {
   get = (id: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, MeetingDto>({
       method: 'GET',
-      url: `/api/app/meeting/${id}`,
+      url: `/api/app/meetings/${id}`,
     },
     { apiName: this.apiName,...config });
   
@@ -39,7 +39,7 @@ export class MeetingService {
   getList = (input: PagedAndSortedResultRequestDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<MeetingDto>>({
       method: 'GET',
-      url: '/api/app/meeting',
+      url: '/api/app/meetings',
       params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName,...config });
@@ -48,7 +48,7 @@ export class MeetingService {
   update = (id: string, input: CreateUpdateMeetingDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, MeetingDto>({
       method: 'PUT',
-      url: `/api/app/meeting/${id}`,
+      url: `/api/app/meetings/${id}`,
       body: input,
     },
     { apiName: this.apiName,...config });

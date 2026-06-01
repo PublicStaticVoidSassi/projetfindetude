@@ -30,14 +30,14 @@ import { OpportunitiesService, OpportunityDto } from 'src/app/proxy/opportunitie
 
   template: `
   <div class="form-group mb-3">
-            <label>{{ '::Assignto:opportunitie' | abpLocalization }}</label>
-          
+            <label>{{ '::Assignto:Opportunity' | abpLocalization }}</label>
+
     <select
       class="form-select"
       [ngModel]="value"
       (ngModelChange)="onSelect($event)"
     >
-      <option [ngValue]="null">{{ '::Assignto:opportunity' | abpLocalization }}</option>
+      <option [ngValue]="null">{{ '::Assignto:Opportunity' | abpLocalization }}</option>
 
       @for (user of opportunities; track user.id) {
         <option [value]="user.id">

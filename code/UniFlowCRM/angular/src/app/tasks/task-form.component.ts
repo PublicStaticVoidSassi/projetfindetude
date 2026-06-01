@@ -5,11 +5,16 @@ import { ToasterService, ThemeSharedModule } from '@abp/ng.theme.shared';
 import { TasksService } from '../proxy/tasks/tasks.service';
 import { LocalizationPipe } from '@abp/ng.core';
 import { CommonModule } from '@angular/common';
+import {
+  taskStatusOptions,
+  taskPriorityOptions
+} from '../proxy/tasks/index';
+import {AccountsLookup,LeadsLookup,OpportunitiesLookup,UsersLookup,ContactsLookup} from '../shared/lookup-components';
 
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [LocalizationPipe,CommonModule, ReactiveFormsModule, ThemeSharedModule],
+  imports: [AccountsLookup,LeadsLookup,OpportunitiesLookup,UsersLookup,ContactsLookup,LocalizationPipe,CommonModule, ReactiveFormsModule, ThemeSharedModule],
   templateUrl: './task-form.component.html',
 })
 export class TaskFormComponent implements OnInit {
@@ -19,6 +24,8 @@ export class TaskFormComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly toaster = inject(ToasterService);
 
+  taskStatuses = taskStatusOptions;
+  taskPriorities = taskPriorityOptions;
   form: FormGroup = this.fb.group({});
   id: string | null = null;
   loading = signal(false);
@@ -38,9 +45,18 @@ export class TaskFormComponent implements OnInit {
 
   buildForm() {
     this.form = this.fb.group({
-      title: ['', [Validators.required, Validators.maxLength(128)]],
-      description: ['', [Validators.maxLength(512)]],
-      dueDate: [null],
+      name: ['', [Validators.required]],
+      description: [''],
+      status: [null],
+      priority: [null],
+      startTime: [null],
+      endTime: [null],
+      completedAt: [null],
+      owner: [null],
+      accountID: [null],
+      contactID: [null],
+      opportunityID: [null],
+      leadID: [null],
     });
   }
 

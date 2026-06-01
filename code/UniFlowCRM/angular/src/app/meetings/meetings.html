@@ -1,47 +1,189 @@
 <div class="card">
+
   <div class="card-header">
-    <div class="row">
-      <div class="col col-md-6">
-        <h5 class="card-title">{{ '::Meetings' | abpLocalization }}</h5>
+    <div class="row align-items-center">
+
+      <div class="col-md-6">
+        <h5 class="card-title mb-0">
+          {{ '::Menu:Meetings' | abpLocalization }}
+        </h5>
       </div>
-      <div class="text-end col col-md-6">
-        <button class="btn btn-primary" type="button" (click)="create()">
+
+      <div class="col-md-6 text-end">
+        <button
+          class="btn btn-primary"
+          type="button"
+          (click)="create()"
+        >
           <i class="fa fa-plus me-1"></i>
-          <span>{{ '::NewMeeting' | abpLocalization }}</span>
+
+          <span>
+            {{ '::NewMeeting' | abpLocalization }}
+          </span>
         </button>
       </div>
+
     </div>
   </div>
+
   <div class="card-body">
-    <ngx-datatable [rows]="meetings.items" [count]="meetings.totalCount" [list]="list" default>
+
+    <ngx-datatable
+      [rows]="items.items"
+      [count]="items.totalCount"
+      [list]="list"
+      default
+    >
+
+      <!-- ACTIONS -->
       <ngx-datatable-column
         [name]="'::Actions' | abpLocalization"
-        [maxWidth]="150"
+        [maxWidth]="120"
         [sortable]="false"
       >
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          <div ngbDropdown container="body" class="d-inline-block">
+        <ng-template
+          let-row="row"
+          ngx-datatable-cell-template
+        >
+
+          <div
+            ngbDropdown
+            container="body"
+            class="d-inline-block"
+          >
+
             <button
               class="btn btn-primary btn-sm dropdown-toggle"
-              data-toggle="dropdown"
-              aria-haspopup="true"
               ngbDropdownToggle
             >
-              <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+              <i class="fa fa-cog me-1"></i>
+
+              {{ '::Actions' | abpLocalization }}
             </button>
+
             <div ngbDropdownMenu>
-              <button ngbDropdownItem (click)="edit(row.id)">
+
+              <button
+                ngbDropdownItem
+                (click)="openDetails(row.id)"
+              >
+                {{ '::Details' | abpLocalization }}
+              </button>
+
+              <button
+                ngbDropdownItem
+                (click)="edit(row.id)"
+              >
                 {{ '::Edit' | abpLocalization }}
               </button>
-              <button ngbDropdownItem (click)="delete(row.id)">
+
+              <button
+                ngbDropdownItem
+                (click)="delete(row.id)"
+              >
                 {{ '::Delete' | abpLocalization }}
               </button>
+
             </div>
           </div>
+
+        </ng-template>
+
+      </ngx-datatable-column>
+
+      <!-- NAME -->
+      <ngx-datatable-column
+        [name]="'::Name' | abpLocalization"
+        prop="name"
+      >
+      </ngx-datatable-column>
+
+      <!-- STATUS -->
+      <ngx-datatable-column
+        [name]="'::Status' | abpLocalization"
+        prop="status"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ '::Meeting:Status:' + row.status | abpLocalization }}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column [name]="'::Title' | abpLocalization" prop="title"></ngx-datatable-column>
-      <ngx-datatable-column [name]="'::Location' | abpLocalization" prop="location"></ngx-datatable-column>
+
+      <!-- LOCATION -->
+      <ngx-datatable-column
+        [name]="'::Location' | abpLocalization"
+        prop="location"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.location || '-' }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!-- OWNER -->
+      <ngx-datatable-column
+        [name]="'::Owner' | abpLocalization"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.owner?.userName || '-' }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!-- ACCOUNT -->
+      <ngx-datatable-column
+        [name]="'::Account' | abpLocalization"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.account?.name || '-' }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!-- CONTACT -->
+      <ngx-datatable-column
+        [name]="'::Contact' | abpLocalization"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.contact?.fullName || '-' }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!-- OPPORTUNITY -->
+      <ngx-datatable-column
+        [name]="'::Opportunity' | abpLocalization"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.opportunity?.name || '-' }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!-- LEAD -->
+      <ngx-datatable-column
+        [name]="'::Lead' | abpLocalization"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.lead?.fullName || '-' }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!-- START -->
+      <ngx-datatable-column
+        [name]="'::StartTime' | abpLocalization"
+        prop="startTime"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.startTime | date:'short' }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!-- END -->
+      <ngx-datatable-column
+        [name]="'::EndTime' | abpLocalization"
+        prop="endTime"
+      >
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.endTime | date:'short' }}
+        </ng-template>
+      </ngx-datatable-column>
+
     </ngx-datatable>
+
   </div>
 </div>
