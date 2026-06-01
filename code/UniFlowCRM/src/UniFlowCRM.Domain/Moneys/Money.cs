@@ -10,7 +10,7 @@ namespace UniFlowCRM.Moneys
         public decimal Value { get; private set; }
         public Currency Currency { get; private set; }
 
-        public void ValidateValue(decimal Value)
+        private void ValidateValue(decimal Value)
         {
             Check.Positive(Value, nameof(Value));
         }
@@ -23,10 +23,7 @@ namespace UniFlowCRM.Moneys
 
         public Money(decimal value, Currency currency)
         {
-            if (value < 0)
-            {
-                throw new ArgumentException("Money cant be negative");
-            }
+            Check.Positive(Value, nameof(Value));
             Value = value;
             Currency = currency;
         }

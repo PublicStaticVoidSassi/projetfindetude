@@ -7,7 +7,7 @@ namespace UniFlowCRM.URLs
 {
     public class URL : ValueObject
     {
-        public string Value { get; private init; } 
+        public string Value { get; private init; }
 
         public URL(string url)
         {
@@ -15,7 +15,8 @@ namespace UniFlowCRM.URLs
             Validate(url);
             Value = url;
         }
-        private void Validate(string url) {
+        private void Validate(string url)
+        {
             if (!url.Length.IsBetween(URLConstraints.MinLength, URLConstraints.MaxLength))
             {
                 throw new UserFriendlyException("Url:Invalid");
@@ -29,6 +30,6 @@ namespace UniFlowCRM.URLs
         protected override IEnumerable<object> GetAtomicValues()
         {
             yield return Value;
-        } 
+        }
     }
 }

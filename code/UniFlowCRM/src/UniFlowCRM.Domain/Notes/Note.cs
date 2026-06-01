@@ -8,13 +8,13 @@ namespace UniFlowCRM.Notes;
 
 public class Note : CreationAuditedAggregateRoot<Guid>
 {
-    public string Title { get;  set; }
-    public string Content { get;  set; }
-    public NoteType Type { get;  set; }
-    public Guid? LeadId { get;  set; }
-    public Guid? AccountId { get;  set; }
-    public Guid? ContactId { get;  set; }
-    public Guid? OpportunityId { get;  set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+    public NoteType Type { get; set; }
+    public Guid? LeadId { get; set; }
+    public Guid? AccountId { get; set; }
+    public Guid? ContactId { get; set; }
+    public Guid? OpportunityId { get; set; }
 
     public void LinkToLead(Guid id)
     {
@@ -57,5 +57,5 @@ public class Note : CreationAuditedAggregateRoot<Guid>
         Title = title;
     }
 
-     protected Note(){}
+    protected Note() { }
 }

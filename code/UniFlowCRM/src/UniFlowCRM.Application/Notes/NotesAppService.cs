@@ -16,7 +16,7 @@ using Volo.Abp.Identity;
 
 namespace UniFlowCRM.Notes;
 
-public class NotesAppService : CrudAppService<Note,NoteDto,Guid,PagedAndSortedResultRequestDto,CreateUpdateNoteDto>,INotesAppService
+public class NotesAppService : CrudAppService<Note, NoteDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateNoteDto>, INotesAppService
 {
     private readonly IRepository<IdentityUser, Guid> _userRepository;
     private readonly IRepository<Lead, Guid> _leadRepository;
@@ -50,68 +50,68 @@ public class NotesAppService : CrudAppService<Note,NoteDto,Guid,PagedAndSortedRe
         var opportunities = await _opportunityRepository.GetQueryableAsync();
 
         return from note in notes
-            where note.Id == id
-            join user in users
-                on note.CreatorId equals user.Id
-                into creatorJoin
-            from creator in creatorJoin.DefaultIfEmpty()
+               where note.Id == id
+               join user in users
+                   on note.CreatorId equals user.Id
+                   into creatorJoin
+               from creator in creatorJoin.DefaultIfEmpty()
 
-            join lead in leads
-                on note.LeadId equals lead.Id
-                into leadJoin
-            from lead in leadJoin.DefaultIfEmpty()
+               join lead in leads
+                   on note.LeadId equals lead.Id
+                   into leadJoin
+               from lead in leadJoin.DefaultIfEmpty()
 
-            join account in accounts
-                on note.AccountId equals account.Id
-                into accountJoin
-            from account in accountJoin.DefaultIfEmpty()
+               join account in accounts
+                   on note.AccountId equals account.Id
+                   into accountJoin
+               from account in accountJoin.DefaultIfEmpty()
 
-            join contact in contacts
-                on note.ContactId equals contact.Id
-                into contactJoin
-            from contact in contactJoin.DefaultIfEmpty()
+               join contact in contacts
+                   on note.ContactId equals contact.Id
+                   into contactJoin
+               from contact in contactJoin.DefaultIfEmpty()
 
-            join opportunity in opportunities
-                on note.OpportunityId equals opportunity.Id
-                into opportunityJoin
-            from opportunity in opportunityJoin.DefaultIfEmpty()
+               join opportunity in opportunities
+                   on note.OpportunityId equals opportunity.Id
+                   into opportunityJoin
+               from opportunity in opportunityJoin.DefaultIfEmpty()
 
-            select new NoteDto
-            {
-                Id = note.Id,
-                Title = note.Title,
-                Content = note.Content,
-                Type = note.Type,
+               select new NoteDto
+               {
+                   Id = note.Id,
+                   Title = note.Title,
+                   Content = note.Content,
+                   Type = note.Type,
 
-                LeadId = note.LeadId,
-                AccountId = note.AccountId,
-                ContactId = note.ContactId,
-                OpportunityId = note.OpportunityId,
+                   LeadId = note.LeadId,
+                   AccountId = note.AccountId,
+                   ContactId = note.ContactId,
+                   OpportunityId = note.OpportunityId,
 
-                Lead = lead != null
-                    ? ObjectMapper.Map<Lead, LeadDto>(lead)
-                    : null,
+                   Lead = lead != null
+                       ? ObjectMapper.Map<Lead, LeadDto>(lead)
+                       : null,
 
-                Account = account != null
-                    ? ObjectMapper.Map<Account, AccountDto>(account)
-                    : null,
+                   Account = account != null
+                       ? ObjectMapper.Map<Account, AccountDto>(account)
+                       : null,
 
-                Contact = contact != null
-                    ? ObjectMapper.Map<Contact, ContactDto>(contact)
-                    : null,
+                   Contact = contact != null
+                       ? ObjectMapper.Map<Contact, ContactDto>(contact)
+                       : null,
 
-                Opportunity = opportunity != null
-                    ? ObjectMapper.Map<Opportunity, OpportunityDto>(opportunity)
-                    : null,
+                   Opportunity = opportunity != null
+                       ? ObjectMapper.Map<Opportunity, OpportunityDto>(opportunity)
+                       : null,
 
-                Creator = creator != null
-                    ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator)
-                    : null
-            };
+                   Creator = creator != null
+                       ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator)
+                       : null
+               };
     }
     private async Task<IQueryable<NoteDto>> GetQueryableAsync(PagedAndSortedResultRequestDto input)
     {
-        var notes = (await Repository.GetQueryableAsync()).OrderBy(input.Sorting??"creationtime desc").Skip(input.SkipCount).Take(input.MaxResultCount);
+        var notes = (await Repository.GetQueryableAsync()).OrderBy(input.Sorting ?? "creationtime desc").Skip(input.SkipCount).Take(input.MaxResultCount);
         var users = await _userRepository.GetQueryableAsync();
         var leads = await _leadRepository.GetQueryableAsync();
         var accounts = await _accountRepository.GetQueryableAsync();
@@ -119,87 +119,87 @@ public class NotesAppService : CrudAppService<Note,NoteDto,Guid,PagedAndSortedRe
         var opportunities = await _opportunityRepository.GetQueryableAsync();
 
         return from note in notes
-            join user in users
-                on note.CreatorId equals user.Id
-                into creatorJoin
-            from creator in creatorJoin.DefaultIfEmpty()
+               join user in users
+                   on note.CreatorId equals user.Id
+                   into creatorJoin
+               from creator in creatorJoin.DefaultIfEmpty()
 
-            join lead in leads
-                on note.LeadId equals lead.Id
-                into leadJoin
-            from lead in leadJoin.DefaultIfEmpty()
+               join lead in leads
+                   on note.LeadId equals lead.Id
+                   into leadJoin
+               from lead in leadJoin.DefaultIfEmpty()
 
-            join account in accounts
-                on note.AccountId equals account.Id
-                into accountJoin
-            from account in accountJoin.DefaultIfEmpty()
+               join account in accounts
+                   on note.AccountId equals account.Id
+                   into accountJoin
+               from account in accountJoin.DefaultIfEmpty()
 
-            join contact in contacts
-                on note.ContactId equals contact.Id
-                into contactJoin
-            from contact in contactJoin.DefaultIfEmpty()
+               join contact in contacts
+                   on note.ContactId equals contact.Id
+                   into contactJoin
+               from contact in contactJoin.DefaultIfEmpty()
 
-            join opportunity in opportunities
-                on note.OpportunityId equals opportunity.Id
-                into opportunityJoin
-            from opportunity in opportunityJoin.DefaultIfEmpty()
-            orderby "Note."+input.Sorting
-            select new NoteDto
-            {
-                Id = note.Id,
-                Title = note.Title,
-                Content = note.Content,
-                Type = note.Type,
+               join opportunity in opportunities
+                   on note.OpportunityId equals opportunity.Id
+                   into opportunityJoin
+               from opportunity in opportunityJoin.DefaultIfEmpty()
+               orderby "Note." + input.Sorting
+               select new NoteDto
+               {
+                   Id = note.Id,
+                   Title = note.Title,
+                   Content = note.Content,
+                   Type = note.Type,
 
-                LeadId = note.LeadId,
-                AccountId = note.AccountId,
-                ContactId = note.ContactId,
-                OpportunityId = note.OpportunityId,
+                   LeadId = note.LeadId,
+                   AccountId = note.AccountId,
+                   ContactId = note.ContactId,
+                   OpportunityId = note.OpportunityId,
 
-                Lead = lead != null
-                    ? ObjectMapper.Map<Lead, LeadDto>(lead)
-                    : null,
+                   Lead = lead != null
+                       ? ObjectMapper.Map<Lead, LeadDto>(lead)
+                       : null,
 
-                Account = account != null
-                    ? ObjectMapper.Map<Account, AccountDto>(account)
-                    : null,
+                   Account = account != null
+                       ? ObjectMapper.Map<Account, AccountDto>(account)
+                       : null,
 
-                Contact = contact != null
-                    ? ObjectMapper.Map<Contact, ContactDto>(contact)
-                    : null,
+                   Contact = contact != null
+                       ? ObjectMapper.Map<Contact, ContactDto>(contact)
+                       : null,
 
-                Opportunity = opportunity != null
-                    ? ObjectMapper.Map<Opportunity, OpportunityDto>(opportunity)
-                    : null,
+                   Opportunity = opportunity != null
+                       ? ObjectMapper.Map<Opportunity, OpportunityDto>(opportunity)
+                       : null,
 
-                Creator = creator != null
-                    ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator)
-                    : null
-            };
+                   Creator = creator != null
+                       ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator)
+                       : null
+               };
     }
-public override async Task<PagedResultDto<NoteDto>> GetListAsync(
-    PagedAndSortedResultRequestDto input)
-{
-    var query = await GetQueryableAsync(input);
-    query = query
-        .OrderBy(input.Sorting ?? "title")
-        .Skip(input.SkipCount)
-        .Take(input.MaxResultCount);
+    public override async Task<PagedResultDto<NoteDto>> GetListAsync(
+        PagedAndSortedResultRequestDto input)
+    {
+        var query = await GetQueryableAsync(input);
+        query = query
+            .OrderBy(input.Sorting ?? "title")
+            .Skip(input.SkipCount)
+            .Take(input.MaxResultCount);
 
-    var items = await AsyncExecuter.ToListAsync(query);
+        var items = await AsyncExecuter.ToListAsync(query);
 
-    return new PagedResultDto<NoteDto>(
-        items.Count,
-        items
-    );
-}
+        return new PagedResultDto<NoteDto>(
+            items.Count,
+            items
+        );
+    }
     public override async Task<NoteDto> GetAsync(Guid id)
     {
         var query = await GetQueryableAsync(id);
-       
+
         return await AsyncExecuter.FirstAsync(query) ?? throw new EntityNotFoundException();
     }
-    
+
     public async override Task<NoteDto> UpdateAsync(Guid id, CreateUpdateNoteDto input)
     {
         var note = await Repository.GetAsync(id);
@@ -208,8 +208,8 @@ public override async Task<PagedResultDto<NoteDto>> GetListAsync(
 
     public async Task<List<NoteDto>> GetForLead(Guid leadId)
     {
-        var notes = await ((INotesRepository)Repository).GetForLead(leadId);
-        var dtos = notes.Select(n=>ObjectMapper.Map<Note, NoteDto>(n)).ToList();//ObjectMapper.Map<Note, NoteDto>(notes);
+        var notes = (await Repository.GetQueryableAsync()).Where(note => note.LeadId == leadId).ToList();
+        var dtos = notes.Select(n => ObjectMapper.Map<Note, NoteDto>(n)).ToList();//ObjectMapper.Map<Note, NoteDto>(notes);
         return dtos;
     }
     // TODO
