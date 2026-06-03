@@ -1,8 +1,8 @@
 import {
   Component,
   forwardRef,
-  inject,
-  OnInit,
+  inject, Input,
+  OnInit
 } from '@angular/core';
 
 import {
@@ -35,13 +35,13 @@ import { ContactDto, ContactsService } from 'src/app/proxy/contacts';
   template: `
   <div class="form-group mb-3">
             <label>{{ '::Assignto:Contact' | abpLocalization }}</label>
-          
+
     <select
       class="form-select"
       [ngModel]="value"
       (ngModelChange)="onSelect($event)"
     >
-      <option [ngValue]="null">{{ '::Assignto:Contact' | abpLocalization }}</option>
+      <option [ngValue]="null" disabled>{{ '::Assignto:Contact' | abpLocalization }}</option>
 
       @for (user of Contacts; track user.id) {
         <option [value]="user.id">
@@ -56,7 +56,7 @@ export class ContactsLookup
   implements ControlValueAccessor, OnInit
 {
   Contacts: ContactDto[] = [];
-
+  @Input() id: string | null = null;
   value: string | null = null;
 
   private readonly Contactsservice =
@@ -67,6 +67,8 @@ export class ContactsLookup
       .getList({ maxResultCount: 1000 })
       .subscribe(r => {
         this.Contacts = r.items ?? [];
+        this.writeValue(this.id===null?this.value:this.id);
+
       });
   }
 

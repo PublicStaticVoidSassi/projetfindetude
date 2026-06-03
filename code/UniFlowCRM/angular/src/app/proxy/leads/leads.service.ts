@@ -2,6 +2,7 @@ import type { CreateUpdateLeadDto, LeadDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable, inject } from '@angular/core';
+import type { ContactDto } from '../contacts/models';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,14 @@ import { Injectable, inject } from '@angular/core';
 export class LeadsService {
   private restService = inject(RestService);
   apiName = 'Default';
+  
+
+  convert = (id: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, ContactDto>({
+      method: 'POST',
+      url: `/api/app/leads/${id}/convert`,
+    },
+    { apiName: this.apiName,...config });
   
 
   create = (input: CreateUpdateLeadDto, config?: Partial<Rest.Config>) =>

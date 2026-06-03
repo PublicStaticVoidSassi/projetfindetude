@@ -3,6 +3,7 @@ import {
   forwardRef,
   inject,
   OnInit,
+  Input
 } from '@angular/core';
 
 import {
@@ -34,13 +35,13 @@ import { LeadDto, LeadsService } from 'src/app/proxy/leads';
   template: `
   <div class="form-group mb-3">
             <label>{{ '::Assignto:lead' | abpLocalization }}</label>
-          
+
     <select
       class="form-select"
       [ngModel]="value"
       (ngModelChange)="onSelect($event)"
     >
-      <option [ngValue]="null">{{ '::Assignto:lead' | abpLocalization }}</option>
+      <option [ngValue]="null" disabled>{{ '::Assignto:lead' | abpLocalization }}</option>
 
       @for (user of leads; track user.id) {
         <option [value]="user.id">
@@ -54,6 +55,7 @@ import { LeadDto, LeadsService } from 'src/app/proxy/leads';
 export class LeadsLookup
   implements ControlValueAccessor, OnInit
 {
+  @Input() id: string | null = null;
   leads: LeadDto[] = [];
 
   value: string | null = null;
@@ -62,10 +64,12 @@ export class LeadsLookup
     inject(LeadsService);
 
   ngOnInit() {
+
     this.leadsservice
       .getList({ maxResultCount: 1000 })
       .subscribe(r => {
         this.leads = r.items ?? [];
+        this.onSelect(this.id);
       });
   }
 

@@ -1,9 +1,11 @@
-<app-return-btn></app-return-btn>
 
 <!-- HEADER -->
 <div class="card shadow-sm mb-4">
   <div class="card-body">
-
+<div class="d-flex justify-content-end">
+  <app-return-btn></app-return-btn>
+  <note-miniform [id]="contact.id" isFor="contact"></note-miniform>
+</div>
     <h1 class="mb-1 text-brand">
       {{ contact.firstName }} {{ contact.middleName }} {{ contact.lastName }}
     </h1>
@@ -96,28 +98,26 @@
 
       <div class="card-body">
 
-        <div class="d-flex justify-content-between border-bottom py-1">
+        @if(contact.job){<div class="d-flex justify-content-between border-bottom py-1">
           <span>{{ '::Contact:Job' | abpLocalization }}</span>
           <strong>{{ contact.job }}</strong>
-        </div>
+        </div>}
 
-        <div class="d-flex justify-content-between border-bottom py-1">
+        @if(contact.departement){<div class="d-flex justify-content-between border-bottom py-1">
           <span>{{ '::Contact:Department' | abpLocalization }}</span>
           <strong>{{ contact.departement }}</strong>
-        </div>
+        </div>}
 
         <div class="d-flex justify-content-between border-bottom py-1">
           <span>{{ '::Contact:Status' | abpLocalization }}</span>
           <strong>
-            {{ contact.status | contactstatuspipe}}
+            {{ '::Contact:Status:'+ contact.status | abpLocalization}}
           </strong>
         </div>
 
         <div class="d-flex justify-content-between py-1">
-          <span>{{ '::Contact:Source' | abpLocalization }}</span>
-          <strong>
-            {{ contact.source | contactsourcepipe }}
-          </strong>
+          {{ '::Contact:Source' | abpLocalization }}
+          <strong>{{ '::Contact:Source:'+contact.source | abpLocalization }}</strong>
         </div>
 
       </div>
@@ -136,19 +136,24 @@
       <div class="card-body">
 
         <div class="d-flex justify-content-between border-bottom py-1">
-          <span>{{ '::Contact:AssignedTo' | abpLocalization }}</span>
-          <strong>{{ contact.userID }}</strong>
+          <span>{{ '::Assignedto:Owner' | abpLocalization }}</span>
+          <strong>{{ contact.owner?.userName }}</strong>
         </div>
 
-        <div class="d-flex justify-content-between border-bottom py-1">
+        @if(contact.lead){<div class="d-flex justify-content-between border-bottom py-1">
           <span>{{ '::Contact:Lead' | abpLocalization }}</span>
-          <strong>{{ contact.leadID }}</strong>
-        </div>
+          <a class="text-brand" [routerLink]="['/Leads',contact.lead.id]">
+            <strong>{{ contact.lead.firstName + ' ' + contact.lead.lastName }}</strong>
+          </a>
 
-        <div class="d-flex justify-content-between py-1">
+        </div>}
+
+        @if(contact.account){<div class="d-flex justify-content-between py-1">
           <span>{{ '::Contact:Account' | abpLocalization }}</span>
-          <strong>{{ contact.accountID }}</strong>
-        </div>
+          <a class="text-brand" [routerLink]="['/Accounts',contact.account.id]">
+            <strong>{{ contact.account.name }}</strong>
+          </a>
+        </div>}
 
       </div>
 
@@ -160,7 +165,7 @@
     <div class="card">
 
       <div class="card-header">
-        {{ '::Contact:AuditInformation' | abpLocalization }}
+        {{ '::Object:AuditInformation' | abpLocalization }}
       </div>
 
       <div class="card-body">
@@ -168,26 +173,26 @@
         <div class="row">
 
           <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
-            <span>{{ '::Contact:CreationTime' | abpLocalization }}</span>
+            <span>{{ '::Object:AuditInformation:CreatedAt' | abpLocalization }}</span>
             <strong>{{ contact.creationTime | date:'medium' }}</strong>
           </div>
 
-          <!-- <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
-            <span>{{ '::Contact:Creator' | abpLocalization }}</span>
-            <strong>{{ contact.creatorName }}</strong>
-          </div> -->
+          <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
+            <span>{{ '::Object:AuditInformation:CreatedBy' | abpLocalization }}</span>
+            <strong>{{ contact.creator?.userName }}</strong>
+          </div>
 
-          <!-- @if (contact.lastModificationTime) {
+          @if (contact.lastModificationTime) {
             <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
-              <span>{{ '::Contact:LastModificationTime' | abpLocalization }}</span>
+              <span>{{ '::Object:AuditInformation:UpdatedAt' | abpLocalization }}</span>
               <strong>{{ contact.lastModificationTime | date:'medium' }}</strong>
             </div>
-          } -->
+          }
 
-          <!-- <div class="col-md-6 d-flex justify-content-between py-1">
-            <span>{{ '::Contact:LastModifier' | abpLocalization }}</span>
-            <strong>{{ contact.lastModifierName }}</strong>
-          </div> -->
+          <div class="col-md-6 d-flex justify-content-between py-1">
+            <span>{{ '::Object:AuditInformation:UpdatedBy' | abpLocalization }}</span>
+            <strong>{{ contact.modifier?.userName }}</strong>
+          </div>
 
         </div>
 
@@ -196,4 +201,21 @@
     </div>
   </div>
 
+</div>
+<div class="card">
+  <div class="card-header display-6">
+    {{'::Notes'|abpLocalization}}
+  </div>
+  <div class="card-body">
+
+    <div class="d-flex flex-column gap-3 mb-3">
+
+      <!-- Comment body -->
+      @for(note of notes;track note.id){
+        <app-note-mini-ui [note]="note"></app-note-mini-ui>
+      }
+    </div>
+
+
+  </div>
 </div>

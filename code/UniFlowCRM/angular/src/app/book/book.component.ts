@@ -1,8 +1,8 @@
 import {
   FormGroup,
-  FormBuilder, 
-  Validators, 
-  FormsModule, 
+  FormBuilder,
+  Validators,
+  FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
 import { Component, inject, OnInit } from '@angular/core';
@@ -11,9 +11,9 @@ import { NgbDatepickerModule, NgbDateStruct, NgbDropdownModule } from '@ng-boots
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {
   ListService,
-  PagedResultDto, 
-  LocalizationPipe, 
-  PermissionDirective, 
+  PagedResultDto,
+  LocalizationPipe,
+  PermissionDirective,
   AutofocusDirective
 } from '@abp/ng.core';
 import {
@@ -25,11 +25,12 @@ import {
   ModalComponent
 } from '@abp/ng.theme.shared';
 import { BookService, BookDto, bookTypeOptions } from '../proxy/books';
-
+import {NoteMiniform} from '../notes/miniform/note-miniform.component';
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
   imports: [
+    NoteMiniform,
     FormsModule,
     ReactiveFormsModule,
     NgbDatepickerModule,

@@ -1,9 +1,12 @@
-<app-return-btn></app-return-btn>
 
 <!-- HEADER -->
 <div class="card shadow-sm mb-4">
   <div class="card-body">
+<div class="d-flex justify-content-end">
+  <app-return-btn></app-return-btn>
+  <note-miniform [id]="opportunity.id" isFor="opportunity"></note-miniform>
 
+</div>
     <h1 class="mb-1 text-brand">
       {{ opportunity.name }}
     </h1>
@@ -72,7 +75,7 @@
           <div class="d-flex justify-content-between border-bottom py-1">
             <span>{{ '::Opportunity:Account' | abpLocalization }}</span>
             <strong>
-              <a [routerLink]="['/Accounts', opportunity.accountID]">
+              <a class="text-brand" [routerLink]="['/Accounts', opportunity.accountID]">
                 {{ opportunity.account?.name }}
               </a>
             </strong>
@@ -83,7 +86,7 @@
           <div class="d-flex justify-content-between border-bottom py-1">
             <span>{{ '::Opportunity:Lead' | abpLocalization }}</span>
             <strong>
-              <a [routerLink]="['/Leads', opportunity.leadID]">
+              <a class="text-brand" [routerLink]="['/Leads', opportunity.leadID]">
                 {{ opportunity.lead?.firstName }} {{ opportunity.lead?.lastName }}
               </a>
             </strong>
@@ -134,4 +137,21 @@
     </div>
   </div>
 
+</div>
+<div class="card">
+  <div class="card-header display-6">
+    {{'::Notes'|abpLocalization}}
+  </div>
+  <div class="card-body">
+
+    <div class="d-flex flex-column gap-3 mb-3">
+
+      <!-- Comment body -->
+      @for(note of notes;track note.id){
+        <app-note-mini-ui [note]="note"></app-note-mini-ui>
+      }
+    </div>
+
+
+  </div>
 </div>

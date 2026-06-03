@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReturnBtn } from './return-btn';
+import { NoteMiniform } from './note-miniform.component';
 
-describe('ReturnBtn', () => {
-  let component: ReturnBtn;
-  let fixture: ComponentFixture<ReturnBtn>;
+describe('Miniform', () => {
+  let component: NoteMiniform;
+  let fixture: ComponentFixture<NoteMiniform>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReturnBtn]
+      imports: [NoteMiniform]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ReturnBtn);
+    fixture = TestBed.createComponent(NoteMiniform);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

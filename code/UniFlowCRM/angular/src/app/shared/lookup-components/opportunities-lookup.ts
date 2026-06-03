@@ -1,8 +1,8 @@
 import {
   Component,
   forwardRef,
-  inject,
-  OnInit,
+  inject, Input,
+  OnInit
 } from '@angular/core';
 
 import {
@@ -37,7 +37,7 @@ import { OpportunitiesService, OpportunityDto } from 'src/app/proxy/opportunitie
       [ngModel]="value"
       (ngModelChange)="onSelect($event)"
     >
-      <option [ngValue]="null">{{ '::Assignto:Opportunity' | abpLocalization }}</option>
+      <option [ngValue]="null" disabled>{{ '::Assignto:Opportunity' | abpLocalization }}</option>
 
       @for (user of opportunities; track user.id) {
         <option [value]="user.id">
@@ -52,7 +52,7 @@ export class OpportunitiesLookup
   implements ControlValueAccessor, OnInit
 {
   opportunities: OpportunityDto[] = [];
-
+  @Input() id: string | null = null;
   value: string | null = null;
 
   private readonly opportunitiesservice =
@@ -63,6 +63,9 @@ export class OpportunitiesLookup
       .getList({ maxResultCount: 1000 })
       .subscribe(r => {
         this.opportunities = r.items ?? [];
+        this.value = this.id;
+        this.writeValue(this.value);
+        this.onSelect(this.value);
       });
   }
 

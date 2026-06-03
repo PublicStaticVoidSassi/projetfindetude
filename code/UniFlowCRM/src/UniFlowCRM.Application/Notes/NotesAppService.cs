@@ -82,12 +82,80 @@ public class NotesAppService : CrudAppService<Note, NoteDto, Guid, PagedAndSorte
                    Title = note.Title,
                    Content = note.Content,
                    Type = note.Type,
-
+                   CreationTime = note.CreationTime,
                    LeadId = note.LeadId,
                    AccountId = note.AccountId,
                    ContactId = note.ContactId,
                    OpportunityId = note.OpportunityId,
 
+                   Lead = lead != null
+                       ? ObjectMapper.Map<Lead, LeadDto>(lead)
+                       : null,
+
+                   Account = account != null
+                       ? ObjectMapper.Map<Account, AccountDto>(account)
+                       : null,
+
+                   Contact = contact != null
+                       ? ObjectMapper.Map<Contact, ContactDto>(contact)
+                       : null,
+
+                   Opportunity = opportunity != null
+                       ? ObjectMapper.Map<Opportunity, OpportunityDto>(opportunity)
+                       : null,
+
+                   Creator = creator != null
+                       ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator)
+                       : null
+               };
+    }
+    private async Task<IQueryable<NoteDto>> GetQueryableAsync()
+    {
+        var notes = (await Repository.GetQueryableAsync()).OrderBy("creationtime desc");
+        var users = await _userRepository.GetQueryableAsync();
+        var leads = await _leadRepository.GetQueryableAsync();
+        var accounts = await _accountRepository.GetQueryableAsync();
+        var contacts = await _contactRepository.GetQueryableAsync();
+        var opportunities = await _opportunityRepository.GetQueryableAsync();
+
+        return from note in notes
+               join user in users
+                   on note.CreatorId equals user.Id
+                   into creatorJoin
+               from creator in creatorJoin.DefaultIfEmpty()
+
+               join lead in leads
+                   on note.LeadId equals lead.Id
+                   into leadJoin
+               from lead in leadJoin.DefaultIfEmpty()
+
+               join account in accounts
+                   on note.AccountId equals account.Id
+                   into accountJoin
+               from account in accountJoin.DefaultIfEmpty()
+
+               join contact in contacts
+                   on note.ContactId equals contact.Id
+                   into contactJoin
+               from contact in contactJoin.DefaultIfEmpty()
+
+               join opportunity in opportunities
+                   on note.OpportunityId equals opportunity.Id
+                   into opportunityJoin
+               from opportunity in opportunityJoin.DefaultIfEmpty()
+               //orderby "Note." + input.Sorting
+               select new NoteDto
+               {
+                   Id = note.Id,
+                   Title = note.Title,
+                   Content = note.Content,
+                   Type = note.Type,
+
+                   LeadId = note.LeadId,
+                   AccountId = note.AccountId,
+                   ContactId = note.ContactId,
+                   OpportunityId = note.OpportunityId,
+                   CreationTime = note.CreationTime,
                    Lead = lead != null
                        ? ObjectMapper.Map<Lead, LeadDto>(lead)
                        : null,
@@ -150,7 +218,7 @@ public class NotesAppService : CrudAppService<Note, NoteDto, Guid, PagedAndSorte
                    Title = note.Title,
                    Content = note.Content,
                    Type = note.Type,
-
+                   CreationTime = note.CreationTime,
                    LeadId = note.LeadId,
                    AccountId = note.AccountId,
                    ContactId = note.ContactId,
@@ -181,15 +249,16 @@ public class NotesAppService : CrudAppService<Note, NoteDto, Guid, PagedAndSorte
         PagedAndSortedResultRequestDto input)
     {
         var query = await GetQueryableAsync(input);
-        query = query
-            .OrderBy(input.Sorting ?? "title")
-            .Skip(input.SkipCount)
-            .Take(input.MaxResultCount);
+        //query = query
+            //.OrderBy(input.Sorting ?? "title")
+            //.Skip(input.SkipCount)
+            //.Take(input.MaxResultCount);
 
         var items = await AsyncExecuter.ToListAsync(query);
+        var count = await Repository.GetCountAsync();
 
         return new PagedResultDto<NoteDto>(
-            items.Count,
+            count,
             items
         );
     }
@@ -208,23 +277,25 @@ public class NotesAppService : CrudAppService<Note, NoteDto, Guid, PagedAndSorte
 
     public async Task<List<NoteDto>> GetForLead(Guid leadId)
     {
-        var notes = (await Repository.GetQueryableAsync()).Where(note => note.LeadId == leadId).ToList();
-        var dtos = notes.Select(n => ObjectMapper.Map<Note, NoteDto>(n)).ToList();//ObjectMapper.Map<Note, NoteDto>(notes);
-        return dtos;
+        var notes = (await this.GetQueryableAsync()).Where(note => note.LeadId == leadId).ToList();
+        return notes;
     }
     // TODO
     public async Task<List<NoteDto>> GetForContact(Guid contactId)
     {
-        throw new NotImplementedException();
+        var notes = (await this.GetQueryableAsync()).Where(note => note.ContactId == contactId).ToList();
+        return notes;
     }
 
-    public async Task<List<NoteDto>> GetForAccount(Guid AccountId)
+    public async Task<List<NoteDto>> GetForAccount(Guid accountId)
     {
-        throw new NotImplementedException();
+        var notes = (await this.GetQueryableAsync()).Where(note => note.AccountId == accountId).ToList();
+        return notes;
     }
 
-    public async Task<List<NoteDto>> GetForOpportunity(Guid OpportunityId)
+    public async Task<List<NoteDto>> GetForOpportunity(Guid opportunityId)
     {
-        throw new NotImplementedException();
+        var notes = (await this.GetQueryableAsync()).Where(note => note.OpportunityId == opportunityId).ToList();
+        return notes;
     }
 }

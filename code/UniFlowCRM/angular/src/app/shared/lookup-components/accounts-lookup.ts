@@ -1,8 +1,8 @@
 import {
   Component,
   forwardRef,
-  inject,
-  OnInit,
+  inject, Input,
+  OnInit
 } from '@angular/core';
 
 import {
@@ -30,13 +30,14 @@ import { AccountDto, AccountsService } from 'src/app/proxy/accounts';
   template: `
   <div class="form-group mb-3">
             <label>{{ '::Assignto:Account' | abpLocalization }}</label>
-          
+
     <select
       class="form-select"
       [ngModel]="value"
       (ngModelChange)="onSelect($event)"
+
     >
-      <option [ngValue]="null">{{ '::Assignto:Account' | abpLocalization }}</option>
+      <option value="null" disabled>{{ '::Assignto:Account' | abpLocalization }}</option>
 
       @for (user of accounts; track user.id) {
         <option [value]="user.id">
@@ -51,7 +52,7 @@ export class AccountsLookup
   implements ControlValueAccessor, OnInit
 {
   accounts: AccountDto[] = [];
-
+  @Input() id: string | null = null;
   value: string | null = null;
 
   private readonly accountsservice =
@@ -62,6 +63,9 @@ export class AccountsLookup
       .getList({ maxResultCount: 1000 })
       .subscribe(r => {
         this.accounts = r.items ?? [];
+        this.value = this.id;
+        this.writeValue(this.value)
+        this.onSelect(this.value);
       });
   }
 

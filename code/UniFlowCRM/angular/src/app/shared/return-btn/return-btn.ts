@@ -3,9 +3,9 @@ import { LocalizationPipe } from '@abp/ng.core';
 @Component({
   selector: 'app-return-btn',
   imports: [LocalizationPipe],
-  template: `<button class="btn btn-secondary btn-sm me-2" (click)="goBack()">
+  template: `<button class="btn btn-muted btn-sm me-2" (click)="goBack()">
           <i class="fa fa-arrow-left me-1"></i>
-          {{ '::Back' | abpLocalization }}
+          {{ '::Action:Back' | abpLocalization }}
         </button>`,
 })
 export class ReturnBtn {

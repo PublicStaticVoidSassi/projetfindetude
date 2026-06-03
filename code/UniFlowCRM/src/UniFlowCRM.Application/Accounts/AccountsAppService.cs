@@ -176,7 +176,8 @@ namespace UniFlowCRM.Accounts
                 dto.Modifier = res.LastModifier;
                 return dto;
             }).ToList();
-            return new PagedResultDto<AccountDto>(dtos.Count, dtos);
+            var count = await Repository.GetCountAsync();
+            return new PagedResultDto<AccountDto>(count, dtos);
         }
 
         public override async Task<AccountDto> CreateAsync(CreateUpdateAccountDto input)

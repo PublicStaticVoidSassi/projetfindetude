@@ -33,13 +33,13 @@ import {
   template: `
   <div class="form-group mb-3">
             <label>{{ '::Assignto:Owner' | abpLocalization }}</label>
-          
+
     <select
       class="form-select"
       [ngModel]="value"
       (ngModelChange)="onSelect($event)"
     >
-      <option [ngValue]="null">{{ '::Assignto:Owner' | abpLocalization }}</option>
+      <option value="null" disabled>{{ '::Assignto:Owner' | abpLocalization }}</option>
 
       @for (user of users; track user.id) {
         <option [value]="user.id">

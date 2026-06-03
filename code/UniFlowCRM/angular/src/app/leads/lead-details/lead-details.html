@@ -1,9 +1,12 @@
-<app-return-btn></app-return-btn>
 
 <!-- HEADER -->
 <div class="card shadow-sm mb-4">
   <div class="card-body">
-
+<div class="d-flex justify-content-end">
+  <app-return-btn></app-return-btn>
+<note-miniform [id]="lead.id" isFor="lead" ></note-miniform>
+  <button class="btn btn-brand btn-sm" [disabled]="lead.status===LeadStatus.Converted" (click)="convert()">{{"::Lead:Convert"|abpLocalization}}</button>
+</div>
     <h1 class="mb-1 text-brand">
       {{ lead.firstName }} {{ lead.lastName }}
     </h1>
@@ -25,7 +28,7 @@
   <div class="col-md-12">
     <div class="card h-100">
 
-      <div class="card-header">
+      <div class="card-header display-6">
         {{ '::Lead:Contact' | abpLocalization }}
       </div>
 
@@ -50,7 +53,7 @@
   <div class="col-md-6">
     <div class="card h-100">
 
-      <div class="card-header">
+      <div class="card-header display-6">
         {{ '::Lead:Information' | abpLocalization }}
       </div>
 
@@ -79,20 +82,22 @@
   <div class="col-md-6">
     <div class="card h-100">
 
-      <div class="card-header">
+      <div class="card-header display-6">
         {{ '::Lead:Relations' | abpLocalization }}
       </div>
 
       <div class="card-body">
 
         <div class="d-flex justify-content-between border-bottom py-1">
-          <span>{{ '::Lead:AssignedTo' | abpLocalization }}</span>
-          <strong>{{ lead.owner.userName }}</strong>
+          <span>{{ '::Assignedto:Owner' | abpLocalization }}</span>
+          <strong>{{ lead.owner?.userName }}</strong>
         </div>
 
         <div class="d-flex justify-content-between py-1">
-          <span>{{ '::Lead:ParentAccount' | abpLocalization }}</span>
-          <strong>{{ lead.account.name }}</strong>
+          <span>{{ '::Assignedto:Account' | abpLocalization }}</span>
+          <a class="text-brand" [routerLink]="['/Accounts/',lead.account?.id]">
+            {{ lead.account?.name }}
+          </a>
         </div>
 
       </div>
@@ -104,8 +109,8 @@
   <div class="col-12">
     <div class="card">
 
-      <div class="card-header">
-        {{ '::Lead:AuditInformation' | abpLocalization }}
+      <div class="card-header display-6">
+        {{ '::Object:AuditInformation' | abpLocalization }}
       </div>
 
       <div class="card-body">
@@ -113,26 +118,26 @@
         <div class="row">
 
           <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
-            <span>{{ '::Lead:CreationTime' | abpLocalization }}</span>
+            <span>{{ '::Object:AuditInformation:CreatedAt' | abpLocalization }}</span>
             <strong>{{ lead.creationTime | date:'medium' }}</strong>
           </div>
-<!-- 
+          @if(lead.creator){
           <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
-            <span>{{ '::Lead:Creator' | abpLocalization }}</span>
-            <strong>{{ lead.creatorName }}</strong>
+            <span>{{ '::Object:AuditInformation:CreatedBy' | abpLocalization }}</span>
+            <strong>  {{'@'+lead.creator.userName }}</strong>
           </div>
-
+          }
           @if (lead.lastModificationTime) {
             <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
-              <span>{{ '::Lead:LastModificationTime' | abpLocalization }}</span>
+              <span>{{ '::Object:AuditInformation:UpdatedAt' | abpLocalization }}</span>
               <strong>{{ lead.lastModificationTime | date:'medium' }}</strong>
             </div>
-          } -->
+          }
 
-          <!-- <div class="col-md-6 d-flex justify-content-between py-1">
-            <span>{{ '::Lead:LastModifier' | abpLocalization }}</span>
-            <strong>{{ lead.lastModifierName }}</strong>
-          </div> -->
+          <div class="col-md-6 d-flex justify-content-between py-1">
+            <span>{{ '::Object:AuditInformation:UpdatedBy' | abpLocalization }}</span>
+            <strong>{{ '@'+lead.modifier?.userName }}</strong>
+          </div>
 
         </div>
 
@@ -142,3 +147,26 @@
   </div>
 
 </div>
+<!-- notes -->
+
+
+  <div class="card">
+    <div class="card-header display-6">
+      {{'::Notes'|abpLocalization}}
+    </div>
+    <div class="card-body">
+
+      <div class="d-flex flex-column gap-3 mb-3">
+
+        <!-- Comment body -->
+        @for(note of notes;track note.id){
+        <app-note-mini-ui [note]="note"></app-note-mini-ui>
+        }
+      </div>
+
+
+    </div>
+  </div>
+
+
+

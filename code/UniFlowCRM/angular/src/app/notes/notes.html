@@ -15,6 +15,7 @@
         [rows]="notes.items"
         [count]="notes.totalCount"
         [list]="List"
+        [externalPaging]="true"
         default
       >
 
@@ -91,19 +92,19 @@
           <ng-template ngx-datatable-cell-template let-row="row">
             <div >
               @if(row.lead)
-              {<a class="text-brand d-block" [routerLink]="['Leads',row.lead?.id]">
+              {<a class="text-brand d-block" [routerLink]="['/Leads',row.lead?.id]">
               {{ row.lead?.firstName + ' ' + row.lead?.lastName}}
               </a>}
               @if(row.contact)
-              {<a class="text-brand d-block" [routerLink]="['Contacts',row.contact?.id]">
+              {<a class="text-brand d-block" [routerLink]="['/Contacts',row.contact?.id]">
                 {{ row.contact?.firstName + ' ' + row.contact?.lastName}}
               </a>}
               @if(row.account)
-              {<a class="text-brand d-block" [routerLink]="['Accounts',row.account?.id]">
+              {<a class="text-brand d-block" [routerLink]="['/Accounts',row.account?.id]">
                 {{ row.account?.Name }}
               </a>}
               @if(row.opportunity)
-              {<a class="text-brand d-block" [routerLink]="['Opportunities',row.opportunity?.id]">
+              {<a class="text-brand d-block" [routerLink]="['/Opportunities',row.opportunity?.id]">
                 {{ row.opportunity?.Name }}
               </a>}
 

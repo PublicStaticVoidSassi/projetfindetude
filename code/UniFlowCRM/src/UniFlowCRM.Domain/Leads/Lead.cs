@@ -1,6 +1,7 @@
 ﻿using System;
 using UniFlowCRM.EmailAddresses;
 using UniFlowCRM.PhoneNumbers;
+using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace UniFlowCRM.Leads;
@@ -74,5 +75,18 @@ public class Lead : FullAuditedAggregateRoot<Guid>
     {
         AccountID = accountId;
     }
+
+    public void Convert()
+    {
+        if (Status != LeadStatus.Converted)
+        {
+            Status = LeadStatus.Converted;
+        }
+        else
+        {
+            throw new BusinessException("Error:Lead:AlreadyConverted");
+        }
+    }
+
     protected Lead() { } // one day EF wont need this. but its not today
 }

@@ -10,7 +10,7 @@ import {
 } from '@abp/ng.theme.shared';
 
 import { LocalizationPipe } from '@abp/ng.core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ContactDto, ContactSource, ContactStatus, ContactsService } from '../proxy/contacts';
@@ -24,7 +24,8 @@ import { ContactDto, ContactSource, ContactStatus, ContactsService } from '../pr
     NgxDatatableListDirective,
     NgxDatatableDefaultDirective,
     LocalizationPipe,
-    PermissionDirective
+    PermissionDirective,
+    RouterLink
   ],
 
   templateUrl: './contacts.html',

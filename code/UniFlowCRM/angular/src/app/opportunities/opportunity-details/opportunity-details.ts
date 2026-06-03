@@ -5,6 +5,9 @@ import { LocalizationPipe } from '@abp/ng.core';
 import { DatePipe } from '@angular/common';
 import { ReturnBtn } from '../../shared/return-btn/return-btn';
 import {myCurrencyPipe} from '../../shared/currency-pipe';
+import { NoteMiniform } from '../../notes/miniform/note-miniform.component';
+import { NoteMiniUi } from '../../notes/note-mini-ui/note-mini-ui';
+import { NoteDto, NotesService } from '../../proxy/notes';
 @Component({
   standalone: true,
   imports: [
@@ -12,7 +15,9 @@ import {myCurrencyPipe} from '../../shared/currency-pipe';
     ReturnBtn,
     LocalizationPipe,
     DatePipe,
-    RouterLink
+    RouterLink,
+    NoteMiniform,
+    NoteMiniUi
   ],
   templateUrl: 'opportunity-details.html'
 })
@@ -20,21 +25,24 @@ export class OpportunityDetailsComponent implements OnInit {
 
   private route = inject(ActivatedRoute);
   private opportunitiesService = inject(Opportunities.OpportunitiesService);
-
+  notesservice = inject(NotesService);
   id: string = '';
-
+  notes :  NoteDto[]= []
   opportunity = {} as Opportunities.OpportunityDto;
 
   constructor() {
-    this.route.params.subscribe(params => {
-      this.id = params['id'];
-    });
+
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
     this.opportunitiesService.get(this.id).subscribe(o => {
       this.opportunity = o;
-      console.log(o);
     });
+    this.notesservice.getForOpportunityByOpportunityId(this.id).subscribe(e=>{
+      this.notes = e;
+    })
   }
 }

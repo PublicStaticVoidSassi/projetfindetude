@@ -9,15 +9,16 @@
       <div class="text-end col col-md-6">
 
         <div class="text-lg-end pt-2">
-          <button 
-            *abpPermission="'UniFlowCRM.Books.Create'" 
-            id="create" class="btn btn-primary" 
-            type="button" 
+          <button
+            *abpPermission="'UniFlowCRM.Books.Create'"
+            id="create" class="btn btn-primary"
+            type="button"
             (click)="createBook()"
           >
             <i class="fa fa-plus me-1"></i>
             <span>{{ '::NewBook' | abpLocalization }}</span>
           </button>
+          <note-miniform isFor="lead"></note-miniform>
         </div>
       </div>
     </div>
@@ -40,16 +41,16 @@
               <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
             </button>
             <div ngbDropdownMenu>
-              <button 
-                *abpPermission="'UniFlowCRM.Books.Edit'" 
-                ngbDropdownItem 
+              <button
+                *abpPermission="'UniFlowCRM.Books.Edit'"
+                ngbDropdownItem
                 (click)="editBook(row.id)"
               >
                 {{ '::Edit' | abpLocalization }}
               </button>
-              <button 
-                *abpPermission="'UniFlowCRM.Books.Delete'" 
-                ngbDropdownItem 
+              <button
+                *abpPermission="'UniFlowCRM.Books.Delete'"
+                ngbDropdownItem
                 (click)="delete(row.id)"
               >
                 {{ '::Delete' | abpLocalization }}
@@ -101,8 +102,8 @@
         <select class="form-control" id="book-type" formControlName="type">
           <option [ngValue]="null">Select a book type</option>
           @for(type of bookTypes; track $index){
-          <option [ngValue]="type.value"> 
-            {{ '::Enum:BookType.' + type.value | abpLocalization }} 
+          <option [ngValue]="type.value">
+            {{ '::Enum:BookType.' + type.value | abpLocalization }}
           </option>
           }
         </select>

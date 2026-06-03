@@ -12,6 +12,7 @@ using UniFlowCRM.Accounts;
 using UniFlowCRM.EmailAddresses;
 using UniFlowCRM.PhoneNumbers;
 using Volo.Abp.Identity;
+using UniFlowCRM.Contacts;
 
 namespace UniFlowCRM.Leads
 {
@@ -29,14 +30,17 @@ namespace UniFlowCRM.Leads
     {
         private readonly IRepository<IdentityUser, Guid> _userRepository;
         private readonly IRepository<Account, Guid> _accountsRepository;
+        private readonly IRepository<Contact, Guid> _contactRepository;
         public LeadsAppService(
             IRepository<Lead, Guid> repository,
             IRepository<Account, Guid> accountsRepository,
             IRepository<IdentityUser, Guid> userRepository
-            ) : base(repository)
+,
+            IRepository<Contact, Guid> contactRepository) : base(repository)
         {
             _userRepository = userRepository;
             _accountsRepository = accountsRepository;
+            _contactRepository = contactRepository;
         }
 
         private async Task<IQueryable<LeadJoined>> GetQueryableAsync(Guid id)
@@ -147,8 +151,9 @@ namespace UniFlowCRM.Leads
                     return result;
                 }
             ).ToList();
+            var count = await Repository.GetCountAsync();
             return new PagedResultDto<LeadDto>(
-                result.Count,
+                count,
                 result
             );
         }
@@ -187,6 +192,20 @@ namespace UniFlowCRM.Leads
             lead = Initialize(lead, input);
             await Repository.UpdateAsync(lead);
             return ObjectMapper.Map<Lead, LeadDto>(lead);
+        }
+        public async Task<ContactDto> ConvertAsync(Guid id)
+        {
+            var lead = await Repository.GetAsync(id);
+            lead.Convert();
+            var contact = new Contact(GuidGenerator.Create(), lead.FirstName);
+            contact.SetLastName(lead.LastName);
+            contact.SetEmail(lead.Email);
+            contact.AssignUser(lead.UserID);
+            contact.AssignLead(lead.Id);
+            contact.AssignAccount(lead.AccountID);
+            contact.SetSource(ContactSource.ConvertedFromLead);
+            contact = await _contactRepository.InsertAsync(contact);
+            return ObjectMapper.Map<Contact, ContactDto>(contact);
         }
     }
 }

@@ -7,7 +7,7 @@ import {
   IdentityUserDto,
   IdentityUserService
 } from '@abp/ng.identity/proxy';
-
+// import {ValidationContainerDirective} from '@abp/ng.core';
 import {
   Component,
   inject,
@@ -29,7 +29,7 @@ import {
   leadSourceOptions
 } from '../../proxy/leads';
 
-import { LocalizationPipe } from '@abp/ng.core';
+import { LocalizationPipe, NgxValidateCoreModule } from '@abp/ng.core';
 
 import { LeadsService } from '../../proxy/leads/leads.service';
 
@@ -37,13 +37,17 @@ import { ToasterService } from '@abp/ng.theme.shared';
 
 import { ActivatedRoute } from '@angular/router';
 import { AccountDto, AccountsService } from 'src/app/proxy/accounts';
+import { AccountsLookup, UsersLookup } from '../../shared/lookup-components';
 
 @Component({
   selector: 'app-lead-form',
   imports: [
     ReturnBtn,
     ReactiveFormsModule,
-    LocalizationPipe
+    LocalizationPipe,
+    AccountsLookup,
+    // NgxValidateCoreModule,
+    UsersLookup
   ],
   templateUrl: './lead-form.html',
   styleUrl: './lead-form.scss',
@@ -127,6 +131,10 @@ export class LeadFormComponent implements OnInit {
     this.leadsService.get(this.id!).subscribe(dto => {
 
       this.form.patchValue(dto);
+      this.form.get('phoneCode').setValue(dto.phone?.split(' ')[0]);
+      this.form.get('phoneNumber').setValue(dto.phone?.split(' ')[1]);
+      this.form.get('accountID').setValue(dto.account?.id);
+      this.form.get('userID').setValue(dto.owner?.id);
 
     });
 

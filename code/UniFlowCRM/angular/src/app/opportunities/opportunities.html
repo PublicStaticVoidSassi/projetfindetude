@@ -4,7 +4,7 @@
   </div>
 
   <div class="d-flex justify-content-end px-1">
-    <button (click)="create()" class="btn btn-success">
+    <button (click)="create()" class="btn btn-brand btn-sm me-2">
       <i class="fa fa-add"></i>
       {{ '::Opportunity:Add' | abpLocalization }}
     </button>
@@ -36,17 +36,17 @@
             <div ngbDropdownMenu>
 
               <button ngbDropdownItem (click)="openDetails(row.id)">
-                <i class="fa fa-plus-circle p-1 bg-primary text-white rounded-5"></i>
+                <i class="fa fa-plus-circle p-1  rounded-5"></i>
                 {{ '::Action:Info' | abpLocalization }}
               </button>
 
               <button ngbDropdownItem (click)="delete(row.id)">
-                <i class="fa fa-trash p-1 bg-danger text-white rounded-5"></i>
+                <i class="fa fa-trash p-1 rounded-5"></i>
                 {{ '::Action:Delete' | abpLocalization }}
               </button>
 
               <button ngbDropdownItem (click)="edit(row.id)">
-                <i class="fa fa-pen p-1 bg-success text-white rounded-5"></i>
+                <i class="fa fa-pen p-1  rounded-5"></i>
                 {{ '::Action:Edit' | abpLocalization }}
               </button>
 

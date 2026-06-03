@@ -16,7 +16,14 @@
     "Task:Status:2": "Completed",
     "Task:Status:3": "Deferred",
     "Task:Status:4": "Cancelled",
-
+    "Lead:Contact": "Contact Information",
+    "Contact:Contact": "Contact Information",
+    "Contact:Fax": "FAX",
+    "Contact:Address": "Address",
+    "Contact:Business": "Business Information",
+    "Lead:Information": "Information",
+    "Lead:Relations": "Relations",
+    "Contact:Relations": "Relations",
     "Task:Priority:0": "Low",
     "Task:Priority:1": "Normal",
     "Task:Priority:2": "High",
@@ -25,9 +32,14 @@
     "Meeting:Status:1": "Held",
     "Meeting:Status:2": "Not Held",
     "Meeting:Status:3": "Cancelled",
-    "Assignto:Owner": "Assign to owner",
+    "Assignto:Owner": "Assign to",
+    "Assignedto:Owner": "Assigned to",
+
     "Assignto:lead": "Assign to lead",
     "Assignto:Account": "Assign to account",
+    "Assignedto:Account": "Assigned to account",
+    "Client:PhoneCode": "Phone Code",
+    "Client:PhoneNumber": "Phone Number",
     "Assignto:Opportunity": "Assign to opportunity",
     "Assignto:Contact": "Assign to contact",
     "Account:Type:1": "Analyst",
@@ -80,7 +92,7 @@
     "PublishDate": "Publish Date",
 
     "Actions": "Actions",
-    "Action:Info": "Info",
+    "Action:Info": "More",
     "Action:Delete": "Delete",
     "Action:Edit": "Edit",
 
@@ -126,8 +138,10 @@
     "Enum:BookType.8": "Poetry",
 
     "Accounts": "Accounts",
+    "Client:Action:Update": "Modifying ",
 
     "Account:Action:Create": "Create new Account:",
+    "Client:Action:Create": "Creating :",
     "Account:Action:Update": "Modifying Account:",
 
     "Account:Created:Successfully": "The Account has been created",
@@ -165,6 +179,8 @@
 
     "Account:Street": "Street",
     "Account:Street:Placeholder": "Street address",
+
+    "Object:Add": "Add",
 
     "Account:Country": "Country",
     "Account:Country:Placeholder": "Country",
@@ -229,7 +245,7 @@
     "Accounts:Type:9": "Reseller",
     "Accounts:Type:10": "Other",
 
-    "Client:Add": "Add Client",
+    "Client:Add": "Add account",
     "Client:AssignedTo": "Assigned To",
     "Client:City": "City",
     "Client:Country": "Country",
@@ -273,7 +289,7 @@
     "Contact:Email": "Email",
     "Contact:Phone": "Phone",
     "Contact:Account": "Account",
-    "Contact:Lead": "Lead",
+    "Contact:Lead": "Converted From",
     "Contact:Status": "Status",
     "Contact:Source": "Source",
     "Lead:Status:0": "New",
@@ -372,6 +388,17 @@
     "Opportunity:Relations": "Relations",
     "Opportunity:AuditInformation": "Audit Information",
     "Opportunity:CreationTime": "Creation Time",
-    "Opportunity:Action:Update": "Updating"
+    "Opportunity:Action:Update": "Updating",
+
+
+    "Object:AuditInformation": "Audit Information",
+    "Object:AuditInformation:CreatedAt": "Created At",
+    "Object:AuditInformation:CreatedBy": "Creator",
+    "Object:AuditInformation:UpdatedAt": "Modified At",
+    "Object:AuditInformation:UpdatedBy": "Modifier",
+
+    "Add:Note": "Add Note",
+    "Action:Back": "Back",
+    "Lead:Convert": "Convert"
   }
 }

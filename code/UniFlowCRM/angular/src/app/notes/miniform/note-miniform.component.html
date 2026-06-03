@@ -1,0 +1,123 @@
+<button class="btn btn-outline-warning btn-sm me-2" (click)="openModal()">{{'::Add:Note'|abpLocalization}}</button>
+<abp-modal [(visible)]="isModalOpen">
+  <ng-template #abpHeader>
+   header
+  </ng-template>
+
+  <ng-template #abpBody>
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-12 mb-3">
+          <label for="title" class="form-label">
+            {{ '::Title' | abpLocalization }}
+          </label>
+          <span> * </span>
+
+          <input
+            id="title"
+            type="text"
+            class="form-control"
+            formControlName="title"
+            maxlength="128"
+            autofocus
+          />
+
+
+
+
+        <div class="row" >
+          <div class="col-md-6 mb-3">
+            <label for="type" class="form-label">
+              {{ '::Type' | abpLocalization }}
+            </label>
+            <span> * </span>
+
+            <select
+              id="type"
+              class="form-select"
+              formControlName="type"
+            >
+              <option
+                *ngFor="let type of noteTypes"
+                [ngValue]="type.value"
+              >
+                {{ type.key }}
+              </option>
+            </select>
+
+
+          </div>
+          <div class="col-6 d-flex flex-column justify-content-end">
+          @switch (isFor){
+            @case ('lead'){
+              <leads-lookup [id]="id" formControlName="leadId"></leads-lookup>
+
+            }
+            @case ('account'){
+              <accounts-lookup [id]="id" formControlName="accountId"></accounts-lookup>
+
+            }
+            @case ('opportunity'){
+              <opportunities-lookup [id]="id" formControlName="opportunityId"></opportunities-lookup>
+
+            }
+            @case ('contact'){
+              <contacts-lookup [id]="id" formControlName="contactId"></contacts-lookup>
+
+            }
+
+          }
+          </div>
+        </div>
+        <div class="col-12 mb-3">
+          <label for="content" class="form-label">
+            {{ '::Content' | abpLocalization }}
+          </label>
+          <span> * </span>
+
+          <textarea
+            id="content"
+            class="form-control"
+            formControlName="content"
+            rows="6"
+          ></textarea>
+
+          <div
+            class="text-danger mt-1"
+            *ngIf="
+              form.get('content')?.invalid &&
+              form.get('content')?.touched
+            "
+          >
+            {{ '::ThisFieldIsRequired' | abpLocalization }}
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <div class="text-end">
+      <button
+        type="reset"
+        class="btn btn-secondary me-2"
+      >
+        {{ '::Cancel' | abpLocalization }}
+      </button>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="form.invalid"
+        (click)="save()"
+      >
+        <i class="fa fa-check me-1"></i>
+
+        {{ '::Save' | abpLocalization }}
+      </button>
+    </div>
+  </ng-template>
+
+</abp-modal>
