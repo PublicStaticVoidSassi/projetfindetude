@@ -1,6 +1,14 @@
 <div class="card">
   <div class="card-header">
-    <h5 class="card-title">{{ (id ? '::Edit' : '::NewCall') | abpLocalization }}</h5>
+    <div class="d-flex justify-content-end">
+      <app-return-btn></app-return-btn>
+    </div>
+    <h5 class="display-6 fw-bold">{{ (id ? '::Client:Action:Update' : '::Client:Action:Create') | abpLocalization }}
+    <span class="text-brand">
+      {{this.form.get('name')?.value}}
+
+    </span>
+    </h5>
   </div>
   <div class="card-body">
     <form [formGroup]="form" (ngSubmit)="save()">
@@ -18,7 +26,14 @@
 
           <div class="form-group mb-3">
             <label for="call-start">{{ '::StartTime' | abpLocalization }}</label>
+<!--            <p-datepicker appendTo="body" class="form-control rounded-3 bg-dark-subtle" formControlName="startTime"  [showTime]="true" hourFormat="12" />-->
             <input id="call-start" type="datetime-local" class="form-control" formControlName="startTime" />
+          </div>
+          <div class="form-group mb-3">
+            <label for="call-end">{{ '::EndTime' | abpLocalization }}</label>
+<!--            <p-datepicker appendTo="body" class="form-control rounded-3 bg-dark-subtle" formControlName="endTime"  [showTime]="true" hourFormat="12" />-->
+
+                        <input id="call-end" type="datetime-local" class="form-control" formControlName="endTime" />
           </div>
         </div>
 
@@ -32,22 +47,19 @@
             <users-lookup formControlName="ownerID"></users-lookup>
           </div>
           <div class="mb-3">
-            <leads-lookup formControlName="leadId"></leads-lookup>
+            <leads-lookup formControlName="leadID"></leads-lookup>
           </div>
 
           <div class="mb-3">
-            <accounts-lookup formControlName="accountId"></accounts-lookup>
+            <accounts-lookup formControlName="accountID"></accounts-lookup>
           </div>
           <div class="mb-3">
-            <contacts-lookup formControlName="contactId"></contacts-lookup>
+            <contacts-lookup formControlName="contactID"></contacts-lookup>
           </div>
           <div class="mb-3">
-            <opportunities-lookup formControlName="opportunityId"></opportunities-lookup>
+            <opportunities-lookup formControlName="opportunityID"></opportunities-lookup>
           </div>
-          <div class="form-group mb-3">
-            <label for="call-end">{{ '::EndTime' | abpLocalization }}</label>
-            <input id="call-end" type="datetime-local" class="form-control" formControlName="endTime" />
-          </div>
+
         </div>
       </div>
 
@@ -84,10 +96,10 @@
       <!-- Relation sections (Opportunity, Account, Lead, Contact) can be added below using lookups -->
 
       <div class="text-end">
-        <button type="button" class="btn btn-secondary me-2" (click)="cancel()">
+        <button type="button" class="btn btn-outline-danger btn-sm me-2" (click)="cancel()">
           {{ '::Cancel' | abpLocalization }}
         </button>
-        <button class="btn btn-primary" >
+        <button class="btn btn-brand btn-sm" >
           <i class="fa fa-check me-1"></i>
           {{ '::Save' | abpLocalization }}
         </button>

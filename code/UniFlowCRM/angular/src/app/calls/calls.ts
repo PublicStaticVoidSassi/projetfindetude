@@ -5,7 +5,7 @@ import { Confirmation, ConfirmationService, ToasterService, ThemeSharedModule } 
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { CallDto } from '../proxy/calls';
+import { CallDirection, CallDto } from '../proxy/calls';
 import {LocalizationPipe} from '@abp/ng.core';
 
 @Component({
@@ -54,4 +54,6 @@ export class CallsComponent implements OnInit {
       }
     });
   }
+
+  protected readonly CallDirection = CallDirection;
 }

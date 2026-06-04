@@ -18,6 +18,7 @@ import {
   OpportunitiesLookup,
   UsersLookup
 } from '../shared/lookup-components';
+import { ReturnBtn } from '../shared/return-btn/return-btn';
 
 @Component({
   selector: 'app-meeting-form',
@@ -31,7 +32,8 @@ import {
     LocalizationPipe,
     CommonModule,
     ReactiveFormsModule,
-    ThemeSharedModule
+    ThemeSharedModule,
+    ReturnBtn
   ],
   templateUrl: './meeting-form.component.html',
 })
@@ -57,8 +59,17 @@ export class MeetingFormComponent implements OnInit {
       this.loading.set(true);
 
       this.meetingService.get(this.id).subscribe((meeting) => {
-        this.form.patchValue(meeting);
-        this.loading.set(false);
+        setTimeout(()=>{
+          this.form.patchValue({
+            ...meeting,
+            accountID: meeting.account?.id,
+            contactID: meeting.contact?.id,
+            opportunityID: meeting.opportunity?.id,
+            leadID: meeting.lead?.id,
+            ownerID: meeting.owner?.id,
+          });
+          this.loading.set(false);
+        },1000)
       });
     }
   }

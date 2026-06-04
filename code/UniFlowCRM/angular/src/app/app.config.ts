@@ -23,6 +23,7 @@ export const appConfig: ApplicationConfig = {
     APP_ROUTE_PROVIDER,
     FOOTER_PROVIDER,
     provideAnimations(),
+
     provideAbpCore(
       withOptions({
         environment,

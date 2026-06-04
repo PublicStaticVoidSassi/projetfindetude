@@ -1,9 +1,12 @@
-<app-return-btn></app-return-btn>
 
+<div class="card shadow-sm border-0">
+  <div class="card-body px-4">
+    <div class="d-flex justify-content-end">
+      <app-return-btn></app-return-btn>
+    </div>
 <form [formGroup]="form" (ngSubmit)="submit()" class="container">
 
-  <div class="card shadow-sm border-0">
-    <div class="card-body px-4">
+
 
       <!-- TITLE -->
       <h1 class="display-6 fw-bold mb-4">
@@ -12,7 +15,7 @@
 
           {{ '::Opportunity:Action:Update' | abpLocalization }}
 
-          <span class="text-primary">
+          <span class="text-brand">
             {{ form.get('name')?.value }}
           </span>
 
@@ -191,14 +194,14 @@
         </div>
 
         <!-- closed at -->
-        <div class="col-md-4">
-          <label class="form-label">
-            {{ '::Opportunity:ClosedAt' | abpLocalization }}
-          </label>
+<!--        <div class="col-md-4">-->
+<!--          <label class="form-label">-->
+<!--            {{ '::Opportunity:ClosedAt' | abpLocalization }}-->
+<!--          </label>-->
 
-          <input class="form-control " type="datetime-local" formControlName="closedAt"/>
+<!--          <input class="form-control " type="datetime-local" formControlName="closedAt"/>-->
 
-        </div>
+<!--        </div>-->
 
 
 
@@ -241,7 +244,8 @@
 
       </div>
 
-    </div>
-  </div>
+
 
 </form>
+  </div>
+</div>

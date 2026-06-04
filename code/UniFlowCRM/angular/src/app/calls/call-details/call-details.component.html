@@ -3,8 +3,8 @@
   <div class="card-header">
     <div class="row align-items-center">
       <div class="col col-md-6">
-        <h5 class="card-title">
-          {{ '::CallDetails' | abpLocalization }}
+        <h5 class="display-6 fw-bold">
+          {{ call()?.name}}
         </h5>
       </div>
 
@@ -32,7 +32,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Name' | abpLocalization }}
+            {{ '::Call:Name' | abpLocalization }}
           </label>
 
           <p class="mt-1 lead">
@@ -42,7 +42,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Description' | abpLocalization }}
+            {{ '::Call:Description' | abpLocalization }}
           </label>
 
           <p class="mt-1">
@@ -52,7 +52,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::PhoneNumber' | abpLocalization }}
+            {{ '::Call:PhoneNumber' | abpLocalization }}
           </label>
 
           <p class="mt-1">
@@ -62,7 +62,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Duration' | abpLocalization }}
+            {{ '::Call:Duration' | abpLocalization }}
           </label>
 
           <p class="mt-1">
@@ -72,7 +72,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::StartTime' | abpLocalization }}
+            {{ '::Call:StartTime' | abpLocalization }}
           </label>
 
           <p class="mt-1">
@@ -82,7 +82,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::EndTime' | abpLocalization }}
+            {{ '::Call:EndTime' | abpLocalization }}
           </label>
 
           <p class="mt-1">
@@ -97,7 +97,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Status' | abpLocalization }}
+            {{ '::Call:Status' | abpLocalization }}
           </label>
 
           <p class="mt-1">
@@ -107,7 +107,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Direction' | abpLocalization }}
+            {{ '::Call:Direction' | abpLocalization }}
           </label>
 
           <p class="mt-1">
@@ -190,7 +190,7 @@
       <div class="col-md-6">
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Creator' | abpLocalization }}
+            {{ '::Object:AuditInformation:CreatedBy' | abpLocalization }}
           </label>
 
           <p class="mt-1">
@@ -200,7 +200,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::CreationTime' | abpLocalization }}
+            {{ '::Object:AuditInformation:CreatedAt' | abpLocalization }}
           </label>
 
           <p class="mt-1">
@@ -212,7 +212,7 @@
       {<div class="col-md-6">
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Modifier' | abpLocalization }}
+            {{ '::Object:AuditInformation:UpdatedBy' | abpLocalization }}
           </label>
 
           <p class="mt-1">
@@ -222,7 +222,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::LastModificationTime' | abpLocalization }}
+            {{ '::Object:AuditInformation:UpdatedAt' | abpLocalization }}
           </label>
 
           <p class="mt-1">

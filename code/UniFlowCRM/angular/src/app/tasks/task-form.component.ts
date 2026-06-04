@@ -37,8 +37,18 @@ export class TaskFormComponent implements OnInit {
     if (this.id) {
       this.loading.set(true);
       this.taskService.get(this.id).subscribe((task) => {
-        this.form.patchValue(task);
-        this.loading.set(false);
+        setTimeout(()=>{
+          this.form.patchValue({
+            ...task,
+            ownerID: task.owner?.id,
+            accountID: task.account?.id,
+            contactID: task.contact?.id,
+            opportunityID: task.opportunity?.id,
+            leadID: task.lead?.id
+          });
+          this.loading.set(false);
+        },1000)
+
       });
     }
   }
@@ -52,7 +62,7 @@ export class TaskFormComponent implements OnInit {
       startTime: [null],
       endTime: [null],
       completedAt: [null],
-      owner: [null],
+      ownerID: [null],
       accountID: [null],
       contactID: [null],
       opportunityID: [null],

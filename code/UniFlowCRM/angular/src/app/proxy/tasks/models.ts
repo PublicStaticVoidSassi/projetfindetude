@@ -15,7 +15,7 @@ export interface CreateUpdateTaskDto extends EntityDto<string> {
   startTime?: string | null;
   endTime?: string | null;
   completedAt?: string | null;
-  owner?: string | null;
+  ownerID?: string | null;
   accountID?: string | null;
   contactID?: string | null;
   opportunityID?: string | null;

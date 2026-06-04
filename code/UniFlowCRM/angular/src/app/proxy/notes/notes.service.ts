@@ -36,10 +36,10 @@ export class NotesService {
     { apiName: this.apiName,...config });
   
 
-  getForAccountByAccountId = (AccountId: string, config?: Partial<Rest.Config>) =>
+  getForAccountByAccountId = (accountId: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, NoteDto[]>({
       method: 'GET',
-      url: `/api/app/notes/for-account/${AccountId}`,
+      url: `/api/app/notes/for-account/${accountId}`,
     },
     { apiName: this.apiName,...config });
   
@@ -60,10 +60,10 @@ export class NotesService {
     { apiName: this.apiName,...config });
   
 
-  getForOpportunityByOpportunityId = (OpportunityId: string, config?: Partial<Rest.Config>) =>
+  getForOpportunityByOpportunityId = (opportunityId: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, NoteDto[]>({
       method: 'GET',
-      url: `/api/app/notes/for-opportunity/${OpportunityId}`,
+      url: `/api/app/notes/for-opportunity/${opportunityId}`,
     },
     { apiName: this.apiName,...config });
   

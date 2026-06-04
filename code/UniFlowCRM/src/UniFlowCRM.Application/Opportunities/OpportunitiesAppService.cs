@@ -307,4 +307,19 @@ public class OpportunitiesAppService : CrudAppService<
             res
         );
     }
+
+    public async Task<OpportunityDto> CloseAsync(Guid id,bool won)
+    {
+        var opp = await Repository.GetAsync(id);
+        if (won)
+        {
+            opp.CloseWon();
+        }
+        else
+        {
+            opp.CloseLost();
+        }
+        await Repository.UpdateAsync(opp);
+        return ObjectMapper.Map<Opportunity,OpportunityDto>(opp);
+    }
 }

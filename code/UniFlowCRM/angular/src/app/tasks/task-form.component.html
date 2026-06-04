@@ -38,7 +38,7 @@
 <!--          </div>-->
 
           <div class="mb-3">
-            <users-lookup formControlName="owner"></users-lookup>
+            <users-lookup formControlName="ownerID"></users-lookup>
           </div>
 
           <div class="mb-3">
@@ -130,12 +130,12 @@
       <div class="text-end">
         <button
           type="button"
-          class="btn btn-secondary me-2"
+          class="btn btn-outline-danger me-2"
           (click)="cancel()">
           {{ '::Cancel' | abpLocalization }}
         </button>
 
-        <button class="btn btn-primary">
+        <button class="btn btn-brand">
           <i class="fa fa-check me-1"></i>
           {{ '::Save' | abpLocalization }}
         </button>

@@ -5,7 +5,10 @@
 
       <div class="col col-md-6">
         <h5 class="card-title">
-          {{ '::MeetingDetails' | abpLocalization }}
+<!--          {{ '::Meeting:Details' | abpLocalization }}-->
+          <p class="display-6 text-brand fw-bold">
+            {{meeting()?.name}}
+          </p>
         </h5>
       </div>
 
@@ -37,7 +40,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Name' | abpLocalization }}
+            {{ '::Meeting:Name' | abpLocalization }}
           </label>
           <p class="mt-1 lead">
             {{ meeting().name }}
@@ -46,7 +49,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Description' | abpLocalization }}
+            {{ '::Meeting:Description' | abpLocalization }}
           </label>
           <p class="mt-1">
             {{ meeting().description || '-' }}
@@ -55,7 +58,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Location' | abpLocalization }}
+            {{ '::Meeting:Location' | abpLocalization }}
           </label>
           <p class="mt-1">
             {{ meeting().location || '-' }}
@@ -64,7 +67,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::StartTime' | abpLocalization }}
+            {{ '::Meeting:StartTime' | abpLocalization }}
           </label>
           <p class="mt-1">
             {{ meeting().startTime | date:'medium' }}
@@ -73,7 +76,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::EndTime' | abpLocalization }}
+            {{ '::Meeting:EndTime' | abpLocalization }}
           </label>
           <p class="mt-1">
             {{ meeting().endTime | date:'medium' }}
@@ -87,57 +90,65 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Status' | abpLocalization }}
+            {{ '::Meeting:Status' | abpLocalization }}
           </label>
           <p class="mt-1">
             {{ '::Meeting:Status:' + meeting().status | abpLocalization }}
           </p>
         </div>
 
-        <div class="mb-3">
+        @if(meeting().owner){<div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Owner' | abpLocalization }}
-          </label>
-          <p class="mt-1">
-            {{ meeting().owner?.userName || '-' }}
-          </p>
-        </div>
+        {{ '::Assignedto:Owner' | abpLocalization }}
+        </label>
+        <p class="mt-1">
+        {{ meeting().owner?.userName || '-' }}
+        </p>
+      </div>}
 
-        <div class="mb-3">
+        @if(meeting().account){<div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Account' | abpLocalization }}
-          </label>
-          <p class="mt-1">
+        {{ '::Account' | abpLocalization }}
+        </label>
+        <p class="mt-1">
+          <a class="text-brand" [routerLink]="['/Accounts', meeting().account?.id]">
             {{ meeting().account?.name || '-' }}
-          </p>
-        </div>
+          </a>
+        </p>
+      </div>}
 
-        <div class="mb-3">
+        @if(meeting().contact){<div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Contact' | abpLocalization }}
-          </label>
-          <p class="mt-1">
-            {{ meeting().contact?.name || '-' }}
-          </p>
-        </div>
+        {{ '::Contact' | abpLocalization }}
+        </label>
+        <p class="mt-1">
+          <a class="text-brand" [routerLink]="['/Contacts', meeting().contact?.id]">
+          {{ meeting().contact?.firstName + ' ' +  meeting().contact?.lastName || '-' }}
+          </a>
+        </p>
+      </div>}
 
-        <div class="mb-3">
+        @if(meeting().lead){<div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Lead' | abpLocalization }}
-          </label>
-          <p class="mt-1">
-            {{ meeting().lead?.firstName + ' ' + meeting().lead?.lastName || '-' }}
-          </p>
-        </div>
+        {{ '::Lead' | abpLocalization }}
+        </label>
+        <p class="mt-1">
+          <a class="text-brand" [routerLink]="['/Leads', meeting().lead?.id]">
+          {{ meeting().lead?.firstName + ' ' + meeting().lead?.lastName || '-' }}
+          </a>
+        </p>
+      </div>}
 
-        <div class="mb-3">
+        @if(meeting().opportunity){<div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Opportunity' | abpLocalization }}
-          </label>
-          <p class="mt-1">
-            {{ meeting().opportunity?.name || '-' }}
-          </p>
-        </div>
+        {{ '::Opportunity' | abpLocalization }}
+        </label>
+        <p class="mt-1">
+          <a class="text-brand" [routerLink]="['/Opportunities', meeting().opportunity?.id]">
+          {{ meeting().opportunity?.name || '-' }}
+          </a>
+        </p>
+      </div>}
 
       </div>
 
@@ -147,12 +158,12 @@
 
     <!-- AUDIT INFO -->
     <div class="row">
-
+      <p class="lead">{{'::Object:AuditInformation'|abpLocalization}}</p>
       <div class="col-md-6">
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::Creator' | abpLocalization }}
+            {{ '::Object:AuditInformation:CreatedBy' | abpLocalization }}
           </label>
           <p class="mt-1">
             {{ meeting().creator?.userName || '-' }}
@@ -161,7 +172,7 @@
 
         <div class="mb-3">
           <label class="text-muted small d-block">
-            {{ '::CreationTime' | abpLocalization }}
+            {{ '::Object:AuditInformation:CreatedAt' | abpLocalization }}
           </label>
           <p class="mt-1">
             {{ meeting().creationTime | date:'medium' }}
@@ -176,7 +187,7 @@
 
           <div class="mb-3">
             <label class="text-muted small d-block">
-              {{ '::Modifier' | abpLocalization }}
+              {{ '::Object:AuditInformation:UpdatedBy' | abpLocalization }}
             </label>
             <p class="mt-1">
               {{ meeting().modifier?.userName || '-' }}
@@ -185,7 +196,7 @@
 
           <div class="mb-3">
             <label class="text-muted small d-block">
-              {{ '::LastModificationTime' | abpLocalization }}
+              {{ '::Object:AuditInformation:UpdatedAt' | abpLocalization }}
             </label>
             <p class="mt-1">
               {{ meeting().lastModificationTime | date:'medium' }}

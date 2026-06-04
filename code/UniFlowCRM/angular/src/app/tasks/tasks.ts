@@ -56,4 +56,7 @@ export class Tasks implements OnInit {
     });
   }
 
+  openDetails(id) {
+  this.router.navigate(['/Tasks/', id]);
+  }
 }

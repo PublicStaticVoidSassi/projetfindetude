@@ -5,7 +5,8 @@
 <div class="d-flex justify-content-end">
   <app-return-btn></app-return-btn>
   <note-miniform [id]="opportunity.id" isFor="opportunity"></note-miniform>
-
+  <button [disabled]="opportunity.saleStage === SaleStage.Closed" class="btn btn-sm btn-success me-2" (click)="close('won')">{{'::Opportunity:Win'|abpLocalization}}</button>
+  <button [disabled]="opportunity.saleStage === SaleStage.Closed" class="btn btn-sm btn-danger" (click)="close('lost')">{{'::Opportunity:Lose'|abpLocalization}}</button>
 </div>
     <h1 class="mb-1 text-brand">
       {{ opportunity.name }}

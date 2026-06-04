@@ -11,6 +11,15 @@ export class OpportunitiesService {
   apiName = 'Default';
   
 
+  close = (id: string, won: boolean, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, OpportunityDto>({
+      method: 'POST',
+      url: `/api/app/opportunities/${id}/close`,
+      params: { won },
+    },
+    { apiName: this.apiName,...config });
+  
+
   create = (input: CreateUpdateOpportunityDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, OpportunityDto>({
       method: 'POST',

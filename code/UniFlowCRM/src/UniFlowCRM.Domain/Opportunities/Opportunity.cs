@@ -1,4 +1,5 @@
 ﻿using System;
+using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace UniFlowCRM.Opportunities
@@ -98,5 +99,26 @@ public void SetContact(Guid? contactID)
 {
     ContactID = contactID;
 }
+        public void CloseWon()
+        {
+            if (SaleStage == SaleStage.Closed)
+            {
+                throw new BusinessException("Already Closed");
+            }
+            this.SetStage(OpportunityStage.ClosedWon);
+            this.SetSaleStage(SaleStage.Closed);
+            this.SetClosedAt(DateTime.UtcNow);
+        }
+        public void CloseLost()
+        {
+            if (SaleStage == SaleStage.Closed)
+            {
+                throw new BusinessException("Already Closed");
+            }
+            this.SetStage(OpportunityStage.ClosedLost);
+            this.SetSaleStage(SaleStage.Closed);
+            this.SetClosedAt(DateTime.UtcNow);
+        }
     }
+    
 }

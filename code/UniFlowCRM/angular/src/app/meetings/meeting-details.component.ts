@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { MeetingsService } from '../proxy/meetings/meetings.service';
 
@@ -17,7 +17,7 @@ import { ReturnBtn } from "../shared/return-btn/return-btn";
 @Component({
   selector: 'app-meeting-details',
   standalone: true,
-  imports: [LocalizationPipe, CommonModule, ThemeSharedModule, ReturnBtn],
+  imports: [LocalizationPipe, CommonModule, ThemeSharedModule, ReturnBtn, RouterLink],
   templateUrl: './meeting-details.component.html',
 })
 export class MeetingDetailsComponent implements OnInit {

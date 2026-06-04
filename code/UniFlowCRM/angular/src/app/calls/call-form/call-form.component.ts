@@ -6,10 +6,11 @@ import { CallsService ,callStatusOptions,callDirectionOptions} from '../../proxy
 import { CommonModule } from '@angular/common';
 import { LocalizationPipe } from '@abp/ng.core';
 import { AccountsLookup,ContactsLookup,LeadsLookup,OpportunitiesLookup,UsersLookup } from '../../shared/lookup-components';
+import { ReturnBtn } from '../../shared/return-btn/return-btn';
 @Component({
   selector: 'app-call-form',
   standalone: true,
-  imports: [AccountsLookup,ContactsLookup,LeadsLookup,OpportunitiesLookup,UsersLookup,LocalizationPipe,CommonModule, ReactiveFormsModule, ThemeSharedModule],
+  imports: [AccountsLookup, ContactsLookup, LeadsLookup, OpportunitiesLookup, UsersLookup, LocalizationPipe, CommonModule, ReactiveFormsModule, ThemeSharedModule,  ReturnBtn],
   templateUrl: './call-form.component.html',
 })
 export class CallFormComponent implements OnInit {
@@ -22,7 +23,7 @@ export class CallFormComponent implements OnInit {
   calldirections = callDirectionOptions;
   callstatuses = callStatusOptions;
 
-  form: FormGroup = this.fb.group({});
+  form: FormGroup ;
   id: string | null = null;
   loading = signal(false);
 
@@ -33,8 +34,20 @@ export class CallFormComponent implements OnInit {
     if (this.id) {
       this.loading.set(true);
       this.callService.get(this.id).subscribe((call) => {
-        this.form.patchValue(call);
-        this.loading.set(false);
+        // this.form.patchValue(call);
+        setTimeout(()=>{
+          this.form.patchValue({
+            ...call,
+            accountID:call.account?.id,
+            leadID:call.lead?.id,
+            contactID:call.contact?.id,
+            opportunityID:call.opportunity?.id,
+            ownerID:call.owner?.id,
+          })
+          this.loading.set(false);
+
+        },500);
+
       });
     }
   }
@@ -45,14 +58,14 @@ export class CallFormComponent implements OnInit {
       description: [''],
       status: [null],
       direction: [null],
-      startTime: ["",Validators.required],
-      endTime: [''],
+      startTime: [new Date().toLocalISOString,Validators.required],
+      endTime: [new Date()],
       duration: [null, [Validators.required,Validators.min(0)]],
       phoneNumber: ['', [Validators.required,Validators.maxLength(32)]],
-      accountId: [null],
-      contactId: [null],
-      opportunityId: [null],
-      leadId: [null],
+      accountID: [null],
+      contactID: [null],
+      opportunityID: [null],
+      leadID: [null],
       ownerID: [null],
     });
   }

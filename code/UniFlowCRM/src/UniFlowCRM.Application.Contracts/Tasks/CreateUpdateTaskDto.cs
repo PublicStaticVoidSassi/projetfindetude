@@ -17,7 +17,7 @@ public class CreateUpdateTaskDto : EntityDto<Guid>
     public DateTime? StartTime { get;  set; }
     public DateTime? EndTime { get;  set; }
     public DateTime? CompletedAt { get;  set; }
-    public Guid? Owner { get;  set; }
+    public Guid? OwnerID { get;  set; }
     // Relations avec d'autres entités CRM
     public Guid? AccountID { get;  set; }
     public Guid? ContactID { get;  set; }

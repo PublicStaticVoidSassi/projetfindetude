@@ -8,6 +8,8 @@ import {myCurrencyPipe} from '../../shared/currency-pipe';
 import { NoteMiniform } from '../../notes/miniform/note-miniform.component';
 import { NoteMiniUi } from '../../notes/note-mini-ui/note-mini-ui';
 import { NoteDto, NotesService } from '../../proxy/notes';
+import { ToasterService } from '@abp/ng.theme.shared';
+import { SaleStage } from '../../proxy/opportunities';
 @Component({
   standalone: true,
   imports: [
@@ -25,16 +27,20 @@ export class OpportunityDetailsComponent implements OnInit {
 
   private route = inject(ActivatedRoute);
   private opportunitiesService = inject(Opportunities.OpportunitiesService);
+  toaster = inject(ToasterService);
   notesservice = inject(NotesService);
   id: string = '';
   notes :  NoteDto[]= []
   opportunity = {} as Opportunities.OpportunityDto;
 
-  constructor() {
-
+  close(state: 'won'|'lost'){
+      this.opportunitiesService.close(this.opportunity.id,state === 'won').subscribe(e=>{
+        this.toaster.success((state==='won')?'::Opportunity:Celebrate':'::Opportunity:Mourn',"::Opportunity:Closed");
+        this.opportunity = e;
+      })
   }
 
-  ngOnInit() {
+  load() {
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
@@ -45,4 +51,9 @@ export class OpportunityDetailsComponent implements OnInit {
       this.notes = e;
     })
   }
+  ngOnInit() {
+    this.load();
+  }
+
+  protected readonly SaleStage = SaleStage;
 }

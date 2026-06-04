@@ -3,11 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TasksService } from '../proxy/tasks/tasks.service';
 import { CommonModule } from '@angular/common';
 import { ThemeSharedModule, ConfirmationService, ToasterService, Confirmation } from '@abp/ng.theme.shared';
+import { LocalizationPipe } from '@abp/ng.core';
 
 @Component({
   selector: 'app-task-details',
   standalone: true,
-  imports: [CommonModule, ThemeSharedModule],
+  imports: [CommonModule, ThemeSharedModule, LocalizationPipe],
   templateUrl: './task-details.component.html',
 })
 export class TaskDetailsComponent implements OnInit {

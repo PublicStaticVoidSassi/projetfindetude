@@ -1,8 +1,8 @@
-<div class="card" *ngIf="task()">
+<div class="card">
   <div class="card-header">
     <div class="row align-items-center">
       <div class="col col-md-6">
-        <h5 class="card-title">{{ '::TaskDetails' | abpLocalization }}</h5>
+        <h5 class="display-6 text-brand fw-bold">{{ task().name }}</h5>
       </div>
       <div class="text-end col col-md-6">
         <button class="btn btn-secondary btn-sm me-2" (click)="goBack()">
@@ -20,15 +20,137 @@
       </div>
     </div>
   </div>
+
   <div class="card-body">
     <div class="row">
-      <div class="col-12">
-        <label class="text-muted small d-block">{{ '::Title' | abpLocalization }}</label>
-        <p class="mt-1 lead">{{ task().title }}</p>
-        
+
+<!--      <div class="col-12 mb-3">-->
+<!--        <label class="text-muted small d-block">{{ '::Name' | abpLocalization }}</label>-->
+<!--        <p class="mt-1 lead">{{ task().name }}</p>-->
+<!--      </div>-->
+
+      <div class="col-12 mb-3">
         <label class="text-muted small d-block">{{ '::Description' | abpLocalization }}</label>
-        <p class="mt-1">{{ task().description }}</p>
+        <p class="mt-1">
+          {{ task().description }}
+        </p>
       </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="text-muted small d-block">{{ '::Status' | abpLocalization }}</label>
+        <p class="mt-1">{{ '::Task:Status:'+ task().status | abpLocalization}}</p>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="text-muted small d-block">{{ '::Priority' | abpLocalization }}</label>
+        <p class="mt-1">{{ '::Task:Priority:'+task().priority | abpLocalization }}</p>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="text-muted small d-block">{{ '::StartTime' | abpLocalization }}</label>
+        <p class="mt-1">{{ task().startTime | date:'medium' }}</p>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="text-muted small d-block">{{ '::EndTime' | abpLocalization }}</label>
+        <p class="mt-1">{{ task().endTime | date:'medium' }}</p>
+      </div>
+
+      @if(task().completedAt){<div class="col-md-6 mb-3" >
+        <label class="text-muted small d-block">{{ '::CompletedAt' | abpLocalization }}</label>
+        <p class="mt-1">
+      {{ task().completedAt ? (task().completedAt | date:'medium') : ('::NotCompleted' | abpLocalization) }}
+      </p>
+    </div>}
+
+      <div class="col-md-6 mb-3">
+        <label class="text-muted small d-block">{{ '::Owner' | abpLocalization }}</label>
+        <p class="mt-1">
+          {{ task().owner?.userName || ('::Unassigned' | abpLocalization) }}
+        </p>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="text-muted small d-block">{{ '::Account' | abpLocalization }}</label>
+        <p class="mt-1">
+          {{ task().account?.name || '-' }}
+        </p>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="text-muted small d-block">{{ '::Contact' | abpLocalization }}</label>
+        <p class="mt-1">
+          {{ task().contact?.firstName }} {{ task().contact?.lastName || '-' }}
+        </p>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="text-muted small d-block">{{ '::Opportunity' | abpLocalization }}</label>
+        <p class="mt-1">
+          {{ task().opportunity?.name || '-' }}
+        </p>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="text-muted small d-block">{{ '::Lead' | abpLocalization }}</label>
+        <p class="mt-1">
+          {{ task().lead?.firstName || '-' }}
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="card mt-3" >
+  <div class="card-header">
+    <h6 class="display-6 fw-bold">
+      {{ '::Object:AuditInformation' | abpLocalization }}
+    </h6>
+  </div>
+
+  <div class="card-body">
+    <div class="row">
+
+      <!-- Creation -->
+      <div class="col-md-6 mb-3">
+        <label class="text-muted small d-block">
+          {{ '::Object:AuditInformation:CreatedAt' | abpLocalization }}
+        </label>
+        <p class="mt-1">
+          {{ task().creationTime | date:'medium' }}
+        </p>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="text-muted small d-block">
+          {{ '::Object:AuditInformation:CreatedBy' | abpLocalization }}
+        </label>
+        <p class="mt-1">
+          {{ task().creator?.userName || '-' }}
+        </p>
+      </div>
+
+      <!-- Last Modification -->
+      <div class="col-md-6 mb-3">
+        <label class="text-muted small d-block">
+          {{ '::Object:AuditInformation:UpdatedAt' | abpLocalization }}
+        </label>
+        <p class="mt-1">
+          {{ task().lastModificationTime ? (task().lastModificationTime | date:'medium') : '-' }}
+        </p>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="text-muted small d-block">
+          {{ '::Object:AuditInformation:UpdatedBy' | abpLocalization }}
+        </label>
+        <p class="mt-1">
+          {{ task().modifier?.userName || '-' }}
+        </p>
+      </div>
+
+
     </div>
   </div>
 </div>

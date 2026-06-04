@@ -4,21 +4,21 @@
     <div class="row align-items-center">
 
       <div class="col-md-6">
-        <h5 class="card-title mb-0">
+        <h5 class="display-6 fw-bold">
           {{ '::Menu:Tasks' | abpLocalization }}
         </h5>
       </div>
 
       <div class="col-md-6 text-end">
         <button
-          class="btn btn-primary"
+          class="btn btn-brand btn-sm"
           type="button"
           (click)="create()"
         >
           <i class="fa fa-plus me-1"></i>
 
           <span>
-            {{ '::NewTask' | abpLocalization }}
+            {{ '::Object:Add' | abpLocalization }}
           </span>
         </button>
       </div>
@@ -53,7 +53,7 @@
           >
 
             <button
-              class="btn btn-primary btn-sm dropdown-toggle"
+              class="btn btn-brand btn-sm dropdown-toggle"
               ngbDropdownToggle
             >
               <i class="fa fa-cog me-1"></i>
@@ -135,53 +135,53 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <!-- ACCOUNT -->
-      <ngx-datatable-column
-        [name]="'::Account' | abpLocalization"
-      >
-        <ng-template
-          let-row="row"
-          ngx-datatable-cell-template
-        >
-          {{ row.account?.name || '-' }}
-        </ng-template>
-      </ngx-datatable-column>
+<!--      &lt;!&ndash; ACCOUNT &ndash;&gt;-->
+<!--      <ngx-datatable-column-->
+<!--        [name]="'::Account' | abpLocalization"-->
+<!--      >-->
+<!--        <ng-template-->
+<!--          let-row="row"-->
+<!--          ngx-datatable-cell-template-->
+<!--        >-->
+<!--          {{ row.account?.name || '-' }}-->
+<!--        </ng-template>-->
+<!--      </ngx-datatable-column>-->
 
-      <!-- CONTACT -->
-      <ngx-datatable-column
-        [name]="'::Contact' | abpLocalization"
-      >
-        <ng-template
-          let-row="row"
-          ngx-datatable-cell-template
-        >
-          {{ row.contact?.fullName || '-' }}
-        </ng-template>
-      </ngx-datatable-column>
+<!--      &lt;!&ndash; CONTACT &ndash;&gt;-->
+<!--      <ngx-datatable-column-->
+<!--        [name]="'::Contact' | abpLocalization"-->
+<!--      >-->
+<!--        <ng-template-->
+<!--          let-row="row"-->
+<!--          ngx-datatable-cell-template-->
+<!--        >-->
+<!--          {{ row.contact?.fullName || '-' }}-->
+<!--        </ng-template>-->
+<!--      </ngx-datatable-column>-->
 
-      <!-- OPPORTUNITY -->
-      <ngx-datatable-column
-        [name]="'::Opportunity' | abpLocalization"
-      >
-        <ng-template
-          let-row="row"
-          ngx-datatable-cell-template
-        >
-          {{ row.opportunity?.name || '-' }}
-        </ng-template>
-      </ngx-datatable-column>
+<!--      &lt;!&ndash; OPPORTUNITY &ndash;&gt;-->
+<!--      <ngx-datatable-column-->
+<!--        [name]="'::Opportunity' | abpLocalization"-->
+<!--      >-->
+<!--        <ng-template-->
+<!--          let-row="row"-->
+<!--          ngx-datatable-cell-template-->
+<!--        >-->
+<!--          {{ row.opportunity?.name || '-' }}-->
+<!--        </ng-template>-->
+<!--      </ngx-datatable-column>-->
 
-      <!-- LEAD -->
-      <ngx-datatable-column
-        [name]="'::Lead' | abpLocalization"
-      >
-        <ng-template
-          let-row="row"
-          ngx-datatable-cell-template
-        >
-          {{ row.lead?.fullName || '-' }}
-        </ng-template>
-      </ngx-datatable-column>
+<!--      &lt;!&ndash; LEAD &ndash;&gt;-->
+<!--      <ngx-datatable-column-->
+<!--        [name]="'::Lead' | abpLocalization"-->
+<!--      >-->
+<!--        <ng-template-->
+<!--          let-row="row"-->
+<!--          ngx-datatable-cell-template-->
+<!--        >-->
+<!--          {{ row.lead?.fullName || '-' }}-->
+<!--        </ng-template>-->
+<!--      </ngx-datatable-column>-->
 
       <!-- START -->
       <ngx-datatable-column

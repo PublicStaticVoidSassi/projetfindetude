@@ -1,7 +1,14 @@
 <div class="card">
   <div class="card-header">
-    <h5 class="card-title">
-      {{ (id ? '::Edit' : '::NewMeeting') | abpLocalization }}
+    <div class="d-flex justify-content-end">
+      <app-return-btn></app-return-btn>
+    </div>
+    <h5 class="display-6 fw-bold">
+      {{ (id ? '::Client:Action:Update' : '::Client:Action:Create') | abpLocalization }}
+      <span class="text-brand">
+      {{ form.get('name')?.value }}
+
+      </span>
     </h5>
   </div>
 
@@ -54,12 +61,6 @@
               formControlName="startTime"
             />
           </div>
-
-        </div>
-
-        <!-- RIGHT -->
-        <div class="col-md-6">
-
           <div class="form-group mb-3">
             <label for="meeting-end">
               {{ '::EndTime' | abpLocalization }}
@@ -72,6 +73,33 @@
               formControlName="endTime"
             />
           </div>
+            <div class="form-group mb-3">
+              <label for="meeting-status">
+                {{ '::Status' | abpLocalization }}
+              </label>
+
+              <select
+                id="meeting-status"
+                class="form-control"
+                formControlName="status"
+              >
+                <option [value]="null" disabled selected>
+                  {{ '::SelectValue' | abpLocalization }}
+                </option>
+
+                @for (status of meetingStatuses; track status.value) {
+                  <option [value]="status.value">
+                    {{ '::Meeting:Status:' + status.value | abpLocalization }}
+                  </option>
+                }
+              </select>
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col-md-6">
+
+
 
           <div class="mb-3">
             <users-lookup formControlName="ownerID"></users-lookup>
@@ -100,29 +128,7 @@
       <!-- STATUS -->
       <div class="row">
 
-        <div class="col-md-6">
-          <div class="form-group mb-3">
-            <label for="meeting-status">
-              {{ '::Status' | abpLocalization }}
-            </label>
 
-            <select
-              id="meeting-status"
-              class="form-control"
-              formControlName="status"
-            >
-              <option [value]="null" disabled selected>
-                {{ '::SelectValue' | abpLocalization }}
-              </option>
-
-              @for (status of meetingStatuses; track status.value) {
-                <option [value]="status.value">
-                  {{ '::Meeting:Status:' + status.value | abpLocalization }}
-                </option>
-              }
-            </select>
-          </div>
-        </div>
 
       </div>
 
@@ -145,13 +151,13 @@
 
         <button
           type="button"
-          class="btn btn-secondary me-2"
+          class="btn btn-outline-danger me-2"
           (click)="cancel()"
         >
           {{ '::Cancel' | abpLocalization }}
         </button>
 
-        <button class="btn btn-primary">
+        <button class="btn btn-brand">
           <i class="fa fa-check me-1"></i>
           {{ '::Save' | abpLocalization }}
         </button>
