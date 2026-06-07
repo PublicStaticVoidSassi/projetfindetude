@@ -40,8 +40,9 @@ import { LeadDto, LeadsService } from 'src/app/proxy/leads';
       class="form-select"
       [ngModel]="value"
       (ngModelChange)="onSelect($event)"
+      [disabled]="disabled"
     >
-      <option [ngValue]="null" disabled>{{ '::Assignto:lead' | abpLocalization }}</option>
+      <option [value]="null" >{{ '::Assignto:lead' | abpLocalization }}</option>
 
       @for (user of leads; track user.id) {
         <option [value]="user.id">
@@ -56,6 +57,7 @@ export class LeadsLookup
   implements ControlValueAccessor, OnInit
 {
   @Input() id: string | null = null;
+  @Input() disabled: boolean = false;
   leads: LeadDto[] = [];
 
   value: string | null = null;

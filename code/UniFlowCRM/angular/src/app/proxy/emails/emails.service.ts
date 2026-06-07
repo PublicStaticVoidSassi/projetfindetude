@@ -45,6 +45,14 @@ export class EmailsService {
     { apiName: this.apiName,...config });
   
 
+  sendEmail = (id: string, ct?: any, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: `/api/app/emails/${id}/send-email`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   update = (id: string, input: CreateUpdateEmailDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, EmailDto>({
       method: 'PUT',

@@ -6,6 +6,7 @@ import { FormGroup,FormBuilder, ReactiveFormsModule, Validators } from '@angular
 import { bookTypeOptions } from '../../proxy/books';
 import { CreateUpdateNoteDto, NotesService, NoteType, noteTypeOptions } from '../../proxy/notes';
 import { AccountsLookup, ContactsLookup, LeadsLookup, OpportunitiesLookup } from '../../shared/lookup-components';
+import { RequiredTag } from '../../shared/required-tag/required-tag';
 
 @Component({
   selector: 'note-miniform',
@@ -20,7 +21,8 @@ import { AccountsLookup, ContactsLookup, LeadsLookup, OpportunitiesLookup } from
     AccountsLookup,
     ContactsLookup,
     LeadsLookup,
-    OpportunitiesLookup
+    OpportunitiesLookup,
+    RequiredTag
   ],
   templateUrl: './note-miniform.component.html',
   styleUrl: './note-miniform.component.scss',

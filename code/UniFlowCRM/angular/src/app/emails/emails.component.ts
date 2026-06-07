@@ -7,11 +7,12 @@ import { Router } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import {LocalizationPipe} from '@abp/ng.core';
 import { EmailDto } from '../proxy/emails';
+import { ReturnBtn } from '../shared/return-btn/return-btn';
 
 @Component({
   selector: 'app-emails',
   standalone: true,
-  imports: [CommonModule,LocalizationPipe, ThemeSharedModule, NgbDropdownModule],
+  imports: [CommonModule, LocalizationPipe, ThemeSharedModule, NgbDropdownModule, ReturnBtn],
   providers: [ListService],
   templateUrl: './emails.component.html',
 })

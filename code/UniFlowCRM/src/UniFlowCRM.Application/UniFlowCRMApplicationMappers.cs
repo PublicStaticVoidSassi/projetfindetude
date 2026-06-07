@@ -25,6 +25,17 @@ public static partial class UniFlowCRMValueObjectMapper
 
     public static string Map(PhoneNumber phone)
         => phone.ToString();
+    public static PhoneNumber Map(string phone)
+        => new PhoneNumber(phone);
+
+
+}
+[Mapper]
+public static partial class EmailAddressMapper
+{
+   public static EmailAddress Map(string email)
+        => (string.IsNullOrEmpty(email))? null : new EmailAddress(email);
+
 }
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 [UseStaticMapper(typeof(UniFlowCRMValueObjectMapper))]
@@ -149,6 +160,7 @@ public partial class DtoToCall : MapperBase<CreateUpdateCallDto, Call>
 }
 // Email
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+[UseStaticMapper(typeof(EmailAddressMapper))]
 public partial class EmailToDto : MapperBase<Email, EmailDto>
 {
     public override partial EmailDto Map(Email source);
@@ -156,6 +168,7 @@ public partial class EmailToDto : MapperBase<Email, EmailDto>
     public override partial void Map(Email source, EmailDto destination);
 }
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+[UseStaticMapper(typeof(EmailAddressMapper))]
 public partial class DtoToEmail : MapperBase<CreateUpdateEmailDto, Email>
 {
     public override partial Email Map(CreateUpdateEmailDto source);

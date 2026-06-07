@@ -1,38 +1,282 @@
-<div class="card" *ngIf="email()">
+<!-- *ngIf="email()" -->
+<div class="card">
   <div class="card-header">
     <div class="row align-items-center">
-      <div class="col col-md-6">
-        <h5 class="card-title">{{ '::EmailDetails' | abpLocalization }}</h5>
+      <div class="col-md-6">
+        <h5 class="display-6 fw-bold d-inline">
+          {{ email().subject || ('::Email' | abpLocalization) }}
+
+        </h5>
+
+        <div class="badge"
+             [ngClass]="{
+              'bg-success': email().status === EmailStatus.Sent,
+              'bg-danger':  email().status === EmailStatus.Failed  ,
+              'bg-warning': email().status === EmailStatus.Sending || email().status === EmailStatus.Archived,
+              'bg-brand' : email().status === EmailStatus.Draft,
+            }"
+        >
+
+          {{ '::Email:Status:' + email().status | abpLocalization }}
+        </div>
       </div>
-      <div class="text-end col col-md-6">
-        <button class="btn btn-secondary btn-sm me-2" (click)="goBack()">
-          <i class="fa fa-arrow-left me-1"></i>
-          {{ '::Back' | abpLocalization }}
-        </button>
+
+      <div class="col-md-6 text-end">
+        <app-return-btn></app-return-btn>
+
         <button class="btn btn-primary btn-sm me-2" (click)="edit()">
           <i class="fa fa-edit me-1"></i>
           {{ '::Edit' | abpLocalization }}
         </button>
-        <button class="btn btn-danger btn-sm" (click)="delete()">
+
+        <button class="btn btn-danger btn-sm me-2" (click)="delete()">
           <i class="fa fa-trash me-1"></i>
           {{ '::Delete' | abpLocalization }}
+        </button>
+        <button class="btn btn-success btn-sm"
+                [disabled]="email().status === EmailStatus.Sent"
+                (click)="send()">
+          {{ '::Email:Send' | abpLocalization }}
         </button>
       </div>
     </div>
   </div>
+
   <div class="card-body">
     <div class="row">
-      <div class="col-12 mb-3">
-        <label class="text-muted small d-block">{{ '::To' | abpLocalization }}</label>
-        <p class="mt-1"><strong>{{ email().toAddress }}</strong></p>
-        
-        <label class="text-muted small d-block">{{ '::Subject' | abpLocalization }}</label>
-        <p class="mt-1 lead">{{ email().subject }}</p>
-        <hr>
-        
-        <label class="text-muted small d-block">{{ '::Body' | abpLocalization }}</label>
-        <div class="mt-2 p-3 bg-light border rounded" style="white-space: pre-wrap;">{{ email().body }}</div>
+      <!-- EMAIL BODY -->
+      <hr />
+
+      <div class="mb-4 p-2  bg-dark-subtle">
+        <label class="text-muted d-block ">
+<!--          {{ '::Email:Body' | abpLocalization }}-->
+        </label>
+
+        @if(email().isHtml){
+          <div class="border rounded p-3 mt-2 bg-light"
+               [innerHTML]="email().body || '-'">
+          </div>
+        }
+        @else {
+          <i class="mt-2 mb-0 fa-italic"  style="white-space: pre-line;">{{ email().body || '-' }}</i>
+        }
       </div>
+
+      <!-- LEFT COLUMN -->
+      <div class="col-md-6">
+
+<!--        <div class="mb-3">-->
+<!--          <label class="text-muted small d-block">-->
+<!--            {{ '::Email:Subject' | abpLocalization }}-->
+<!--          </label>-->
+
+<!--          <p class="mt-1 lead">-->
+<!--            {{ email().subject || '-' }}-->
+<!--          </p>-->
+<!--        </div>-->
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Email:From' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ email().from || '-' }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Email:To' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ email().to || '-' }}
+          </p>
+        </div>
+
+        @if(email().cc){<div class="mb-3">
+          <label class="text-muted small d-block">
+        {{ '::Email:Cc' | abpLocalization }}
+        </label>
+
+        <p class="mt-1">
+        {{ email().cc || '-' }}
+        </p>
+      </div>}
+
+        @if(email().bcc){<div class="mb-3">
+          <label class="text-muted small d-block">
+        {{ '::Email:Bcc' | abpLocalization }}
+        </label>
+
+        <p class="mt-1">
+        {{ email().bcc || '-' }}
+        </p>
+      </div>}
+
+        @if(email().sentAt){<div class="mb-3">
+          <label class="text-muted small d-block">
+        {{ '::Email:SentAt' | abpLocalization }}
+        </label>
+
+        <p class="mt-1">
+        {{ email().sentAt | date:'medium'}}
+        </p>
+      </div>}
+
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="col-md-6">
+
+        <div class="mb-3">
+<!--          <label class="text-muted small d-block">-->
+<!--            {{ '::Email:Status' | abpLocalization }}-->
+<!--          </label>-->
+
+<!--          <p class="mt-1">-->
+<!--            {{ '::Email:Status:' + email().status | abpLocalization }}-->
+<!--          </p>-->
+<!--        </div>-->
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            <input type="checkbox" disabled class="me-2 " [checked]="email().isHtml"/>
+            {{ '::Email:IsHtml' | abpLocalization }}
+
+          </label>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Owner' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ email().owner?.userName || '-' }}
+          </p>
+        </div>
+
+        @if(email().account){
+          <div class="mb-3">
+            <label class="text-muted small d-block">
+              {{ '::Account' | abpLocalization }}
+            </label>
+
+            <p class="mt-1">
+              <a class="text-brand"
+                 [routerLink]="['/Accounts', email().account?.id]">
+                {{ email().account?.name }}
+              </a>
+            </p>
+          </div>
+        }
+
+        @if(email().contact){
+          <div class="mb-3">
+            <label class="text-muted small d-block">
+              {{ '::Contact' | abpLocalization }}
+            </label>
+
+            <p class="mt-1">
+              <a class="text-brand"
+                 [routerLink]="['/Contacts', email().contact?.id]">
+                {{ email().contact?.firstName + ' ' + email().contact?.lastName }}
+              </a>
+            </p>
+          </div>
+        }
+
+        @if(email().lead){
+          <div class="mb-3">
+            <label class="text-muted small d-block">
+              {{ '::Lead' | abpLocalization }}
+            </label>
+
+            <p class="mt-1">
+              <a class="text-brand"
+                 [routerLink]="['/Leads', email().lead?.id]">
+                {{ email().lead?.firstName + ' ' + email().lead?.lastName }}
+              </a>
+            </p>
+          </div>
+        }
+
+        @if(email().opportunity){
+          <div class="mb-3">
+            <label class="text-muted small d-block">
+              {{ '::Opportunity' | abpLocalization }}
+            </label>
+
+            <p class="mt-1">
+              <a class="text-brand"
+                 [routerLink]="['/Opportunities', email().opportunity?.id]">
+                {{ email().opportunity?.name }}
+              </a>
+            </p>
+          </div>
+        }
+
+      </div>
+    </div>
+
+
+    <hr />
+
+    <!-- AUDIT INFO -->
+    <div class="row">
+
+      <div class="col-md-6">
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Object:AuditInformation:CreatedBy' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ email().creator?.userName || '-' }}
+          </p>
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted small d-block">
+            {{ '::Object:AuditInformation:CreatedAt' | abpLocalization }}
+          </label>
+
+          <p class="mt-1">
+            {{ email().creationTime | date:'medium' }}
+          </p>
+        </div>
+
+      </div>
+
+      @if(!!email().lastModificationTime){
+        <div class="col-md-6">
+
+          <div class="mb-3">
+            <label class="text-muted small d-block">
+              {{ '::Object:AuditInformation:UpdatedBy' | abpLocalization }}
+            </label>
+
+            <p class="mt-1">
+              {{ email().modifier?.userName || '-' }}
+            </p>
+          </div>
+
+          <div class="mb-3">
+            <label class="text-muted small d-block">
+              {{ '::Object:AuditInformation:UpdatedAt' | abpLocalization }}
+            </label>
+
+            <p class="mt-1">
+              {{ email().lastModificationTime | date:'medium' }}
+            </p>
+          </div>
+
+        </div>
+      }
+
     </div>
   </div>
 </div>

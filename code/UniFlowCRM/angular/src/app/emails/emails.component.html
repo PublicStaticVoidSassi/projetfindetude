@@ -5,10 +5,11 @@
         <h5 class="card-title">{{ '::Menu:Emails' | abpLocalization }}</h5>
       </div>
       <div class="text-end col col-md-6">
-        <button class="btn btn-primary" type="button" (click)="create()">
+        <button class="btn btn-brand btn-sm me-2" type="button" (click)="create()">
           <i class="fa fa-plus me-1"></i>
-          <span>{{ '::NewEmail' | abpLocalization }}</span>
+          <span>{{ '::Object:Add' | abpLocalization }}</span>
         </button>
+<!--        <app-return-btn></app-return-btn>-->
       </div>
     </div>
   </div>
@@ -22,7 +23,7 @@
         <ng-template let-row="row" ngx-datatable-cell-template>
           <div ngbDropdown container="body" class="d-inline-block">
             <button
-              class="btn btn-primary btn-sm dropdown-toggle"
+              class="btn btn-brand btn-sm dropdown-toggle"
               data-toggle="dropdown"
               aria-haspopup="true"
               ngbDropdownToggle
@@ -43,9 +44,15 @@
           </div>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column [name]="'::Subject' | abpLocalization" prop="subject">
+      <ngx-datatable-column [name]="'::Email:Subject' | abpLocalization" prop="subject">
       </ngx-datatable-column>
-      <ngx-datatable-column [name]="'::To' | abpLocalization" prop="to">
+      <ngx-datatable-column [name]="'::Email:Status' | abpLocalization" prop="status">
+        <ng-template ngx-datatable-cell-template let-row="row">
+          {{'::Email:Status:'+row.status | abpLocalization}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [name]="'::Email:To' | abpLocalization" prop="to">
+
       </ngx-datatable-column>
       <ngx-datatable-column [name]="'Client::AssignedTo' | abpLocalization" prop="ownerID">
         <ng-template ngx-datatable-cell-template let-row="row">

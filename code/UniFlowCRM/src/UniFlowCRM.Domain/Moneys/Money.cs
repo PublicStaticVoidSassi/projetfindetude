@@ -7,8 +7,8 @@ namespace UniFlowCRM.Moneys
 {
     public class Money : ValueObject
     {
-        public decimal Value { get; private set; }
-        public Currency Currency { get; private set; }
+        public decimal Value { get; private set; } = 0;
+        public Currency Currency { get; private set; } = Currency.DZD;
 
         private void ValidateValue(decimal Value)
         {

@@ -71,12 +71,12 @@ namespace UniFlowCRM.Contacts
             Source = source;
         }
 
-        public void SetPhone(PhoneNumbers.PhoneNumber? phone)
+        public void SetPhone(PhoneNumber? phone)
         {
             Phone = phone;
         }
 
-        public void SetFax(PhoneNumbers.PhoneNumber? fax)
+        public void SetFax(PhoneNumber? fax)
         {
             Fax = fax;
         }

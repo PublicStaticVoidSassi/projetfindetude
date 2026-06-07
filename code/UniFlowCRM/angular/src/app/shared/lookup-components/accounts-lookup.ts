@@ -32,12 +32,13 @@ import { AccountDto, AccountsService } from 'src/app/proxy/accounts';
             <label>{{ '::Assignto:Account' | abpLocalization }}</label>
 
     <select
+      [disabled]="disabled"
       class="form-select"
       [ngModel]="value"
       (ngModelChange)="onSelect($event)"
 
     >
-      <option value="null" disabled>{{ '::Assignto:Account' | abpLocalization }}</option>
+      <option value="null" >{{ '::Assignto:Account' | abpLocalization }}</option>
 
       @for (user of accounts; track user.id) {
         <option [value]="user.id">
@@ -53,6 +54,7 @@ export class AccountsLookup
 {
   accounts: AccountDto[] = [];
   @Input() id: string | null = null;
+  @Input() disabled: boolean = false;
   value: string | null = null;
 
   private readonly accountsservice =

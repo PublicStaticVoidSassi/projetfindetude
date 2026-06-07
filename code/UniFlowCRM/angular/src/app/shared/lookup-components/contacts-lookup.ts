@@ -40,8 +40,9 @@ import { ContactDto, ContactsService } from 'src/app/proxy/contacts';
       class="form-select"
       [ngModel]="value"
       (ngModelChange)="onSelect($event)"
+      [disabled]="disabled"
     >
-      <option [ngValue]="null" disabled>{{ '::Assignto:Contact' | abpLocalization }}</option>
+      <option [value]="null" >{{ '::Assignto:Contact' | abpLocalization }}</option>
 
       @for (user of Contacts; track user.id) {
         <option [value]="user.id">
@@ -57,6 +58,8 @@ export class ContactsLookup
 {
   Contacts: ContactDto[] = [];
   @Input() id: string | null = null;
+  @Input() disabled: boolean = false;
+
   value: string | null = null;
 
   private readonly Contactsservice =

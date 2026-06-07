@@ -6,8 +6,7 @@ using Volo.Abp.Domain.Values;
 namespace UniFlowCRM.EmailAddresses;
 public class EmailAddress : ValueObject
 {
-    public string Name { get; private init; }
-    public string Domain { get; private init; }
+    private string _value { get; init; }
 
     protected EmailAddress() { }
 
@@ -15,9 +14,7 @@ public class EmailAddress : ValueObject
     {
         email = email.Trim();
         Validate(email);
-        var parts = email.Split('@');
-        Name = parts[0].ToLowerInvariant();
-        Domain = parts[1].ToLowerInvariant();
+        _value = email;
     }
 
     private void Validate(string email)
@@ -28,12 +25,12 @@ public class EmailAddress : ValueObject
             throw new UserFriendlyException("::EmailAddress:Invalid");
         }
     }
+    public static implicit operator string(EmailAddress emailaddress) => emailaddress.ToString();
 
-    public override string ToString() => $"{Name}@{Domain}";
+    public override string ToString() => _value;
 
     protected override IEnumerable<object> GetAtomicValues()
     {
-        yield return Name;
-        yield return Domain;
+        yield return _value;
     }
 }

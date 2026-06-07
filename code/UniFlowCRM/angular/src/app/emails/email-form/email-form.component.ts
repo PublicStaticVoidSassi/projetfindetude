@@ -7,10 +7,12 @@ import { emailStatusOptions } from '../../proxy/emails';
 import { CommonModule } from '@angular/common';
 import {AccountsLookup,ContactsLookup,LeadsLookup,OpportunitiesLookup,UsersLookup} from "../../shared/lookup-components";
 import {LocalizationPipe} from '@abp/ng.core';
+import { ReturnBtn } from '../../shared/return-btn/return-btn';
+import { RequiredTag } from '../../shared/required-tag/required-tag';
 @Component({
   selector: 'app-email-form',
   standalone: true,
-  imports: [AccountsLookup,ContactsLookup,LeadsLookup,OpportunitiesLookup,UsersLookup,CommonModule, ReactiveFormsModule, LocalizationPipe,ThemeSharedModule],
+  imports: [AccountsLookup, ContactsLookup, LeadsLookup, OpportunitiesLookup, UsersLookup, CommonModule, ReactiveFormsModule, LocalizationPipe, ThemeSharedModule, ReturnBtn, RequiredTag],
   templateUrl: './email-form.component.html',
 })
 export class EmailFormComponent implements OnInit {
@@ -27,11 +29,22 @@ export class EmailFormComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.buildForm();
-
+    setTimeout((()=>{
+      this.load();
+    }),2500)
+  }
+  load(){
     if (this.id) {
       this.loading.set(true);
       this.emailService.get(this.id).subscribe((email) => {
-        this.form.patchValue(email);
+        this.form.patchValue({
+          ...email,
+          accountID: email.account?.id,
+          contactID: email.contact?.id,
+          opportunityID: email.opportunity?.id,
+          leadID: email.lead?.id,
+          ownerID: email.owner?.id
+        });
         this.loading.set(false);
       });
     }
@@ -39,14 +52,14 @@ export class EmailFormComponent implements OnInit {
 
   buildForm() {
     this.form = this.fb.group({
-      subject: ['', [Validators.required, Validators.maxLength(256)]],
+      subject: ['', [Validators.required]],
       body: ['', [Validators.required]],
-      status: [null],
+      status: [null, Validators.required],
 
       from: ['', [Validators.email]],
       to: ['', [Validators.required, Validators.email]],
-      cc: [''],
-      bcc: [''],
+      cc: ['',Validators.email],
+      bcc: ['',Validators.email],
 
       sentAt: [null],
       isHtml: [false],

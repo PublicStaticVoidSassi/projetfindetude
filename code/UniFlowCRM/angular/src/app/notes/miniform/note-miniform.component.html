@@ -11,7 +11,7 @@
           <label for="title" class="form-label">
             {{ '::Title' | abpLocalization }}
           </label>
-          <span> * </span>
+          <app-required-tag></app-required-tag>
 
           <input
             id="title"
@@ -30,7 +30,7 @@
             <label for="type" class="form-label">
               {{ '::Type' | abpLocalization }}
             </label>
-            <span> * </span>
+            <app-required-tag></app-required-tag>
 
             <select
               id="type"
@@ -50,19 +50,19 @@
           <div class="col-6 d-flex flex-column justify-content-end">
           @switch (isFor){
             @case ('lead'){
-              <leads-lookup [id]="id" formControlName="leadId"></leads-lookup>
+              <leads-lookup [disabled]="true" [id]="id" formControlName="leadId"></leads-lookup>
 
             }
             @case ('account'){
-              <accounts-lookup [id]="id" formControlName="accountId"></accounts-lookup>
+              <accounts-lookup [disabled]="true"  [id]="id" formControlName="accountId"></accounts-lookup>
 
             }
             @case ('opportunity'){
-              <opportunities-lookup [id]="id" formControlName="opportunityId"></opportunities-lookup>
+              <opportunities-lookup [disabled]="true"  [id]="id" formControlName="opportunityId"></opportunities-lookup>
 
             }
             @case ('contact'){
-              <contacts-lookup [id]="id" formControlName="contactId"></contacts-lookup>
+              <contacts-lookup [disabled]="true"  [id]="id" formControlName="contactId"></contacts-lookup>
 
             }
 
@@ -73,13 +73,14 @@
           <label for="content" class="form-label">
             {{ '::Content' | abpLocalization }}
           </label>
-          <span> * </span>
+          <app-required-tag></app-required-tag>
 
           <textarea
             id="content"
             class="form-control"
             formControlName="content"
             rows="6"
+            required
           ></textarea>
 
           <div
@@ -102,14 +103,14 @@
     <div class="text-end">
       <button
         type="reset"
-        class="btn btn-secondary me-2"
+        class="btn btn-outline-danger btn-sm me-2"
       >
         {{ '::Cancel' | abpLocalization }}
       </button>
 
       <button
         type="submit"
-        class="btn btn-primary"
+        class="btn btn-brand btn-sm"
         [disabled]="form.invalid"
         (click)="save()"
       >

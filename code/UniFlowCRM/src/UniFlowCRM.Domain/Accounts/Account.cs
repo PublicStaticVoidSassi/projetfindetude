@@ -8,19 +8,7 @@ using UniFlowCRM.Moneys;
 using Volo.Abp;
 namespace UniFlowCRM.Accounts;
 
-public static class AccountConstraints
-{
-    public static class Name
-    {
-        public static int MaxLength = 128;
-        public static int MinLength = 2;
-    }
-    public static class Description
-    {
-        public static int MaxLength = 255;
-        public static int MinLength = 0;
-    }
-}
+
 
 public class Account : FullAuditedAggregateRoot<Guid>
 {
@@ -160,9 +148,9 @@ public class Account : FullAuditedAggregateRoot<Guid>
         Industry = industry;
     }
 
-    public void SetRevenue(Money? revenue)
+    public void SetRevenue(Money? revenue )
     {
-        // Check.Positive(revenue?.Value ?? 0, nameof(revenue));
+        Check.Positive(revenue.Value + 1 , nameof(revenue));
         Revenue = revenue;
     }
 

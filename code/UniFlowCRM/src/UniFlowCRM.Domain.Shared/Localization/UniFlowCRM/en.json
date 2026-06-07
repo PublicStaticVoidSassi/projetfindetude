@@ -418,6 +418,24 @@
 
     "Add:Note": "Add Note",
     "Action:Back": "Back",
-    "Lead:Convert": "Convert"
+    "Lead:Convert": "Convert",
+    "Email:Status": "Email Status",
+    "Email:Status:0": "Draft",
+    "Email:Status:1": "Sending",
+    "Email:Status:2": "Sent",
+    "Email:Status:3": "Archived",
+    "Email:Status:4": "Failed",
+    "Email:Subject": "Subject",
+    "Email:Body": "Body",
+    "Email:From": "From",
+    "Email:To": "To",
+    "Email:Cc": "CC",
+    "Email:Bcc": "BCC",
+    "Email:SentAt": "Sent At",
+    "Email:IsHtml": "Is HTML",
+    "Email:Send": "Send Email",
+    "Email:Send:Confirmation": "are you sure you want to send this email?",
+    "Email:Send:Text": "the receiver would be able to read it ",
+    "Email:Sent:Successfully": "your email has been send successfully"
   }
 }

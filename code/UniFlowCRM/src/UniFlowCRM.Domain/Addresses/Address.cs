@@ -10,7 +10,24 @@ namespace UniFlowCRM.Addresses
         public string? Country { get; private set; }
         public int? PostalCode { get; private set; }
 
-        public Address() { }
+        public Address()
+        {
+        }
+        public Address(string? street) {
+            Street = street;
+        }
+        public Address(string? street,string? city): this(street)
+        {
+            City = city;
+        }
+        public Address(string? street, string? city, string? country) : this(street,city)
+        {
+             Country = country;
+        }
+        public Address(string? street, string? city, string? country, int? postalcode) : this(street, city,country)
+        {
+            PostalCode = postalcode;
+        }
         public Address AddStreet(string? street) {
             Street = street;
             return this;
@@ -29,7 +46,10 @@ namespace UniFlowCRM.Addresses
         }
         protected override IEnumerable<object> GetAtomicValues()
         {
-            throw new NotImplementedException();
+            yield return Street;
+            yield return City;
+            yield return Country;
+            yield return PostalCode;
         }
     }
 }

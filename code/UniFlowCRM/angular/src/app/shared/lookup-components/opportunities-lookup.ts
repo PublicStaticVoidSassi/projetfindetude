@@ -34,10 +34,11 @@ import { OpportunitiesService, OpportunityDto } from 'src/app/proxy/opportunitie
 
     <select
       class="form-select"
+      [disabled]="disabled"
       [ngModel]="value"
       (ngModelChange)="onSelect($event)"
     >
-      <option [ngValue]="null" disabled>{{ '::Assignto:Opportunity' | abpLocalization }}</option>
+      <option [value]="null" >{{ '::Assignto:Opportunity' | abpLocalization }}</option>
 
       @for (user of opportunities; track user.id) {
         <option [value]="user.id">
@@ -53,6 +54,8 @@ export class OpportunitiesLookup
 {
   opportunities: OpportunityDto[] = [];
   @Input() id: string | null = null;
+  @Input() disabled: boolean = false;
+
   value: string | null = null;
 
   private readonly opportunitiesservice =

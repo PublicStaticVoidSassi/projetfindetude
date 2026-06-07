@@ -256,6 +256,10 @@ public class UniFlowCRMDbContext :
         builder.Entity<Email>(b =>
         {
             b.ConfigureByConvention();
+            b.Property<EmailAddress>(e=>e.From).HasConversion(v=>(v == null)?null:v.ToString(),v=>(v == null) ? null:new EmailAddress(v));
+            b.Property<EmailAddress>(e=>e.To).HasConversion(v=>(v == null)?null:v.ToString(),v=>(v == null) ? null:new EmailAddress(v));
+            b.Property<EmailAddress>(e=>e.Bcc).HasConversion(v=>(v == null)?null:v.ToString(),v=>(v == null) ? null:new EmailAddress(v));
+            b.Property<EmailAddress>(e=>e.Cc).HasConversion(v=>(v == null)?null:v.ToString(),v=>(v == null) ? null:new EmailAddress(v));
             b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
             b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
             b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);

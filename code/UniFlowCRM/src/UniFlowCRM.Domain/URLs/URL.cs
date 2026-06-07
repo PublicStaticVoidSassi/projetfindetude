@@ -7,13 +7,13 @@ namespace UniFlowCRM.URLs
 {
     public class URL : ValueObject
     {
-        public string Value { get; private init; }
+        public string _value { get; private init; }
 
         public URL(string url)
         {
             url = url.Trim();
             Validate(url);
-            Value = url;
+            _value = url;
         }
         private void Validate(string url)
         {
@@ -24,12 +24,12 @@ namespace UniFlowCRM.URLs
         }
         public override string ToString()
         {
-            return Value;
+            return _value;
         }
 
         protected override IEnumerable<object> GetAtomicValues()
         {
-            yield return Value;
+            yield return _value;
         }
     }
 }

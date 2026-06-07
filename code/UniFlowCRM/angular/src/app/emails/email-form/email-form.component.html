@@ -1,7 +1,11 @@
 <div class="card">
   <div class="card-header">
-    <h5 class="card-title">
-      {{ (id ? '::Edit' : '::NewEmail') | abpLocalization }}
+    <div class="d-flex justify-content-end">
+      <app-return-btn></app-return-btn>
+    </div>
+    <h5 class="display-6">
+      {{ (id ? '::Client:Action:Update' : '::Client:Action:Create') | abpLocalization }}
+      <span class="text-brand">{{form.get("subject")?.value }}</span>
     </h5>
   </div>
 
@@ -12,14 +16,19 @@
       <div class="row">
 
       <div class="form-group col-6 mb-3">
-        <label for="from">{{ '::From' | abpLocalization }}</label>
-        <input id="from" type="email" class="form-control" formControlName="from" />
+        <label for="from">{{ '::From' | abpLocalization }}
+        <app-required-tag></app-required-tag>
+        </label>
+
+        <input id="from" required type="email" class="form-control" formControlName="from" />
       </div>
 
       <!-- TO -->
       <div class="form-group  col-6 mb-3">
-        <label for="to">{{ '::To' | abpLocalization }}</label><span> * </span>
-        <input id="to" type="email" class="form-control" formControlName="to" autofocus />
+        <label for="to">{{ '::To' | abpLocalization }}
+          <app-required-tag></app-required-tag>
+        </label>
+        <input id="to" required type="email" class="form-control" formControlName="to" autofocus />
       </div>
       </div>
       <div class="row">
@@ -39,13 +48,16 @@
       <!-- SUBJECT -->
       <div class="row">
       <div class="form-group mb-3 col-9">
-        <label for="subject">{{ '::Subject' | abpLocalization }}</label><span> * </span>
-        <input id="subject" type="text" class="form-control" formControlName="subject" />
+        <label for="subject">{{ '::Subject' | abpLocalization }}
+          <app-required-tag></app-required-tag>
+        </label>
+        <input id="subject"  required  type="text" class="form-control" formControlName="subject" />
       </div>
       <div class="form-group mb-3 col-3">
-        <label for="status">{{ '::Email:Status' | abpLocalization }}</label><span> * </span>
-        <select class="form-control" formControlName="status" >
-          <option value="null" disabled>email status</option>
+        <label for="status">{{ '::Email:Status' | abpLocalization }}</label>        <app-required-tag></app-required-tag>
+
+        <select class="form-control"  required  formControlName="status" >
+<!--          <option value="null" disabled>email status</option>-->
           @for(status of emailStatuses; track status.value){
               <option [value]="status.value">{{'::Email:Status:'+status.value | abpLocalization}}</option>
           }
@@ -55,12 +67,13 @@
 
       <!-- BODY -->
       <div class="form-group mb-3">
-        <label for="body">{{ '::Body' | abpLocalization }}</label><span> * </span>
+        <label for="body">{{ '::Body' | abpLocalization }}</label>        <app-required-tag></app-required-tag>
+
         <textarea
           id="body"
           class="form-control"
           formControlName="body"
-          rows="10"
+          rows="10" required
         ></textarea>
       </div>
 
@@ -72,7 +85,7 @@
         </label>
       </div>
       <div class="mb-3">
-        <users-lookup formControlName="ownerID"></users-lookup>
+        <users-lookup  formControlName="ownerID"></users-lookup>
       </div>
       <div class="row">
       <div class="mb-3 col-6">
@@ -95,17 +108,17 @@
       <div class="text-end">
         <button
           type="button"
-          class="btn btn-secondary me-2"
+          class="btn btn-outline-danger btn-sm me-2"
           (click)="cancel()"
         >
           {{ '::Cancel' | abpLocalization }}
         </button>
 
         <button
-          class="btn btn-primary"
+          class="btn btn-brand btn-sm"
           [disabled]="form.invalid || loading()"
         >
-          <i class="fa fa-check me-1"></i>
+          <i class="fa fa-check me-1 "></i>
           {{ '::Save' | abpLocalization }}
         </button>
       </div>
