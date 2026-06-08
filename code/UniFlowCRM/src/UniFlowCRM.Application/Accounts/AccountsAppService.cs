@@ -26,17 +26,26 @@ namespace UniFlowCRM.Accounts
         public IdentityUserDto? Creator { get; set; }
         public IdentityUserDto? LastModifier { get; set; }
     }
-    public class AccountsAppService : CrudAppService<Account, AccountDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateAccountDto>, IAccountsAppService
+    public class AccountsAppService : CrudAppService<Account, AccountDto, Guid, AccountRequestDto, CreateUpdateAccountDto>, IAccountsAppService
     {
         private readonly IRepository<IdentityUser, Guid> _userRepository;
         public AccountsAppService(IRepository<Account, Guid> repository, IRepository<IdentityUser, Guid> usersrepository) : base(repository)
         {
             _userRepository = usersrepository;
         }
-        private async Task<IQueryable<AccountJoined>> GetQueryableAsync(PagedAndSortedResultRequestDto input)
+        private async Task<IQueryable<AccountJoined>> GetQueryableAsync(AccountRequestDto input)
         {
-
-            var accounts = (await Repository.GetQueryableAsync()).Skip(input.SkipCount).Take(input.MaxResultCount);
+            var accounts = (await Repository.GetQueryableAsync());
+            if (!string.IsNullOrEmpty(input.Name))
+                accounts = accounts.Where(a => a.Name.ToLower().Contains(input.Name));
+            if (input.Type != null)
+                accounts = accounts.Where(a => a.Type == input.Type);
+            if (input.Industry != null)
+                accounts = accounts.Where(a => a.Industry == input.Industry);
+            if (!string.IsNullOrWhiteSpace(input.Sorting))
+                accounts = accounts.OrderBy(input.Sorting);
+            accounts = accounts.Skip(input.SkipCount)
+                .Take(input.MaxResultCount);
 
 
 
@@ -164,9 +173,10 @@ namespace UniFlowCRM.Accounts
             return dto;
         }
 
-        public override async Task<PagedResultDto<AccountDto>> GetListAsync(PagedAndSortedResultRequestDto input)
+        public override async Task<PagedResultDto<AccountDto>> GetListAsync(AccountRequestDto input)
         {
             var q = await GetQueryableAsync(input);
+
             var res = await AsyncExecuter.ToListAsync(q);
             var dtos = res.Select(res =>
             {

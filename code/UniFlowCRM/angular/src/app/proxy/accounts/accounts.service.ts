@@ -1,6 +1,6 @@
-import type { AccountDto, CreateUpdateAccountDto } from './models';
+import type { AccountDto, AccountRequestDto, CreateUpdateAccountDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
-import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
+import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable, inject } from '@angular/core';
 
 @Injectable({
@@ -36,11 +36,11 @@ export class AccountsService {
     { apiName: this.apiName,...config });
   
 
-  getList = (input: PagedAndSortedResultRequestDto, config?: Partial<Rest.Config>) =>
+  getList = (input: AccountRequestDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<AccountDto>>({
       method: 'GET',
       url: '/api/app/accounts',
-      params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+      params: { name: input.name, type: input.type, industry: input.industry, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName,...config });
   

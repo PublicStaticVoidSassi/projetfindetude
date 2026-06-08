@@ -1,8 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import {Accounts as AccountsModule} from '../proxy/index';
-import { ListService, PagedResultDto, PermissionDirective } from '@abp/ng.core';
+import { BaseCoreModule, ListService, PagedResultDto, PermissionDirective } from '@abp/ng.core';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
-// import { NumberPipe } from '@angular/common';
 import {
   NgxDatatableListDirective,
   NgxDatatableDefaultDirective,
@@ -14,10 +13,11 @@ import {myCurrencyPipe} from '../shared/currency-pipe';
 import {AccountTypePipe,AccountIndustryPipe} from './pipes';
 import { Router } from '@angular/router';
 import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap'
+import { AccountIndustry, AccountRequestDto, AccountType ,accountTypeOptions, accountIndustryOptions} from '../proxy/accounts';
 type AccountDto = AccountsModule.AccountDto;
 @Component({
   selector: 'app-accounts',
-  imports: [NgbDropdownModule, AccountIndustryPipe, AccountTypePipe, myCurrencyPipe, NgxDatatableModule, NgxDatatableListDirective, NgxDatatableDefaultDirective, LocalizationPipe, PermissionDirective],
+  imports: [NgbDropdownModule, AccountIndustryPipe, AccountTypePipe, myCurrencyPipe, NgxDatatableModule, NgxDatatableListDirective, NgxDatatableDefaultDirective, LocalizationPipe, PermissionDirective, BaseCoreModule],
   templateUrl: './accounts.html',
   styleUrl: './accounts.scss',
   providers: [ListService]
@@ -29,15 +29,47 @@ export class AccountsComponent implements OnInit{
   private readonly toaster = inject(ToasterService);
   List = inject(ListService);
   Accounts = {} as PagedResultDto<AccountDto>;
+  accountTypeOptions = accountTypeOptions;
+  accountIndustryOptions = accountIndustryOptions;
   refreshList = () =>{
     this.List.get();
   }
+    searchIndustry: AccountIndustry | null = null;
+    searchType: AccountType | null = null;
+    searchName: string | null = null;
+    lastQuery : any = {skipCount:0,maxResultCount:10};
+  async search(){
+    if (this.loading){
+      return
+    }
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    this.loading = true;
+    console.log({
+      ...this.lastQuery,
+      name: this.searchName,
+      type: this.searchType,
+      industry: this.searchIndustry
+    });
+    this.AccountsService.getList(
+      { ...this.lastQuery , name: this.searchName,type: this.searchType,industry: this.searchIndustry })
+      .subscribe(accounts => {this.Accounts=accounts;this.loading = false;});
+
+  }
+  loading = false;
   ngOnInit() {
   this.List.hookToQuery(
       (q)=>{
-        return this.AccountsService.getList(q)
+        console.log(q);
+        this.lastQuery = q;
+        return this.AccountsService.getList({ ...q , name: this.searchName,type: this.searchType,industry: this.searchIndustry });
       }
-      ).subscribe(accounts => {this.Accounts=accounts})
+      ).subscribe(
+        accounts => {
+          this.Accounts=accounts
+        }
+
+      )
   }
   openDetails(id: string){
     this.router.navigate(['/Accounts/'+id]);
@@ -65,4 +97,6 @@ export class AccountsComponent implements OnInit{
     // this.toaster.error("not implemented yet");
     this.router.navigate(['/Accounts/form/']);
   }
+
+  protected readonly AccountType = AccountType;
 }

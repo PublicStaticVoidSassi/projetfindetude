@@ -9,6 +9,28 @@
     </button>
   </div>
   <div class="card-body">
+    <div class="row">
+      <div class="col-4">
+        <input type="text" class="form-control" (ngModelChange)="search()"  [(ngModel)]="searchName" [placeholder]="'::Account:Name'|abpLocalization"/>
+      </div>
+      <div class="col-4">
+        <select type="text" class="form-control" (ngModelChange)="search()"  [(ngModel)]="searchType" >
+          <option [ngValue]="null">{{"::Account:Type"|abpLocalization}}</option>
+          @for(type of accountTypeOptions; track type.value){
+              <option [ngValue]="type.value">{{'::Account:Type:'+type.value| abpLocalization}}</option>
+          }
+        </select>
+      </div>
+      <div class="col-4">
+        <select type="text" class="form-control" (ngModelChange)="search()"  [(ngModel)]="searchIndustry" >
+          <option [ngValue]="null">{{"::Account:Industry"|abpLocalization}}</option>
+
+          @for(type of accountIndustryOptions; track type.value){
+            <option [ngValue]="type.value">{{'::Account:Industry:'+type.value| abpLocalization}}</option>
+          }
+        </select>
+      </div>
+    </div>
   <ngx-datatable [rows]="Accounts.items" [count]="Accounts.totalCount" [list]="List" default>
     <ngx-datatable-column   [sortable]="false">
       <ng-template ngx-datatable-cell-template let-row="row">

@@ -1,4 +1,4 @@
-import type { EntityDto, FullAuditedEntityDto } from '@abp/ng.core';
+import type { EntityDto, FullAuditedEntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 import type { AccountType } from './account-type.enum';
 import type { AccountIndustry } from './account-industry.enum';
 import type { Currency } from '../moneys/currency.enum';
@@ -24,6 +24,12 @@ export interface AccountDto extends FullAuditedEntityDto<string> {
   owner?: IdentityUserDto | null;
   creator?: IdentityUserDto | null;
   modifier?: IdentityUserDto | null;
+}
+
+export interface AccountRequestDto extends PagedAndSortedResultRequestDto {
+  name?: string | null;
+  type?: AccountType | null;
+  industry?: AccountIndustry | null;
 }
 
 export interface CreateUpdateAccountDto extends EntityDto<string> {

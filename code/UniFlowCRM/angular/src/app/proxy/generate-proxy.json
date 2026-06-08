@@ -923,9 +923,9 @@
                   "parametersOnMethod": [
                     {
                       "name": "input",
-                      "typeAsString": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
-                      "type": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
-                      "typeSimple": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                      "typeAsString": "UniFlowCRM.Accounts.AccountRequestDto, UniFlowCRM.Application.Contracts",
+                      "type": "UniFlowCRM.Accounts.AccountRequestDto",
+                      "typeSimple": "UniFlowCRM.Accounts.AccountRequestDto",
                       "isOptional": false,
                       "defaultValue": null
                     }
@@ -1034,7 +1034,7 @@
               },
               "allowAnonymous": null,
               "authorizeDatas": [],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Accounts.AccountDto,UniFlowCRM.Accounts.AccountDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Accounts.AccountDto,UniFlowCRM.Accounts.AccountDto,System.Guid,UniFlowCRM.Accounts.AccountRequestDto>"
             },
             "GetListAsyncByInput": {
               "uniqueName": "GetListAsyncByInput",
@@ -1045,14 +1045,50 @@
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
-                  "type": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
-                  "typeSimple": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                  "typeAsString": "UniFlowCRM.Accounts.AccountRequestDto, UniFlowCRM.Application.Contracts",
+                  "type": "UniFlowCRM.Accounts.AccountRequestDto",
+                  "typeSimple": "UniFlowCRM.Accounts.AccountRequestDto",
                   "isOptional": false,
                   "defaultValue": null
                 }
               ],
               "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Name",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Type",
+                  "jsonName": null,
+                  "type": "UniFlowCRM.Accounts.AccountType?",
+                  "typeSimple": "enum?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "Industry",
+                  "jsonName": null,
+                  "type": "UniFlowCRM.Accounts.AccountIndustry?",
+                  "typeSimple": "enum?",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
                 {
                   "nameOnMethod": "input",
                   "name": "Sorting",
@@ -1096,7 +1132,7 @@
               },
               "allowAnonymous": null,
               "authorizeDatas": [],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Accounts.AccountDto,UniFlowCRM.Accounts.AccountDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Accounts.AccountDto,UniFlowCRM.Accounts.AccountDto,System.Guid,UniFlowCRM.Accounts.AccountRequestDto>"
             },
             "CreateAsyncByInput": {
               "uniqueName": "CreateAsyncByInput",
@@ -8251,6 +8287,54 @@
       ],
       "genericArguments": null,
       "properties": null
+    },
+    "UniFlowCRM.Accounts.AccountRequestDto": {
+      "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Name",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": true
+        },
+        {
+          "name": "Type",
+          "jsonName": null,
+          "type": "UniFlowCRM.Accounts.AccountType?",
+          "typeSimple": "enum?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": true
+        },
+        {
+          "name": "Industry",
+          "jsonName": null,
+          "type": "UniFlowCRM.Accounts.AccountIndustry?",
+          "typeSimple": "enum?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": true
+        }
+      ]
     },
     "UniFlowCRM.Accounts.AccountType": {
       "baseType": "System.Enum",

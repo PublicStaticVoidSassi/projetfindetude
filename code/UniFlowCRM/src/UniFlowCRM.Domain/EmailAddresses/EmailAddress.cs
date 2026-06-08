@@ -25,7 +25,7 @@ public class EmailAddress : ValueObject
             throw new UserFriendlyException("::EmailAddress:Invalid");
         }
     }
-    public static implicit operator string(EmailAddress emailaddress) => emailaddress.ToString();
+    public static implicit operator string(EmailAddress emailaddress) => (emailaddress == null)? null: emailaddress.ToString();
 
     public override string ToString() => _value;
 
