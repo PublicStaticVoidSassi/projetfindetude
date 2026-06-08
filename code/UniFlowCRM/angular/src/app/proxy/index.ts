@@ -1,4 +1,5 @@
 import * as Accounts from './accounts';
+import * as Analytics from './analytics';
 import * as Books from './books';
 import * as Calls from './calls';
 import * as Contacts from './contacts';
@@ -10,4 +11,4 @@ import * as Notes from './notes';
 import * as Opportunities from './opportunities';
 import * as Tasks from './tasks';
 import * as Volo from './volo';
-export { Accounts, Books, Calls, Contacts, Emails, Leads, Meetings, Moneys, Notes, Opportunities, Tasks, Volo };
+export { Accounts, Analytics, Books, Calls, Contacts, Emails, Leads, Meetings, Moneys, Notes, Opportunities, Tasks, Volo };

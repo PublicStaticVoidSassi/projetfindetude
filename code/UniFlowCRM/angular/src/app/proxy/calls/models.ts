@@ -33,6 +33,7 @@ export interface CreateUpdateCallDto extends EntityDto<string> {
   startTime?: string | null;
   endTime?: string | null;
   duration?: number | null;
+  phoneCode?: string | null;
   phoneNumber?: string | null;
   accountID?: string | null;
   contactID?: string | null;

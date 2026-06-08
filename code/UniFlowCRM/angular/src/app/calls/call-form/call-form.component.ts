@@ -7,10 +7,11 @@ import { CommonModule } from '@angular/common';
 import { LocalizationPipe } from '@abp/ng.core';
 import { AccountsLookup,ContactsLookup,LeadsLookup,OpportunitiesLookup,UsersLookup } from '../../shared/lookup-components';
 import { ReturnBtn } from '../../shared/return-btn/return-btn';
+import { RequiredTag } from '../../shared/required-tag/required-tag';
 @Component({
   selector: 'app-call-form',
   standalone: true,
-  imports: [AccountsLookup, ContactsLookup, LeadsLookup, OpportunitiesLookup, UsersLookup, LocalizationPipe, CommonModule, ReactiveFormsModule, ThemeSharedModule,  ReturnBtn],
+  imports: [AccountsLookup, ContactsLookup, LeadsLookup, OpportunitiesLookup, UsersLookup, LocalizationPipe, CommonModule, ReactiveFormsModule, ThemeSharedModule, ReturnBtn, RequiredTag],
   templateUrl: './call-form.component.html',
 })
 export class CallFormComponent implements OnInit {
@@ -38,6 +39,8 @@ export class CallFormComponent implements OnInit {
         setTimeout(()=>{
           this.form.patchValue({
             ...call,
+            phoneNumber: call.phoneNumber?.split(' ')[1],
+            phoneCode:call.phoneNumber?.split(' ')[0],
             accountID:call.account?.id,
             leadID:call.lead?.id,
             contactID:call.contact?.id,
@@ -58,9 +61,10 @@ export class CallFormComponent implements OnInit {
       description: [''],
       status: [null],
       direction: [null],
-      startTime: [new Date().toLocalISOString,Validators.required],
+      startTime: [new Date().toLocalISOString(),Validators.required],
       endTime: [new Date()],
       duration: [null, [Validators.required,Validators.min(0)]],
+      phoneCode: ['', [Validators.required,Validators.maxLength(32)]],
       phoneNumber: ['', [Validators.required,Validators.maxLength(32)]],
       accountID: [null],
       contactID: [null],
@@ -71,8 +75,10 @@ export class CallFormComponent implements OnInit {
   }
 
   save() {
+    // console.log(this.form.value);
     if (this.form.invalid)
-      console.log(this.form.errors);
+      // console.log(this.form.errors);
+      return;
 
     this.loading.set(true);
     const request = this.id

@@ -9,4 +9,26 @@
             </div>
         </div>
       </div>
+      <div class="card">
+        <div class="card-header">
+          title goes here
+        </div>
+        <div class="card-body">
+          stats go here
+        </div>
+      </div>
+
+
+  <div class="card">
+    <div class="card-header">
+      {{ '::Lead'|abpLocalization }}
+    </div>
+    <div class="card-body">
+      {{analytics.lead.converted}} / {{analytics.lead.total}}
+    </div>
+  </div>
+  <div class="card w-25">
+    <p-chart type="pie" [data]="data" [options]="basicOptions" />
+  </div>
+
 </div>

@@ -154,9 +154,29 @@ public partial class CallToDto : MapperBase<Call, CallDto>
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 public partial class DtoToCall : MapperBase<CreateUpdateCallDto, Call>
 {
-    public override partial Call Map(CreateUpdateCallDto source);
+    public override Call Map(CreateUpdateCallDto source)
+    {
+        return new Call(source.Id, source.Name)
+        {
+            Description = source.Description,
+            Status = source.Status,
+            Direction = source.Direction,
+            StartTime = source.StartTime,
+            EndTime = source.EndTime,
+            Duration = source.Duration,
+            PhoneNumber = (source.PhoneNumber is not null && source.PhoneCode is not null) ? new PhoneNumber(source.PhoneNumber,source.PhoneCode) : null,
+            AccountID = source.AccountID,
+            ContactID = source.ContactID,
+            OpportunityID = source.OpportunityID,
+            LeadID = source.LeadID,
+            OwnerID = source.OwnerID,
+        };
+    }
 
-    public override partial void Map(CreateUpdateCallDto source, Call destination);
+    public override void Map(CreateUpdateCallDto source, Call destination)
+    {
+        destination = this.Map(source);
+    }
 }
 // Email
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]

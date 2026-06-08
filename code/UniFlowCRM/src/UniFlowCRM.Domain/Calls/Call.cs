@@ -1,4 +1,5 @@
 using System;
+using UniFlowCRM.PhoneNumbers;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace UniFlowCRM.Calls;
@@ -13,7 +14,7 @@ public class Call : FullAuditedAggregateRoot<Guid>
     public DateTime? StartTime { get; set; }
     public DateTime? EndTime { get; set; }
     public int? Duration { get; set; }
-    public string? PhoneNumber { get; set; }
+    public PhoneNumber? PhoneNumber { get; set; }
 
     // Relations avec d'autres entités CRM
     public Guid? AccountID { get; set; }

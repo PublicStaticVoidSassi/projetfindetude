@@ -14,6 +14,7 @@ public class CreateUpdateCallDto : EntityDto<Guid>
     public DateTime? StartTime { get; set; }
     public DateTime? EndTime { get; set; }
     public int? Duration { get; set; }
+    public string? PhoneCode { get; set; }
     public string? PhoneNumber { get; set; }
     public Guid? AccountID { get; set; }
     public Guid? ContactID { get; set; }

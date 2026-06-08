@@ -1234,6 +1234,33 @@
             }
           }
         },
+        "UniFlowCRM.Analytics.AnalyticsAppService": {
+          "controllerName": "Analytics",
+          "controllerGroupName": "Analytics",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "UniFlowCRM.Analytics.AnalyticsAppService",
+          "interfaces": [],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/app/analytics",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "UniFlowCRM.Analytics.AnalyticsDto",
+                "typeSimple": "UniFlowCRM.Analytics.AnalyticsDto"
+              },
+              "allowAnonymous": null,
+              "authorizeDatas": [],
+              "implementFrom": "UniFlowCRM.Analytics.AnalyticsAppService"
+            }
+          }
+        },
         "UniFlowCRM.Books.BookAppService": {
           "controllerName": "Book",
           "controllerGroupName": "Book",
@@ -8498,6 +8525,176 @@
         }
       ]
     },
+    "UniFlowCRM.Analytics.AccountAnalytics": {
+      "baseType": "UniFlowCRM.Analytics.BaseAnalytics",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": []
+    },
+    "UniFlowCRM.Analytics.AnalyticsDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Lead",
+          "jsonName": null,
+          "type": "UniFlowCRM.Analytics.LeadAnalytics",
+          "typeSimple": "UniFlowCRM.Analytics.LeadAnalytics",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        },
+        {
+          "name": "Account",
+          "jsonName": null,
+          "type": "UniFlowCRM.Analytics.AccountAnalytics",
+          "typeSimple": "UniFlowCRM.Analytics.AccountAnalytics",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        },
+        {
+          "name": "Contact",
+          "jsonName": null,
+          "type": "UniFlowCRM.Analytics.ContactAnalytics",
+          "typeSimple": "UniFlowCRM.Analytics.ContactAnalytics",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        },
+        {
+          "name": "Opportunity",
+          "jsonName": null,
+          "type": "UniFlowCRM.Analytics.OpportunityAnalytics",
+          "typeSimple": "UniFlowCRM.Analytics.OpportunityAnalytics",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        }
+      ]
+    },
+    "UniFlowCRM.Analytics.BaseAnalytics": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Total",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        }
+      ]
+    },
+    "UniFlowCRM.Analytics.ContactAnalytics": {
+      "baseType": "UniFlowCRM.Analytics.BaseAnalytics",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "active",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        }
+      ]
+    },
+    "UniFlowCRM.Analytics.LeadAnalytics": {
+      "baseType": "UniFlowCRM.Analytics.BaseAnalytics",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Converted",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        }
+      ]
+    },
+    "UniFlowCRM.Analytics.OpportunityAnalytics": {
+      "baseType": "UniFlowCRM.Analytics.BaseAnalytics",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Won",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        },
+        {
+          "name": "Lost",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        }
+      ]
+    },
     "UniFlowCRM.Books.BookDto": {
       "baseType": "Volo.Abp.Application.Dtos.AuditedEntityDto<System.Guid>",
       "isEnum": false,
@@ -8974,6 +9171,19 @@
           "jsonName": null,
           "type": "System.Int32?",
           "typeSimple": "number?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": true
+        },
+        {
+          "name": "PhoneCode",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,

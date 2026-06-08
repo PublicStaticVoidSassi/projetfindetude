@@ -213,10 +213,10 @@ public class UniFlowCRMDbContext :
         builder.Entity<Note>(b =>
         {
             b.ConfigureByConvention();
-            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadId).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountId).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactId).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityId).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadId).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountId).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactId).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityId).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
         });
 
 
@@ -226,30 +226,31 @@ public class UniFlowCRMDbContext :
         builder.Entity<Task>(b =>
         {
             b.ConfigureByConvention();
-            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
         });
         #endregion
         #region Calls
         builder.Entity<Call>(b =>
         {
             b.ConfigureByConvention();
-            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.Property(e => e.PhoneNumber).HasConversion(v => v == null ? null : v.ToString() , v => v == null? null: new PhoneNumbers.PhoneNumber(v));
+            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
         });
         #endregion
         #region Meetings
         builder.Entity<Meeting>(b =>
         {
             b.ConfigureByConvention();
-            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
         });
         #endregion
         #region Emails
@@ -260,10 +261,10 @@ public class UniFlowCRMDbContext :
             b.Property<EmailAddress>(e=>e.To).HasConversion(v=>(v == null)?null:v.ToString(),v=>(v == null) ? null:new EmailAddress(v));
             b.Property<EmailAddress>(e=>e.Bcc).HasConversion(v=>(v == null)?null:v.ToString(),v=>(v == null) ? null:new EmailAddress(v));
             b.Property<EmailAddress>(e=>e.Cc).HasConversion(v=>(v == null)?null:v.ToString(),v=>(v == null) ? null:new EmailAddress(v));
-            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
-            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+            b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
+            b.HasOne<Opportunity>().WithMany().HasForeignKey(n => n.OpportunityID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
         });
         #endregion
 

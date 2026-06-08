@@ -2842,23 +2842,19 @@ namespace UniFlowCRM.Migrations
                 {
                     b.HasOne("UniFlowCRM.Accounts.Account", null)
                         .WithMany()
-                        .HasForeignKey("AccountID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AccountID");
 
                     b.HasOne("UniFlowCRM.Contacts.Contact", null)
                         .WithMany()
-                        .HasForeignKey("ContactID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ContactID");
 
                     b.HasOne("UniFlowCRM.Leads.Lead", null)
                         .WithMany()
-                        .HasForeignKey("LeadID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("LeadID");
 
                     b.HasOne("UniFlowCRM.Opportunities.Opportunity", null)
                         .WithMany()
-                        .HasForeignKey("OpportunityID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("OpportunityID");
                 });
 
             modelBuilder.Entity("UniFlowCRM.Contacts.Contact", b =>
@@ -2913,23 +2909,19 @@ namespace UniFlowCRM.Migrations
                 {
                     b.HasOne("UniFlowCRM.Accounts.Account", null)
                         .WithMany()
-                        .HasForeignKey("AccountID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AccountID");
 
                     b.HasOne("UniFlowCRM.Contacts.Contact", null)
                         .WithMany()
-                        .HasForeignKey("ContactID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ContactID");
 
                     b.HasOne("UniFlowCRM.Leads.Lead", null)
                         .WithMany()
-                        .HasForeignKey("LeadID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("LeadID");
 
                     b.HasOne("UniFlowCRM.Opportunities.Opportunity", null)
                         .WithMany()
-                        .HasForeignKey("OpportunityID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("OpportunityID");
                 });
 
             modelBuilder.Entity("UniFlowCRM.Leads.Lead", b =>
@@ -2949,46 +2941,38 @@ namespace UniFlowCRM.Migrations
                 {
                     b.HasOne("UniFlowCRM.Accounts.Account", null)
                         .WithMany()
-                        .HasForeignKey("AccountID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AccountID");
 
                     b.HasOne("UniFlowCRM.Contacts.Contact", null)
                         .WithMany()
-                        .HasForeignKey("ContactID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ContactID");
 
                     b.HasOne("UniFlowCRM.Leads.Lead", null)
                         .WithMany()
-                        .HasForeignKey("LeadID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("LeadID");
 
                     b.HasOne("UniFlowCRM.Opportunities.Opportunity", null)
                         .WithMany()
-                        .HasForeignKey("OpportunityID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("OpportunityID");
                 });
 
             modelBuilder.Entity("UniFlowCRM.Notes.Note", b =>
                 {
                     b.HasOne("UniFlowCRM.Accounts.Account", null)
                         .WithMany()
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AccountId");
 
                     b.HasOne("UniFlowCRM.Contacts.Contact", null)
                         .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ContactId");
 
                     b.HasOne("UniFlowCRM.Leads.Lead", null)
                         .WithMany()
-                        .HasForeignKey("LeadId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("LeadId");
 
                     b.HasOne("UniFlowCRM.Opportunities.Opportunity", null)
                         .WithMany()
-                        .HasForeignKey("OpportunityId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("OpportunityId");
                 });
 
             modelBuilder.Entity("UniFlowCRM.Opportunities.Opportunity", b =>
@@ -3040,23 +3024,19 @@ namespace UniFlowCRM.Migrations
                 {
                     b.HasOne("UniFlowCRM.Accounts.Account", null)
                         .WithMany()
-                        .HasForeignKey("AccountID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AccountID");
 
                     b.HasOne("UniFlowCRM.Contacts.Contact", null)
                         .WithMany()
-                        .HasForeignKey("ContactID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ContactID");
 
                     b.HasOne("UniFlowCRM.Leads.Lead", null)
                         .WithMany()
-                        .HasForeignKey("LeadID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("LeadID");
 
                     b.HasOne("UniFlowCRM.Opportunities.Opportunity", null)
                         .WithMany()
-                        .HasForeignKey("OpportunityID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("OpportunityID");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>
