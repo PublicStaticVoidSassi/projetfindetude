@@ -6,12 +6,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { CallDirection, CallDto } from '../proxy/calls';
-import {LocalizationPipe} from '@abp/ng.core';
+import { LocalizationPipe } from '@abp/ng.core';
 
 @Component({
   selector: 'app-calls',
   standalone: true,
-  imports: [LocalizationPipe,CommonModule, ThemeSharedModule, NgbDropdownModule],
+  imports: [LocalizationPipe, CommonModule, ThemeSharedModule, NgbDropdownModule],
   providers: [ListService],
   templateUrl: './calls.html',
 })
@@ -23,9 +23,25 @@ export class CallsComponent implements OnInit {
   public readonly list = inject(ListService);
 
   items = {} as PagedResultDto<CallDto>;
+  filter: any;
+  loading = false;
+  query: any;
+  search() {
+    if (this.loading) {
+      return;
+    }
+    this.loading = true;
+    this.callService.getList(this.query).subscribe((e) =>
+      this.items = e
+    );
+  }
 
   ngOnInit() {
-    const streamCreator = (query: PagedAndSortedResultRequestDto) => this.callService.getList(query);
+    const streamCreator = (query: PagedAndSortedResultRequestDto) => {
+      this.query = query;
+      this.query.filter = this.filter;
+      return this.callService.getList(this.query);
+    };
 
     this.list.hookToQuery(streamCreator).subscribe((response) => {
       this.items = response;

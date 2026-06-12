@@ -10,11 +10,7 @@
       </div>
 
       <div class="col-md-6 text-end">
-        <button
-          class="btn btn-brand btn-sm me-2"
-          type="button"
-          (click)="create()"
-        >
+        <button class="btn btn-brand btn-sm me-2" type="button" (click)="create()">
           <i class="fa fa-plus me-1"></i>
 
           <span>
@@ -27,35 +23,18 @@
   </div>
 
   <div class="card-body">
+    <input class="form-control" [(ngModel)]="filter" (ngModelChange)="search()" />
 
-    <ngx-datatable
-      [rows]="items.items"
-      [count]="items.totalCount"
-      [list]="list"
-      default
-    >
+
+    <ngx-datatable [rows]="items.items" [count]="items.totalCount" [list]="list" default>
 
       <!-- ACTIONS -->
-      <ngx-datatable-column
-        [name]="'::Actions' | abpLocalization"
-        [maxWidth]="150"
-        [sortable]="false"
-      >
-        <ng-template
-          let-row="row"
-          ngx-datatable-cell-template
-        >
+      <ngx-datatable-column [name]="'::Actions' | abpLocalization" [maxWidth]="150" [sortable]="false">
+        <ng-template let-row="row" ngx-datatable-cell-template>
 
-          <div
-            ngbDropdown
-            container="body"
-            class="d-inline-block"
-          >
+          <div ngbDropdown container="body" class="d-inline-block">
 
-            <button
-              class="btn btn-brand btn-sm dropdown-toggle"
-              ngbDropdownToggle
-            >
+            <button class="btn btn-brand btn-sm dropdown-toggle" ngbDropdownToggle>
               <i class="fa fa-cog me-1"></i>
 
               {{ '::Actions' | abpLocalization }}
@@ -63,27 +42,18 @@
 
             <div ngbDropdownMenu>
 
-              <button
-                ngbDropdownItem
-                (click)="openDetails(row.id)"
-              >
+              <button ngbDropdownItem (click)="openDetails(row.id)">
                 <i class="fa fa-plus me-1"></i>
 
                 {{ '::Details' | abpLocalization }}
               </button>
 
-              <button
-                ngbDropdownItem
-                (click)="edit(row.id)"
-              >
+              <button ngbDropdownItem (click)="edit(row.id)">
                 <i class="fa fa-pen me-1"></i>
                 {{ '::Edit' | abpLocalization }}
               </button>
 
-              <button
-                ngbDropdownItem
-                (click)="delete(row.id)"
-              >
+              <button ngbDropdownItem (click)="delete(row.id)">
                 <i class="fa fa-trash me-1"></i>
                 {{ '::Delete' | abpLocalization }}
               </button>
@@ -95,40 +65,25 @@
       </ngx-datatable-column>
 
       <!-- NAME -->
-      <ngx-datatable-column
-        [name]="'::Name' | abpLocalization"
-        prop="name"
-      >
+      <ngx-datatable-column [name]="'::Name' | abpLocalization" prop="name">
       </ngx-datatable-column>
 
       <!-- STATUS -->
-      <ngx-datatable-column
-        [name]="'::Status' | abpLocalization"
-        prop="status"
-      >
-        <ng-template
-          let-row="row"
-          ngx-datatable-cell-template
-        >
+      <ngx-datatable-column [name]="'::Status' | abpLocalization" prop="status">
+        <ng-template let-row="row" ngx-datatable-cell-template>
           {{ '::Call:Status:' + row.status | abpLocalization }}
         </ng-template>
       </ngx-datatable-column>
 
       <!-- DIRECTION -->
-      <ngx-datatable-column
-        [name]="'::Direction' | abpLocalization"
-        prop="direction"
-      >
-        <ng-template
-          let-row="row"
-          ngx-datatable-cell-template
-        >
+      <ngx-datatable-column [name]="'::Direction' | abpLocalization" prop="direction">
+        <ng-template let-row="row" ngx-datatable-cell-template>
           @if( row.direction === CallDirection.Inbound){
-            <i class="fa fa-arrow-down text-secondary"></i>
-            <span class="text-secondary">{{ '::Call:Direction:' + row.direction | abpLocalization }}</span>
+          <i class="fa fa-arrow-down text-secondary"></i>
+          <span class="text-secondary">{{ '::Call:Direction:' + row.direction | abpLocalization }}</span>
           } @else if (row.direction === CallDirection.Outbound){
-            <i class="fa fa-arrow-up text-brand"></i>
-            <span class="text-brand">{{ '::Call:Direction:' + row.direction | abpLocalization }}</span>
+          <i class="fa fa-arrow-up text-brand"></i>
+          <span class="text-brand">{{ '::Call:Direction:' + row.direction | abpLocalization }}</span>
 
           }
 
@@ -136,46 +91,31 @@
       </ngx-datatable-column>
 
       <!-- PHONE -->
-      <ngx-datatable-column
-        [name]="'::PhoneNumber' | abpLocalization"
-        prop="phoneNumber"
-      >
+      <ngx-datatable-column [name]="'::PhoneNumber' | abpLocalization" prop="phoneNumber">
       </ngx-datatable-column>
 
       <!-- OWNER -->
-<!--      <ngx-datatable-column-->
-<!--        [name]="'::Owner' | abpLocalization"-->
-<!--      >-->
-<!--        <ng-template-->
-<!--          let-row="row"-->
-<!--          ngx-datatable-cell-template-->
-<!--        >-->
-<!--          {{ row.owner?.userName || '-' }}-->
-<!--        </ng-template>-->
-<!--      </ngx-datatable-column>-->
+      <!--      <ngx-datatable-column-->
+      <!--        [name]="'::Owner' | abpLocalization"-->
+      <!--      >-->
+      <!--        <ng-template-->
+      <!--          let-row="row"-->
+      <!--          ngx-datatable-cell-template-->
+      <!--        >-->
+      <!--          {{ row.owner?.userName || '-' }}-->
+      <!--        </ng-template>-->
+      <!--      </ngx-datatable-column>-->
 
       <!-- START -->
-      <ngx-datatable-column
-        [name]="'::StartTime' | abpLocalization"
-        prop="startTime"
-      >
-        <ng-template
-          let-row="row"
-          ngx-datatable-cell-template
-        >
+      <ngx-datatable-column [name]="'::StartTime' | abpLocalization" prop="startTime">
+        <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row.startTime | date:'short' }}
         </ng-template>
       </ngx-datatable-column>
 
       <!-- END -->
-      <ngx-datatable-column
-        [name]="'::EndTime' | abpLocalization"
-        prop="endTime"
-      >
-        <ng-template
-          let-row="row"
-          ngx-datatable-cell-template
-        >
+      <ngx-datatable-column [name]="'::EndTime' | abpLocalization" prop="endTime">
+        <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row.endTime | date:'short' }}
         </ng-template>
       </ngx-datatable-column>

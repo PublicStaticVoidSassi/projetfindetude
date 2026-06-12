@@ -5,6 +5,6 @@ using UniFlowCRM.Opportunities;
 public interface IOpportunityAppService : ICrudAppService<
         OpportunityDto,
         Guid,
-        PagedAndSortedResultRequestDto,
+        OpportunityRequestDto,
         CreateUpdateOpportunityDto>
 { }

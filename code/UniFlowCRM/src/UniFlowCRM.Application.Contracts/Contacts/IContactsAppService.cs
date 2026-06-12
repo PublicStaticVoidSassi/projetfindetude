@@ -7,7 +7,7 @@ using Volo.Abp.Application.Services;
 
 namespace UniFlowCRM.Contacts
 {
-    public interface IContactsAppService : ICrudAppService<ContactDto,Guid,PagedAndSortedResultRequestDto,CreateUpdateContactDto>
+    public interface IContactsAppService : ICrudAppService<ContactDto, Guid, ContactRequestDto, CreateUpdateContactDto>
     {
     }
 }

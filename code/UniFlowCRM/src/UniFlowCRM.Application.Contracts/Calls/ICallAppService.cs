@@ -4,7 +4,7 @@ using Volo.Abp.Application.Services;
 
 namespace UniFlowCRM.Calls;
 
-public interface ICallAppService : ICrudAppService<CallDto,Guid,PagedAndSortedResultRequestDto,CreateUpdateCallDto> 
+public interface ICallAppService : ICrudAppService<CallDto, Guid, CallRequestDto, CreateUpdateCallDto>
 {
-    
+
 }

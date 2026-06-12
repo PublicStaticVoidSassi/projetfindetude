@@ -20,24 +20,30 @@ namespace UniFlowCRM.Contacts
 {
     public class ContactJoined
     {
-        public ContactDto Contact { get; set; }
+        public required ContactDto Contact { get; set; }
         public AccountDto? Account { get; set; }
         public LeadDto? Lead { get; set; }
         public IdentityUserDto? Owner { get; set; }
         public IdentityUserDto? Creator { get; set; }
         public IdentityUserDto? LastModifier { get; set; }
     }
-    public class ContactsAppService: CrudAppService<Contact,ContactDto,Guid,PagedAndSortedResultRequestDto,CreateUpdateContactDto>,IContactsAppService
+    public class ContactsAppService :
+      CrudAppService<
+      Contact,
+      ContactDto,
+      Guid,
+      ContactRequestDto,
+      CreateUpdateContactDto>, IContactsAppService
     {
         private readonly IRepository<IdentityUser, Guid> _userRepository;
         private readonly IRepository<Account, Guid> _accountsRepository;
         private readonly IRepository<Lead, Guid> _leadRepository;
-        public ContactsAppService(IRepository<Contact,Guid> repository,
+        public ContactsAppService(IRepository<Contact, Guid> repository,
         IRepository<IdentityUser, Guid> userRepository,
         IRepository<Account, Guid> accountsRepository,
-        IRepository<Lead, Guid> leadRepository): base(repository)
+        IRepository<Lead, Guid> leadRepository) : base(repository)
         {
-            _userRepository = userRepository; 
+            _userRepository = userRepository;
             _accountsRepository = accountsRepository;
             _leadRepository = leadRepository;
         }
@@ -54,10 +60,10 @@ namespace UniFlowCRM.Contacts
             dto.Creator = joineddto.Creator;
             return dto;
         }
-        public override async Task<PagedResultDto<ContactDto>> GetListAsync(PagedAndSortedResultRequestDto input)
+        public override async Task<PagedResultDto<ContactDto>> GetListAsync(ContactRequestDto input)
         {
             var query = (await GetQueryableAsync(input));
-            var result = (await AsyncExecuter.ToListAsync(query)).Select<ContactJoined,ContactDto>(e =>
+            var result = (await AsyncExecuter.ToListAsync(query)).Select<ContactJoined, ContactDto>(e =>
                 {
                     var result = e.Contact;
                     result.Lead = e.Lead;
@@ -110,70 +116,75 @@ namespace UniFlowCRM.Contacts
                 con.AssignLead(input.LeadID);
             return con;
         }
-        private async Task<IQueryable<ContactJoined>> GetQueryableAsync(PagedAndSortedResultRequestDto input)
+        private async Task<IQueryable<ContactJoined>> GetQueryableAsync(ContactRequestDto input)
         {
-    var contacts = (await Repository.GetQueryableAsync()).OrderBy(input.Sorting ?? "creationTime desc").Skip(input.SkipCount).Take(input.MaxResultCount);
-    var users = await _userRepository.GetQueryableAsync();
-    var accounts = await _accountsRepository.GetQueryableAsync();
-    var leads = await _leadRepository.GetQueryableAsync();
+            var contacts = (await Repository.GetQueryableAsync())
 
-    var query =
-        from contact in contacts
+                        .Where((e) =>
+                            input.filter == null || e.FirstName.ToLower().Contains(input.filter)
+                        )
+              .OrderBy(input.Sorting ?? "creationTime desc").Skip(input.SkipCount).Take(input.MaxResultCount);
+            var users = await _userRepository.GetQueryableAsync();
+            var accounts = await _accountsRepository.GetQueryableAsync();
+            var leads = await _leadRepository.GetQueryableAsync();
 
-        join account in accounts
-            on contact.AccountID equals account.Id
-            into accountJoin
-        from account in accountJoin.DefaultIfEmpty()
+            var query =
+                from contact in contacts
 
-        join lead in leads
-            on contact.LeadID equals lead.Id
-            into leadJoin
-        from lead in leadJoin.DefaultIfEmpty()
+                join account in accounts
+                    on contact.AccountID equals account.Id
+                    into accountJoin
+                from account in accountJoin.DefaultIfEmpty()
 
-        join owner in users
-            on contact.UserID equals owner.Id
-            into ownerJoin
-        from owner in ownerJoin.DefaultIfEmpty()
+                join lead in leads
+                    on contact.LeadID equals lead.Id
+                    into leadJoin
+                from lead in leadJoin.DefaultIfEmpty()
 
-        join creator in users
-            on contact.CreatorId equals creator.Id
-            into creatorJoin
-        from creator in creatorJoin.DefaultIfEmpty()
+                join owner in users
+                    on contact.UserID equals owner.Id
+                    into ownerJoin
+                from owner in ownerJoin.DefaultIfEmpty()
 
-        join modifier in users
-            on contact.LastModifierId equals modifier.Id
-            into modifierJoin
-        from modifier in modifierJoin.DefaultIfEmpty()
-        orderby "contact."+input.Sorting
-        select new ContactJoined
-        {
-            Contact = ObjectMapper.Map<Contact, ContactDto>(contact),
+                join creator in users
+                    on contact.CreatorId equals creator.Id
+                    into creatorJoin
+                from creator in creatorJoin.DefaultIfEmpty()
 
-            Account = account != null
-                ? ObjectMapper.Map<Account, AccountDto>(account)
-                : null,
+                join modifier in users
+                    on contact.LastModifierId equals modifier.Id
+                    into modifierJoin
+                from modifier in modifierJoin.DefaultIfEmpty()
+                    // orderby "contact." + input.Sorting
+                select new ContactJoined
+                {
+                    Contact = ObjectMapper.Map<Contact, ContactDto>(contact),
 
-            Lead = lead != null
-                ? ObjectMapper.Map<Lead, LeadDto>(lead)
-                : null,
+                    Account = account != null
+                        ? ObjectMapper.Map<Account, AccountDto>(account)
+                        : null,
 
-            Owner = owner != null
-                ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(owner)
-                : null,
+                    Lead = lead != null
+                        ? ObjectMapper.Map<Lead, LeadDto>(lead)
+                        : null,
 
-            Creator = creator != null
-                ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator)
-                : null,
+                    Owner = owner != null
+                        ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(owner)
+                        : null,
 
-            LastModifier = modifier != null
-                ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(modifier)
-                : null
-        };
+                    Creator = creator != null
+                        ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator)
+                        : null,
 
-   
+                    LastModifier = modifier != null
+                        ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(modifier)
+                        : null
+                };
 
-    return query;
-}
+
+
+            return query;
+        }
         private async Task<IQueryable<ContactJoined>> GetQueryableAsync(Guid id)
         {
             var contacts = await Repository.GetQueryableAsync();
@@ -240,9 +251,9 @@ namespace UniFlowCRM.Contacts
             Contact con = new Contact(input.Id, input.FirstName);
             Initialize(con, input);
             await Repository.InsertAsync(con);
-            return ObjectMapper.Map<Contact,ContactDto>(con);
+            return ObjectMapper.Map<Contact, ContactDto>(con);
         }
-        public override async Task<ContactDto> UpdateAsync(Guid id,CreateUpdateContactDto input)
+        public override async Task<ContactDto> UpdateAsync(Guid id, CreateUpdateContactDto input)
         {
             Contact con = await Repository.FindAsync(id) ?? throw new EntityNotFoundException();
             Initialize(con, input);

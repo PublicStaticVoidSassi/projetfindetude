@@ -1,4 +1,4 @@
-import type { EntityDto, FullAuditedEntityDto } from '@abp/ng.core';
+import type { EntityDto, FullAuditedEntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 import type { LeadStatus } from './lead-status.enum';
 import type { LeadSource } from './lead-source.enum';
 import type { IdentityUserDto } from '../volo/abp/identity/models';
@@ -31,4 +31,8 @@ export interface LeadDto extends FullAuditedEntityDto<string> {
   modifier?: IdentityUserDto | null;
   account?: AccountDto | null;
   accountID?: string | null;
+}
+
+export interface LeadRequestDto extends PagedAndSortedResultRequestDto {
+  filter?: string | null;
 }

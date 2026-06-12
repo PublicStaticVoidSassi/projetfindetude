@@ -11,6 +11,7 @@ using Volo.Abp.Identity;
 
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Collections.Generic;
 namespace UniFlowCRM.Calls;
 
 public class CallJoined
@@ -38,7 +39,7 @@ public class CallJoined
     }
 }
 
-public class CallsAppService : CrudAppService<Call, CallDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateCallDto>, ICallAppService
+public class CallsAppService : CrudAppService<Call, CallDto, Guid, CallRequestDto, CreateUpdateCallDto>, ICallAppService
 {
     private readonly IRepository<Account, Guid> _accountRepository;
     private readonly IRepository<Lead, Guid> _leadRepository;
@@ -112,7 +113,7 @@ public class CallsAppService : CrudAppService<Call, CallDto, Guid, PagedAndSorte
                 into modifierJoin
             from modifier in modifierJoin.DefaultIfEmpty()
 
-            
+
 
             select new CallJoined
             {
@@ -150,5 +151,21 @@ public class CallsAppService : CrudAppService<Call, CallDto, Guid, PagedAndSorte
         var joined = await AsyncExecuter.FirstAsync(query);
         var res = joined.ToDto();
         return res;
+    }
+    public override async Task<PagedResultDto<CallDto>> GetListAsync(CallRequestDto input)
+    {
+        var calls = (await Repository.GetQueryableAsync())
+          .Where((e) =>
+              input.filter == null || e.Name.ToLower().Contains(input.filter)
+          )
+          .OrderBy(input.Sorting ?? "creationTime desc")
+          .Skip(input.SkipCount)
+          .Take(input.MaxResultCount)
+          .ToList();
+        var count = await Repository.GetCountAsync();
+        return new PagedResultDto<CallDto>(count, ObjectMapper.Map<
+            List<Call>,
+            List<CallDto>>(calls));
+
     }
 }

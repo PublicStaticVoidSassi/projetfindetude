@@ -1,4 +1,4 @@
-import type { EntityDto, FullAuditedEntityDto } from '@abp/ng.core';
+import type { EntityDto, FullAuditedEntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 import type { ContactStatus } from './contact-status.enum';
 import type { ContactSource } from './contact-source.enum';
 import type { IdentityUserDto } from '../volo/abp/identity/models';
@@ -30,6 +30,10 @@ export interface ContactDto extends FullAuditedEntityDto<string> {
   lead?: LeadDto | null;
   accountID?: string | null;
   account?: AccountDto | null;
+}
+
+export interface ContactRequestDto extends PagedAndSortedResultRequestDto {
+  filter?: string | null;
 }
 
 export interface CreateUpdateContactDto extends EntityDto<string> {

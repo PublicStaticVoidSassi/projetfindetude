@@ -26,7 +26,7 @@ public class OpportunitiesAppService : CrudAppService<
                                        Opportunity,
                                        OpportunityDto,
                                        Guid,
-                                       PagedAndSortedResultRequestDto,
+                                       OpportunityRequestDto,
                                        CreateUpdateOpportunityDto>, IOpportunityAppService
 {
     private readonly IRepository<IdentityUser, Guid> _userRepository;
@@ -45,159 +45,162 @@ public class OpportunitiesAppService : CrudAppService<
         _contactRepository = c;
         _accountRepository = a;
     }
-    private async Task<IQueryable<OpportunityJoined>> GetQueryableAsync(PagedAndSortedResultRequestDto input)
+    private async Task<IQueryable<OpportunityJoined>> GetQueryableAsync(OpportunityRequestDto input)
     {
-    var opportunities = (await Repository.GetQueryableAsync())
-            .OrderBy(input.Sorting??"creationTime desc")
-            .Skip(input.SkipCount)
-            .Take(input.MaxResultCount);
+        var opportunities = (await Repository.GetQueryableAsync())
+                .Where((e) =>
+                    input.filter == null || e.Name.ToLower().Contains(input.filter)
+                )
+                .OrderBy(input.Sorting ?? "creationTime desc")
+                .Skip(input.SkipCount)
+                .Take(input.MaxResultCount);
 
-    var users = await _userRepository.GetQueryableAsync();
-    var accounts = await _accountRepository.GetQueryableAsync();
-    var contacts = await _contactRepository.GetQueryableAsync();
-    var leads = await _leadRepository.GetQueryableAsync();
+        var users = await _userRepository.GetQueryableAsync();
+        var accounts = await _accountRepository.GetQueryableAsync();
+        var contacts = await _contactRepository.GetQueryableAsync();
+        var leads = await _leadRepository.GetQueryableAsync();
 
-    var query =
-        from opportunity in opportunities
+        var query =
+            from opportunity in opportunities
 
-        join account in accounts
-            on opportunity.AccountID equals account.Id
-            into accountJoin
-        from account in accountJoin.DefaultIfEmpty()
+            join account in accounts
+                on opportunity.AccountID equals account.Id
+                into accountJoin
+            from account in accountJoin.DefaultIfEmpty()
 
-        join contact in contacts
-            on opportunity.ContactID equals contact.Id
-            into contactJoin
-        from contact in contactJoin.DefaultIfEmpty()
+            join contact in contacts
+                on opportunity.ContactID equals contact.Id
+                into contactJoin
+            from contact in contactJoin.DefaultIfEmpty()
 
-        join lead in leads
-            on opportunity.LeadID equals lead.Id
-            into leadJoin
-        from lead in leadJoin.DefaultIfEmpty()
+            join lead in leads
+                on opportunity.LeadID equals lead.Id
+                into leadJoin
+            from lead in leadJoin.DefaultIfEmpty()
 
-        join owner in users
-            on opportunity.UserID equals owner.Id
-            into ownerJoin
-        from owner in ownerJoin.DefaultIfEmpty()
+            join owner in users
+                on opportunity.UserID equals owner.Id
+                into ownerJoin
+            from owner in ownerJoin.DefaultIfEmpty()
 
-        join creator in users
-            on opportunity.CreatorId equals creator.Id
-            into creatorJoin
-        from creator in creatorJoin.DefaultIfEmpty()
+            join creator in users
+                on opportunity.CreatorId equals creator.Id
+                into creatorJoin
+            from creator in creatorJoin.DefaultIfEmpty()
 
-        join modifier in users
-            on opportunity.LastModifierId equals modifier.Id
-            into modifierJoin
-        from modifier in modifierJoin.DefaultIfEmpty()
-        orderby "opportunity."+input.Sorting
-        select new OpportunityJoined
-        {
-            Opportunity = ObjectMapper.Map<Opportunity, OpportunityDto>(opportunity),
+            join modifier in users
+                on opportunity.LastModifierId equals modifier.Id
+                into modifierJoin
+            from modifier in modifierJoin.DefaultIfEmpty()
+            orderby "opportunity." + input.Sorting
+            select new OpportunityJoined
+            {
+                Opportunity = ObjectMapper.Map<Opportunity, OpportunityDto>(opportunity),
 
-            Account = account != null
-                ? ObjectMapper.Map<Account, AccountDto>(account)
-                : null,
+                Account = account != null
+                    ? ObjectMapper.Map<Account, AccountDto>(account)
+                    : null,
 
-            Contact = contact != null
-                ? ObjectMapper.Map<Contact, ContactDto>(contact)
-                : null,
+                Contact = contact != null
+                    ? ObjectMapper.Map<Contact, ContactDto>(contact)
+                    : null,
 
-            Lead = lead != null
-                ? ObjectMapper.Map<Lead, LeadDto>(lead)
-                : null,
+                Lead = lead != null
+                    ? ObjectMapper.Map<Lead, LeadDto>(lead)
+                    : null,
 
-            Owner = owner != null
-                ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(owner)
-                : null,
+                Owner = owner != null
+                    ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(owner)
+                    : null,
 
-            Creator = creator != null
-                ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator)
-                : null,
+                Creator = creator != null
+                    ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator)
+                    : null,
 
-            LastModifier = modifier != null
-                ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(modifier)
-                : null
-        };
+                LastModifier = modifier != null
+                    ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(modifier)
+                    : null
+            };
 
-    
 
-    return query;
-}
+
+        return query;
+    }
     private async Task<IQueryable<OpportunityJoined>> GetQueryableAsync(Guid id)
-{
-    var opportunities = await Repository.GetQueryableAsync();
+    {
+        var opportunities = await Repository.GetQueryableAsync();
 
-    var users = await _userRepository.GetQueryableAsync();
-    var accounts = await _accountRepository.GetQueryableAsync();
-    var contacts = await _contactRepository.GetQueryableAsync();
-    var leads = await _leadRepository.GetQueryableAsync();
+        var users = await _userRepository.GetQueryableAsync();
+        var accounts = await _accountRepository.GetQueryableAsync();
+        var contacts = await _contactRepository.GetQueryableAsync();
+        var leads = await _leadRepository.GetQueryableAsync();
 
-    var query =
-        from opportunity in opportunities
-        where opportunity.Id == id
-        join account in accounts
-            on opportunity.AccountID equals account.Id
-            into accountJoin
-        from account in accountJoin.DefaultIfEmpty()
+        var query =
+            from opportunity in opportunities
+            where opportunity.Id == id
+            join account in accounts
+                on opportunity.AccountID equals account.Id
+                into accountJoin
+            from account in accountJoin.DefaultIfEmpty()
 
-        join contact in contacts
-            on opportunity.ContactID equals contact.Id
-            into contactJoin
-        from contact in contactJoin.DefaultIfEmpty()
+            join contact in contacts
+                on opportunity.ContactID equals contact.Id
+                into contactJoin
+            from contact in contactJoin.DefaultIfEmpty()
 
-        join lead in leads
-            on opportunity.LeadID equals lead.Id
-            into leadJoin
-        from lead in leadJoin.DefaultIfEmpty()
+            join lead in leads
+                on opportunity.LeadID equals lead.Id
+                into leadJoin
+            from lead in leadJoin.DefaultIfEmpty()
 
-        join owner in users
-            on opportunity.UserID equals owner.Id
-            into ownerJoin
-        from owner in ownerJoin.DefaultIfEmpty()
+            join owner in users
+                on opportunity.UserID equals owner.Id
+                into ownerJoin
+            from owner in ownerJoin.DefaultIfEmpty()
 
-        join creator in users
-            on opportunity.CreatorId equals creator.Id
-            into creatorJoin
-        from creator in creatorJoin.DefaultIfEmpty()
+            join creator in users
+                on opportunity.CreatorId equals creator.Id
+                into creatorJoin
+            from creator in creatorJoin.DefaultIfEmpty()
 
-        join modifier in users
-            on opportunity.LastModifierId equals modifier.Id
-            into modifierJoin
-        from modifier in modifierJoin.DefaultIfEmpty()
-        
-        select new OpportunityJoined
-        {
-            Opportunity = ObjectMapper.Map<Opportunity, OpportunityDto>(opportunity),
+            join modifier in users
+                on opportunity.LastModifierId equals modifier.Id
+                into modifierJoin
+            from modifier in modifierJoin.DefaultIfEmpty()
 
-            Account = account != null
-                ? ObjectMapper.Map<Account, AccountDto>(account)
-                : null,
+            select new OpportunityJoined
+            {
+                Opportunity = ObjectMapper.Map<Opportunity, OpportunityDto>(opportunity),
 
-            Contact = contact != null
-                ? ObjectMapper.Map<Contact, ContactDto>(contact)
-                : null,
+                Account = account != null
+                    ? ObjectMapper.Map<Account, AccountDto>(account)
+                    : null,
 
-            Lead = lead != null
-                ? ObjectMapper.Map<Lead, LeadDto>(lead)
-                : null,
+                Contact = contact != null
+                    ? ObjectMapper.Map<Contact, ContactDto>(contact)
+                    : null,
 
-            Owner = owner != null
-                ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(owner)
-                : null,
+                Lead = lead != null
+                    ? ObjectMapper.Map<Lead, LeadDto>(lead)
+                    : null,
 
-            Creator = creator != null
-                ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator)
-                : null,
+                Owner = owner != null
+                    ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(owner)
+                    : null,
 
-            LastModifier = modifier != null
-                ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(modifier)
-                : null
-        };
+                Creator = creator != null
+                    ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator)
+                    : null,
 
-    
+                LastModifier = modifier != null
+                    ? ObjectMapper.Map<IdentityUser, IdentityUserDto>(modifier)
+                    : null
+            };
 
-    return query;
-}
+
+
+        return query;
+    }
     private Opportunity Initialize(Opportunity opportunity, CreateUpdateOpportunityDto input)
     {
         opportunity.SetName(input.Name!);
@@ -270,7 +273,7 @@ public class OpportunitiesAppService : CrudAppService<
         dto.Modifier = res.LastModifier;
         return dto;
     }
-    
+
     /*private async Task<OpportunityDto> AddNavigationProperties(OpportunityDto dto)
     {
         if (dto.AccountID is not null)
@@ -285,7 +288,7 @@ public class OpportunitiesAppService : CrudAppService<
         return dto;
     }*/
 
-    public override async Task<PagedResultDto<OpportunityDto>> GetListAsync(PagedAndSortedResultRequestDto input)
+    public override async Task<PagedResultDto<OpportunityDto>> GetListAsync(OpportunityRequestDto input)
     {
         var query = (await GetQueryableAsync(input));
         var res = (await AsyncExecuter.ToListAsync(query)).Select<OpportunityJoined, OpportunityDto>(res =>
@@ -299,7 +302,7 @@ public class OpportunitiesAppService : CrudAppService<
             dto.Modifier = res.LastModifier;
             return dto;
         }).ToList();
-            var count = await Repository.GetCountAsync();
+        var count = await Repository.GetCountAsync();
 
 
         return new PagedResultDto<OpportunityDto>(
@@ -308,7 +311,7 @@ public class OpportunitiesAppService : CrudAppService<
         );
     }
 
-    public async Task<OpportunityDto> CloseAsync(Guid id,bool won)
+    public async Task<OpportunityDto> CloseAsync(Guid id, bool won)
     {
         var opp = await Repository.GetAsync(id);
         if (won)
@@ -320,6 +323,6 @@ public class OpportunitiesAppService : CrudAppService<
             opp.CloseLost();
         }
         await Repository.UpdateAsync(opp);
-        return ObjectMapper.Map<Opportunity,OpportunityDto>(opp);
+        return ObjectMapper.Map<Opportunity, OpportunityDto>(opp);
     }
 }

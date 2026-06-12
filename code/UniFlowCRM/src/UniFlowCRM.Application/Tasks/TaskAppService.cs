@@ -37,7 +37,7 @@ public class TaskJoined
         return res;
     }
 }
-public class TasksAppService : CrudAppService<Task, TaskDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateTaskDto>, ITaskAppService
+public class TasksAppService : CrudAppService<Task, TaskDto, Guid, TaskRequestDto, CreateUpdateTaskDto>, ITaskAppService
 {
     private readonly IRepository<Account, Guid> _accountRepository;
     private readonly IRepository<Lead, Guid> _leadRepository;

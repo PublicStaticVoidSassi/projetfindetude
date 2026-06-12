@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Dynamic.Core;   
+using System.Linq.Dynamic.Core;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
@@ -18,14 +18,14 @@ namespace UniFlowCRM.Leads
 {
     public class LeadJoined
     {
-        public LeadDto Lead {get;set;}
-        public AccountDto? Account {get;set;}
-        public IdentityUserDto? Owner {get;set;}
-        public IdentityUserDto? Creator {get;set;}
-        public IdentityUserDto? LastModifier {get;set;}
+        public LeadDto Lead { get; set; }
+        public AccountDto? Account { get; set; }
+        public IdentityUserDto? Owner { get; set; }
+        public IdentityUserDto? Creator { get; set; }
+        public IdentityUserDto? LastModifier { get; set; }
     }
     public class LeadsAppService :
-        CrudAppService<Lead, LeadDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateLeadDto>
+        CrudAppService<Lead, LeadDto, Guid, LeadRequestDto, CreateUpdateLeadDto>
         , ILeadsAppService
     {
         private readonly IRepository<IdentityUser, Guid> _userRepository;
@@ -73,19 +73,22 @@ namespace UniFlowCRM.Leads
                 from modifier in modifierJoin.DefaultIfEmpty()
                 select new LeadJoined
                 {
-                    Lead = ObjectMapper.Map<Lead,LeadDto>(lead),
-                    Account = ObjectMapper.Map<Account,AccountDto>(account),
-                    Owner = ObjectMapper.Map<IdentityUser,IdentityUserDto>(owner),
-                    Creator = ObjectMapper.Map<IdentityUser,IdentityUserDto>(creator),
-                    LastModifier = ObjectMapper.Map<IdentityUser,IdentityUserDto>(modifier)
+                    Lead = ObjectMapper.Map<Lead, LeadDto>(lead),
+                    Account = ObjectMapper.Map<Account, AccountDto>(account),
+                    Owner = ObjectMapper.Map<IdentityUser, IdentityUserDto>(owner),
+                    Creator = ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator),
+                    LastModifier = ObjectMapper.Map<IdentityUser, IdentityUserDto>(modifier)
                 };
 
             return query;
         }
-        private async Task<IQueryable<LeadJoined>> GetQueryableAsync(PagedAndSortedResultRequestDto input)
+        private async Task<IQueryable<LeadJoined>> GetQueryableAsync(LeadRequestDto input)
         {
             var leads = (await Repository.GetQueryableAsync())
-                .OrderBy(input.Sorting??"creationTime desc")
+                .OrderBy(input.Sorting ?? "creationTime desc")
+                .Where(e =>
+                    input.filter == null || e.FirstName.ToLower().Contains(input.filter)
+                )
                 .Skip(input.SkipCount).
                 Take(input.MaxResultCount);
             var users = await _userRepository.GetQueryableAsync();
@@ -116,11 +119,11 @@ namespace UniFlowCRM.Leads
                 orderby input.Sorting
                 select new LeadJoined
                 {
-                    Lead = ObjectMapper.Map<Lead,LeadDto>(lead),
-                    Account = ObjectMapper.Map<Account,AccountDto>(account),
-                    Owner = ObjectMapper.Map<IdentityUser,IdentityUserDto>(owner),
-                    Creator = ObjectMapper.Map<IdentityUser,IdentityUserDto>(creator),
-                    LastModifier = ObjectMapper.Map<IdentityUser,IdentityUserDto>(modifier)
+                    Lead = ObjectMapper.Map<Lead, LeadDto>(lead),
+                    Account = ObjectMapper.Map<Account, AccountDto>(account),
+                    Owner = ObjectMapper.Map<IdentityUser, IdentityUserDto>(owner),
+                    Creator = ObjectMapper.Map<IdentityUser, IdentityUserDto>(creator),
+                    LastModifier = ObjectMapper.Map<IdentityUser, IdentityUserDto>(modifier)
                 };
 
             return query;
@@ -138,10 +141,10 @@ namespace UniFlowCRM.Leads
             return dto;
         }
 
-        public override async Task<PagedResultDto<LeadDto>> GetListAsync(PagedAndSortedResultRequestDto input)
+        public override async Task<PagedResultDto<LeadDto>> GetListAsync(LeadRequestDto input)
         {
             var query = (await GetQueryableAsync(input));
-            var result = (await AsyncExecuter.ToListAsync(query)).Select<LeadJoined,LeadDto>(e =>
+            var result = (await AsyncExecuter.ToListAsync(query)).Select<LeadJoined, LeadDto>(e =>
                 {
                     var result = e.Lead;
                     result.Account = e.Account;
@@ -157,7 +160,7 @@ namespace UniFlowCRM.Leads
                 result
             );
         }
-        
+
         private Lead Initialize(Lead lead, CreateUpdateLeadDto input)
         {
             lead.SetFirstName(input.FirstName);

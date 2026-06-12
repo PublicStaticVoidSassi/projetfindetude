@@ -1,6 +1,6 @@
 import type { CreateUpdateOpportunityDto, OpportunityDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
-import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
+import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable, inject } from '@angular/core';
 
 @Injectable({
@@ -45,11 +45,11 @@ export class OpportunitiesService {
     { apiName: this.apiName,...config });
   
 
-  getList = (input: PagedAndSortedResultRequestDto, config?: Partial<Rest.Config>) =>
+  getList = (input: OpportunityRequestDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<OpportunityDto>>({
       method: 'GET',
       url: '/api/app/opportunities',
-      params: { sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+      params: { filter: input.filter, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName,...config });
   

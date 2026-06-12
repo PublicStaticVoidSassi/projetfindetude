@@ -44,7 +44,7 @@ public class EmailsAppService :
   CrudAppService<Email,
   EmailDto,
   Guid,
-  PagedAndSortedResultRequestDto,
+  EmailRequestDto,
   CreateUpdateEmailDto
   >, IEmailAppService
 {
@@ -78,16 +78,23 @@ public class EmailsAppService :
 
     public async Task SendEmailAsync(Guid id, CancellationToken ct = default)
     {
-        Email email = await Repository.GetAsync(id, cancellationToken:ct);
+        Email email = await Repository.GetAsync(id, cancellationToken: ct);
         await _emailManager.SendEmailAsync(email);
     }
 
 
 
 
-    public override async Task<PagedResultDto<EmailDto>> GetListAsync(PagedAndSortedResultRequestDto input)
+    public override async Task<PagedResultDto<EmailDto>> GetListAsync(EmailRequestDto input)
     {
-        var emails = (await Repository.GetQueryableAsync()).OrderBy(input.Sorting ?? "creationtime desc").Skip(input.SkipCount).Take(input.MaxResultCount);
+        var emails = (await Repository.GetQueryableAsync())
+
+                .Where((e) =>
+                    input.filter == null || e.Subject.ToLower().Contains(input.filter)
+                )
+          .OrderBy(input.Sorting ?? "creationtime desc")
+          .Skip(input.SkipCount)
+          .Take(input.MaxResultCount);
         var leads = await LeadsRepository.GetQueryableAsync();
         var users = await UsersRepository.GetQueryableAsync();
         var accounts = await AccountsRepository.GetQueryableAsync();
@@ -164,13 +171,13 @@ public class EmailsAppService :
                             ? null
                             : ObjectMapper.Map<IdentityUser, IdentityUserDto>(modifier),
                     };
-        var dto = (await AsyncExecuter.ToListAsync(query)).Select(e=>e.ToDto()).ToList();
+        var dto = (await AsyncExecuter.ToListAsync(query)).Select(e => e.ToDto()).ToList();
         var count = await Repository.GetCountAsync();
         return new PagedResultDto<EmailDto>(count, dto);
     }
     public override async Task<EmailDto> GetAsync(Guid id)
     {
-        var emails  = (await Repository.GetQueryableAsync()).Where(email => email.Id == id);
+        var emails = (await Repository.GetQueryableAsync()).Where(email => email.Id == id);
         var leads = await LeadsRepository.GetQueryableAsync();
         var users = await UsersRepository.GetQueryableAsync();
         var accounts = await AccountsRepository.GetQueryableAsync();

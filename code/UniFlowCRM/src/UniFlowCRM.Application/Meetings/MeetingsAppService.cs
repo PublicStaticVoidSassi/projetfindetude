@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
@@ -41,7 +42,7 @@ public class MeetingJoined
 }
 public class MeetingsAppService :
 
-  CrudAppService<Meeting, MeetingDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateMeetingDto>,
+  CrudAppService<Meeting, MeetingDto, Guid, MeetingRequestDto, CreateUpdateMeetingDto>,
   IMeetingAppService
 {
     private readonly IRepository<Account, Guid> _accountRepository;
@@ -62,6 +63,19 @@ public class MeetingsAppService :
         _contactRepository = contactRepository;
         _opportunityRepository = opportunityRepository;
         _userRepository = userRepository;
+    }
+    public override async Task<PagedResultDto<MeetingDto>> GetListAsync(MeetingRequestDto input)
+    {
+        var meetings = (await Repository.GetQueryableAsync())
+          .Where(m => input.filter == null || m.Name.ToLower().Contains(input.filter))
+          .OrderBy(input.Sorting ?? "creationTime desc")
+          .Skip(input.SkipCount)
+          .Take(input.MaxResultCount)
+          .ToList();
+        // .Select(m => ObjectMapper.Map<Meeting, MeetingDto>(m)).ToList();
+        var dtos = ObjectMapper.Map<List<Meeting>, List<MeetingDto>>(meetings);
+        var count = await Repository.GetCountAsync();
+        return new PagedResultDto<MeetingDto>(count, dtos);
     }
     public override async Task<MeetingDto> GetAsync(Guid id)
     {
