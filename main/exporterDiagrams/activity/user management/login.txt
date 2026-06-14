@@ -1,0 +1,31 @@
+@startuml
+title Connexion
+
+|Utilisateur|
+start
+:Saisir les identifiants;
+:Envoyer la demande de connexion;
+
+|Backend|
+:Vérifier les identifiants;
+
+if (Identifiants valides ?) then (Oui)
+
+    |Backend|
+    :Créer la session;
+
+    |Frontend|
+    :Accorder l'accès;
+
+    stop
+
+else (Non)
+
+    |Frontend|
+    :Afficher message d'erreur;
+
+    stop
+
+endif
+
+@enduml

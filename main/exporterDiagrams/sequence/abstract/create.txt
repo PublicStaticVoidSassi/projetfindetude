@@ -1,0 +1,25 @@
+@startuml
+title CRUD — Créer
+participant Utilisateur
+participant Frontend
+participant backend
+participant BDD
+
+Utilisateur -> Frontend: Saisir et envoyer
+Frontend -> backend: Demande de création
+activate backend
+backend -> backend: Vérifier la demande
+alt Succès
+  backend -> BDD: Enregistrer
+  activate BDD
+  BDD --> backend: Enregistré
+  deactivate BDD
+  backend --> Frontend: Confirmation
+  deactivate backend
+  Frontend --> Utilisateur: Afficher confirmation
+else Échec
+  backend --> Frontend: Refus / impossible de traiter
+  deactivate backend
+  Frontend --> Utilisateur: Afficher erreur
+end
+@enduml

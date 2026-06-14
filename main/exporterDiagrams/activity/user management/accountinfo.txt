@@ -1,0 +1,25 @@
+@startuml
+title Consulter le compte
+
+|Utilisateur|
+start
+:Accéder au profil;
+
+|Frontend|
+:Demander les informations du compte;
+
+|Backend|
+:Charger les données du compte;
+
+|BDD|
+:Récupérer les informations;
+
+|Backend|
+:Préparer les données;
+
+|Frontend|
+:Afficher les informations;
+
+stop
+
+@enduml

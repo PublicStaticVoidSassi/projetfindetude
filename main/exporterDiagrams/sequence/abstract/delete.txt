@@ -1,0 +1,26 @@
+@startuml
+title CRUD — Supprimer
+participant Utilisateur
+participant Frontend
+participant Backend
+participant BDD
+
+Utilisateur -> Frontend: Demander la suppression
+Frontend -> Utilisateur: Demander confirmation
+Frontend -> Backend: Confirmer la suppression
+activate Backend
+Backend -> Backend: Vérifier les règles
+alt Succès
+  Backend -> BDD: Supprimer
+  activate BDD
+  BDD --> Backend: Suppression effectuée
+  deactivate BDD
+  Backend --> Frontend: Confirmation
+  deactivate Backend
+  Frontend --> Utilisateur: Retirer l’élément
+else Échec
+  Backend --> Frontend: Refus / impossible de traiter
+  deactivate Backend
+  Frontend --> Utilisateur: Afficher erreur
+end
+@enduml

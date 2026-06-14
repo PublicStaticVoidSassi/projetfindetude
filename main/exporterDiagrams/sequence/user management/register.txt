@@ -1,0 +1,22 @@
+@startuml
+title CRUD — Inscription
+
+participant Utilisateur
+participant Backend
+participant BDD
+
+Utilisateur -> Backend: Soumettre les informations
+activate Backend
+
+Backend -> Backend: Vérifier les données
+
+Backend -> BDD: Créer le compte
+activate BDD
+
+BDD --> Backend: Compte créé
+deactivate BDD
+
+Backend --> Utilisateur: Confirmation
+deactivate Backend
+
+@enduml

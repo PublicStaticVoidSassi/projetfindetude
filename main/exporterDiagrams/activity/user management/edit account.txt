@@ -1,0 +1,37 @@
+@startuml
+title Modifier le compte
+
+|Utilisateur|
+start
+:Modifier les informations;
+:Envoyer les modifications;
+
+|Frontend|
+:Transmettre la mise à jour;
+
+|Backend|
+:Vérifier les données;
+
+if (Données valides ?) then (Oui)
+
+    |BDD|
+    :Mettre à jour le compte;
+
+    |Backend|
+    :Confirmer la mise à jour;
+
+    |Frontend|
+    :Rafraîchir l'affichage;
+
+    stop
+
+else (Non)
+
+    |Frontend|
+    :Afficher erreurs;
+
+    stop
+
+endif
+
+@enduml

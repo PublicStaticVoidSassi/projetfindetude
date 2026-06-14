@@ -1,0 +1,39 @@
+@startuml
+title CRUD — Supprimer
+
+|Utilisateur|
+start
+:Demander la suppression;
+
+|Frontend|
+:Demander confirmation;
+
+|Utilisateur|
+:Confirmer la suppression;
+
+|Backend|
+:Vérifier les règles;
+
+if (Suppression autorisée ?) then (Oui)
+
+    |BDD|
+    :Supprimer les données;
+
+    |Backend|
+    :Confirmer la suppression;
+
+    |Frontend|
+    :Retirer l'élément de l'affichage;
+
+    stop
+
+else (Non)
+
+    |Frontend|
+    :Afficher une erreur;
+
+    stop
+
+endif
+
+@enduml

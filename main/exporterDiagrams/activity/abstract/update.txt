@@ -1,0 +1,36 @@
+@startuml
+title CRUD — Mettre à jour
+
+|Utilisateur|
+start
+:Modifier les informations;
+
+|Frontend|
+:Envoyer les modifications;
+
+|Backend|
+:Vérifier la demande;
+
+if (Demande valide ?) then (Oui)
+
+    |BDD|
+    :Mettre à jour les données;
+
+    |Backend|
+    :Confirmer la mise à jour;
+
+    |Frontend|
+    :Rafraîchir l'affichage;
+
+    stop
+
+else (Non)
+
+    |Frontend|
+    :Afficher une erreur;
+
+    stop
+
+endif
+
+@enduml

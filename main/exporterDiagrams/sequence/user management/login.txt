@@ -1,0 +1,20 @@
+@startuml
+title CRUD — Connexion
+
+participant Utilisateur
+participant Backend
+participant BDD
+
+Utilisateur -> Backend: Soumettre les identifiants
+activate Backend
+
+Backend -> BDD: Vérifier les identifiants
+activate BDD
+
+BDD --> Backend: Utilisateur authentifié
+deactivate BDD
+
+Backend --> Utilisateur: Accès autorisé
+deactivate Backend
+
+@enduml

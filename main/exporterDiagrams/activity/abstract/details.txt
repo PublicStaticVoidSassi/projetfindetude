@@ -1,0 +1,36 @@
+@startuml
+title CRUD — Détails
+
+|Utilisateur|
+start
+:Consulter l'élément;
+
+|Frontend|
+:Demander les détails;
+
+|Backend|
+:Vérifier la demande;
+
+if (Accès autorisé ?) then (Oui)
+
+    |BDD|
+    :Récupérer les informations;
+
+    |Backend|
+    :Préparer les données;
+
+    |Frontend|
+    :Afficher les détails;
+
+    stop
+
+else (Non)
+
+    |Frontend|
+    :Afficher une erreur;
+
+    stop
+
+endif
+
+@enduml

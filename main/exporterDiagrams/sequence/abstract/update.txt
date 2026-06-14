@@ -1,0 +1,25 @@
+@startuml
+title CRUD — Mettre à jour
+participant Utilisateur
+participant Frontend
+participant Backend
+participant BDD
+
+Utilisateur -> Frontend: Modifier et enregistrer
+Frontend -> Backend: Demande de mise à jour
+activate Backend
+Backend -> Backend: Vérifier la demande
+alt Succès
+  Backend -> BDD: Mettre à jour
+  activate BDD
+  BDD --> Backend: Mise à jour effectuée
+  deactivate BDD
+  Backend --> Frontend: Confirmation
+  deactivate Backend
+  Frontend --> Utilisateur: Rafraîchir l’affichage
+else Échec
+  Backend --> Frontend: Refus / impossible de traiter
+  deactivate Backend
+  Frontend --> Utilisateur: Afficher erreur
+end
+@enduml

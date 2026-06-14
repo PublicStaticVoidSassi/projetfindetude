@@ -1,0 +1,28 @@
+@startuml
+title CRUD — Liste paginée
+
+|Utilisateur|
+start
+:Consulter la liste;
+
+|Frontend|
+:Saisir les paramètres
+(page, taille, recherche, filtres);
+
+:Envoyer la demande;
+
+|Backend|
+:Vérifier les paramètres;
+
+|BDD|
+:Charger les données;
+
+|Backend|
+:Préparer les résultats paginés;
+
+|Frontend|
+:Afficher les résultats;
+
+stop
+
+@enduml

@@ -1,0 +1,39 @@
+@startuml
+title Inscription
+
+|Utilisateur|
+start
+:Saisir les informations;
+:Envoyer la demande d'inscription;
+
+|Backend|
+:Recevoir la demande;
+:Vérifier les données;
+
+if (Données valides ?) then (Oui)
+
+    |BDD|
+    :Créer le compte;
+
+    |Backend|
+    :Générer la confirmation;
+    :Préparer la réponse de succès;
+
+    |Backend|
+    :Afficher la confirmation;
+
+    stop
+
+else (Non)
+
+    |Backend|
+    :Préparer les erreurs;
+
+    |Backend|
+    :Afficher les erreurs;
+
+    stop
+
+endif
+
+@enduml

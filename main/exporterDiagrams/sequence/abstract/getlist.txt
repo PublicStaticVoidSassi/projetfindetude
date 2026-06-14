@@ -1,0 +1,27 @@
+@startuml
+title CRUD — Liste paginée
+
+participant Utilisateur
+participant Frontend
+participant Backend
+participant BDD
+
+Utilisateur -> Frontend: Consulter la liste
+
+Frontend -> Backend: Demander les données\n(page, taille, recherche, filtres)
+activate Backend
+
+Backend -> Backend: Vérifier les paramètres
+
+Backend -> BDD: Charger les données
+activate BDD
+
+BDD --> Backend: Éléments, total,\nnombre de pages
+deactivate BDD
+
+Backend --> Frontend: Résultats paginés
+deactivate Backend
+
+Frontend --> Utilisateur: Afficher les résultats
+
+@enduml

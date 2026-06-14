@@ -1,0 +1,37 @@
+@startuml
+title CRUD — Créer
+
+|Utilisateur|
+start
+:Saisir les informations;
+:Envoyer la demande;
+
+|Frontend|
+:Transmettre la demande;
+
+|Backend|
+:Vérifier la demande;
+
+if (Demande valide ?) then (Oui)
+
+    |BDD|
+    :Enregistrer les données;
+
+    |Backend|
+    :Confirmer la création;
+
+    |Frontend|
+    :Afficher la confirmation;
+
+    stop
+
+else (Non)
+
+    |Frontend|
+    :Afficher une erreur;
+
+    stop
+
+endif
+
+@enduml

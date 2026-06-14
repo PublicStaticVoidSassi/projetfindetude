@@ -1,0 +1,26 @@
+@startuml
+title CRUD — Modifier le compte
+
+participant Utilisateur
+participant Frontend
+participant Backend
+participant BDD
+
+Utilisateur -> Frontend: Modifier les informations
+Frontend -> Backend: Enregistrer les modifications
+activate Backend
+
+Backend -> Backend: Vérifier les données
+
+Backend -> BDD: Mettre à jour le compte
+activate BDD
+
+BDD --> Backend: Mise à jour effectuée
+deactivate BDD
+
+Backend --> Frontend: Confirmation
+deactivate Backend
+
+Frontend --> Utilisateur: Afficher les modifications
+
+@enduml
