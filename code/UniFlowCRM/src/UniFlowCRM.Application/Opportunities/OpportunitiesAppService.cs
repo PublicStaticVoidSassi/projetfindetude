@@ -218,8 +218,8 @@ public class OpportunitiesAppService : CrudAppService<
         opportunity.SetStage(input.Stage!.Value);
 
         opportunity.SetType(input.Type!.Value);
-
         //opportunity.SetSaleStage(input.SaleStage!.Value);
+
 
         opportunity.SetProbability(input.Probability);
 
