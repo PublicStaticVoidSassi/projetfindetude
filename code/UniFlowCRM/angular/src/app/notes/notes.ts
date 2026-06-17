@@ -1,8 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import {
+  CoreModule,
   ListService,
   PagedResultDto,
-  PermissionDirective,
+  PermissionDirective
 } from '@abp/ng.core';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -29,7 +30,8 @@ import { NotesService, NoteDto, noteTypeOptions } from '../proxy/notes';
     NgxDatatableDefaultDirective,
     LocalizationPipe,
     PermissionDirective,
-    RouterLink
+    RouterLink,
+    CoreModule
   ],
   templateUrl: './notes.html',
   styleUrl: './notes.scss',

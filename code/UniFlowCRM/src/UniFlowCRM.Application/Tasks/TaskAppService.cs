@@ -1,6 +1,8 @@
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Calls;
@@ -57,6 +59,20 @@ public class TasksAppService : CrudAppService<Task, TaskDto, Guid, TaskRequestDt
         _contactRepository = contactRepository;
         _opportunityRepository = opportunityRepository;
         _userRepository = userRepository;
+    }
+    public override async Task<PagedResultDto<TaskDto>> GetListAsync(TaskRequestDto input)
+    {
+        List<Task> dtos = (await Repository.GetQueryableAsync())
+            .OrderBy(input.Sorting ?? "creationTime desc")
+            .Where((e) =>
+                (string.IsNullOrEmpty(input.filter)) ||
+                (e.Name.ToLower().Contains(input.filter))
+            )
+            .Skip(input.SkipCount)
+            .Take(input.MaxResultCount)
+            .ToList();
+        var count = await Repository.GetCountAsync();
+        return new PagedResultDto<TaskDto>(count, ObjectMapper.Map<List<Task>, List<TaskDto>>(dtos));
     }
     public override Task<TaskDto> CreateAsync(CreateUpdateTaskDto input)
     {

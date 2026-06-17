@@ -11,12 +11,18 @@
     </div>
 
     <div class="card-body">
+      <div class="row">
+        <div class="col-4">
+          <input type="text" class="form-control" (ngModelChange)="search()"  [(ngModel)]="searchName" [placeholder]="'::Lead'|abpLocalization"/>
+        </div>
+      </div>
       <ngx-datatable
         [rows]="leads.items"
         [count]="leads.totalCount"
         [list]="List"
         default
       >
+
 
         <ngx-datatable-column [sortable]="false">
           <ng-template ngx-datatable-cell-template let-row="row">

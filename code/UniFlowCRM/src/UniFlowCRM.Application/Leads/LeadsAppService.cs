@@ -87,7 +87,9 @@ namespace UniFlowCRM.Leads
             var leads = (await Repository.GetQueryableAsync())
                 .OrderBy(input.Sorting ?? "creationTime desc")
                 .Where(e =>
-                    input.filter == null || e.FirstName.ToLower().Contains(input.filter)
+                    (input.filter == null) ||
+                    e.FirstName.ToLower().Contains(input.filter) ||
+                    (!string.IsNullOrEmpty(e.LastName) && e.FirstName.ToLower().Contains(input.filter))
                 )
                 .Skip(input.SkipCount).
                 Take(input.MaxResultCount);

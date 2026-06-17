@@ -1,4 +1,4 @@
-import { ListService, PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
+import { CoreModule, ListService, PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { EmailsService } from '../proxy/emails/emails.service';
 import { Confirmation, ConfirmationService, ToasterService, ThemeSharedModule } from '@abp/ng.theme.shared';
@@ -12,7 +12,7 @@ import { ReturnBtn } from '../shared/return-btn/return-btn';
 @Component({
   selector: 'app-emails',
   standalone: true,
-  imports: [CommonModule, LocalizationPipe, ThemeSharedModule, NgbDropdownModule, ReturnBtn],
+  imports: [CommonModule, LocalizationPipe, ThemeSharedModule, NgbDropdownModule, ReturnBtn, CoreModule],
   providers: [ListService],
   templateUrl: './emails.component.html',
 })
@@ -54,4 +54,26 @@ export class EmailsComponent implements OnInit {
       }
     });
   }
+
+  // search
+  searchName: string | null = null;
+  loading = false;
+  lastQuery : any = {skipCount:0,maxResultCount:10};
+
+  async search(){
+    if (this.loading){
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    this.loading = true;
+    console.log(this.lastQuery , this.searchName);
+    this.emailService.getList(
+      { ...this.lastQuery , filter: this.searchName } )
+      .subscribe(accounts => {this.items=accounts;this.loading = false;});
+
+  }
+
+
+
 }

@@ -2,6 +2,7 @@ import type { CallDto, CreateUpdateCallDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable, inject } from '@angular/core';
+import { LeadRequestDto } from '../leads';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { Injectable, inject } from '@angular/core';
 export class CallsService {
   private restService = inject(RestService);
   apiName = 'Default';
-  
+
 
   create = (input: CreateUpdateCallDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, CallDto>({
@@ -18,7 +19,7 @@ export class CallsService {
       body: input,
     },
     { apiName: this.apiName,...config });
-  
+
 
   delete = (id: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
@@ -26,7 +27,7 @@ export class CallsService {
       url: `/api/app/calls/${id}`,
     },
     { apiName: this.apiName,...config });
-  
+
 
   get = (id: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, CallDto>({
@@ -34,16 +35,16 @@ export class CallsService {
       url: `/api/app/calls/${id}`,
     },
     { apiName: this.apiName,...config });
-  
 
-  getList = (input: CallRequestDto, config?: Partial<Rest.Config>) =>
+
+  getList = (input: LeadRequestDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<CallDto>>({
       method: 'GET',
       url: '/api/app/calls',
       params: { filter: input.filter, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName,...config });
-  
+
 
   update = (id: string, input: CreateUpdateCallDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, CallDto>({

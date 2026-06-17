@@ -119,10 +119,12 @@ namespace UniFlowCRM.Contacts
         private async Task<IQueryable<ContactJoined>> GetQueryableAsync(ContactRequestDto input)
         {
             var contacts = (await Repository.GetQueryableAsync())
-
-                        .Where((e) =>
-                            input.filter == null || e.FirstName.ToLower().Contains(input.filter)
-                        )
+                    .Where(e =>
+                    (input.filter == null) ||
+                    e.FirstName.ToLower().Contains(input.filter) ||
+                    (!string.IsNullOrEmpty(e.MiddleName) && e.MiddleName.ToLower().Contains(input.filter)) ||
+                    (!string.IsNullOrEmpty(e.LastName) && e.LastName.ToLower().Contains(input.filter))
+                )
               .OrderBy(input.Sorting ?? "creationTime desc").Skip(input.SkipCount).Take(input.MaxResultCount);
             var users = await _userRepository.GetQueryableAsync();
             var accounts = await _accountsRepository.GetQueryableAsync();

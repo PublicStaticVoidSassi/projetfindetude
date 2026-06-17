@@ -1,4 +1,4 @@
-import { ListService, PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
+import { CoreModule, ListService, PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Component, inject, OnInit } from '@angular/core';
 import { MeetingsService } from '../proxy/meetings/meetings.service';
 import { MeetingDto } from '../proxy/meetings/models';
@@ -16,7 +16,7 @@ import {
 @Component({
   selector: 'app-meetings',
   standalone: true,
-  imports: [LocalizationPipe, CommonModule, ThemeSharedModule, RouterLink, NgbDropdown, NgbDropdownButtonItem, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle],
+  imports: [LocalizationPipe, CommonModule, ThemeSharedModule, RouterLink, NgbDropdown, NgbDropdownButtonItem, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle, CoreModule],
   templateUrl: './meetings.html',
   styleUrl: './meetings.scss',
   providers: [ListService],
@@ -51,4 +51,25 @@ export class Meetings implements OnInit {
       });
     }
   }
+  // search
+  searchName: string | null = null;
+  loading = false;
+  lastQuery : any = {skipCount:0,maxResultCount:10};
+
+  async search(){
+    if (this.loading){
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    this.loading = true;
+    console.log(this.lastQuery , this.searchName);
+    this.meetingService.getList(
+      { ...this.lastQuery , filter: this.searchName } )
+      .subscribe(accounts => {this.items=accounts;this.loading = false;});
+
+  }
+
+
+
 }

@@ -2,6 +2,7 @@ import type { CreateUpdateEmailDto, EmailDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable, inject } from '@angular/core';
+import { LeadRequestDto } from '../leads';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { Injectable, inject } from '@angular/core';
 export class EmailsService {
   private restService = inject(RestService);
   apiName = 'Default';
-  
+
 
   create = (input: CreateUpdateEmailDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, EmailDto>({
@@ -18,7 +19,7 @@ export class EmailsService {
       body: input,
     },
     { apiName: this.apiName,...config });
-  
+
 
   delete = (id: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
@@ -26,7 +27,7 @@ export class EmailsService {
       url: `/api/app/emails/${id}`,
     },
     { apiName: this.apiName,...config });
-  
+
 
   get = (id: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, EmailDto>({
@@ -34,16 +35,16 @@ export class EmailsService {
       url: `/api/app/emails/${id}`,
     },
     { apiName: this.apiName,...config });
-  
 
-  getList = (input: EmailRequestDto, config?: Partial<Rest.Config>) =>
+
+  getList = (input: LeadRequestDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<EmailDto>>({
       method: 'GET',
       url: '/api/app/emails',
       params: { filter: input.filter, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName,...config });
-  
+
 
   sendEmail = (id: string, ct?: any, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
@@ -51,7 +52,7 @@ export class EmailsService {
       url: `/api/app/emails/${id}/send-email`,
     },
     { apiName: this.apiName,...config });
-  
+
 
   update = (id: string, input: CreateUpdateEmailDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, EmailDto>({

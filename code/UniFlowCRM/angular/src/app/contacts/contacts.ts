@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ListService, PagedResultDto, PermissionDirective } from '@abp/ng.core';
+import { CoreModule, ListService, PagedResultDto, PermissionDirective } from '@abp/ng.core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import {
@@ -24,8 +24,9 @@ import { ContactDto, ContactSource, ContactStatus, ContactsService } from '../pr
     NgxDatatableListDirective,
     NgxDatatableDefaultDirective,
     LocalizationPipe,
-    PermissionDirective,
-    RouterLink
+    // PermissionDirective,
+    RouterLink,
+    CoreModule
   ],
 
   templateUrl: './contacts.html',
@@ -87,4 +88,28 @@ export class ContactsComponent implements OnInit {
   create() {
     this.router.navigate(['/Contacts/form/']);
   }
+
+
+  // search
+  searchName: string | null = null;
+  loading = false;
+  lastQuery : any = {skipCount:0,maxResultCount:10};
+
+  async search(){
+    if (this.loading){
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+    await new Promise(resolve => setTimeout(resolve, 100));
+    this.loading = true;
+    // console.log(this.lastQuery , this.searchName);
+    this._contactsService.getList(
+      { ...this.lastQuery , filter: this.searchName } )
+      .subscribe(accounts => {
+        this.contacts=accounts;
+        this.loading = false;});
+
+  }
+
+
+
 }

@@ -11,6 +11,11 @@
   </div>
 
   <div class="card-body">
+    <div class="row">
+      <div class="col-4">
+        <input type="text" class="form-control" (ngModelChange)="search()"  [(ngModel)]="searchName" [placeholder]="'::Contact'|abpLocalization"/>
+      </div>
+    </div>
     <ngx-datatable
       [rows]="contacts.items"
       [count]="contacts.totalCount"

@@ -2,6 +2,7 @@ import type { CreateUpdateOpportunityDto, OpportunityDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable, inject } from '@angular/core';
+import { LeadRequestDto } from '../leads';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { Injectable, inject } from '@angular/core';
 export class OpportunitiesService {
   private restService = inject(RestService);
   apiName = 'Default';
-  
+
 
   close = (id: string, won: boolean, config?: Partial<Rest.Config>) =>
     this.restService.request<any, OpportunityDto>({
@@ -18,7 +19,7 @@ export class OpportunitiesService {
       params: { won },
     },
     { apiName: this.apiName,...config });
-  
+
 
   create = (input: CreateUpdateOpportunityDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, OpportunityDto>({
@@ -27,7 +28,7 @@ export class OpportunitiesService {
       body: input,
     },
     { apiName: this.apiName,...config });
-  
+
 
   delete = (id: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
@@ -35,7 +36,7 @@ export class OpportunitiesService {
       url: `/api/app/opportunities/${id}`,
     },
     { apiName: this.apiName,...config });
-  
+
 
   get = (id: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, OpportunityDto>({
@@ -43,16 +44,16 @@ export class OpportunitiesService {
       url: `/api/app/opportunities/${id}`,
     },
     { apiName: this.apiName,...config });
-  
 
-  getList = (input: OpportunityRequestDto, config?: Partial<Rest.Config>) =>
+
+  getList = (input: LeadRequestDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<OpportunityDto>>({
       method: 'GET',
       url: '/api/app/opportunities',
       params: { filter: input.filter, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName,...config });
-  
+
 
   update = (id: string, input: CreateUpdateOpportunityDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, OpportunityDto>({

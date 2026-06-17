@@ -1,4 +1,4 @@
-import { ListService, PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
+import { CoreModule, ListService, PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Component, inject, OnInit } from '@angular/core';
 import { TasksService } from '../proxy/tasks/tasks.service';
 import { TaskDto } from '../proxy/tasks/models';
@@ -17,7 +17,7 @@ import {
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [LocalizationPipe, CommonModule, ThemeSharedModule, RouterLink, NgbDropdown, NgbDropdownButtonItem, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle],
+  imports: [LocalizationPipe, CommonModule, ThemeSharedModule, RouterLink, NgbDropdown, NgbDropdownButtonItem, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle, CoreModule],
   templateUrl: './tasks.html',
   styleUrl: './tasks.scss',
   providers: [ListService],
@@ -59,4 +59,27 @@ export class Tasks implements OnInit {
   openDetails(id) {
   this.router.navigate(['/Tasks/', id]);
   }
+
+  // search
+  searchName: string | null = null;
+  loading = false;
+  lastQuery : any = {skipCount:0,maxResultCount:10};
+
+  async search(){
+    if (this.loading){
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    this.loading = true;
+    console.log(this.lastQuery , this.searchName);
+    this.taskService.getList(
+      { ...this.lastQuery , filter: this.searchName } )
+      .subscribe(accounts => {this.items=accounts;this.loading = false;});
+
+  }
+
+
+
+
 }

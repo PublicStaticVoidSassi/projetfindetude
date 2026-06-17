@@ -1,4 +1,4 @@
-import { ListService, PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
+import { CoreModule, ListService, PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CallsService } from '../proxy/calls/calls.service';
 import { Confirmation, ConfirmationService, ToasterService, ThemeSharedModule } from '@abp/ng.theme.shared';
@@ -11,7 +11,7 @@ import { LocalizationPipe } from '@abp/ng.core';
 @Component({
   selector: 'app-calls',
   standalone: true,
-  imports: [LocalizationPipe, CommonModule, ThemeSharedModule, NgbDropdownModule],
+  imports: [LocalizationPipe, CommonModule, ThemeSharedModule, NgbDropdownModule, CoreModule],
   providers: [ListService],
   templateUrl: './calls.html',
 })
@@ -23,24 +23,24 @@ export class CallsComponent implements OnInit {
   public readonly list = inject(ListService);
 
   items = {} as PagedResultDto<CallDto>;
-  filter: any;
-  loading = false;
-  query: any;
-  search() {
-    if (this.loading) {
-      return;
-    }
-    this.loading = true;
-    this.callService.getList(this.query).subscribe((e) =>
-      this.items = e
-    );
-  }
+  // filter: any;
+  // loading = false;
+  // query: any;
+  // search() {
+  //   if (this.loading) {
+  //     return;
+  //   }
+  //   this.loading = true;
+  //   this.callService.getList(this.query).subscribe((e) =>
+  //     this.items = e
+  //   );
+  // }
 
   ngOnInit() {
     const streamCreator = (query: PagedAndSortedResultRequestDto) => {
-      this.query = query;
-      this.query.filter = this.filter;
-      return this.callService.getList(this.query);
+      // this.query = query;
+      // this.query.filter = this.filter;
+      return this.callService.getList(query);
     };
 
     this.list.hookToQuery(streamCreator).subscribe((response) => {
@@ -69,6 +69,24 @@ export class CallsComponent implements OnInit {
         });
       }
     });
+  }
+  // search
+  searchName: string | null = null;
+  loading = false;
+  lastQuery : any = {skipCount:0,maxResultCount:10};
+
+  async search(){
+    if (this.loading){
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    this.loading = true;
+    console.log(this.lastQuery , this.searchName);
+    this.callService.getList(
+      { ...this.lastQuery , filter: this.searchName } )
+      .subscribe(accounts => {this.items=accounts;this.loading = false;});
+
   }
 
   protected readonly CallDirection = CallDirection;

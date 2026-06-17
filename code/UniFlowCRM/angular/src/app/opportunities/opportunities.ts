@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ListService, PagedResultDto, PermissionDirective, LocalizationPipe } from '@abp/ng.core';
+import { ListService, PagedResultDto, PermissionDirective, LocalizationPipe, CoreModule } from '@abp/ng.core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {
   NgxDatatableListDirective,
@@ -41,7 +41,8 @@ import {
     PermissionDirective,
     DatePipe,
     RouterLink,
-    NgClass
+    NgClass,
+    CoreModule
   ],
   templateUrl: './opportunities.html',
   styleUrl: './opportunities.scss',
@@ -111,4 +112,26 @@ export class OpportunitiesComponent implements OnInit {
   create() {
     this.router.navigate(['/Opportunities/form/']);
   }
+
+  // search
+  searchName: string | null = null;
+  loading = false;
+  lastQuery : any = {skipCount:0,maxResultCount:10};
+
+  async search(){
+    if (this.loading){
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    this.loading = true;
+    console.log(this.lastQuery , this.searchName);
+    this._opportunitiesService.getList(
+      { ...this.lastQuery , filter: this.searchName } )
+      .subscribe(accounts => {this.opportunities=accounts;this.loading = false;});
+
+  }
+
+
+
 }
