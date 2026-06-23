@@ -5,9 +5,11 @@
 <div class="d-flex justify-content-end">
   <app-return-btn></app-return-btn>
   <note-miniform [id]="opportunity.id" isFor="opportunity"></note-miniform>
-  <button [disabled]="opportunity.saleStage === SaleStage.Closed" class="btn btn-sm btn-success me-2" (click)="close('won')">{{'::Opportunity:Win'|abpLocalization}}</button>
-  <button [disabled]="opportunity.saleStage === SaleStage.Closed" class="btn btn-sm btn-danger" (click)="close('lost')">{{'::Opportunity:Lose'|abpLocalization}}</button>
-</div>
+  @if (opportunity.stage !== OpportunityStage.ClosedWon && opportunity.stage === OpportunityStage.ClosedLost){
+  <button class="btn btn-sm btn-success me-2" (click)="close('won')">{{'::Opportunity:Win'|abpLocalization}}</button>
+  <button class="btn btn-sm btn-danger" (click)="close('lost')">{{'::Opportunity:Lose'|abpLocalization}}</button>
+  }
+  </div>
     <h1 class="mb-1 text-brand">
       {{ opportunity.name }}
     </h1>
@@ -50,12 +52,12 @@
           </strong>
         </div>
 
-        <div class="d-flex justify-content-between py-1">
+        <!-- <div class="d-flex justify-content-between py-1">
           <span>{{ '::Opportunity:SaleStage' | abpLocalization }}</span>
           <strong>
             {{ ('::Opportunity:SaleStage:' + opportunity.saleStage) | abpLocalization }}
           </strong>
-        </div>
+        </div> -->
 
       </div>
 

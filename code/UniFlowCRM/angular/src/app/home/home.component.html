@@ -2,33 +2,131 @@
       <div class="card h-100 w-100 overflow-hidden getting-started-hero-card">
         <div class="card-body">
             <div class="starting-content pe-5" >
-            <h5>placeholder for now</h5>
-            <h1>welcome to our app</h1>
-            <p>notifications...</p>
-            <p>schedule...</p>
+            <p class="display-4">Salute 
+              <span class="fw-semibold">
+              {{username}} 
+              </span>
+              <p>
             </div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-header">
-          title goes here
-        </div>
-        <div class="card-body">
-          stats go here
+
+
+
+<div class="row">
+    <div class="col">
+      <div class="card border-0 shadow-sm kpi-card">
+        <div class="card-body px-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <h6 class="text-muted text-uppercase fs-7 fw-semibold mb-1" style="letter-spacing: 0.5px;">revenu dinar</h6>
+              <h2 class="fw-bold mb-0">{{analytics.opportunity.dzdincome}},00 DZD</h2>
+            </div>
+            <div class="bg-success-subtle text-white p-3 rounded-3 fs-3 lh-1">
+              <i class="fas ">DA</i>
+            </div>
+          </div>
         </div>
       </div>
-
-
-  <div class="card">
-    <div class="card-header">
-      {{ '::Lead'|abpLocalization }}
     </div>
-    <div class="card-body">
-      {{analytics.lead.converted}} / {{analytics.lead.total}}
+    <div class="col">
+      <div class="card border-0 shadow-sm kpi-card">
+        <div class="card-body px-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <h6 class="text-muted text-uppercase fs-7 fw-semibold mb-1" style="letter-spacing: 0.5px;">revenu euro</h6>
+              <h2 class="fw-bold mb-0">{{analytics.opportunity.eurincome}},00 €</h2>
+            </div>
+            <div class="bg-success-subtle text-white p-3 rounded-3 fs-3 lh-1">
+              <i class="fas fa-euro"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-0 shadow-sm kpi-card">
+        <div class="card-body px-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <h6 class="text-muted text-uppercase fs-7 fw-semibold mb-1" style="letter-spacing: 0.5px;">revenu dollar</h6>
+              <h2 class="fw-bold mb-0">{{analytics.opportunity.usdincome}},00 $</h2>
+            </div>
+            <div class="bg-success-subtle text-white p-3 rounded-3 fs-3 lh-1">
+              <i class="fas fa-dollar"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+<div class="row">
+    <div class="col">
+      <div class="card border-0 shadow-sm kpi-card">
+        <div class="card-body px-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <h6 class="text-muted text-uppercase fs-7 fw-semibold mb-1" style="letter-spacing: 0.5px;">Prospects Totales</h6>
+              <h2 class="fw-bold mb-0">{{analytics.lead.total}}</h2>
+            </div>
+            <div class="bg-secondary-subtle text-white p-3 rounded-3 fs-3 lh-1">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-0 shadow-sm kpi-card">
+        <div class="card-body px-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <h6 class="text-muted text-uppercase fs-7 fw-semibold mb-1" style="letter-spacing: 0.5px;">Comptes Totales</h6>
+              <h2 class="fw-bold mb-0">{{analytics.account.total}}</h2>
+            </div>
+            <div class="bg-warning-subtle text-white p-3 rounded-3 fs-3 lh-1">
+              <i class="fas fa-building"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-0 shadow-sm kpi-card">
+        <div class="card-body px-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <h6 class="text-muted text-uppercase fs-7 fw-semibold mb-1" style="letter-spacing: 0.5px;">Contacts Totales</h6>
+              <h2 class="fw-bold mb-0">{{analytics.contact.total}}</h2>
+            </div>
+            <div class="bg-primary-subtle text-white p-3 rounded-3 fs-3 lh-1">
+              <i class="fas fa-id-card"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+<div class="row">
+  <div class="col-4">
+    <div class="card">
+      <p-chart type="pie" [data]="leaddata" [options]="basicOptions" />
     </div>
   </div>
-  <div class="card w-25">
-    <p-chart type="pie" [data]="data" [options]="basicOptions" />
+  <div class="col-4">
+    <div class="card">
+      <p-chart type="pie" [data]="contactdata" [options]="basicOptions" />
+    </div>
   </div>
+  <div class="col-4">
+    <div class="card">
+      <p-chart type="pie" [data]="opportunitydata" [options]="basicOptions" />
+    </div>
+  </div>
+</div>  
 
-</div>
+
+

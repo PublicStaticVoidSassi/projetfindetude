@@ -24,4 +24,7 @@ export interface LeadAnalytics extends BaseAnalytics {
 export interface OpportunityAnalytics extends BaseAnalytics {
   won?: number;
   lost?: number;
+  dzdincome?: number;
+  eurincome?: number;
+  usdincome?: number;
 }

@@ -12,13 +12,19 @@ namespace UniFlowCRM.Analytics
     {
         public int Converted { get; set; }
     }
-    public class ContactAnalytics : BaseAnalytics {
+    public class ContactAnalytics : BaseAnalytics
+    {
         public int active { get; set; }
     }
     public class AccountAnalytics : BaseAnalytics { }
-    public class OpportunityAnalytics : BaseAnalytics {
+    public class OpportunityAnalytics : BaseAnalytics
+    {
         public int Won { get; set; }
         public int Lost { get; set; }
+
+        public decimal dzdincome { get; set; }
+        public decimal eurincome { get; set; }
+        public decimal usdincome { get; set; }
     }
     public class AnalyticsDto
     {

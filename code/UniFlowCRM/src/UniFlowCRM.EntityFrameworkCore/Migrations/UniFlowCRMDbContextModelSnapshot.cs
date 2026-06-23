@@ -785,9 +785,6 @@ namespace UniFlowCRM.Migrations
                     b.Property<short>("Probability")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("SaleStage")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Stage")
                         .HasColumnType("INTEGER");
 

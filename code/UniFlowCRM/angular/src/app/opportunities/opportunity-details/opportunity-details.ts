@@ -9,7 +9,7 @@ import { NoteMiniform } from '../../notes/miniform/note-miniform.component';
 import { NoteMiniUi } from '../../notes/note-mini-ui/note-mini-ui';
 import { NoteDto, NotesService } from '../../proxy/notes';
 import { ToasterService } from '@abp/ng.theme.shared';
-import { SaleStage } from '../../proxy/opportunities';
+import { SaleStage,OpportunityStage } from '../../proxy/opportunities';
 @Component({
   standalone: true,
   imports: [
@@ -34,7 +34,7 @@ export class OpportunityDetailsComponent implements OnInit {
   opportunity = {} as Opportunities.OpportunityDto;
 
   close(state: 'won'|'lost'){
-      this.opportunitiesService.close(this.opportunity.id,state === 'won').subscribe(e=>{
+      this.opportunitiesService.close(this.opportunity.id!,state === 'won').subscribe(e=>{
         this.toaster.success((state==='won')?'::Opportunity:Celebrate':'::Opportunity:Mourn',"::Opportunity:Closed");
         this.opportunity = e;
       })
@@ -56,4 +56,5 @@ export class OpportunityDetailsComponent implements OnInit {
   }
 
   protected readonly SaleStage = SaleStage;
+  OpportunityStage = OpportunityStage;
 }
