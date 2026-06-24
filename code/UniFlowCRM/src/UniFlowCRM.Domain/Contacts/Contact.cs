@@ -7,7 +7,7 @@ using UniFlowCRM.Addresses;
 
 namespace UniFlowCRM.Contacts
 {
-    
+
     public class Contact : FullAuditedAggregateRoot<Guid>
     {
         public string FirstName { get; private set; }
@@ -32,9 +32,52 @@ namespace UniFlowCRM.Contacts
         public Guid? LeadID { get; private set; }
         public Guid? AccountID { get; private set; } // Account FK
 
+
+        public Contact(
+                Guid id,
+                string firstName,
+                string? middleName,
+                string? lastName,
+                string? description,
+                ContactStatus status,
+                ContactSource source,
+                PhoneNumber? phone,
+                PhoneNumber? fax,
+                EmailAddress? email,
+                URL? website,
+                Address? address,
+                string? job,
+                string? department,
+                Guid userId,
+                Guid? leadId = null,
+                Guid? accountId = null
+            ) : base(id)
+        {
+            FirstName = firstName;
+            MiddleName = middleName;
+            LastName = lastName;
+            Description = description;
+
+            Status = status;
+            Source = source;
+
+            Phone = phone;
+            Fax = fax;
+            Email = email;
+            Website = website;
+            Address = address;
+
+            Job = job;
+            Department = department;
+
+            UserID = userId;
+            LeadID = leadId;
+            AccountID = accountId;
+        }
+
         public Contact(
         Guid id,
-        string firstName):base(id)
+        string firstName) : base(id)
         {
             FirstName = firstName;
         }

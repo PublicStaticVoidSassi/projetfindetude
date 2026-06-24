@@ -21,8 +21,30 @@ public class Lead : FullAuditedAggregateRoot<Guid>
 
     public Guid UserID { get; private set; } // user FK
     public Guid? AccountID { get; private set; } // Account FK
-
-    public Lead(Guid id,string firstName): base(id)
+    public Lead(
+            Guid id,
+            string firstName,
+            string? lastName,
+            string? description,
+            LeadStatus status,
+            LeadSource source,
+            PhoneNumber? phone,
+            EmailAddress? email,
+            Guid userId,
+            Guid? accountId = null
+        ) : base(id)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Description = description;
+        Status = status;
+        Source = source;
+        Phone = phone;
+        Email = email;
+        UserID = userId;
+        AccountID = accountId;
+    }
+    public Lead(Guid id, string firstName) : base(id)
     {
         FirstName = firstName;
         Status = LeadStatus.New;

@@ -1,62 +1,68 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AuthService, LocalizationPipe,ConfigStateService } from '@abp/ng.core';
+import { AuthService, LocalizationPipe, ConfigStateService } from '@abp/ng.core';
 import { ChartModule } from 'primeng/chart';
 import { AnalyticsDto, AnalyticsService } from '../proxy/analytics';
+import { DashboardDto, IncomeDto } from '../proxy/dashboards/models';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [ChartModule,LocalizationPipe]
+  imports: [ChartModule, LocalizationPipe]
 })
 export class HomeComponent implements OnInit {
   private authService = inject(AuthService);
   private analyticService = inject(AnalyticsService);
-
   private configState = inject(ConfigStateService);
-  
+
   username: string | undefined = "";
 
   documentStyle = getComputedStyle(document.documentElement);
-  leaddata : any = {}
+  leaddata: any = {}
+  contactdata: any = {}
+  opportunitydata: any = {}
+
+  analytics: AnalyticsDto = {};
+  dashboard: DashboardDto = {};
+  income: IncomeDto = {};
+
   basicOptions = {
     plugins: {
       legend: {
         labels: {
           usePointStyle: true,
-          // color: textColor
         }
       }
     }
   };
-contactdata : any = {}
-opportunitydata: any = {}
 
 
 
 
-  analytics : AnalyticsDto = {};
+
   ngOnInit() {
     this.loadAnalytics();
     let currentUser = this.configState.getOne('currentUser');
     this.username = currentUser.userName;
     console.log(currentUser);
   }
-  loadLead(){
-    if (!this.analytics.lead||!this.analytics.lead.total||!this.analytics.lead.converted){
-      return;
-    }
+  loadLead() {
     this.leaddata = {
       labels: [
-         'Prospects convertis', 'Prospects non convertis'],
+        'Prospects en attente',
+        'Prospects perdus',
+        'Prospects convertis'],
       datasets: [
         {
           data: [
-            this.analytics.lead.converted,
-            this.analytics.lead.total - this.analytics.lead.converted],
+            this.dashboard.pendingleads,
+            this.dashboard.deadleads,
+            this.dashboard.convertedleads
+          ],
           backgroundColor: [
+            this.documentStyle.getPropertyValue('--bs-primary-bg-subtle'),
+            this.documentStyle.getPropertyValue('--bs-gray'),
             this.documentStyle.getPropertyValue('--bs-primary'),
-            this.documentStyle.getPropertyValue('--bs-primary-bg-subtle')
             ,
           ],
           // hoverBackgroundColor: [documentStyle.getPropertyValue('--p-cyan-400'), documentStyle.getPropertyValue('--p-orange-400'), documentStyle.getPropertyValue('--p-gray-400')]
@@ -65,22 +71,18 @@ opportunitydata: any = {}
     };
   }
 
-  loadContact(){
-    if (!this.analytics.contact?.total || !this.analytics.contact?.active)
-    {
-      return ;
-    }
+  loadContact() {
     this.contactdata = {
       labels: [
-         'Contacts actives', 'Contacts inactives'],
+        'Contacts actives', 'Contacts inactives'],
       datasets: [
         {
           data: [
-            this.analytics.contact?.active,
-            this.analytics.contact.total - this.analytics.contact.active],
+            this.dashboard.activecontacts,
+            this.dashboard.inactivecontacts],
           backgroundColor: [
-            this.documentStyle.getPropertyValue('--bs-secondary'),
-            this.documentStyle.getPropertyValue('--bs-secondary-bg-subtle')
+            this.documentStyle.getPropertyValue('--bs-success'),
+            this.documentStyle.getPropertyValue('--bs-success-bg-subtle')
             ,
           ],
           // hoverBackgroundColor: [documentStyle.getPropertyValue('--p-cyan-400'), documentStyle.getPropertyValue('--p-orange-400'), documentStyle.getPropertyValue('--p-gray-400')]
@@ -88,22 +90,22 @@ opportunitydata: any = {}
       ]
     };
   }
-loadOpportunity(){
-    if (!this.analytics.contact?.total || !this.analytics.contact?.active)
-    {
-      return ;
-    }
+  loadOpportunity() {
     this.opportunitydata = {
       labels: [
-         'opportunités gagnées', 'opportunités perdues'],
+        'opportunités gagnées',
+        'opportunités en attentes',
+        'opportunités perdues'],
       datasets: [
         {
           data: [
-            this.analytics.opportunity?.won,
-            this.analytics.opportunity?.lost],
+            this.dashboard.wondeals,
+            this.dashboard.pendingdeals,
+            this.dashboard.lostdeals,],
           backgroundColor: [
             this.documentStyle.getPropertyValue('--bs-warning'),
-            this.documentStyle.getPropertyValue('--bs-warning-bg-subtle')
+            this.documentStyle.getPropertyValue('--bs-warning-bg-subtle'),
+            this.documentStyle.getPropertyValue('--bs-gray')
             ,
           ],
           // hoverBackgroundColor: [documentStyle.getPropertyValue('--p-cyan-400'), documentStyle.getPropertyValue('--p-orange-400'), documentStyle.getPropertyValue('--p-gray-400')]
@@ -111,7 +113,13 @@ loadOpportunity(){
       ]
     };
   }
-  loadAnalytics () {
+  loadAnalytics() {
+    this.analyticService.getDashboard().subscribe((d) => {
+      this.dashboard = d;
+    });
+    this.analyticService.getIncome().subscribe((d) => {
+      this.income = d;
+    });
     this.analyticService.get().subscribe((res) => {
       this.analytics = res;
       this.loadLead();

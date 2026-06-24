@@ -15,16 +15,16 @@
 
           {{ '::Opportunity:Action:Update' | abpLocalization }}
 
-          <span class="text-brand">
-            {{ form.get('name')?.value }}
-          </span>
+
 
         } @else {
 
           {{ '::Opportunity:Action:Create' | abpLocalization }}
 
         }
-
+<span class="text-brand">
+            {{ form.get('name')?.value }}
+          </span>
       </h1>
 
       <div class="row g-3">
@@ -75,7 +75,7 @@
         </div>
 
         <!-- Probability -->
-        <div class="col-md-3">
+        <div class="col-6">
           <label class="form-label">
             {{ '::Opportunity:Probability' | abpLocalization }} : {{form.get("probability")?.value}}%
           </label>
@@ -130,7 +130,7 @@
         </div> -->
 
         <!-- Lead -->
-        <div class="col-md-4">
+        <div class="col-3">
           <label class="form-label">
             {{ '::Opportunity:Lead' | abpLocalization }}
           </label>
@@ -146,7 +146,7 @@
         </div>
 
         <!-- Account -->
-        <div class="col-md-4">
+        <div class="col-3">
           <label class="form-label">
             {{ '::Opportunity:Account' | abpLocalization }}
           </label>
@@ -162,7 +162,7 @@
         </div>
 
         <!-- Contact -->
-        <div class="col-md-4">
+        <div class="col-3">
           <label class="form-label">
             {{ '::Opportunity:Contact' | abpLocalization }}
           </label>
@@ -178,7 +178,7 @@
         </div>
 
         <!-- Owner -->
-        <div class="col-md-4">
+        <div class="col-3">
           <label class="form-label">
             {{ '::Opportunity:Owner' | abpLocalization }}
           </label>
@@ -226,7 +226,7 @@
 
         <button
           type="button"
-          class="btn btn-outline-secondary"
+          class="btn btn-outline-danger btn-sm"
           (click)="form.reset()">
 
           {{ '::Reset' | abpLocalization }}
@@ -235,7 +235,7 @@
 
         <button
           type="submit"
-          class="btn btn-primary"
+          class="btn btn-brand btn-sm"
           [disabled]="form.invalid">
 
           {{ '::Save' | abpLocalization }}

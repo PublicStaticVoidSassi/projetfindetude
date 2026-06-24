@@ -14,8 +14,26 @@ using UniFlowCRM.PhoneNumbers;
 using UniFlowCRM.Tasks;
 using UniFlowCRM.Meetings;
 using UniFlowCRM.Emails;
+using UniFlowCRM.Dashboards;
 
 namespace UniFlowCRM;
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+
+public partial class IncomeMapper : MapperBase<Income, IncomeDto>
+{
+    public override partial IncomeDto Map(Income source);
+    public override partial void Map(Income source, IncomeDto destination);
+}
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+
+public partial class DashboardMapper : MapperBase<Dashboard, DashboardDto>
+{
+    public override partial DashboardDto Map(Dashboard source);
+
+    public override partial void Map(Dashboard source, DashboardDto destination);
+}
 
 [Mapper]
 public static partial class UniFlowCRMValueObjectMapper
@@ -33,8 +51,8 @@ public static partial class UniFlowCRMValueObjectMapper
 [Mapper]
 public static partial class EmailAddressMapper
 {
-   public static EmailAddress Map(string email)
-        => (string.IsNullOrEmpty(email))? null : new EmailAddress(email);
+    public static EmailAddress Map(string email)
+         => (string.IsNullOrEmpty(email)) ? null : new EmailAddress(email);
 
 }
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
@@ -164,7 +182,7 @@ public partial class DtoToCall : MapperBase<CreateUpdateCallDto, Call>
             StartTime = source.StartTime,
             EndTime = source.EndTime,
             Duration = source.Duration,
-            PhoneNumber = (source.PhoneNumber is not null && source.PhoneCode is not null) ? new PhoneNumber(source.PhoneNumber,source.PhoneCode) : null,
+            PhoneNumber = (source.PhoneNumber is not null && source.PhoneCode is not null) ? new PhoneNumber(source.PhoneNumber, source.PhoneCode) : null,
             AccountID = source.AccountID,
             ContactID = source.ContactID,
             OpportunityID = source.OpportunityID,

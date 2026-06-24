@@ -104,12 +104,12 @@ public class Account : FullAuditedAggregateRoot<Guid>
 
     public void SetDescription(string? description)
     {
-        Check.NotNullOrWhiteSpace(
-            description,
-            nameof(description),
-            AccountConstraints.Description.MaxLength,
-            AccountConstraints.Description.MinLength
-        );
+        // Check.NotNullOrWhiteSpace(
+        //     description,
+        //     nameof(description),
+        //     AccountConstraints.Description.MaxLength,
+        //     AccountConstraints.Description.MinLength
+        // );
         Description = description;
     }
 
@@ -148,9 +148,14 @@ public class Account : FullAuditedAggregateRoot<Guid>
         Industry = industry;
     }
 
-    public void SetRevenue(Money? revenue )
+    public void SetRevenue(Money? revenue)
     {
-        Check.Positive(revenue.Value + 1 , nameof(revenue));
+        if (revenue == null)
+        {
+            this.Revenue = null;
+            return;
+        }
+        Check.Positive(revenue.Value + 1, nameof(revenue));
         Revenue = revenue;
     }
 

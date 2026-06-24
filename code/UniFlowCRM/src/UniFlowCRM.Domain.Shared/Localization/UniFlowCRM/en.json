@@ -2,7 +2,6 @@
   "Culture": "en",
   "Texts": {
     "AppName": "UniFlowCRM",
-
     "Welcome": "Welcome",
     "LongWetcomeMessage": "Welcome to UniFlow CRM",
     "Call:Direction:0": "Outbound",
@@ -34,7 +33,6 @@
     "Meeting:Status:3": "Cancelled",
     "Assignto:Owner": "Assign to",
     "Assignedto:Owner": "Assigned to",
-
     "Assignto:lead": "Assign to lead",
     "Assignto:Account": "Assign to account",
     "Assignedto:Account": "Assigned to account",
@@ -52,7 +50,6 @@
     "Account:Type:8": "Prospect",
     "Account:Type:9": "Reseller",
     "Account:Type:10": "Other",
-
     "Account:Industry:0": "Apparel",
     "Account:Industry:1": "Banking",
     "Account:Industry:2": "Biotechnology",
@@ -90,15 +87,12 @@
     "Type": "Type",
     "Price": "Price",
     "PublishDate": "Publish Date",
-
     "Actions": "Actions",
     "Action:Info": "More",
     "Action:Delete": "Delete",
     "Action:Edit": "Edit",
-
     "AreYouSure": "Are you sure?",
     "AreYouSureToDelete": "Are you sure you want to delete this item?",
-
     "Menu:Home": "Home",
     "Menu:UniFlowCRM": "UniFlow CRM",
     "Menu:Books": "Books",
@@ -116,17 +110,14 @@
     "Menu:Notes": "Notes",
     "Menu:CRM:Extras": "Extras",
     "Menu:CRM:Testing": "Testing",
-
     "Permission:UniFlowCRM": "UniFlow CRM",
     "Permission:Books": "Book Management",
     "Permission:Books.Create": "Create Books",
     "Permission:Books.Edit": "Edit Books",
     "Permission:Books.Delete": "Delete Books",
-
     "Books": "Books",
     "NewBook": "New Book",
     "BookDeletionConfirmationMessage": "Are you sure you want to delete the book '{0}'?",
-
     "Enum:BookType.0": "Uncategorized",
     "Enum:BookType.1": "Adventure",
     "Enum:BookType.2": "Biography",
@@ -155,66 +146,44 @@
     "Account:Action:Create": "Create new Account:",
     "Client:Action:Create": "Creating :",
     "Account:Action:Update": "Modifying Account:",
-
     "Account:Created:Successfully": "The Account has been created",
     "Account:Updated:Successfully": "The Account has been updated",
-
     "Account:Created:Failed": "We couldn't create this account...",
     "Account:Updated:Failed": "We couldn't update this account...",
-
     "Account:Name": "Name",
     "Account:Name:Placeholder": "Enter account name",
-
     "Account:Description": "Description",
     "Account:Description:Placeholder": "Write a short description",
-
     "Account:PhoneCode": "Phone Code",
     "Account:PhoneCode:Placeholder": "+213",
-
     "Account:PhoneNumber": "Phone Number",
     "Account:PhoneNumber:Placeholder": "123456789",
-
     "Account:FaxCode": "Fax Code",
     "Account:FaxCode:Placeholder": "+213",
-
     "Account:FaxNumber": "Fax Number",
     "Account:FaxNumber:Placeholder": "123456789",
-
     "Account:Email": "Email",
     "Account:Email:Placeholder": "example@domain.com",
-
     "Account:Website": "Website",
     "Account:Website:Placeholder": "https://example.com",
-
     "Account:City": "City",
     "Account:City:Placeholder": "City",
-
     "Account:Street": "Street",
     "Account:Street:Placeholder": "Street address",
-
     "Object:Add": "Add",
-
     "Account:Country": "Country",
     "Account:Country:Placeholder": "Country",
-
     "Account:PostalCode": "Postal Code",
     "Account:PostalCode:Placeholder": "00000",
-
     "Account:Type": "Account Type",
     "Account:Industry": "Industry",
-
     "Account:Employees": "Employees",
     "Account:Employees:Placeholder": "0",
-
     "Account:Revenue": "Revenue",
-
     "Account:RevenueAmount": "Revenue Amount",
     "Account:RevenueAmount:Placeholder": "0.00",
-
     "Account:RevenueCurrency": "Currency",
-
     "Account:AssignTo": "Assign To",
-
     "Accounts:Industry:0": "Apparel",
     "Accounts:Industry:1": "Banking",
     "Accounts:Industry:2": "Biotechnology",
@@ -245,7 +214,6 @@
     "Accounts:Industry:27": "Transportation",
     "Accounts:Industry:28": "Utilities",
     "Accounts:Industry:29": "Other",
-
     "Accounts:Type:1": "Analyst",
     "Accounts:Type:2": "Competitor",
     "Accounts:Type:3": "Customer",
@@ -256,7 +224,6 @@
     "Accounts:Type:8": "Prospect",
     "Accounts:Type:9": "Reseller",
     "Accounts:Type:10": "Other",
-
     "Client:Add": "Add account",
     "Client:AssignedTo": "Assigned To",
     "Client:City": "City",
@@ -272,15 +239,11 @@
     "Client:Street": "Street",
     "Client:UserID": "User ID",
     "Client:Website": "Website",
-
     "Client:Delete:Warning:Text": "This action cannot be undone.",
     "Client:Delete:Warning:Title": "Delete Client",
-
     "Client:Deleted:Success": "Client deleted successfully",
     "Client:Deleted:Canceled": "Client deletion canceled",
-
     "Leads": "Leads",
-
     "Lead:Source:0": "Unset",
     "Lead:Source:1": "Existing Customer",
     "Lead:Source:2": "Self Generated",
@@ -334,11 +297,9 @@
     "Contact:Source:13": "Cold Call",
     "Contact:Source:14": "Other",
     "Contact:Source:15": "Converted from Lead",
-
     "Contact:Status:0": "Inactive",
     "Contact:Status:1": "Active",
     "Opportunity:Add": "Add Opportunity",
-
     "Contact:MiddleName": "Middle Name",
     "Contact:Website": "Website",
     "Contact:Description": "Description",
@@ -375,7 +336,6 @@
     "Opportunity:Owner": "Owner",
     "Opportunity:CloseDate": "Close Date",
     "Opportunity:Currency": "Currency",
-
     "Opportunity:Stage:0": "Prospecting",
     "Opportunity:Stage:1": "Qualification",
     "Opportunity:Stage:2": "Needs Analysis",
@@ -390,7 +350,6 @@
     "Opportunity:Type:0": "New Business",
     "Opportunity:Type:1": "Existing Business",
     "Opportunity:Type:2": "Renewal",
-
     "Opportunity:SaleStage:0": "Prospecting",
     "Opportunity:SaleStage:1": "Qualification",
     "Opportunity:SaleStage:2": "Proposal",
@@ -401,6 +360,7 @@
     "Opportunity:AuditInformation": "Audit Information",
     "Opportunity:CreationTime": "Creation Time",
     "Opportunity:Action:Update": "Updating",
+    "Opportunity:Action:Create": "Creating",
     "Opportunity:ClosedAt": "Closed At",
     "Opportunity:Description": "Description",
     "Opportunity:Lose": "Close Lost",
@@ -408,14 +368,11 @@
     "Opportunity:Closed": "Opportunity Closed",
     "Opportunity:Celebrate": "Congratulations!!!",
     "Opportunity:Mourn": "We're sorry to see this",
-
-
     "Object:AuditInformation": "Audit Information",
     "Object:AuditInformation:CreatedAt": "Created At",
     "Object:AuditInformation:CreatedBy": "Creator",
     "Object:AuditInformation:UpdatedAt": "Modified At",
     "Object:AuditInformation:UpdatedBy": "Modifier",
-
     "Add:Note": "Add Note",
     "Action:Back": "Back",
     "Lead:Convert": "Convert",

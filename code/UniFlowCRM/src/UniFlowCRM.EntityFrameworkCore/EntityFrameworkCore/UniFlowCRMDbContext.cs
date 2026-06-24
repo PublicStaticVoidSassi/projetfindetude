@@ -24,6 +24,7 @@ using UniFlowCRM.Tasks;
 using UniFlowCRM.Calls;
 using UniFlowCRM.Meetings;
 using UniFlowCRM.Emails;
+using UniFlowCRM.Dashboards;
 
 
 namespace UniFlowCRM.EntityFrameworkCore;
@@ -36,7 +37,7 @@ public class UniFlowCRMDbContext :
 {
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
 
-    public DbSet<Book> Books { get; set; } // keeping it as a good luck charm
+    // public DbSet<Book> Books { get; set; } // keeping it as a good luck charm
 
     public DbSet<Lead> Leads { get; set; }
     public DbSet<Account> Accounts { get; set; }
@@ -91,15 +92,14 @@ public class UniFlowCRMDbContext :
         builder.ConfigureOpenIddict();
         builder.ConfigureBlobStoring();
         #endregion
-        #region REMOVEME
-        builder.Entity<Book>(b =>
-        {
-            b.ToTable(UniFlowCRMConsts.DbTablePrefix + "Books",
-                UniFlowCRMConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props
-            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
-        });
-        #endregion 
+
+        // views and functions
+        builder.Entity<Dashboard>()
+            .HasNoKey()
+            .ToView("dashboard", "crm");
+        builder.Entity<Income>()
+            .HasNoKey()
+            .ToView("incomepercurrency", "crm");
         #region Accounts
         builder.Entity<Account>(b =>
         {
@@ -236,7 +236,7 @@ public class UniFlowCRMDbContext :
         builder.Entity<Call>(b =>
         {
             b.ConfigureByConvention();
-            b.Property(e => e.PhoneNumber).HasConversion(v => v == null ? null : v.ToString() , v => v == null? null: new PhoneNumbers.PhoneNumber(v));
+            b.Property(e => e.PhoneNumber).HasConversion(v => v == null ? null : v.ToString(), v => v == null ? null : new PhoneNumbers.PhoneNumber(v));
             b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
             b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
             b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
@@ -257,10 +257,10 @@ public class UniFlowCRMDbContext :
         builder.Entity<Email>(b =>
         {
             b.ConfigureByConvention();
-            b.Property<EmailAddress>(e=>e.From).HasConversion(v=>(v == null)?null:v.ToString(),v=>(v == null) ? null:new EmailAddress(v));
-            b.Property<EmailAddress>(e=>e.To).HasConversion(v=>(v == null)?null:v.ToString(),v=>(v == null) ? null:new EmailAddress(v));
-            b.Property<EmailAddress>(e=>e.Bcc).HasConversion(v=>(v == null)?null:v.ToString(),v=>(v == null) ? null:new EmailAddress(v));
-            b.Property<EmailAddress>(e=>e.Cc).HasConversion(v=>(v == null)?null:v.ToString(),v=>(v == null) ? null:new EmailAddress(v));
+            b.Property<EmailAddress>(e => e.From).HasConversion(v => (v == null) ? null : v.ToString(), v => (v == null) ? null : new EmailAddress(v));
+            b.Property<EmailAddress>(e => e.To).HasConversion(v => (v == null) ? null : v.ToString(), v => (v == null) ? null : new EmailAddress(v));
+            b.Property<EmailAddress>(e => e.Bcc).HasConversion(v => (v == null) ? null : v.ToString(), v => (v == null) ? null : new EmailAddress(v));
+            b.Property<EmailAddress>(e => e.Cc).HasConversion(v => (v == null) ? null : v.ToString(), v => (v == null) ? null : new EmailAddress(v));
             b.HasOne<Lead>().WithMany().HasForeignKey(n => n.LeadID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
             b.HasOne<Account>().WithMany().HasForeignKey(n => n.AccountID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);
             b.HasOne<Contact>().WithMany().HasForeignKey(n => n.ContactID).IsRequired(false).OnDelete(DeleteBehavior.ClientSetNull);

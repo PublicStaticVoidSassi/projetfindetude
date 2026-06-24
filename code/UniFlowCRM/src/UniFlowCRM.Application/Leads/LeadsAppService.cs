@@ -89,7 +89,7 @@ namespace UniFlowCRM.Leads
                 .Where(e =>
                     (input.filter == null) ||
                     e.FirstName.ToLower().Contains(input.filter) ||
-                    (!string.IsNullOrEmpty(e.LastName) && e.FirstName.ToLower().Contains(input.filter))
+                    (!string.IsNullOrEmpty(e.LastName) && e.LastName.ToLower().Contains(input.filter))
                 )
                 .Skip(input.SkipCount).
                 Take(input.MaxResultCount);

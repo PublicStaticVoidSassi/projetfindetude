@@ -1,13 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { LocalizationPipe } from '@abp/ng.core';
 import { ToasterService } from '@abp/ng.theme.shared';
-import {saleStageOptions} from '../../proxy/opportunities/sale-stage.enum'
-import {currencyOptions} from '../../proxy/moneys/currency.enum'
+import { saleStageOptions } from '../../proxy/opportunities/sale-stage.enum'
+import { currencyOptions } from '../../proxy/moneys/currency.enum'
 import { ReturnBtn } from '../../shared/return-btn/return-btn';
-import { enumToDropdown } from '../../shared/enum-to-dropdown';
+// import { enumToDropdown } from '../../shared/enum-to-dropdown';
 import { Currency } from '../../proxy/moneys';
 
 import {
@@ -17,7 +17,7 @@ import {
   OpportunityType,
   SaleStage, opportunityTypeOptions
 } from '../../proxy/opportunities';
-import {opportunityStageOptions} from '../../proxy/opportunities/opportunity-stage.enum'
+import { opportunityStageOptions } from '../../proxy/opportunities/opportunity-stage.enum'
 import { IdentityUserDto, IdentityUserService } from '@abp/ng.identity/proxy';
 import { LeadsService, LeadDto } from '../../proxy/leads';
 import { AccountsService, AccountDto } from '../../proxy/accounts';
@@ -45,8 +45,9 @@ export class OpportunityFormComponent implements OnInit {
   private accountService = inject(AccountsService);
   private contactService = inject(ContactsService);
   private toaster = inject(ToasterService);
+  private router = inject(Router);
 
-  OpportunityStage= opportunityStageOptions;
+  OpportunityStage = opportunityStageOptions;
   types = opportunityTypeOptions;
   saleStages = saleStageOptions;
   currencies = currencyOptions;
@@ -112,12 +113,14 @@ export class OpportunityFormComponent implements OnInit {
 
       this.service.create(dto).subscribe(res => {
         this.toaster.success(res.id, '::Opportunity:Created:Successfully');
+        this.router.navigate(['Opportunities', res.id]);
       });
 
     } else {
 
       this.service.update(this.id!, dto).subscribe(res => {
         this.toaster.success(res.id, '::Opportunity:Updated:Successfully');
+        this.router.navigate(['Opportunities', res.id]);
       });
 
     }

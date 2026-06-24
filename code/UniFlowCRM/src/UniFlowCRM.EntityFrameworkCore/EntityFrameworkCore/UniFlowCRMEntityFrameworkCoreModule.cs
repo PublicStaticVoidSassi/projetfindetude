@@ -4,7 +4,7 @@ using Volo.Abp.Uow;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.Sqlite;
+using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
@@ -23,7 +23,7 @@ namespace UniFlowCRM.EntityFrameworkCore;
     typeof(UniFlowCRMDomainModule),
     typeof(AbpPermissionManagementEntityFrameworkCoreModule),
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCoreSqliteModule),
+    typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
     typeof(AbpAuditLoggingEntityFrameworkCoreModule),
     typeof(AbpFeatureManagementEntityFrameworkCoreModule),
@@ -43,14 +43,14 @@ public class UniFlowCRMEntityFrameworkCoreModule : AbpModule
     {
         context.Services.AddAbpDbContext<UniFlowCRMDbContext>(options =>
         {
-                /* Remove "includeAllEntities: true" to create
-                 * default repositories only for aggregate roots */
+            /* Remove "includeAllEntities: true" to create
+             * default repositories only for aggregate roots */
             // options.AddDefaultRepositories(includeAllEntities: true);
             options.AddDefaultRepositories();
 
-            options.AddRepository<Lead,LeadsRepository>();
-            options.AddRepository<Account,AccountsRepository>();
-            options.AddRepository<Contact,ContactsRepository>();
+            options.AddRepository<Lead, LeadsRepository>();
+            options.AddRepository<Account, AccountsRepository>();
+            options.AddRepository<Contact, ContactsRepository>();
         });
 
         if (AbpStudioAnalyzeHelper.IsInAnalyzeMode)
@@ -63,10 +63,10 @@ public class UniFlowCRMEntityFrameworkCoreModule : AbpModule
             /* The main point to change your DBMS.
              * See also UniFlowCRMDbContextFactory for EF Core tooling. */
             //TODO : Use SQLSERVER
-            options.UseSqlite();
+            options.UseSqlServer();
 
         });
-        
+
         context.Services.AddAlwaysDisableUnitOfWorkTransaction();
         Configure<AbpUnitOfWorkDefaultOptions>(options =>
         {

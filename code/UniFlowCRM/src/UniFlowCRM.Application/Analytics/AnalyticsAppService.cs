@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Contacts;
+using UniFlowCRM.Dashboards;
 using UniFlowCRM.Leads;
 using UniFlowCRM.Opportunities;
 using Volo.Abp.Domain.Repositories;
@@ -17,9 +19,29 @@ namespace UniFlowCRM.Analytics
         IRepository<Account, Guid> _accountRepository,
         IRepository<Contact, Guid> _contactRepository,
         IRepository<Opportunity, Guid> _opportunityRepository,
-        IRepository<IdentityUser, Guid> _userRepository
+        IRepository<IdentityUser, Guid> _userRepository,
+        IDashboardRepository _dashboardRepository
         ) : UniFlowCRMAppService
     {
+
+        public async Task<DashboardDto> GetDashboardAsync(CancellationToken ct = default)
+        {
+            return ObjectMapper.Map<Dashboard, DashboardDto>(await _dashboardRepository.GetAsync());
+        }
+        public async Task<IncomeDto> GetIncomeAsync(CancellationToken ct = default)
+        {
+            return ObjectMapper.Map<Income, IncomeDto>(await _dashboardRepository.GetIncomeAsync(ct));
+        }
+
+
+
+
+
+
+
+
+
+
         private async Task<LeadAnalytics> GetLeadAnalyticsAsync()
         {
             var analytics = new LeadAnalytics();

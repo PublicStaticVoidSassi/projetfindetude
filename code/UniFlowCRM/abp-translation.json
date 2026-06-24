@@ -1,0 +1,1961 @@
+{
+  "ReferenceCulture": "en",
+  "TargetCulture": "fr",
+  "Resources": [
+    {
+      "ResourcePath": "/home/sassy/Projects/projetfindetude/code/UniFlowCRM/src/UniFlowCRM.Domain.Shared/Localization/UniFlowCRM",
+      "Texts": [
+        {
+          "LocalizationKey": "LongWetcomeMessage",
+          "Reference": "Welcome to UniFlow CRM",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Call:Direction:0",
+          "Reference": "Outbound",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Call:Direction:1",
+          "Reference": "Inbound",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Call:Status:0",
+          "Reference": "Planned",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Call:Status:1",
+          "Reference": "Held",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Call:Status:2",
+          "Reference": "Not Held",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Call:Status:3",
+          "Reference": "Cancelled",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Task:Status:0",
+          "Reference": "Not Started",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Task:Status:1",
+          "Reference": "In Progress",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Task:Status:2",
+          "Reference": "Completed",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Task:Status:3",
+          "Reference": "Deferred",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Task:Status:4",
+          "Reference": "Cancelled",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Contact",
+          "Reference": "Contact Information",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Contact",
+          "Reference": "Contact Information",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Fax",
+          "Reference": "FAX",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Address",
+          "Reference": "Address",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Business",
+          "Reference": "Business Information",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Information",
+          "Reference": "Information",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Relations",
+          "Reference": "Relations",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Relations",
+          "Reference": "Relations",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Task:Priority:0",
+          "Reference": "Low",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Task:Priority:1",
+          "Reference": "Normal",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Task:Priority:2",
+          "Reference": "High",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Task:Priority:3",
+          "Reference": "Urgent",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Meeting:Status:0",
+          "Reference": "Planned",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Meeting:Status:1",
+          "Reference": "Held",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Meeting:Status:2",
+          "Reference": "Not Held",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Meeting:Status:3",
+          "Reference": "Cancelled",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Assignto:Owner",
+          "Reference": "Assign to",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Assignedto:Owner",
+          "Reference": "Assigned to",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Assignto:lead",
+          "Reference": "Assign to lead",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Assignto:Account",
+          "Reference": "Assign to account",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Assignedto:Account",
+          "Reference": "Assigned to account",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:PhoneCode",
+          "Reference": "Phone Code",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:PhoneNumber",
+          "Reference": "Phone Number",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Assignto:Opportunity",
+          "Reference": "Assign to opportunity",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Assignto:Contact",
+          "Reference": "Assign to contact",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Type:1",
+          "Reference": "Analyst",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Type:2",
+          "Reference": "Competitor",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Type:3",
+          "Reference": "Customer",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Type:4",
+          "Reference": "Integrator",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Type:5",
+          "Reference": "Investor",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Type:6",
+          "Reference": "Partner",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Type:7",
+          "Reference": "Press",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Type:8",
+          "Reference": "Prospect",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Type:9",
+          "Reference": "Reseller",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Type:10",
+          "Reference": "Other",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:0",
+          "Reference": "Apparel",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:1",
+          "Reference": "Banking",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:2",
+          "Reference": "Biotechnology",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:3",
+          "Reference": "Chemicals",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:4",
+          "Reference": "Communications",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:5",
+          "Reference": "Construction",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:6",
+          "Reference": "Consulting",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:7",
+          "Reference": "Education",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:8",
+          "Reference": "Electronics",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:9",
+          "Reference": "Energy",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:10",
+          "Reference": "Engineering",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:11",
+          "Reference": "Entertainment",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:12",
+          "Reference": "Environmental",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:13",
+          "Reference": "Finance",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:14",
+          "Reference": "Government",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:15",
+          "Reference": "Healthcare",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:16",
+          "Reference": "Hospitality",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:17",
+          "Reference": "Insurance",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:18",
+          "Reference": "Machinery",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:19",
+          "Reference": "Manufacturing",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:20",
+          "Reference": "Media",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:21",
+          "Reference": "Not-for-Profit",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:22",
+          "Reference": "Recreation",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:23",
+          "Reference": "Retail",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:24",
+          "Reference": "Shipping",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:25",
+          "Reference": "Technology",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:26",
+          "Reference": "Telecommunications",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:27",
+          "Reference": "Transportation",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:28",
+          "Reference": "Utilities",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry:29",
+          "Reference": "Other",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Close",
+          "Reference": "Close",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Delete",
+          "Reference": "Delete",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Edit",
+          "Reference": "Edit",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Name",
+          "Reference": "Name",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Type",
+          "Reference": "Type",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Price",
+          "Reference": "Price",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "PublishDate",
+          "Reference": "Publish Date",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Actions",
+          "Reference": "Actions",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Action:Info",
+          "Reference": "More",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Action:Delete",
+          "Reference": "Delete",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Action:Edit",
+          "Reference": "Edit",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "AreYouSure",
+          "Reference": "Are you sure?",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "AreYouSureToDelete",
+          "Reference": "Are you sure you want to delete this item?",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:UniFlowCRM",
+          "Reference": "UniFlow CRM",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:Books",
+          "Reference": "Books",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:Accounts",
+          "Reference": "Accounts",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:Contacts",
+          "Reference": "Contacts",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:Leads",
+          "Reference": "Leads",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:Opportunities",
+          "Reference": "Opportunities",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:CRM:Activities",
+          "Reference": "Activities",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:CRM:Objects",
+          "Reference": "Clients",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:CRM:Sales",
+          "Reference": "Sales",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:Calls",
+          "Reference": "Calls",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:Meetings",
+          "Reference": "Meetings",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:Tasks",
+          "Reference": "Tasks",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:Emails",
+          "Reference": "Emails",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:Notes",
+          "Reference": "Notes",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:CRM:Extras",
+          "Reference": "Extras",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:CRM:Testing",
+          "Reference": "Testing",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:UniFlowCRM",
+          "Reference": "UniFlow CRM",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Books",
+          "Reference": "Book Management",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Books.Create",
+          "Reference": "Create Books",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Books.Edit",
+          "Reference": "Edit Books",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Books.Delete",
+          "Reference": "Delete Books",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Books",
+          "Reference": "Books",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "NewBook",
+          "Reference": "New Book",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "BookDeletionConfirmationMessage",
+          "Reference": "Are you sure you want to delete the book '{0}'?",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Enum:BookType.0",
+          "Reference": "Uncategorized",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Enum:BookType.1",
+          "Reference": "Adventure",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Enum:BookType.2",
+          "Reference": "Biography",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Enum:BookType.3",
+          "Reference": "Dystopian",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Enum:BookType.4",
+          "Reference": "Fantasy",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Enum:BookType.5",
+          "Reference": "Horror",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Enum:BookType.6",
+          "Reference": "Science",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Enum:BookType.7",
+          "Reference": "Science Fiction",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Enum:BookType.8",
+          "Reference": "Poetry",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Call:Name",
+          "Reference": "Subject",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Call:Description",
+          "Reference": "Description",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Call:PhoneNumber",
+          "Reference": "Phone Number",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Call:Duration",
+          "Reference": "Call Duration",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Call:StartTime",
+          "Reference": "Start Time",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Call:EndTime",
+          "Reference": "End Time",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Call:Status",
+          "Reference": "Status",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Call:Direction",
+          "Reference": "Direction",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts",
+          "Reference": "Accounts",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Action:Update",
+          "Reference": "Modifying ",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Meeting:Name",
+          "Reference": "Meeting Subject",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Meeting:Status",
+          "Reference": "Status",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Meeting:Location",
+          "Reference": "Location",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Meeting:StartTime",
+          "Reference": "Start Time",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Meeting:EndTime",
+          "Reference": "End Time",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Meeting:Description",
+          "Reference": "Description",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Action:Create",
+          "Reference": "Create new Account:",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Action:Create",
+          "Reference": "Creating :",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Action:Update",
+          "Reference": "Modifying Account:",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Created:Successfully",
+          "Reference": "The Account has been created",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Updated:Successfully",
+          "Reference": "The Account has been updated",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Created:Failed",
+          "Reference": "We couldn't create this account...",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Updated:Failed",
+          "Reference": "We couldn't update this account...",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Name",
+          "Reference": "Name",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Name:Placeholder",
+          "Reference": "Enter account name",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Description",
+          "Reference": "Description",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Description:Placeholder",
+          "Reference": "Write a short description",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:PhoneCode",
+          "Reference": "Phone Code",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:PhoneCode:Placeholder",
+          "Reference": "+213",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:PhoneNumber",
+          "Reference": "Phone Number",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:PhoneNumber:Placeholder",
+          "Reference": "123456789",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:FaxCode",
+          "Reference": "Fax Code",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:FaxCode:Placeholder",
+          "Reference": "+213",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:FaxNumber",
+          "Reference": "Fax Number",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:FaxNumber:Placeholder",
+          "Reference": "123456789",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Email",
+          "Reference": "Email",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Email:Placeholder",
+          "Reference": "example@domain.com",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Website",
+          "Reference": "Website",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Website:Placeholder",
+          "Reference": "https://example.com",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:City",
+          "Reference": "City",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:City:Placeholder",
+          "Reference": "City",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Street",
+          "Reference": "Street",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Street:Placeholder",
+          "Reference": "Street address",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Object:Add",
+          "Reference": "Add",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Country",
+          "Reference": "Country",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Country:Placeholder",
+          "Reference": "Country",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:PostalCode",
+          "Reference": "Postal Code",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:PostalCode:Placeholder",
+          "Reference": "00000",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Type",
+          "Reference": "Account Type",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Industry",
+          "Reference": "Industry",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Employees",
+          "Reference": "Employees",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Employees:Placeholder",
+          "Reference": "0",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:Revenue",
+          "Reference": "Revenue",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:RevenueAmount",
+          "Reference": "Revenue Amount",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:RevenueAmount:Placeholder",
+          "Reference": "0.00",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:RevenueCurrency",
+          "Reference": "Currency",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Account:AssignTo",
+          "Reference": "Assign To",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:0",
+          "Reference": "Apparel",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:1",
+          "Reference": "Banking",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:2",
+          "Reference": "Biotechnology",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:3",
+          "Reference": "Chemicals",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:4",
+          "Reference": "Communications",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:5",
+          "Reference": "Construction",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:6",
+          "Reference": "Consulting",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:7",
+          "Reference": "Education",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:8",
+          "Reference": "Electronics",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:9",
+          "Reference": "Energy",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:10",
+          "Reference": "Engineering",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:11",
+          "Reference": "Entertainment",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:12",
+          "Reference": "Environmental",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:13",
+          "Reference": "Finance",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:14",
+          "Reference": "Government",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:15",
+          "Reference": "Healthcare",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:16",
+          "Reference": "Hospitality",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:17",
+          "Reference": "Insurance",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:18",
+          "Reference": "Machinery",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:19",
+          "Reference": "Manufacturing",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:20",
+          "Reference": "Media",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:21",
+          "Reference": "Not For Profit",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:22",
+          "Reference": "Recreation",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:23",
+          "Reference": "Retail",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:24",
+          "Reference": "Shipping",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:25",
+          "Reference": "Technology",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:26",
+          "Reference": "Telecommunications",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:27",
+          "Reference": "Transportation",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:28",
+          "Reference": "Utilities",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Industry:29",
+          "Reference": "Other",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Type:1",
+          "Reference": "Analyst",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Type:2",
+          "Reference": "Competitor",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Type:3",
+          "Reference": "Customer",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Type:4",
+          "Reference": "Integrator",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Type:5",
+          "Reference": "Investor",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Type:6",
+          "Reference": "Partner",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Type:7",
+          "Reference": "Press",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Type:8",
+          "Reference": "Prospect",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Type:9",
+          "Reference": "Reseller",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Accounts:Type:10",
+          "Reference": "Other",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Add",
+          "Reference": "Add account",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:AssignedTo",
+          "Reference": "Assigned To",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:City",
+          "Reference": "City",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Country",
+          "Reference": "Country",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:CreationTime",
+          "Reference": "Created at",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Creator",
+          "Reference": "Created by",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Description",
+          "Reference": "Description",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Email",
+          "Reference": "Email",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Fax",
+          "Reference": "Fax",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Name",
+          "Reference": "Client Name",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Phone",
+          "Reference": "Phone",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:PostalCode",
+          "Reference": "Postal Code",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Street",
+          "Reference": "Street",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:UserID",
+          "Reference": "User ID",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Website",
+          "Reference": "Website",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Delete:Warning:Text",
+          "Reference": "This action cannot be undone.",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Delete:Warning:Title",
+          "Reference": "Delete Client",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Deleted:Success",
+          "Reference": "Client deleted successfully",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Client:Deleted:Canceled",
+          "Reference": "Client deletion canceled",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Leads",
+          "Reference": "Leads",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:0",
+          "Reference": "Unset",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:1",
+          "Reference": "Existing Customer",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:2",
+          "Reference": "Self Generated",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:3",
+          "Reference": "Employee",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:4",
+          "Reference": "Partner",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:5",
+          "Reference": "Public Relations",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:6",
+          "Reference": "Direct Mail",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:7",
+          "Reference": "Conference",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:8",
+          "Reference": "Trade Show",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:9",
+          "Reference": "Website",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:10",
+          "Reference": "Word of Mouth",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:11",
+          "Reference": "Email",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:12",
+          "Reference": "Campaign",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:13",
+          "Reference": "Cold Call",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source:14",
+          "Reference": "Other",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:FirstName",
+          "Reference": "First Name",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:LastName",
+          "Reference": "Last Name",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Email",
+          "Reference": "Email",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Phone",
+          "Reference": "Phone",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Account",
+          "Reference": "Account",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Lead",
+          "Reference": "Converted From",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Status",
+          "Reference": "Status",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source",
+          "Reference": "Source",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Status:0",
+          "Reference": "New",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Status:1",
+          "Reference": "Assigned",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Status:2",
+          "Reference": "In Process",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Status:3",
+          "Reference": "Converted",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Status:4",
+          "Reference": "Recycled",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Status:5",
+          "Reference": "Dead",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:FirstName",
+          "Reference": "First Name",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:LastName",
+          "Reference": "Last Name",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Account",
+          "Reference": "Account",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Phone",
+          "Reference": "Phone",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Email",
+          "Reference": "Email",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Status",
+          "Reference": "Status",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Source",
+          "Reference": "Source",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunities",
+          "Reference": "Opportunities",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:0",
+          "Reference": "Unset",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:1",
+          "Reference": "Existing Customer",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:2",
+          "Reference": "Self Generated",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:3",
+          "Reference": "Employee",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:4",
+          "Reference": "Partner",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:5",
+          "Reference": "Public Relations",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:6",
+          "Reference": "Direct Mail",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:7",
+          "Reference": "Conference",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:8",
+          "Reference": "Trade Show",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:9",
+          "Reference": "Website",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:10",
+          "Reference": "Word of Mouth",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:11",
+          "Reference": "Email",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:12",
+          "Reference": "Campaign",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:13",
+          "Reference": "Cold Call",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:14",
+          "Reference": "Other",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Source:15",
+          "Reference": "Converted from Lead",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Status:0",
+          "Reference": "Inactive",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Status:1",
+          "Reference": "Active",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Add",
+          "Reference": "Add Opportunity",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:MiddleName",
+          "Reference": "Middle Name",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Website",
+          "Reference": "Website",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Description",
+          "Reference": "Description",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:PhoneCode",
+          "Reference": "Phone Code",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:PhoneNumber",
+          "Reference": "Phone Number",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:FaxCode",
+          "Reference": "Fax Code",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:FaxNumber",
+          "Reference": "Fax Number",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Country",
+          "Reference": "Country",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:City",
+          "Reference": "City",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Street",
+          "Reference": "Street",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:PostalCode",
+          "Reference": "Postal Code",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Job",
+          "Reference": "Job",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:Department",
+          "Reference": "Department",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Contact:AssignTo",
+          "Reference": "Assign To",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Note:Title",
+          "Reference": "Title",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Note:Content",
+          "Reference": "Content",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Note:Type",
+          "Reference": "Type",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Note:LinkedTo",
+          "Reference": "Linked To",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Note:Creator",
+          "Reference": "Creator",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Note:Type:0",
+          "Reference": "General",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Note:Type:1",
+          "Reference": "Preference",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Note:Type:2",
+          "Reference": "Demand",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Note:Type:3",
+          "Reference": "Complaint",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Note:linkedTo",
+          "Reference": "Linked to",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Name",
+          "Reference": "Name",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Amount",
+          "Reference": "Amount",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Probability",
+          "Reference": "Probability",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Stage",
+          "Reference": "Stage",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Type",
+          "Reference": "Type",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:SaleStage",
+          "Reference": "Sale Stage",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Account",
+          "Reference": "Account",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Lead",
+          "Reference": "Lead",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Contact",
+          "Reference": "Contact",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Owner",
+          "Reference": "Owner",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:CloseDate",
+          "Reference": "Close Date",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Currency",
+          "Reference": "Currency",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Stage:0",
+          "Reference": "Prospecting",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Stage:1",
+          "Reference": "Qualification",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Stage:2",
+          "Reference": "Needs Analysis",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Stage:3",
+          "Reference": "Value Proposition",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Stage:4",
+          "Reference": "Identify Decision Makers",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Stage:5",
+          "Reference": "Perception Analysis",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Stage:6",
+          "Reference": "Proposal / Price Quote",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Stage:7",
+          "Reference": "Negotiation / Review",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Stage:8",
+          "Reference": "Closed Won",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Stage:9",
+          "Reference": "Closed Lost",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:NextStep",
+          "Reference": "Next Step",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Type:0",
+          "Reference": "New Business",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Type:1",
+          "Reference": "Existing Business",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Type:2",
+          "Reference": "Renewal",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:SaleStage:0",
+          "Reference": "Prospecting",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:SaleStage:1",
+          "Reference": "Qualification",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:SaleStage:2",
+          "Reference": "Proposal",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:SaleStage:3",
+          "Reference": "Negotiation",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:SaleStage:4",
+          "Reference": "Closed",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Information",
+          "Reference": "Information",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Relations",
+          "Reference": "Relations",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:AuditInformation",
+          "Reference": "Audit Information",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:CreationTime",
+          "Reference": "Creation Time",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Action:Update",
+          "Reference": "Updating",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Action:Create",
+          "Reference": "Creating",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:ClosedAt",
+          "Reference": "Closed At",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Description",
+          "Reference": "Description",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Lose",
+          "Reference": "Close Lost",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Win",
+          "Reference": "Close Won",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Closed",
+          "Reference": "Opportunity Closed",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Celebrate",
+          "Reference": "Congratulations!!!",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Opportunity:Mourn",
+          "Reference": "We're sorry to see this",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Object:AuditInformation",
+          "Reference": "Audit Information",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Object:AuditInformation:CreatedAt",
+          "Reference": "Created At",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Object:AuditInformation:CreatedBy",
+          "Reference": "Creator",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Object:AuditInformation:UpdatedAt",
+          "Reference": "Modified At",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Object:AuditInformation:UpdatedBy",
+          "Reference": "Modifier",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Add:Note",
+          "Reference": "Add Note",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Action:Back",
+          "Reference": "Back",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Lead:Convert",
+          "Reference": "Convert",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:Status",
+          "Reference": "Email Status",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:Status:0",
+          "Reference": "Draft",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:Status:1",
+          "Reference": "Sending",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:Status:2",
+          "Reference": "Sent",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:Status:3",
+          "Reference": "Archived",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:Status:4",
+          "Reference": "Failed",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:Subject",
+          "Reference": "Subject",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:Body",
+          "Reference": "Body",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:From",
+          "Reference": "From",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:To",
+          "Reference": "To",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:Cc",
+          "Reference": "CC",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:Bcc",
+          "Reference": "BCC",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:SentAt",
+          "Reference": "Sent At",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:IsHtml",
+          "Reference": "Is HTML",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:Send",
+          "Reference": "Send Email",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:Send:Confirmation",
+          "Reference": "are you sure you want to send this email?",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:Send:Text",
+          "Reference": "the receiver would be able to read it ",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Email:Sent:Successfully",
+          "Reference": "your email has been send successfully",
+          "Target": ""
+        }
+      ]
+    }
+  ]
+}
