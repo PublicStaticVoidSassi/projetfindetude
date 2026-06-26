@@ -23,7 +23,7 @@ namespace UniFlowCRM;
 public class UniFlowCRMDataSeederContributor
     : IDataSeedContributor, ITransientDependency
 {
-    private readonly IRepository<Book, Guid> _bookRepository;
+    // private readonly IRepository<Book, Guid> _bookRepository;
     private readonly IGuidGenerator _guidGenerator;
     private readonly IRepository<IdentityUser, Guid> _userRepository;
     private readonly IRepository<Account, Guid> _accountRepository;
@@ -31,7 +31,6 @@ public class UniFlowCRMDataSeederContributor
     private readonly IRepository<Contact, Guid> _contactRepository;
     private readonly IRepository<Opportunity, Guid> _opportunityRepository;
     public UniFlowCRMDataSeederContributor(
-        IRepository<Book, Guid> bookRepository,
         IRepository<IdentityUser, Guid> u,
         IRepository<Opportunity, Guid> opportunityRepository,
         IRepository<Contact, Guid> contactRepository,
@@ -39,7 +38,7 @@ public class UniFlowCRMDataSeederContributor
         IRepository<Account, Guid> accountRepository,
         IGuidGenerator gg)
     {
-        _bookRepository = bookRepository;
+        // _bookRepository = bookRepository;
         _guidGenerator = gg;
         _userRepository = u;
 

@@ -21,12 +21,14 @@ export class EmailDetailsComponent implements OnInit {
   private readonly toaster = inject(ToasterService);
 
   email = signal<any>(null);
-
-  ngOnInit() {
+  reload() {
     const id = this.route.snapshot.params['id'];
     if (id) {
       this.emailService.get(id).subscribe((data) => this.email.set(data));
     }
+  }
+  ngOnInit() {
+    this.reload();
   }
 
   edit() {
@@ -52,11 +54,12 @@ export class EmailDetailsComponent implements OnInit {
   protected readonly EmailStatus = EmailStatus;
 
   protected send() {
-    this.confirmation.info("::Email:Send:Text","::Email:Send:Confirmation").subscribe((status) => {
+    this.confirmation.info("::Email:Send:Text", "::Email:Send:Confirmation").subscribe((status) => {
       if (status === Confirmation.Status.confirm) {
-          this.emailService.sendEmail(this.email().id).subscribe(()=>{
-            this.toaster.success(this.email().id ,"::Email:Sent:Successfully" );
-          });
+        this.emailService.sendEmail(this.email().id).subscribe(() => {
+          this.toaster.success(this.email().id, "::Email:Sent:Successfully");
+          this.reload();
+        });
       }
     })
   }

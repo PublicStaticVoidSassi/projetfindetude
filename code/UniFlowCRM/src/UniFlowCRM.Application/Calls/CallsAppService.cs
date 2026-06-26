@@ -12,6 +12,7 @@ using Volo.Abp.Identity;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 namespace UniFlowCRM.Calls;
 
 public class CallJoined
@@ -39,6 +40,7 @@ public class CallJoined
     }
 }
 
+[Authorize]
 public class CallsAppService : CrudAppService<Call, CallDto, Guid, CallRequestDto, CreateUpdateCallDto>, ICallAppService
 {
     private readonly IRepository<Account, Guid> _accountRepository;

@@ -22,12 +22,13 @@ public class OpportunityJoined
     public IdentityUserDto? Creator { get; set; }
     public IdentityUserDto? LastModifier { get; set; }
 }
+[Microsoft.AspNetCore.Authorization.Authorize]
 public class OpportunitiesAppService : CrudAppService<
-                                       Opportunity,
-                                       OpportunityDto,
-                                       Guid,
-                                       OpportunityRequestDto,
-                                       CreateUpdateOpportunityDto>, IOpportunityAppService
+                                   Opportunity,
+                                   OpportunityDto,
+                                   Guid,
+                                   OpportunityRequestDto,
+                                   CreateUpdateOpportunityDto>, IOpportunityAppService
 {
     private readonly IRepository<IdentityUser, Guid> _userRepository;
     private readonly IRepository<Account, Guid> _accountRepository;

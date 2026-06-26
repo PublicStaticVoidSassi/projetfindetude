@@ -9,6 +9,7 @@ import { NoteDto, NotesService } from '../../proxy/notes';
 import { NoteMiniform } from '../../notes/miniform/note-miniform.component';
 import { LeadStatus } from '../../proxy/leads';
 import { Toaster, ToasterService } from '@abp/ng.theme.shared';
+import { MiniOpportunity } from "src/app/shared/mini-opportunity/mini-opportunity";
 
 @Component({
   standalone: true,
@@ -18,7 +19,8 @@ import { Toaster, ToasterService } from '@abp/ng.theme.shared';
     DatePipe,
     RouterLink,
     NoteMiniUi,
-    NoteMiniform
+    NoteMiniform,
+    MiniOpportunity
   ],
   templateUrl: 'lead-details.html'
 })
@@ -29,7 +31,7 @@ export class LeadDetailsComponent implements OnInit {
   private toaster = inject(ToasterService);
 
   notesService = inject(NotesService);
-  notes:NoteDto[] = []
+  notes: NoteDto[] = []
 
   id: string = '';
 
@@ -38,7 +40,7 @@ export class LeadDetailsComponent implements OnInit {
   constructor() {
 
   }
-  ngOnInit(){
+  ngOnInit() {
     this.load();
   }
   load() {
@@ -52,10 +54,10 @@ export class LeadDetailsComponent implements OnInit {
       this.notes = notes;
     })
   }
-  convert(){
+  convert() {
     console.log("entered");
     this.leadsService.convert(this.id).subscribe(contact => {
-      this.toaster.success("::Lead:Converted",contact.id);
+      this.toaster.success("::Lead:Converted", contact.id);
       this.load();
     })
   }

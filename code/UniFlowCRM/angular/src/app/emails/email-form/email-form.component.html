@@ -15,66 +15,62 @@
       <!-- FROM -->
       <div class="row">
 
-      <div class="form-group col-6 mb-3">
-        <label for="from">{{ '::From' | abpLocalization }}
-        <app-required-tag></app-required-tag>
-        </label>
+        <div class="form-group col-6 mb-3">
+          <label for="from">{{ '::From' | abpLocalization }}
+            <app-required-tag></app-required-tag>
+          </label>
 
-        <input id="from" required type="email" class="form-control" formControlName="from" />
-      </div>
+          <input id="from" disabled="true" value='uniflowcrm67@gmail.com' type="email" class="form-control disabled"
+            formControlName="from" />
+        </div>
 
-      <!-- TO -->
-      <div class="form-group  col-6 mb-3">
-        <label for="to">{{ '::To' | abpLocalization }}
-          <app-required-tag></app-required-tag>
-        </label>
-        <input id="to" required type="email" class="form-control" formControlName="to" autofocus />
-      </div>
+        <!-- TO -->
+        <div class="form-group  col-6 mb-3">
+          <label for="to">{{ '::To' | abpLocalization }}
+            <app-required-tag></app-required-tag>
+          </label>
+          <input id="to" required type="email" class="form-control" formControlName="to" autofocus />
+        </div>
       </div>
       <div class="row">
 
-      <!-- CC -->
-      <div class="form-group col-6 mb-3">
-        <label for="cc">{{ '::Cc' | abpLocalization }}</label>
-        <input id="cc" type="email" class="form-control" formControlName="cc" />
-      </div>
+        <!-- CC -->
+        <div class="form-group col-6 mb-3">
+          <label for="cc">{{ '::Cc' | abpLocalization }}</label>
+          <input id="cc" type="email" class="form-control" formControlName="cc" />
+        </div>
 
-      <!-- BCC -->
-      <div class="form-group col-6 mb-3">
-        <label for="bcc">{{ '::Bcc' | abpLocalization }}</label>
-        <input id="bcc" type="email" class="form-control" formControlName="bcc" />
-      </div>
+        <!-- BCC -->
+        <div class="form-group col-6 mb-3">
+          <label for="bcc">{{ '::Bcc' | abpLocalization }}</label>
+          <input id="bcc" type="email" class="form-control" formControlName="bcc" />
+        </div>
       </div>
       <!-- SUBJECT -->
       <div class="row">
-      <div class="form-group mb-3 col-9">
-        <label for="subject">{{ '::Subject' | abpLocalization }}
-          <app-required-tag></app-required-tag>
-        </label>
-        <input id="subject"  required  type="text" class="form-control" formControlName="subject" />
-      </div>
-      <div class="form-group mb-3 col-3">
-        <label for="status">{{ '::Email:Status' | abpLocalization }}</label>        <app-required-tag></app-required-tag>
+        <div class="form-group mb-3 col-9">
+          <label for="subject">{{ '::Subject' | abpLocalization }}
+            <app-required-tag></app-required-tag>
+          </label>
+          <input id="subject" required type="text" class="form-control" formControlName="subject" />
+        </div>
+        <div class="form-group mb-3 col-3">
+          <label for="status">{{ '::Email:Status' | abpLocalization }}</label> <app-required-tag></app-required-tag>
 
-        <select class="form-control"  required  formControlName="status" >
-<!--          <option value="null" disabled>email status</option>-->
-          @for(status of emailStatuses; track status.value){
-              <option [value]="status.value">{{'::Email:Status:'+status.value | abpLocalization}}</option>
-          }
+          <select class="form-control" required formControlName="status">
+            <!--          <option value="null" disabled>email status</option>-->
+            @for(status of emailStatuses; track status.value){
+            <option [value]="status.value">{{'::Email:Status:'+status.value | abpLocalization}}</option>
+            }
           </select>
-      </div>
+        </div>
       </div>
 
       <!-- BODY -->
       <div class="form-group mb-3">
-        <label for="body">{{ '::Body' | abpLocalization }}</label>        <app-required-tag></app-required-tag>
+        <label for="body">{{ '::Body' | abpLocalization }}</label> <app-required-tag></app-required-tag>
 
-        <textarea
-          id="body"
-          class="form-control"
-          formControlName="body"
-          rows="10" required
-        ></textarea>
+        <textarea id="body" class="form-control" formControlName="body" rows="10" required></textarea>
       </div>
 
       <!-- IS HTML -->
@@ -85,39 +81,49 @@
         </label>
       </div>
       <div class="mb-3">
-        <users-lookup  formControlName="ownerID"></users-lookup>
+        <users-lookup formControlName="ownerID"></users-lookup>
       </div>
       <div class="row">
-      <div class="mb-3 col-6">
-        <leads-lookup formControlName="leadID"></leads-lookup>
-      </div>
+        <div class="mb-3 col-6">
+          <leads-lookup [disabled]="
+  (form.get('accountID')?.value && form.get('accountID')?.value !== 'null')||
+  (form.get('contactID')?.value && form.get('contactID')?.value !== 'null')||
+  (form.get('opportunityID')?.value && form.get('opportunityID')?.value !== 'null')
+  " formControlName="leadID">
+          </leads-lookup>
+        </div>
 
-      <div class="mb-3 col-6">
-        <accounts-lookup formControlName="accountID"></accounts-lookup>
-      </div>
+        <div class="mb-3 col-6">
+          <accounts-lookup [disabled]="
+  (form.get('leadID')?.value && form.get('leadID')?.value !== 'null')||
+  (form.get('contactID')?.value && form.get('contactID')?.value !== 'null')||
+  (form.get('opportunityID')?.value && form.get('opportunityID')?.value !== 'null')
+  " formControlName="accountID"></accounts-lookup>
+        </div>
       </div>
       <div class="row">
-      <div class="mb-3 col-6">
-        <contacts-lookup formControlName="contactID"></contacts-lookup>
-      </div>
-      <div class="mb-3 col-6">
-        <opportunities-lookup formControlName="opportunityID"></opportunities-lookup>
-      </div>
+        <div class="mb-3 col-6">
+          <contacts-lookup [disabled]="
+  (form.get('accountID')?.value && form.get('accountID')?.value !== 'null')||
+  (form.get('leadID')?.value && form.get('leadID')?.value !== 'null')||
+  (form.get('opportunityID')?.value && form.get('opportunityID')?.value !== 'null')
+  " formControlName="contactID"></contacts-lookup>
+        </div>
+        <div class="mb-3 col-6">
+          <opportunities-lookup [disabled]="
+  (form.get('accountID')?.value && form.get('accountID')?.value !== 'null')||
+  (form.get('leadID')?.value && form.get('leadID')?.value !== 'null')||
+  (form.get('contactID')?.value && form.get('contactID')?.value !== 'null')
+  " formControlName="opportunityID"></opportunities-lookup>
+        </div>
       </div>
       <!-- ACTIONS -->
       <div class="text-end">
-        <button
-          type="button"
-          class="btn btn-outline-danger btn-sm me-2"
-          (click)="cancel()"
-        >
+        <button type="button" class="btn btn-outline-danger btn-sm me-2" (click)="cancel()">
           {{ '::Cancel' | abpLocalization }}
         </button>
 
-        <button
-          class="btn btn-brand btn-sm"
-          [disabled]="form.invalid || loading()"
-        >
+        <button class="btn btn-brand btn-sm" [disabled]="form.invalid || loading()">
           <i class="fa fa-check me-1 "></i>
           {{ '::Save' | abpLocalization }}
         </button>

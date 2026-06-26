@@ -129,52 +129,64 @@
           </select>
         </div> -->
 
+<!-- <div> -->
+<!---->
+<!-- <leads-lookup -->
+<!--   [disabled]=" -->
+<!--   (form.get('accountID')?.value && form.get('accountID')?.value !== 'null')|| -->
+<!--   (form.get('contactID')?.value && form.get('contactID')?.value !== 'null')|| -->
+<!--   (form.get('opportunityID')?.value && form.get('opportunityID')?.value !== 'null') -->
+<!--   " -->
+<!--   formControlName="leadID"> -->
+<!-- </leads-lookup> -->
+<!-- <accounts-lookup -->
+<!-- [disabled]=" -->
+<!--   (form.get('leadID')?.value && form.get('leadID')?.value !== 'null')|| -->
+<!--   (form.get('contactID')?.value && form.get('contactID')?.value !== 'null')|| -->
+<!--   (form.get('opportunityID')?.value && form.get('opportunityID')?.value !== 'null') -->
+<!--   " -->
+<!-- formControlName="accountID"></accounts-lookup> -->
+<!-- <contacts-lookup -->
+<!-- [disabled]=" -->
+<!--   (form.get('accountID')?.value && form.get('accountID')?.value !== 'null')|| -->
+<!--   (form.get('leadID')?.value && form.get('leadID')?.value !== 'null')|| -->
+<!--   (form.get('opportunityID')?.value && form.get('opportunityID')?.value !== 'null') -->
+<!--   " -->
+<!-- formControlName="contactID"></contacts-lookup> -->
+<!-- </div> -->
+
         <!-- Lead -->
         <div class="col-3">
-          <label class="form-label">
-            {{ '::Opportunity:Lead' | abpLocalization }}
-          </label>
-
-          <select class="form-select" formControlName="leadID">
-            <option [ngValue]="null"></option>
-            @for (l of leads; track l.id) {
-              <option [value]="l.id">
-                {{ l.firstName }} {{ l.lastName }}
-              </option>
-            }
-          </select>
+          <leads-lookup
+  [disabled]="
+  (form.get('accountID')?.value && form.get('accountID')?.value !== 'null')||
+  (form.get('contactID')?.value && form.get('contactID')?.value !== 'null')||
+  (form.get('opportunityID')?.value && form.get('opportunityID')?.value !== 'null')
+  "
+  formControlName="leadID">
+</leads-lookup>
         </div>
 
         <!-- Account -->
         <div class="col-3">
-          <label class="form-label">
-            {{ '::Opportunity:Account' | abpLocalization }}
-          </label>
-
-          <select class="form-select" formControlName="accountID">
-            <option [ngValue]="null"></option>
-            @for (a of accounts; track a.id) {
-              <option [value]="a.id">
-                {{ a.name }}
-              </option>
-            }
-          </select>
+<accounts-lookup
+[disabled]="
+  (form.get('leadID')?.value && form.get('leadID')?.value !== 'null')||
+  (form.get('contactID')?.value && form.get('contactID')?.value !== 'null')||
+  (form.get('opportunityID')?.value && form.get('opportunityID')?.value !== 'null')
+  "
+formControlName="accountID"></accounts-lookup>
         </div>
 
         <!-- Contact -->
         <div class="col-3">
-          <label class="form-label">
-            {{ '::Opportunity:Contact' | abpLocalization }}
-          </label>
-
-          <select class="form-select" formControlName="contactID">
-            <option [ngValue]="null"></option>
-            @for (c of contacts; track c.id) {
-              <option [value]="c.id">
-                {{ c.firstName }} {{ c.lastName }}
-              </option>
-            }
-          </select>
+<contacts-lookup
+[disabled]="
+  (form.get('accountID')?.value && form.get('accountID')?.value !== 'null')||
+  (form.get('leadID')?.value && form.get('leadID')?.value !== 'null')||
+  (form.get('opportunityID')?.value && form.get('opportunityID')?.value !== 'null')
+  "
+formControlName="contactID"></contacts-lookup>
         </div>
 
         <!-- Owner -->

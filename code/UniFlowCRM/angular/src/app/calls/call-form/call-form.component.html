@@ -4,10 +4,10 @@
       <app-return-btn></app-return-btn>
     </div>
     <h5 class="display-6 fw-bold">{{ (id ? '::Client:Action:Update' : '::Client:Action:Create') | abpLocalization }}
-    <span class="text-brand">
-      {{this.form.get('name')?.value}}
+      <span class="text-brand">
+        {{this.form.get('name')?.value}}
 
-    </span>
+      </span>
     </h5>
   </div>
   <div class="card-body">
@@ -20,47 +20,55 @@
           </div>
 
           <div class="form-group mb-3">
-            <label class="d-block">{{ '::Call:PhoneNumber' | abpLocalization }}<app-required-tag></app-required-tag></label>
+            <label class="d-block">{{ '::Call:PhoneNumber' | abpLocalization
+              }}<app-required-tag></app-required-tag></label>
             <div>
 
-            <input id="call-phonecode" required placeholder="+213" type="text" formControlName="phoneCode" class="form-control d-inline w-25">
-            <input id="call-phonenumber" required placeholder="123 45 67 89" type="text" formControlName="phoneNumber" class="form-control d-inline w-75">
+              <input id="call-phonecode" required placeholder="+213" type="text" formControlName="phoneCode"
+                class="form-control d-inline w-25">
+              <input id="call-phonenumber" required placeholder="123 45 67 89" type="text" formControlName="phoneNumber"
+                class="form-control d-inline w-75">
             </div>
 
           </div>
 
           <div class="form-group mb-3">
-            <label for="call-start">{{ '::Call:StartTime' | abpLocalization }} <app-required-tag></app-required-tag> </label>
-<!--            <p-datepicker appendTo="body" class="form-control rounded-3 bg-dark-subtle" formControlName="startTime"  [showTime]="true" hourFormat="12" />-->
+            <label for="call-start">{{ '::Call:StartTime' | abpLocalization }} <app-required-tag></app-required-tag>
+            </label>
+            <!--            <p-datepicker appendTo="body" class="form-control rounded-3 bg-dark-subtle" formControlName="startTime"  [showTime]="true" hourFormat="12" />-->
             <input id="call-start" required type="datetime-local" class="form-control" formControlName="startTime" />
           </div>
           <div class="form-group mb-3">
-            <label for="call-end">{{ '::Call:EndTime' | abpLocalization }} <app-required-tag></app-required-tag> </label>
-<!--            <p-datepicker appendTo="body" class="form-control rounded-3 bg-dark-subtle" formControlName="endTime"  [showTime]="true" hourFormat="12" />-->
+            <label for="call-end">{{ '::Call:EndTime' | abpLocalization }} <app-required-tag></app-required-tag>
+            </label>
+            <!--            <p-datepicker appendTo="body" class="form-control rounded-3 bg-dark-subtle" formControlName="endTime"  [showTime]="true" hourFormat="12" />-->
 
-                        <input id="call-end" required type="datetime-local" class="form-control" formControlName="endTime" />
+            <input id="call-end" required type="datetime-local" class="form-control" formControlName="endTime" />
           </div>
-            <div class="form-group mb-3">
-              <label for="call-status">{{ '::Call:Status' | abpLocalization }} <app-required-tag></app-required-tag></label>
-              <select id="call-status" required class="form-control" formControlName="status">
-                @for (status of callstatuses; track status.value) {
-                  <option [value]="status.value">{{ '::Call:Status:'+status.value | abpLocalization }}</option>
-                }
-              </select>
-            </div>
-            <div class="form-group mb-3">
-              <label for="call-direction">{{ '::Direction' | abpLocalization }} <app-required-tag></app-required-tag> </label>
-              <select id="call-direction" required class="form-control" formControlName="direction">
-                @for (status of calldirections; track status.value) {
-                  <option [value]="status.value">{{ '::Call:Direction:'+status.value | abpLocalization }}</option>
-                }
-              </select>
-            </div>
+          <div class="form-group mb-3">
+            <label for="call-status">{{ '::Call:Status' | abpLocalization }}
+              <app-required-tag></app-required-tag></label>
+            <select id="call-status" required class="form-control" formControlName="status">
+              @for (status of callstatuses; track status.value) {
+              <option [value]="status.value">{{ '::Call:Status:'+status.value | abpLocalization }}</option>
+              }
+            </select>
+          </div>
+          <div class="form-group mb-3">
+            <label for="call-direction">{{ '::Direction' | abpLocalization }} <app-required-tag></app-required-tag>
+            </label>
+            <select id="call-direction" required class="form-control" formControlName="direction">
+              @for (status of calldirections; track status.value) {
+              <option [value]="status.value">{{ '::Call:Direction:'+status.value | abpLocalization }}</option>
+              }
+            </select>
+          </div>
         </div>
 
         <div class="col-md-6">
           <div class="form-group mb-3">
-            <label for="call-duration">{{ '::Duration' | abpLocalization }}{{ ' (mins)' }}<app-required-tag></app-required-tag></label>
+            <label for="call-duration">{{ '::Duration' | abpLocalization }}{{ ' (mins)'
+              }}<app-required-tag></app-required-tag></label>
             <input id="call-duration" type="number" required class="form-control" formControlName="duration" />
           </div>
 
@@ -68,17 +76,34 @@
             <users-lookup formControlName="ownerID"></users-lookup>
           </div>
           <div class="mb-3">
-            <leads-lookup formControlName="leadID"></leads-lookup>
+            <leads-lookup [disabled]="
+  (form.get('accountID')?.value && form.get('accountID')?.value !== 'null')||
+  (form.get('contactID')?.value && form.get('contactID')?.value !== 'null')||
+  (form.get('opportunityID')?.value && form.get('opportunityID')?.value !== 'null')
+  " formControlName="leadID">
+            </leads-lookup>
           </div>
 
           <div class="mb-3">
-            <accounts-lookup formControlName="accountID"></accounts-lookup>
+            <accounts-lookup [disabled]="
+  (form.get('leadID')?.value && form.get('leadID')?.value !== 'null')||
+  (form.get('contactID')?.value && form.get('contactID')?.value !== 'null')||
+  (form.get('opportunityID')?.value && form.get('opportunityID')?.value !== 'null')
+  " formControlName="accountID"></accounts-lookup>
           </div>
           <div class="mb-3">
-            <contacts-lookup formControlName="contactID"></contacts-lookup>
+            <contacts-lookup [disabled]="
+  (form.get('accountID')?.value && form.get('accountID')?.value !== 'null')||
+  (form.get('leadID')?.value && form.get('leadID')?.value !== 'null')||
+  (form.get('opportunityID')?.value && form.get('opportunityID')?.value !== 'null')
+  " formControlName="contactID"></contacts-lookup>
           </div>
           <div class="mb-3">
-            <opportunities-lookup formControlName="opportunityID"></opportunities-lookup>
+            <opportunities-lookup [disabled]="
+  (form.get('accountID')?.value && form.get('accountID')?.value !== 'null')||
+  (form.get('leadID')?.value && form.get('leadID')?.value !== 'null')||
+  (form.get('contactID')?.value && form.get('contactID')?.value !== 'null')
+  " formControlName="opportunityID"></opportunities-lookup>
           </div>
 
         </div>
@@ -99,9 +124,7 @@
         <button type="button" class="btn btn-outline-danger btn-sm me-2" (click)="cancel()">
           {{ '::Cancel' | abpLocalization }}
         </button>
-        <button
-          [disabled]="form.invalid"
-          class="btn btn-brand btn-sm" >
+        <button [disabled]="form.invalid" class="btn btn-brand btn-sm">
           <i class="fa fa-check me-1"></i>
           {{ '::Save' | abpLocalization }}
         </button>

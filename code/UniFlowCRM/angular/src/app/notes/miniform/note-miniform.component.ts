@@ -2,7 +2,7 @@ import { Component, inject, Input } from '@angular/core';
 import { AutofocusDirective, CoreModule, LocalizationPipe } from '@abp/ng.core';
 import { ModalCloseDirective, ModalComponent, Toaster, ToasterService } from '@abp/ng.theme.shared';
 import { NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup,FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { bookTypeOptions } from '../../proxy/books';
 import { CreateUpdateNoteDto, NotesService, NoteType, noteTypeOptions } from '../../proxy/notes';
 import { AccountsLookup, ContactsLookup, LeadsLookup, OpportunitiesLookup } from '../../shared/lookup-components';
@@ -28,18 +28,18 @@ import { RequiredTag } from '../../shared/required-tag/required-tag';
   styleUrl: './note-miniform.component.scss',
 })
 export class NoteMiniform {
-  @Input() isFor! : 'lead'|'account'|'contact'|'opportunity';
-  @Input() id! : string;
+  @Input() isFor!: 'lead' | 'account' | 'contact' | 'opportunity';
+  @Input() id!: string;
   private readonly fb = inject(FormBuilder);
   notesService = inject(NotesService);
   toaster = inject(ToasterService);
 
   form: FormGroup = this.fb.group({});
 
-isModalOpen=  false;
-openModal(){
-  this.isModalOpen = true;
-}
+  isModalOpen = false;
+  openModal() {
+    this.isModalOpen = true;
+  }
   buildForm() {
     this.form = this.fb.group({
       // id: [null],
@@ -93,7 +93,7 @@ openModal(){
         this.toaster.success('::SuccessfullySaved');
         this.form.reset();
         this.isModalOpen = false;
-        // window.reload();
+        location.reload();
       },
       error: err => {
         this.toaster.error(err.message);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Addresses;
 using UniFlowCRM.EmailAddresses;
@@ -27,6 +28,8 @@ namespace UniFlowCRM.Contacts
         public IdentityUserDto? Creator { get; set; }
         public IdentityUserDto? LastModifier { get; set; }
     }
+
+    [Authorize]
     public class ContactsAppService :
       CrudAppService<
       Contact,

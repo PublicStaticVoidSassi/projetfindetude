@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService, ThemeSharedModule } from '@abp/ng.theme.shared';
 import { EmailsService } from '../../proxy/emails/emails.service';
-import { emailStatusOptions } from '../../proxy/emails';
+import { EmailStatus, emailStatusOptions } from '../../proxy/emails';
 import { CommonModule } from '@angular/common';
-import {AccountsLookup,ContactsLookup,LeadsLookup,OpportunitiesLookup,UsersLookup} from "../../shared/lookup-components";
-import {LocalizationPipe} from '@abp/ng.core';
+import { AccountsLookup, ContactsLookup, LeadsLookup, OpportunitiesLookup, UsersLookup } from "../../shared/lookup-components";
+import { LocalizationPipe } from '@abp/ng.core';
 import { ReturnBtn } from '../../shared/return-btn/return-btn';
 import { RequiredTag } from '../../shared/required-tag/required-tag';
 @Component({
@@ -29,11 +29,11 @@ export class EmailFormComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.buildForm();
-    setTimeout((()=>{
+    setTimeout((() => {
       this.load();
-    }),2500)
+    }), 2500)
   }
-  load(){
+  load() {
     if (this.id) {
       this.loading.set(true);
       this.emailService.get(this.id).subscribe((email) => {
@@ -54,15 +54,15 @@ export class EmailFormComponent implements OnInit {
     this.form = this.fb.group({
       subject: ['', [Validators.required]],
       body: ['', [Validators.required]],
-      status: [null, Validators.required],
+      status: [EmailStatus.Draft, Validators.required],
 
-      from: ['', [Validators.email]],
+      from: ['uniflowcrm67@gmail.com', Validators.email],
       to: ['', [Validators.required, Validators.email]],
-      cc: ['',Validators.email],
-      bcc: ['',Validators.email],
+      cc: ['', Validators.email],
+      bcc: ['', Validators.email],
 
       sentAt: [null],
-      isHtml: [false],
+      isHtml: [true],
 
       accountID: [null],
       contactID: [null],

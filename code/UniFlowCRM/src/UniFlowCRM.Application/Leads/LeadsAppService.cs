@@ -13,6 +13,7 @@ using UniFlowCRM.EmailAddresses;
 using UniFlowCRM.PhoneNumbers;
 using Volo.Abp.Identity;
 using UniFlowCRM.Contacts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UniFlowCRM.Leads
 {
@@ -24,6 +25,7 @@ namespace UniFlowCRM.Leads
         public IdentityUserDto? Creator { get; set; }
         public IdentityUserDto? LastModifier { get; set; }
     }
+    [Authorize]
     public class LeadsAppService :
         CrudAppService<Lead, LeadDto, Guid, LeadRequestDto, CreateUpdateLeadDto>
         , ILeadsAppService

@@ -4,10 +4,11 @@ import { Contacts } from '../../proxy';
 import { LocalizationPipe } from '@abp/ng.core';
 import { DatePipe } from '@angular/common';
 import { ReturnBtn } from '../../shared/return-btn/return-btn';
-import {ContactsourcePipe,ContactstatusPipe} from '../pipes';
+import { ContactsourcePipe, ContactstatusPipe } from '../pipes';
 import { NoteMiniform } from '../../notes/miniform/note-miniform.component';
 import { NoteMiniUi } from '../../notes/note-mini-ui/note-mini-ui';
 import { NoteDto, NotesService } from '../../proxy/notes';
+import { MiniOpportunity } from "src/app/shared/mini-opportunity/mini-opportunity";
 @Component({
   standalone: true,
   imports: [
@@ -18,7 +19,8 @@ import { NoteDto, NotesService } from '../../proxy/notes';
     DatePipe,
     NoteMiniform,
     RouterLink,
-    NoteMiniUi
+    NoteMiniUi,
+    MiniOpportunity
   ],
   templateUrl: 'contact-details.html'
 })
@@ -27,7 +29,7 @@ export class ContactDetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private contactsService = inject(Contacts.ContactsService);
   notesService = inject(NotesService);
-  notes :NoteDto[]= [];
+  notes: NoteDto[] = [];
   id: string = '';
 
   contact = {} as Contacts.ContactDto;
@@ -44,7 +46,7 @@ export class ContactDetailsComponent implements OnInit {
       this.contact = c;
       console.log(c);
     });
-    this.notesService.getForContactByContactId(this.id).subscribe(e=>{
+    this.notesService.getForContactByContactId(this.id).subscribe(e => {
       this.notes = e;
     })
   }

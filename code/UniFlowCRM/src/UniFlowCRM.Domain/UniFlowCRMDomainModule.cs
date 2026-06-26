@@ -17,6 +17,7 @@ using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Emailing;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
+using UniFlowCRM.Emails;
 
 namespace UniFlowCRM;
 
@@ -42,10 +43,6 @@ public class UniFlowCRMDomainModule : AbpModule
         {
             options.IsEnabled = MultiTenancyConsts.IsEnabled;
         });
-
-
-#if DEBUG
-        context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, NullEmailSender>());
-#endif
+        context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, GmailSender>());
     }
 }

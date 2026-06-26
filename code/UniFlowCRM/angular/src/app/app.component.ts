@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { DynamicLayoutComponent } from '@abp/ng.core';
+import { Component, inject, OnInit } from '@angular/core';
+import { AuthService, DynamicLayoutComponent } from '@abp/ng.core';
 import { LoaderBarComponent } from '@abp/ng.theme.shared';
 
 @Component({
@@ -10,4 +10,11 @@ import { LoaderBarComponent } from '@abp/ng.theme.shared';
   `,
   imports: [LoaderBarComponent, DynamicLayoutComponent],
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  ngOnInit(): void {
+    this.auth.isAuthenticated || this.auth.navigateToLogin();
+  }
+  private auth = inject(AuthService);
+
+
+}

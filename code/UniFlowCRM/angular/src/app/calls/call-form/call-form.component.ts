@@ -2,10 +2,10 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToasterService, ThemeSharedModule } from '@abp/ng.theme.shared';
-import { CallsService ,callStatusOptions,callDirectionOptions} from '../../proxy/calls';
+import { CallsService, callStatusOptions, callDirectionOptions, CallDirection, CallStatus } from '../../proxy/calls';
 import { CommonModule } from '@angular/common';
 import { LocalizationPipe } from '@abp/ng.core';
-import { AccountsLookup,ContactsLookup,LeadsLookup,OpportunitiesLookup,UsersLookup } from '../../shared/lookup-components';
+import { AccountsLookup, ContactsLookup, LeadsLookup, OpportunitiesLookup, UsersLookup } from '../../shared/lookup-components';
 import { ReturnBtn } from '../../shared/return-btn/return-btn';
 import { RequiredTag } from '../../shared/required-tag/required-tag';
 @Component({
@@ -24,7 +24,7 @@ export class CallFormComponent implements OnInit {
   calldirections = callDirectionOptions;
   callstatuses = callStatusOptions;
 
-  form: FormGroup ;
+  form: FormGroup;
   id: string | null = null;
   loading = signal(false);
 
@@ -36,20 +36,20 @@ export class CallFormComponent implements OnInit {
       this.loading.set(true);
       this.callService.get(this.id).subscribe((call) => {
         // this.form.patchValue(call);
-        setTimeout(()=>{
+        setTimeout(() => {
           this.form.patchValue({
             ...call,
             phoneNumber: call.phoneNumber?.split(' ')[1],
-            phoneCode:call.phoneNumber?.split(' ')[0],
-            accountID:call.account?.id,
-            leadID:call.lead?.id,
-            contactID:call.contact?.id,
-            opportunityID:call.opportunity?.id,
-            ownerID:call.owner?.id,
+            phoneCode: call.phoneNumber?.split(' ')[0],
+            accountID: call.account?.id,
+            leadID: call.lead?.id,
+            contactID: call.contact?.id,
+            opportunityID: call.opportunity?.id,
+            ownerID: call.owner?.id,
           })
           this.loading.set(false);
 
-        },500);
+        }, 500);
 
       });
     }
@@ -59,18 +59,18 @@ export class CallFormComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       description: [''],
-      status: [null],
-      direction: [null],
-      startTime: [new Date().toLocalISOString(),Validators.required],
+      status: [CallStatus.Planned],
+      direction: [CallDirection.Outbound],
+      startTime: [new Date().toLocalISOString(), Validators.required],
       endTime: [new Date()],
-      duration: [null, [Validators.required,Validators.min(0)]],
-      phoneCode: ['', [Validators.required,Validators.maxLength(32)]],
-      phoneNumber: ['', [Validators.required,Validators.maxLength(32)]],
+      duration: [null, [Validators.required, Validators.min(0)]],
+      phoneCode: ['', [Validators.required, Validators.maxLength(4)]],
+      phoneNumber: ['', [Validators.required, Validators.maxLength(32)]],
       accountID: [null],
       contactID: [null],
       opportunityID: [null],
       leadID: [null],
-      ownerID: [null],
+      ownerID: [null, Validators.required],
     });
   }
 

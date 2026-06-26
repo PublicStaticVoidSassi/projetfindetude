@@ -10,6 +10,7 @@ import { ReturnBtn } from '../../shared/return-btn/return-btn';
 // import { enumToDropdown } from '../../shared/enum-to-dropdown';
 import { Currency } from '../../proxy/moneys';
 
+import { AccountsLookup, ContactsLookup, LeadsLookup, OpportunitiesLookup } from '../../shared/lookup-components/';
 import {
   OpportunitiesService,
   CreateUpdateOpportunityDto,
@@ -25,7 +26,7 @@ import { ContactDto, ContactsService } from '../../proxy/contacts';
 @Component({
   selector: 'app-opportunity-form',
   standalone: true,
-  imports: [
+  imports: [AccountsLookup, ContactsLookup, LeadsLookup,
     ReturnBtn,
     ReactiveFormsModule,
     LocalizationPipe
@@ -60,25 +61,19 @@ export class OpportunityFormComponent implements OnInit {
   // stages = enumToDropdown(OpportunityStage);
 
   form: FormGroup = this.fb.group({
-
     name: ['', Validators.required],
     description: [null],
-
     amountCurrency: [Currency.DZD],
-    amountValue: [null],
-
-    stage: [OpportunityStage.Prospecting],
-    type: [OpportunityType.NewBusiness],
-    saleStage: [SaleStage.Prospecting],
-
-    probability: [0],
+    amountValue: [0],
+    stage: [OpportunityStage.Prospecting, Validators.required],
+    type: [OpportunityType.NewBusiness, Validators.required],
+    probability: [50],
     nextStep: [null],
     closedAt: [null],
-
-    userID: [null],
-    leadID: [null],
-    accountID: [null],
-    contactID: [null],
+    userID: [null, Validators.required],
+    leadID: [this.route.snapshot.queryParamMap.get('leadID')],
+    accountID: [this.route.snapshot.queryParamMap.get('accountID')],
+    contactID: [this.route.snapshot.queryParamMap.get('contactID')],
   });
 
   get isUpdate(): boolean {
@@ -97,11 +92,22 @@ export class OpportunityFormComponent implements OnInit {
     this.accountService.getList({ maxResultCount: 999 }).subscribe(r => this.accounts = r.items);
     this.contactService.getList({ maxResultCount: 999 })
       .subscribe(r => this.contacts = r.items);
+    setTimeout(() => {
+      this.form.patchValue({
+        leadID: this.route.snapshot.queryParamMap.get('leadID'),
+        accountID: this.route.snapshot.queryParamMap.get('accountID'),
+        contactID: this.route.snapshot.queryParamMap.get('contactID'),
+      });
+    }, 1000);
+
   }
 
   private load(): void {
     this.service.get(this.id!).subscribe(dto => {
-      this.form.patchValue(dto);
+      setTimeout(() => {
+
+        this.form.patchValue(dto);
+      }, 1000);
     });
   }
 

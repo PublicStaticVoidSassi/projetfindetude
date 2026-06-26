@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Calls;
 using UniFlowCRM.Contacts;
@@ -40,13 +41,14 @@ public class EmailJoined
     }
 }
 
+[Authorize]
 public class EmailsAppService :
-  CrudAppService<Email,
-  EmailDto,
-  Guid,
-  EmailRequestDto,
-  CreateUpdateEmailDto
-  >, IEmailAppService
+CrudAppService<Email,
+EmailDto,
+Guid,
+EmailRequestDto,
+CreateUpdateEmailDto
+>, IEmailAppService
 {
 
     public IRepository<Lead, Guid> LeadsRepository { get; }

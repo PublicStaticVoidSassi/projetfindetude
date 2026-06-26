@@ -5,6 +5,7 @@
     <div class="d-flex justify-content-end">
       <app-return-btn></app-return-btn>
       <note-miniform [id]="account.id" isFor="account"></note-miniform>
+      <create-opp-btn for="account" [id]="account.id"></create-opp-btn>
     </div>
     <h1 class="mb-1 text-brand">{{ account.name }}</h1>
     <p class="mb-1">{{'::Client:AssignedTo'| abpLocalization }} : {{ account.owner?.userName }}</p>

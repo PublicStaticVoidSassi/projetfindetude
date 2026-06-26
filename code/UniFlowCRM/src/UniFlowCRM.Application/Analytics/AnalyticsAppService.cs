@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Contacts;
 using UniFlowCRM.Dashboards;
@@ -14,6 +15,7 @@ using Volo.Abp.Identity;
 
 namespace UniFlowCRM.Analytics
 {
+    [Authorize]
     public class AnalyticsAppService(
         IRepository<Lead, Guid> _leadRepository,
         IRepository<Account, Guid> _accountRepository,

@@ -13,9 +13,11 @@ using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
 using System.Linq.Dynamic.Core;
 using Volo.Abp.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UniFlowCRM.Notes;
 
+[Authorize]
 public class NotesAppService : CrudAppService<Note, NoteDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateNoteDto>, INotesAppService
 {
     private readonly IRepository<IdentityUser, Guid> _userRepository;
@@ -143,7 +145,7 @@ public class NotesAppService : CrudAppService<Note, NoteDto, Guid, PagedAndSorte
                    on note.OpportunityId equals opportunity.Id
                    into opportunityJoin
                from opportunity in opportunityJoin.DefaultIfEmpty()
-               //orderby "Note." + input.Sorting
+                   //orderby "Note." + input.Sorting
                select new NoteDto
                {
                    Id = note.Id,
@@ -250,9 +252,9 @@ public class NotesAppService : CrudAppService<Note, NoteDto, Guid, PagedAndSorte
     {
         var query = await GetQueryableAsync(input);
         //query = query
-            //.OrderBy(input.Sorting ?? "title")
-            //.Skip(input.SkipCount)
-            //.Take(input.MaxResultCount);
+        //.OrderBy(input.Sorting ?? "title")
+        //.Skip(input.SkipCount)
+        //.Take(input.MaxResultCount);
 
         var items = await AsyncExecuter.ToListAsync(query);
         var count = await Repository.GetCountAsync();

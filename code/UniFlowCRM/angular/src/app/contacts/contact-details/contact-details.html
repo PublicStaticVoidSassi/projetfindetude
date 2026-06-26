@@ -1,11 +1,11 @@
-
 <!-- HEADER -->
 <div class="card shadow-sm mb-4">
   <div class="card-body">
-<div class="d-flex justify-content-end">
-  <app-return-btn></app-return-btn>
-  <note-miniform [id]="contact.id" isFor="contact"></note-miniform>
-</div>
+    <div class="d-flex justify-content-end">
+      <app-return-btn></app-return-btn>
+      <note-miniform [id]="contact.id" isFor="contact"></note-miniform>
+      <create-opp-btn for="contact" [id]="contact.id"></create-opp-btn>
+    </div>
     <h1 class="mb-1 text-brand">
       {{ contact.firstName }} {{ contact.middleName }} {{ contact.lastName }}
     </h1>
@@ -183,10 +183,10 @@
           </div>
 
           @if (contact.lastModificationTime) {
-            <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
-              <span>{{ '::Object:AuditInformation:UpdatedAt' | abpLocalization }}</span>
-              <strong>{{ contact.lastModificationTime | date:'medium' }}</strong>
-            </div>
+          <div class="col-md-6 d-flex justify-content-between border-bottom py-1">
+            <span>{{ '::Object:AuditInformation:UpdatedAt' | abpLocalization }}</span>
+            <strong>{{ contact.lastModificationTime | date:'medium' }}</strong>
+          </div>
           }
 
           <div class="col-md-6 d-flex justify-content-between py-1">
@@ -212,7 +212,7 @@
 
       <!-- Comment body -->
       @for(note of notes;track note.id){
-        <app-note-mini-ui [note]="note"></app-note-mini-ui>
+      <app-note-mini-ui [note]="note"></app-note-mini-ui>
       }
     </div>
 

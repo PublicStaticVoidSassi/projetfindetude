@@ -10,13 +10,13 @@ export const APP_ROUTE_PROVIDER = [
 function configureRoutes() {
   const routes = inject(RoutesService);
   routes.add([
-      {
-        path: '/',
-        name: '::Menu:Home',
-        iconClass: 'fas fa-home',
-        order: 1,
-        layout: eLayoutType.application,
-      },
+    {
+      path: '/',
+      name: '::Menu:Home',
+      iconClass: 'fas fa-home',
+      order: 1,
+      layout: eLayoutType.application,
+    },
     {
       path: '/Accounts',
       name: '::Menu:Accounts',
@@ -80,22 +80,22 @@ function configureRoutes() {
       layout: eLayoutType.application,
       parentName: "::Menu:CRM:Extras",
     },
-    {
-      path: '/Notes',
-      name: '::Menu:Notes',
-      iconClass: 'fas fa-sticky-note',
-      layout: eLayoutType.application,
-      parentName: "::Menu:CRM:Extras",
-    },
-    {
-        path: '/books',
-        name: '::Menu:Books',
-        iconClass: 'fas fa-book',
-        layout: eLayoutType.application,
-        requiredPolicy: 'UniFlowCRM.Books',
-        parentName: "::Menu:CRM:Testing",
-    },
-
+    // {
+    //   path: '/Notes',
+    //   name: '::Menu:Notes',
+    //   iconClass: 'fas fa-sticky-note',
+    //   layout: eLayoutType.application,
+    //   parentName: "::Menu:CRM:Extras",
+    // },
+    // {
+    //     path: '/books',
+    //     name: '::Menu:Books',
+    //     iconClass: 'fas fa-book',
+    //     layout: eLayoutType.application,
+    //     requiredPolicy: 'UniFlowCRM.Books',
+    //     parentName: "::Menu:CRM:Testing",
+    // },
+    //
 
 
 

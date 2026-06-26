@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Calls;
 using UniFlowCRM.Contacts;
@@ -40,10 +41,11 @@ public class MeetingJoined
         return res;
     }
 }
+[Authorize]
 public class MeetingsAppService :
 
-  CrudAppService<Meeting, MeetingDto, Guid, MeetingRequestDto, CreateUpdateMeetingDto>,
-  IMeetingAppService
+CrudAppService<Meeting, MeetingDto, Guid, MeetingRequestDto, CreateUpdateMeetingDto>,
+IMeetingAppService
 {
     private readonly IRepository<Account, Guid> _accountRepository;
     private readonly IRepository<Lead, Guid> _leadRepository;

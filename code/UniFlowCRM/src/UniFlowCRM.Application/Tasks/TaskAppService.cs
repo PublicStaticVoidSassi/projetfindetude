@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Calls;
 using UniFlowCRM.Contacts;
@@ -39,6 +40,7 @@ public class TaskJoined
         return res;
     }
 }
+[Authorize]
 public class TasksAppService : CrudAppService<Task, TaskDto, Guid, TaskRequestDto, CreateUpdateTaskDto>, ITaskAppService
 {
     private readonly IRepository<Account, Guid> _accountRepository;

@@ -30,7 +30,7 @@ AS BEGIN
 	DECLARE @total DECIMAL(18,2);
 	SELECT @total = ISNULL(SUM(o.AmountValue), 0)
 	FROM crm.Opportunities o
-	WHERE o.ClosedAt IS NOT NULL AND o.AmountCurrency = @currency;
+	WHERE stage=8 AND o.AmountCurrency = @currency;
 RETURN @total;
 END;"
         );

@@ -4,11 +4,12 @@ import { TasksService } from '../proxy/tasks/tasks.service';
 import { CommonModule } from '@angular/common';
 import { ThemeSharedModule, ConfirmationService, ToasterService, Confirmation } from '@abp/ng.theme.shared';
 import { LocalizationPipe } from '@abp/ng.core';
+import { ReturnBtn } from "../shared/return-btn/return-btn";
 
 @Component({
   selector: 'app-task-details',
   standalone: true,
-  imports: [CommonModule, ThemeSharedModule, LocalizationPipe],
+  imports: [CommonModule, ThemeSharedModule, LocalizationPipe, ReturnBtn],
   templateUrl: './task-details.component.html',
 })
 export class TaskDetailsComponent implements OnInit {

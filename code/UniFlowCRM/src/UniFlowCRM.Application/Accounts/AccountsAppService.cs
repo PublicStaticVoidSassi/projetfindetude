@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace UniFlowCRM.Accounts
         public IdentityUserDto? Creator { get; set; }
         public IdentityUserDto? LastModifier { get; set; }
     }
+    [Authorize]
     public class AccountsAppService : CrudAppService<Account, AccountDto, Guid, AccountRequestDto, CreateUpdateAccountDto>, IAccountsAppService
     {
         private readonly IRepository<IdentityUser, Guid> _userRepository;

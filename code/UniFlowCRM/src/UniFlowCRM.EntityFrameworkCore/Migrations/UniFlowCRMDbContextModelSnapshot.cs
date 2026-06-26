@@ -113,57 +113,6 @@ namespace UniFlowCRM.Migrations
                     b.ToTable("Accounts", "CRM");
                 });
 
-            modelBuilder.Entity("UniFlowCRM.Books.Book", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<string>("ExtraProperties")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("LastModifierId");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("PublishDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Books");
-                });
-
             modelBuilder.Entity("UniFlowCRM.Calls.Call", b =>
                 {
                     b.Property<Guid>("Id")
@@ -261,7 +210,7 @@ namespace UniFlowCRM.Migrations
 
                     b.HasIndex("OpportunityID");
 
-                    b.ToTable("Calls");
+                    b.ToTable("calls", "CRM");
                 });
 
             modelBuilder.Entity("UniFlowCRM.Contacts.Contact", b =>
@@ -403,7 +352,23 @@ namespace UniFlowCRM.Migrations
 
                     b.ToTable((string)null);
 
-                    b.ToView("dashboard", "crm");
+                    b.ToView("dashboard", "CRM");
+                });
+
+            modelBuilder.Entity("UniFlowCRM.Dashboards.Income", b =>
+                {
+                    b.Property<decimal>("dzdincome")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("eurincome")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("usdincome")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("incomepercurrency", "CRM");
                 });
 
             modelBuilder.Entity("UniFlowCRM.Emails.Email", b =>
@@ -506,7 +471,7 @@ namespace UniFlowCRM.Migrations
 
                     b.HasIndex("OpportunityID");
 
-                    b.ToTable("Emails");
+                    b.ToTable("emails", "CRM");
                 });
 
             modelBuilder.Entity("UniFlowCRM.Leads.Lead", b =>
@@ -686,7 +651,7 @@ namespace UniFlowCRM.Migrations
 
                     b.HasIndex("OpportunityID");
 
-                    b.ToTable("Meetings");
+                    b.ToTable("meetings", "CRM");
                 });
 
             modelBuilder.Entity("UniFlowCRM.Notes.Note", b =>
@@ -747,7 +712,7 @@ namespace UniFlowCRM.Migrations
 
                     b.HasIndex("OpportunityId");
 
-                    b.ToTable("Notes");
+                    b.ToTable("notes", "CRM");
                 });
 
             modelBuilder.Entity("UniFlowCRM.Opportunities.Opportunity", b =>
@@ -938,7 +903,7 @@ namespace UniFlowCRM.Migrations
 
                     b.HasIndex("OpportunityID");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("tasks", "CRM");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>

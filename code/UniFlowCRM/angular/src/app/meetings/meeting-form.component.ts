@@ -5,6 +5,7 @@ import { ToasterService, ThemeSharedModule } from '@abp/ng.theme.shared';
 
 import {
   MeetingsService,
+  MeetingStatus,
   meetingStatusOptions
 } from '../proxy/meetings';
 
@@ -59,7 +60,7 @@ export class MeetingFormComponent implements OnInit {
       this.loading.set(true);
 
       this.meetingService.get(this.id).subscribe((meeting) => {
-        setTimeout(()=>{
+        setTimeout(() => {
           this.form.patchValue({
             ...meeting,
             accountID: meeting.account?.id,
@@ -69,7 +70,7 @@ export class MeetingFormComponent implements OnInit {
             ownerID: meeting.owner?.id,
           });
           this.loading.set(false);
-        },1000)
+        }, 1000)
       });
     }
   }
@@ -78,7 +79,7 @@ export class MeetingFormComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       description: [''],
-      status: [null],
+      status: [MeetingStatus.Planned],
       startTime: [null, [Validators.required]],
       endTime: [null],
       location: [''],

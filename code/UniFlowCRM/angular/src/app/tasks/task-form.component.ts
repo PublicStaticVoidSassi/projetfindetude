@@ -7,14 +7,16 @@ import { LocalizationPipe } from '@abp/ng.core';
 import { CommonModule } from '@angular/common';
 import {
   taskStatusOptions,
-  taskPriorityOptions
+  taskPriorityOptions,
+  TaskStatus,
+  TaskPriority
 } from '../proxy/tasks/index';
-import {AccountsLookup,LeadsLookup,OpportunitiesLookup,UsersLookup,ContactsLookup} from '../shared/lookup-components';
+import { AccountsLookup, LeadsLookup, OpportunitiesLookup, UsersLookup, ContactsLookup } from '../shared/lookup-components';
 
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [AccountsLookup,LeadsLookup,OpportunitiesLookup,UsersLookup,ContactsLookup,LocalizationPipe,CommonModule, ReactiveFormsModule, ThemeSharedModule],
+  imports: [AccountsLookup, LeadsLookup, OpportunitiesLookup, UsersLookup, ContactsLookup, LocalizationPipe, CommonModule, ReactiveFormsModule, ThemeSharedModule],
   templateUrl: './task-form.component.html',
 })
 export class TaskFormComponent implements OnInit {
@@ -37,7 +39,7 @@ export class TaskFormComponent implements OnInit {
     if (this.id) {
       this.loading.set(true);
       this.taskService.get(this.id).subscribe((task) => {
-        setTimeout(()=>{
+        setTimeout(() => {
           this.form.patchValue({
             ...task,
             ownerID: task.owner?.id,
@@ -47,7 +49,7 @@ export class TaskFormComponent implements OnInit {
             leadID: task.lead?.id
           });
           this.loading.set(false);
-        },1000)
+        }, 1000)
 
       });
     }
@@ -57,12 +59,12 @@ export class TaskFormComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
       description: [''],
-      status: [null],
-      priority: [null],
-      startTime: [null],
-      endTime: [null],
-      completedAt: [null],
-      ownerID: [null],
+      status: [TaskStatus.NotStarted],
+      priority: [TaskPriority.Normal],
+      startTime: [null, Validators.required],
+      endTime: [null, Validators.required],
+      completedAt: [null, Validators.required],
+      ownerID: [null, Validators.required],
       accountID: [null],
       contactID: [null],
       opportunityID: [null],
@@ -71,7 +73,7 @@ export class TaskFormComponent implements OnInit {
   }
 
   save() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) console.log(this.form.errors);
 
     this.loading.set(true);
     const request = this.id
