@@ -210,6 +210,8 @@ namespace UniFlowCRM.Migrations
 
                     b.HasIndex("OpportunityID");
 
+                    b.HasIndex("OwnerID");
+
                     b.ToTable("calls", "CRM");
                 });
 
@@ -471,6 +473,8 @@ namespace UniFlowCRM.Migrations
 
                     b.HasIndex("OpportunityID");
 
+                    b.HasIndex("OwnerID");
+
                     b.ToTable("emails", "CRM");
                 });
 
@@ -650,6 +654,8 @@ namespace UniFlowCRM.Migrations
                     b.HasIndex("LeadID");
 
                     b.HasIndex("OpportunityID");
+
+                    b.HasIndex("OwnerID");
 
                     b.ToTable("meetings", "CRM");
                 });
@@ -902,6 +908,8 @@ namespace UniFlowCRM.Migrations
                     b.HasIndex("LeadID");
 
                     b.HasIndex("OpportunityID");
+
+                    b.HasIndex("OwnerID");
 
                     b.ToTable("tasks", "CRM");
                 });
@@ -2860,6 +2868,10 @@ namespace UniFlowCRM.Migrations
                     b.HasOne("UniFlowCRM.Opportunities.Opportunity", null)
                         .WithMany()
                         .HasForeignKey("OpportunityID");
+
+                    b.HasOne("Volo.Abp.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("OwnerID");
                 });
 
             modelBuilder.Entity("UniFlowCRM.Contacts.Contact", b =>
@@ -2927,6 +2939,10 @@ namespace UniFlowCRM.Migrations
                     b.HasOne("UniFlowCRM.Opportunities.Opportunity", null)
                         .WithMany()
                         .HasForeignKey("OpportunityID");
+
+                    b.HasOne("Volo.Abp.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("OwnerID");
                 });
 
             modelBuilder.Entity("UniFlowCRM.Leads.Lead", b =>
@@ -2959,6 +2975,10 @@ namespace UniFlowCRM.Migrations
                     b.HasOne("UniFlowCRM.Opportunities.Opportunity", null)
                         .WithMany()
                         .HasForeignKey("OpportunityID");
+
+                    b.HasOne("Volo.Abp.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("OwnerID");
                 });
 
             modelBuilder.Entity("UniFlowCRM.Notes.Note", b =>
@@ -2984,15 +3004,18 @@ namespace UniFlowCRM.Migrations
                 {
                     b.HasOne("UniFlowCRM.Accounts.Account", null)
                         .WithMany()
-                        .HasForeignKey("AccountID");
+                        .HasForeignKey("AccountID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("UniFlowCRM.Contacts.Contact", null)
                         .WithMany()
-                        .HasForeignKey("ContactID");
+                        .HasForeignKey("ContactID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("UniFlowCRM.Leads.Lead", null)
                         .WithMany()
-                        .HasForeignKey("LeadID");
+                        .HasForeignKey("LeadID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Volo.Abp.Identity.IdentityUser", null)
                         .WithMany()
@@ -3042,6 +3065,10 @@ namespace UniFlowCRM.Migrations
                     b.HasOne("UniFlowCRM.Opportunities.Opportunity", null)
                         .WithMany()
                         .HasForeignKey("OpportunityID");
+
+                    b.HasOne("Volo.Abp.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("OwnerID");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLogAction", b =>
