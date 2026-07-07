@@ -1,0 +1,48 @@
+@startuml
+title Envoi d'un e-mail
+
+participant Utilisateur
+participant Frontend
+participant Backend
+participant "Serveur SMTP Gmail" as Gmail
+participant BDD
+
+Utilisateur -> Frontend: Accéder à l'application
+activate Frontend
+
+Utilisateur -> Frontend: Ouvrir un e-mail existant
+
+Utilisateur -> Frontend: Cliquer sur « Envoyer »
+Frontend -> Backend: Demander l'envoi de l'e-mail
+activate Backend
+
+Backend -> Gmail: Envoyer l'e-mail
+activate Gmail
+
+alt Envoi réussi
+    Gmail --> Backend: E-mail envoyé
+    deactivate Gmail
+
+    Backend -> BDD: Mettre à jour l'état = Envoyé
+    activate BDD
+    BDD --> Backend: Mise à jour effectuée
+    deactivate BDD
+
+    Backend --> Frontend: Confirmation de l'envoi
+else Échec de l'envoi
+    Gmail --> Backend: Erreur d'envoi
+    deactivate Gmail
+
+    Backend -> BDD: Mettre à jour l'état = Échec
+    activate BDD
+    BDD --> Backend: Mise à jour effectuée
+    deactivate BDD
+
+    Backend --> Frontend: Notification de l'échec
+end
+
+deactivate Backend
+
+Frontend --> Utilisateur: Afficher le résultat
+
+@enduml

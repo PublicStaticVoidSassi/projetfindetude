@@ -16,6 +16,7 @@ import {
   IdentityUserService,
 } from '@abp/ng.identity/proxy';
 import {
+  ConfigStateService,
   LocalizationPipe
 } from '@abp/ng.core';
 
@@ -38,9 +39,9 @@ import {
       class="form-select"
       [ngModel]="value"
       (ngModelChange)="onSelect($event)"
-    >
-      <option [value]="null">{{ '::Assignto:Owner' | abpLocalization }}</option>
+      [attr.disabled]="listdisabled"
 
+    >
       @for (user of users; track user.id) {
         <option [value]="user.id">
           {{ user.userName }}
@@ -59,12 +60,23 @@ export class UsersLookup
 
   private readonly identityUserService =
     inject(IdentityUserService);
+  private role = inject(ConfigStateService)
+  listdisabled: boolean = false;
+  isGuest():boolean {
+    return !this.role.getAll().currentUser.roles.includes("admin") && !this.role.getAll().currentUser.roles.includes("Directeur");
+  }
 
   ngOnInit() {
     this.identityUserService
       .getList({ maxResultCount: 1000 })
-      .subscribe(r => {
+      .subscribe(async r => {
         this.users = r.items ?? [];
+        await new Promise(resolve => {setTimeout(resolve, 1000);});
+        this.onSelect(this.role.getAll().currentUser.id);
+        if (this.isGuest()){
+          this.listdisabled = true;
+
+        }
       });
   }
 

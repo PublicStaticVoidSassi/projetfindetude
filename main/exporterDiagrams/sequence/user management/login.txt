@@ -11,10 +11,15 @@ activate Backend
 Backend -> BDD: Vérifier les identifiants
 activate BDD
 
-BDD --> Backend: Utilisateur authentifié
+BDD --> Backend: Résultat de l'authentification
 deactivate BDD
 
-Backend --> Utilisateur: Accès autorisé
+alt Identifiants valides
+    Backend --> Utilisateur: Accès autorisé
+else Identifiants invalides
+    Backend --> Utilisateur: Accès refusé
+end
+
 deactivate Backend
 
 @enduml

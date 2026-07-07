@@ -1,0 +1,31 @@
+@startuml
+title Conversion d'un prospect en contact
+
+participant Utilisateur
+participant Frontend
+participant Backend
+participant BDD
+
+Utilisateur -> Frontend: Accéder à la page d'un prospect
+activate Frontend
+
+Utilisateur -> Frontend: Cliquer sur « Convertir »
+
+Frontend -> Backend: Demander la conversion du prospect
+activate Backend
+
+Backend -> BDD: Mettre à jour l'état du prospect = Converti
+activate BDD
+BDD --> Backend: Prospect mis à jour
+
+Backend -> BDD: Créer un nouveau contact\nà partir des informations du prospect
+BDD --> Backend: Contact créé
+deactivate BDD
+
+Backend --> Frontend: Conversion réussie
+deactivate Backend
+
+Frontend --> Utilisateur: Afficher un message de succès
+deactivate Frontend
+
+@enduml

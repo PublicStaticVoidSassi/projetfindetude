@@ -80,13 +80,10 @@ export class TaskFormComponent implements OnInit {
       ? this.taskService.update(this.id, this.form.value)
       : this.taskService.create(this.form.value);
 
-    request.subscribe({
-      next: () => {
+    request.subscribe((res) => {
         this.toaster.success('::SuccessfullySaved');
-        this.router.navigate(['/Tasks']);
-      },
-      error: () => this.loading.set(false),
-    });
+        this.router.navigate(['/Tasks',res.id]);
+      })
   }
 
   cancel() {

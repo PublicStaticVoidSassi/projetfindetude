@@ -80,13 +80,10 @@ export class EmailFormComponent implements OnInit {
       ? this.emailService.update(this.id, this.form.value)
       : this.emailService.create(this.form.value);
 
-    request.subscribe({
-      next: () => {
+    request.subscribe((res) => {
         this.toaster.success('::SuccessfullySaved');
-        this.router.navigate(['/Emails']);
-      },
-      error: () => this.loading.set(false),
-    });
+        this.router.navigate(['/Emails',res.id]);
+      });
   }
 
   cancel() {

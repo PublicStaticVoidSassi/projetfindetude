@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using UniFlowCRM.Contacts;
 using Volo.Abp.Application.Services;
 
 namespace UniFlowCRM.Leads
@@ -9,5 +11,6 @@ namespace UniFlowCRM.Leads
         LeadRequestDto,
         CreateUpdateLeadDto>
     {
+        Task<ContactDto> ConvertAsync(Guid id);
     }
 }

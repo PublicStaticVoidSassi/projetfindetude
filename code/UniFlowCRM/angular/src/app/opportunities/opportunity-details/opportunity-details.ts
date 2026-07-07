@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Opportunities } from '../../proxy';
-import { LocalizationPipe } from '@abp/ng.core';
+import { AuthService, LocalizationPipe,ConfigStateService } from '@abp/ng.core';
 import { DatePipe } from '@angular/common';
 import { ReturnBtn } from '../../shared/return-btn/return-btn';
 import {myCurrencyPipe} from '../../shared/currency-pipe';
@@ -10,6 +10,7 @@ import { NoteMiniUi } from '../../notes/note-mini-ui/note-mini-ui';
 import { NoteDto, NotesService } from '../../proxy/notes';
 import { ToasterService } from '@abp/ng.theme.shared';
 import { SaleStage,OpportunityStage } from '../../proxy/opportunities';
+import { IdentityRoleService } from '@abp/ng.identity/proxy';
 @Component({
   standalone: true,
   imports: [
@@ -26,12 +27,17 @@ import { SaleStage,OpportunityStage } from '../../proxy/opportunities';
 export class OpportunityDetailsComponent implements OnInit {
 
   private route = inject(ActivatedRoute);
+  private role = inject(ConfigStateService);
   private opportunitiesService = inject(Opportunities.OpportunitiesService);
   toaster = inject(ToasterService);
   notesservice = inject(NotesService);
   id: string = '';
   notes :  NoteDto[]= []
   opportunity = {} as Opportunities.OpportunityDto;
+
+  canClose(): boolean {
+    return this.role.getAll().currentUser.roles.includes("admin") || this.role.getAll().currentUser.roles.includes("Directeur")
+  }
 
   close(state: 'won'|'lost'){
       this.opportunitiesService.close(this.opportunity.id!,state === 'won').subscribe(e=>{

@@ -1,8 +1,9 @@
-﻿using System;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace UniFlowCRM.EntityFrameworkCore;
 
@@ -17,8 +18,16 @@ public class UniFlowCRMDbContextFactory : IDesignTimeDbContextFactory<UniFlowCRM
         UniFlowCRMEfCoreEntityExtensionMappings.Configure();
 
         //TODO: UseSqlServer()
-        var builder = new DbContextOptionsBuilder<UniFlowCRMDbContext>()
-            .UseSqlServer(configuration.GetConnectionString("Default"));
+        var builder = new DbContextOptionsBuilder<UniFlowCRMDbContext>();
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            builder.UseSqlServer(configuration.GetConnectionString("new"));
+        }
+        else
+        {
+            builder.UseSqlServer(configuration.GetConnectionString("Default"));
+        }
+            
 
         return new UniFlowCRMDbContext(builder.Options);
     }

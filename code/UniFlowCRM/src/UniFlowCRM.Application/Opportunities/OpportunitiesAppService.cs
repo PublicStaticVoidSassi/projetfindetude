@@ -34,16 +34,21 @@ public class OpportunitiesAppService : CrudAppService<
     private readonly IRepository<Account, Guid> _accountRepository;
     private readonly IRepository<Lead, Guid> _leadRepository;
     private readonly IRepository<Contact, Guid> _contactRepository;
+    private readonly ILeadsAppService leadappservice;
+
     public OpportunitiesAppService(
         IRepository<Opportunity, Guid> r,
         IRepository<IdentityUser, Guid> u,
         IRepository<Account, Guid> a,
         IRepository<Lead, Guid> l,
-        IRepository<Contact, Guid> c) : base(r)
+        IRepository<Contact, Guid> c,
+        ILeadsAppService leadappservice // bad practice
+        ) : base(r)
     {
         _userRepository = u;
         _leadRepository = l;
         _contactRepository = c;
+        this.leadappservice = leadappservice;
         _accountRepository = a;
     }
     private async Task<IQueryable<OpportunityJoined>> GetQueryableAsync(OpportunityRequestDto input)
@@ -311,13 +316,25 @@ public class OpportunitiesAppService : CrudAppService<
             res
         );
     }
-
+    private async Task ConvertOpportunitysLead(Guid id)
+    {
+        await this.leadappservice.ConvertAsync(id);
+    }
     public async Task<OpportunityDto> CloseAsync(Guid id, bool won)
     {
         var opp = await Repository.GetAsync(id);
         if (won)
         {
             opp.CloseWon();
+            // convert lead if exists
+            if (opp.LeadID != null)
+            {
+                var lead = await _leadRepository.GetAsync((Guid)opp.LeadID);
+                if (lead.Status != LeadStatus.Converted)
+                {
+                    await this.ConvertOpportunitysLead(lead.Id);
+                }
+            }
         }
         else
         {

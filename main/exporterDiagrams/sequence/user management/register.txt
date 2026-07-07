@@ -10,13 +10,18 @@ activate Backend
 
 Backend -> Backend: Vérifier les données
 
-Backend -> BDD: Créer le compte
-activate BDD
+alt Données valides
+    Backend -> BDD: Créer le compte
+    activate BDD
 
-BDD --> Backend: Compte créé
-deactivate BDD
+    BDD --> Backend: Compte créé
+    deactivate BDD
 
-Backend --> Utilisateur: Confirmation
+    Backend --> Utilisateur: Confirmation
+else Données invalides
+    Backend --> Utilisateur: Échec de l'inscription\nDonnées invalides
+end
+
 deactivate Backend
 
 @enduml

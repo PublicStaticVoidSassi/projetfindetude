@@ -85,12 +85,9 @@ export class CallFormComponent implements OnInit {
       ? this.callService.update(this.id, this.form.value)
       : this.callService.create(this.form.value);
 
-    request.subscribe({
-      next: () => {
+    request.subscribe((e)=>{
         this.toaster.success('::SuccessfullySaved');
-        this.router.navigate(['/Calls']);
-      },
-      error: () => this.loading.set(false),
+        this.router.navigate(['/Calls',e.id]);
     });
   }
 

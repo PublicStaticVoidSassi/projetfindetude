@@ -1,0 +1,64 @@
+@startuml
+title Clôture d'une opportunité
+
+participant Utilisateur
+participant Frontend
+participant Backend
+participant BDD
+
+Utilisateur -> Frontend: Accéder à la page des opportunités
+activate Frontend
+
+Frontend -> Backend: Demander la liste des opportunités
+activate Backend
+
+Backend -> BDD: Récupérer les opportunités
+activate BDD
+
+BDD --> Backend: Liste des opportunités
+deactivate BDD
+
+Backend --> Frontend: Afficher les opportunités
+deactivate Backend
+
+Frontend --> Utilisateur: Afficher la page
+
+alt L'utilisateur clique sur « Terminer gagnée »
+    Utilisateur -> Frontend: Cliquer sur « Terminer gagnée »
+    Frontend -> Backend: Mettre à jour le statut = Gagnée
+    activate Backend
+
+    Backend -> BDD: Enregistrer le statut
+    activate BDD
+    BDD --> Backend: Mise à jour effectuée
+    deactivate BDD
+
+    alt L'opportunité est liée à un prospect
+        Backend -> BDD: Convertir le prospect en contact
+        activate BDD
+        BDD --> Backend: Prospect converti
+        deactivate BDD
+    else L'opportunité n'est pas liée à un prospect
+        note over Backend: Aucune action supplémentaire
+    end
+
+    Backend --> Frontend: Confirmation
+    deactivate Backend
+
+else L'utilisateur clique sur « Terminer perdue »
+    Utilisateur -> Frontend: Cliquer sur « Terminer perdue »
+    Frontend -> Backend: Mettre à jour le statut = Perdue
+    activate Backend
+
+    Backend -> BDD: Enregistrer le statut
+    activate BDD
+    BDD --> Backend: Mise à jour effectuée
+    deactivate BDD
+
+    Backend --> Frontend: Confirmation
+    deactivate Backend
+end
+
+Frontend --> Utilisateur: Afficher la confirmation
+
+@enduml

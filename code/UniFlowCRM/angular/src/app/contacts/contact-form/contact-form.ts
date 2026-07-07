@@ -31,7 +31,7 @@ import { LocalizationPipe, validateMinAge } from '@abp/ng.core';
 
 import { ContactsService } from '../../proxy/contacts/contacts.service';
 import { ToasterService, AbpVisibleDirective } from '@abp/ng.theme.shared';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { AccountDto, AccountsService } from 'src/app/proxy/accounts';
 
@@ -54,6 +54,7 @@ export class ContactFormComponent implements OnInit {
   private accountService = inject(AccountsService);
   private toaster = inject(ToasterService);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   contactStatuses = contactStatusOptions;
   contactSources = contactSourceOptions;
@@ -136,6 +137,7 @@ export class ContactFormComponent implements OnInit {
 
       this.contactsService.create(dto).subscribe(res => {
         this.toaster.success(res.id, '::Contact:Created:Successfully');
+        this.router.navigate(['/Contacts',res.id])
       });
 
     } else {

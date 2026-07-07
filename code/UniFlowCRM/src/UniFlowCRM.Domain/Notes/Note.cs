@@ -6,7 +6,7 @@ namespace UniFlowCRM.Notes;
 
 
 
-public class Note : CreationAuditedAggregateRoot<Guid>
+public class Note : FullAuditedAggregateRoot<Guid>
 {
     public string Title { get; set; }
     public string Content { get; set; }

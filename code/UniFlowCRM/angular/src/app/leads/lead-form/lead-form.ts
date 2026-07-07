@@ -35,7 +35,7 @@ import { LeadsService } from '../../proxy/leads/leads.service';
 
 import { ToasterService } from '@abp/ng.theme.shared';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountDto, AccountsService } from 'src/app/proxy/accounts';
 import { AccountsLookup, UsersLookup } from '../../shared/lookup-components';
 
@@ -61,7 +61,7 @@ export class LeadFormComponent implements OnInit {
   private leadsService = inject(LeadsService);
   private accountService = inject(AccountsService);
   private toaster = inject(ToasterService);
-
+  private router = inject(Router);
   private route = inject(ActivatedRoute);
 
   leadStatuses = leadStatusOptions;
@@ -163,6 +163,7 @@ export class LeadFormComponent implements OnInit {
           res.id,
           '::Lead:Updated:Successfully'
         );
+        this.router.navigate(['/Leads',res.id])
 
       });
 

@@ -6,20 +6,21 @@ import { Component,inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 // import  {Accounts} from '../../proxy';
-import { accountTypeOptions,accountIndustryOptions,CreateUpdateAccountDto } from '../../proxy/accounts';
+import { accountTypeOptions,accountIndustryOptions, AccountType,AccountIndustry,CreateUpdateAccountDto } from '../../proxy/accounts';
 // import { AccountType } from './account-type.enum';
 import { Currency, currencyOptions } from '../../proxy/moneys';
 import {LocalizationPipe} from '@abp/ng.core';
 import { AccountsService } from '../../proxy/accounts/accounts.service';
 import { ToasterService } from '@abp/ng.theme.shared';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UsersLookup } from '../../shared/lookup-components';
 // import { AccountIndustry } from '../../proxy/accounts/account-industry.enum';
 // enum AccountType = Accounts.AccountType;
 
 @Component({
   selector: 'app-account-form',
   templateUrl: './account-form.html',
-  imports: [ReturnBtn,ReactiveFormsModule, LocalizationPipe, ReturnBtn]
+  imports: [ReturnBtn, ReactiveFormsModule, LocalizationPipe, ReturnBtn, UsersLookup]
 })
 export class AccountFormComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -27,6 +28,7 @@ export class AccountFormComponent implements OnInit {
   private accountsService = inject(AccountsService);
   private toaster = inject(ToasterService);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   accountTypes = accountTypeOptions;
   accountIndustries = accountIndustryOptions;
@@ -55,13 +57,13 @@ export class AccountFormComponent implements OnInit {
 
     postalCode: [null],
 
-    type: [this.accountTypes[0]],
-    industry: [this.accountIndustries[0]],
+    type: [AccountType.Customer],
+    industry: [AccountIndustry.Other],
 
     revenueAmount: [0],
-    revenueCurrency: [this.currencies[0]],
+    revenueCurrency: [Currency.DZD],
 
-    employees: [null],
+    employees: [1],
 
     userID: [null, Validators.required],
   });
@@ -98,6 +100,7 @@ export class AccountFormComponent implements OnInit {
     if (!this.isUpdate) {
       this.accountsService.create(dto).subscribe(res => {
         this.toaster.success(res.id, '::Account:Created:Successfully');
+        this.router.navigate(['/Accounts',res.id])
       });
     } else {
       this.accountsService.update(this.id!, dto).subscribe(res => {

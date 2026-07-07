@@ -104,13 +104,10 @@ export class MeetingFormComponent implements OnInit {
       ? this.meetingService.update(this.id, this.form.value)
       : this.meetingService.create(this.form.value);
 
-    request.subscribe({
-      next: () => {
+    request.subscribe((res) => {
         this.toaster.success('::SuccessfullySaved');
-        this.router.navigate(['/Meetings']);
-      },
-      error: () => this.loading.set(false),
-    });
+        this.router.navigate(['/Meetings',res.id]);
+      });
   }
 
   cancel() {

@@ -1,0 +1,45 @@
+@startuml
+title Diagramme de cas d'utilisation — Gestion commerciale
+
+left to right direction
+
+actor Marketaire
+actor Directeur
+actor Client
+
+Directeur --|> Marketaire
+
+rectangle Système {
+    
+    usecase "Collecter les informations du client" as UC1
+    usecase "Enregistrer les informations du client" as UC2
+    usecase "Créer une opportunité avec le client" as UC3
+    usecase "Planifier une activité avec le client" as UC4
+    usecase "Gérer les appels" as UC5
+    usecase "Gérer les tâches" as UC6
+    usecase "Gérer les réunions" as UC7
+    usecase "Clôturer une opportunité" as UC8
+    usecase "Envoyer un e-mail au client" as UC9
+}
+
+Marketaire --> UC1
+Marketaire --> UC2
+Marketaire --> UC3
+Marketaire --> UC4
+Marketaire --> UC9
+
+Directeur --> UC8
+
+UC4 .> UC5 : <<include>>
+UC4 .> UC6 : <<include>>
+UC4 .> UC7 : <<include>>
+
+Client --> UC1
+Client --> UC3
+Client --> UC4
+Client --> UC9
+
+' Positionnement des acteurs secondaires à droite
+Client -[hidden]-> UC9
+
+@enduml

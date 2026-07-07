@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Threading.Tasks;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Addresses;
@@ -26,6 +27,7 @@ public class UniFlowCRMDataSeederContributor
     // private readonly IRepository<Book, Guid> _bookRepository;
     private readonly IGuidGenerator _guidGenerator;
     private readonly IRepository<IdentityUser, Guid> _userRepository;
+    private readonly IRepository<IdentityRole, Guid> _roleRepository;
     private readonly IRepository<Account, Guid> _accountRepository;
     private readonly IRepository<Lead, Guid> _leadRepository;
     private readonly IRepository<Contact, Guid> _contactRepository;
@@ -36,7 +38,8 @@ public class UniFlowCRMDataSeederContributor
         IRepository<Contact, Guid> contactRepository,
         IRepository<Lead, Guid> leadRepository,
         IRepository<Account, Guid> accountRepository,
-        IGuidGenerator gg)
+        IGuidGenerator gg,
+        IRepository<IdentityRole, Guid> roleRepository)
     {
         // _bookRepository = bookRepository;
         _guidGenerator = gg;
@@ -46,11 +49,12 @@ public class UniFlowCRMDataSeederContributor
         _leadRepository = leadRepository;
         _contactRepository = contactRepository;
         _opportunityRepository = opportunityRepository;
-
+        _roleRepository = roleRepository;
     }
 
     public async Task SeedAsync(DataSeedContext context)
     {
+        await SeedRolesAsync(context);
         if (await _accountRepository.GetCountAsync() != 0)
         {
             return;
@@ -547,6 +551,9 @@ public class UniFlowCRMDataSeederContributor
 };
         Console.WriteLine("seeding contacts");
         await _contactRepository.InsertManyAsync(contacts);
+        // seeding roles:
+        
+
         //if (await _bookRepository.GetCountAsync() <= 0)
         //{
         //    await _bookRepository.InsertAsync(
@@ -571,5 +578,25 @@ public class UniFlowCRMDataSeederContributor
         //        autoSave: true
         //    );
         //}
+    }
+    public async Task SeedRolesAsync(DataSeedContext context)
+    {
+        if (await _roleRepository.GetCountAsync() > 1)
+        {
+            return;
+        }
+        var rMarketaire = new IdentityRole(_guidGenerator.Create(), "Marketaire")
+        {
+            IsDefault = true,
+            IsPublic = true,
+            IsStatic = true
+        };
+        var rDirecteur = new IdentityRole(_guidGenerator.Create(), "Directeur")
+        {
+            IsDefault = false,
+            IsPublic = true,
+            IsStatic = true
+        };
+        await _roleRepository.InsertManyAsync([rMarketaire,rDirecteur]);
     }
 }

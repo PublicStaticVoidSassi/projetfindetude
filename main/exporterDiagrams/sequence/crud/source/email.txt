@@ -1,0 +1,58 @@
+@startuml
+title Diagramme de séquence - CRUD sur l'objet email
+
+actor Utilisateur
+participant "Frontend" as Frontend
+participant "Backend" as Backend
+database "Base de données" as BDD
+
+Utilisateur -> Frontend : Accéder à l'application
+Frontend --> Utilisateur : Afficher la page des choix CRUD
+
+alt Créer un email
+    Utilisateur -> Frontend : Saisir les informations de création
+    Frontend -> Backend : Envoyer la demande de création
+
+    alt Requête valide
+        Backend -> BDD : Insérer le nouvel email
+        BDD --> Backend : Confirmation de l'insertion
+        Backend --> Frontend : Création réussie
+        Frontend --> Utilisateur : Afficher le succès
+    else Requête invalide
+        Backend --> Frontend : Erreur de validation
+        Frontend --> Utilisateur : Afficher les erreurs de saisie
+    end
+
+else Lire un email
+    Utilisateur -> Frontend : Demander les informations
+    Frontend -> Backend : Envoyer la demande de lecture
+    Backend -> BDD : Lire l'email
+    BDD --> Backend : Données trouvées
+    Backend --> Frontend : Retourner les données
+    Frontend --> Utilisateur : Afficher les informations
+
+else Modifier un email
+    Utilisateur -> Frontend : Soumettre les modifications
+    Frontend -> Backend : Envoyer la demande de modification
+
+    alt Requête valide
+        Backend -> BDD : Mettre à jour l'email
+        BDD --> Backend : Confirmation de la mise à jour
+        Backend --> Frontend : Modification réussie
+        Frontend --> Utilisateur : Afficher le succès
+    else Requête invalide
+        Backend --> Frontend : Erreur de validation
+        Frontend --> Utilisateur : Afficher les erreurs de saisie
+    end
+
+else Supprimer un email
+    Utilisateur -> Frontend : Demander la suppression
+    Frontend -> Backend : Envoyer la demande de suppression
+    Backend -> BDD : Supprimer l'email
+    BDD --> Backend : Confirmation de la suppression
+    Backend --> Frontend : Suppression réussie
+    Frontend --> Utilisateur : Confirmer la suppression
+
+end
+
+@enduml
