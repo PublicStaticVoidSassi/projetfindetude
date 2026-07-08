@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Opportunities } from '../../proxy';
-import { AuthService, LocalizationPipe,ConfigStateService } from '@abp/ng.core';
+import { AuthService, LocalizationPipe, ConfigStateService, PermissionDirective } from '@abp/ng.core';
 import { DatePipe } from '@angular/common';
 import { ReturnBtn } from '../../shared/return-btn/return-btn';
 import {myCurrencyPipe} from '../../shared/currency-pipe';
@@ -20,7 +20,8 @@ import { IdentityRoleService } from '@abp/ng.identity/proxy';
     DatePipe,
     RouterLink,
     NoteMiniform,
-    NoteMiniUi
+    NoteMiniUi,
+    PermissionDirective
   ],
   templateUrl: 'opportunity-details.html'
 })

@@ -5,7 +5,9 @@
         <h5 class="card-title">{{ '::Menu:Emails' | abpLocalization }}</h5>
       </div>
       <div class="text-end col col-md-6">
-        <button class="btn btn-brand btn-sm me-2" type="button" (click)="create()">
+        <button class="btn btn-brand btn-sm me-2" type="button"
+                *abpPermission='"UniFlowCRM.Email.Create"'
+                (click)="create()">
           <i class="fa fa-plus me-1"></i>
           <span>{{ '::Object:Add' | abpLocalization }}</span>
         </button>
@@ -40,10 +42,14 @@
               <button ngbDropdownItem (click)="openDetails(row.id)">
                 {{ '::Details' | abpLocalization }}
               </button>
-              <button ngbDropdownItem (click)="edit(row.id)">
+              <button ngbDropdownItem
+                      *abpPermission='"UniFlowCRM.Email.Edit"'
+                      (click)="edit(row.id)">
                 {{ '::Edit' | abpLocalization }}
               </button>
-              <button ngbDropdownItem (click)="delete(row.id)">
+              <button ngbDropdownItem
+                      *abpPermission='"UniFlowCRM.Email.Delete"'
+                      (click)="delete(row.id)">
                 {{ '::Delete' | abpLocalization }}
               </button>
             </div>

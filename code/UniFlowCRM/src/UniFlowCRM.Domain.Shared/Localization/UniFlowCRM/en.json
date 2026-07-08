@@ -1,6 +1,15 @@
 {
   "Culture": "en",
   "Texts": {
+    "Permission:Lead": "Lead",
+    "Permission:Account": "Account",
+    "Permission:Contact": "Contact",
+    "Permission:Opportunity": "Opportunity",
+    "Permission:Task": "Task",
+    "Permission:Call": "Call",
+    "Permission:Meeting": "Meeting",
+    "Permission:Email": "Email",
+    "Permission:Note": "Note",
     "AppName": "UniFlowCRM",
     "Welcome": "Welcome",
     "LongWetcomeMessage": "Welcome to UniFlow CRM",

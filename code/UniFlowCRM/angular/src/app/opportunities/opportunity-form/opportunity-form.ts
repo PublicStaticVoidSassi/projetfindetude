@@ -10,7 +10,13 @@ import { ReturnBtn } from '../../shared/return-btn/return-btn';
 // import { enumToDropdown } from '../../shared/enum-to-dropdown';
 import { Currency } from '../../proxy/moneys';
 
-import { AccountsLookup, ContactsLookup, LeadsLookup, OpportunitiesLookup } from '../../shared/lookup-components/';
+import {
+  AccountsLookup,
+  ContactsLookup,
+  LeadsLookup,
+  OpportunitiesLookup,
+  UsersLookup
+} from '../../shared/lookup-components/';
 import {
   OpportunitiesService,
   CreateUpdateOpportunityDto,
@@ -29,7 +35,7 @@ import { ContactDto, ContactsService } from '../../proxy/contacts';
   imports: [AccountsLookup, ContactsLookup, LeadsLookup,
     ReturnBtn,
     ReactiveFormsModule,
-    LocalizationPipe
+    LocalizationPipe, UsersLookup
   ],
   templateUrl: './opportunity-form.html',
   styleUrl: './opportunity-form.scss',

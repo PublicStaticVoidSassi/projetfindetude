@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Calls;
 using UniFlowCRM.Contacts;
@@ -12,6 +13,7 @@ using UniFlowCRM.Leads;
 using UniFlowCRM.Opportunities;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
+using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
 using Volo.Abp.Users;
@@ -52,31 +54,41 @@ IMeetingAppService
     private readonly IRepository<Contact, Guid> _contactRepository;
     private readonly IRepository<Opportunity, Guid> _opportunityRepository;
     private readonly IRepository<IdentityUser, Guid> _userRepository;
+    private readonly IPermissionChecker permissionChecker;
 
     public MeetingsAppService(IRepository<Meeting, Guid> repository,
         IRepository<Account, Guid> accountRepository,
         IRepository<Lead, Guid> leadRepository,
         IRepository<Contact, Guid> contactRepository,
         IRepository<Opportunity, Guid> opportunityRepository,
-        IRepository<IdentityUser, Guid> userRepository) : base(repository)
+        IRepository<IdentityUser, Guid> userRepository,
+        IPermissionChecker permissionChecker) : base(repository)
     {
         _accountRepository = accountRepository;
         _leadRepository = leadRepository;
         _contactRepository = contactRepository;
         _opportunityRepository = opportunityRepository;
         _userRepository = userRepository;
+        this.permissionChecker = permissionChecker;
     }
     public override async Task<PagedResultDto<MeetingDto>> GetListAsync(MeetingRequestDto input)
     {
-        var meetings = (await Repository.GetQueryableAsync())
-          .Where(m => input.filter == null || m.Name.ToLower().Contains(input.filter))
+        var q = await Repository.GetQueryableAsync();
+
+        // view own only
+        if (!await permissionChecker.IsGrantedAsync(UniFlowCRM.Permissions.UniFlowCRMPermissions.Meeting.ViewAll))
+        {
+            q = q.Where(a => a.CreatorId == CurrentUser.Id || a.OwnerID == CurrentUser.Id);
+        }
+        //
+
+        q = q.Where(m => input.filter == null || m.Name.ToLower().Contains(input.filter))
           .OrderBy(input.Sorting ?? "creationTime desc")
           .Skip(input.SkipCount)
-          .Take(input.MaxResultCount)
-          .ToList();
+          .Take(input.MaxResultCount);
         // .Select(m => ObjectMapper.Map<Meeting, MeetingDto>(m)).ToList();
-        var dtos = ObjectMapper.Map<List<Meeting>, List<MeetingDto>>(meetings);
-        var count = await Repository.GetCountAsync();
+        var dtos = ObjectMapper.Map<List<Meeting>, List<MeetingDto>>(await AsyncExecuter.ToListAsync(q));
+        var count = await AsyncExecuter.CountAsync(q);
         return new PagedResultDto<MeetingDto>(count, dtos);
     }
     public override async Task<MeetingDto> GetAsync(Guid id)

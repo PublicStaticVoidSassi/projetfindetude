@@ -10,10 +10,12 @@ using System.Threading.Tasks;
 using UniFlowCRM.Addresses;
 using UniFlowCRM.EmailAddresses;
 using UniFlowCRM.Moneys;
+using UniFlowCRM.Permissions;
 using UniFlowCRM.PhoneNumbers;
 using UniFlowCRM.URLs;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
+using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
@@ -31,12 +33,16 @@ namespace UniFlowCRM.Accounts
     public class AccountsAppService : CrudAppService<Account, AccountDto, Guid, AccountRequestDto, CreateUpdateAccountDto>, IAccountsAppService
     {
         private readonly IRepository<IdentityUser, Guid> _userRepository;
-        public AccountsAppService(IRepository<Account, Guid> repository, IRepository<IdentityUser, Guid> usersrepository) : base(repository)
+        private readonly IPermissionChecker permissionChecker;
+        public AccountsAppService(IRepository<Account, Guid> repository, IRepository<IdentityUser, Guid> usersrepository, IPermissionChecker permissionChecker) : base(repository)
         {
             _userRepository = usersrepository;
+            this.permissionChecker = permissionChecker;
         }
         private async Task<IQueryable<AccountJoined>> GetQueryableAsync(AccountRequestDto input)
         {
+            
+
             var accounts = (await Repository.GetQueryableAsync());
             if (!string.IsNullOrEmpty(input.Name))
                 accounts = accounts.Where(a => a.Name.ToLower().Contains(input.Name));
@@ -44,6 +50,12 @@ namespace UniFlowCRM.Accounts
                 accounts = accounts.Where(a => a.Type == input.Type);
             if (input.Industry != null)
                 accounts = accounts.Where(a => a.Industry == input.Industry);
+            // view own only
+            if (!await permissionChecker.IsGrantedAsync(UniFlowCRMPermissions.Account.ViewAll))
+            {
+                accounts = accounts.Where(a => a.CreatorId == CurrentUser.Id || a.UserID == CurrentUser.Id);
+            }
+            //
             if (!string.IsNullOrWhiteSpace(input.Sorting))
                 accounts = accounts.OrderBy(input.Sorting);
             accounts = accounts.Skip(input.SkipCount)
@@ -164,6 +176,8 @@ namespace UniFlowCRM.Accounts
             );
             return acc;
         }
+
+        [Authorize(UniFlowCRMPermissions.Account.Default)]
         public override async Task<AccountDto> GetAsync(Guid id)
         {
             var query = await GetQueryableAsync(id);
@@ -174,6 +188,7 @@ namespace UniFlowCRM.Accounts
             dto.Modifier = res.LastModifier;
             return dto;
         }
+        [Authorize(UniFlowCRMPermissions.Account.Default)]
 
         public override async Task<PagedResultDto<AccountDto>> GetListAsync(AccountRequestDto input)
         {
@@ -188,10 +203,10 @@ namespace UniFlowCRM.Accounts
                 dto.Modifier = res.LastModifier;
                 return dto;
             }).ToList();
-            var count = await Repository.GetCountAsync();
+            var count = await AsyncExecuter.CountAsync(q);
             return new PagedResultDto<AccountDto>(count, dtos);
         }
-
+        [Authorize(UniFlowCRMPermissions.Account.Create)]
         public override async Task<AccountDto> CreateAsync(CreateUpdateAccountDto input)
         {
             Account acc = new Account(id: input.Id, name: input.Name, userID: CurrentUser.Id!.Value);
@@ -199,12 +214,18 @@ namespace UniFlowCRM.Accounts
             await Repository.InsertAsync(acc);
             return ObjectMapper.Map<Account, AccountDto>(acc);
         }
+        [Authorize(UniFlowCRMPermissions.Account.Edit)]
         public override async Task<AccountDto> UpdateAsync(Guid id, CreateUpdateAccountDto input)
         {
             Account? acc = await Repository.FindAsync(id) ?? throw new EntityNotFoundException();
             acc = Initialize(acc, input);
             await Repository.UpdateAsync(acc);
             return ObjectMapper.Map<Account, AccountDto>(acc);
+        }
+        [Authorize(UniFlowCRMPermissions.Account.Delete)]
+        public override Task DeleteAsync(Guid id)
+        {
+            return base.DeleteAsync(id);
         }
     }
 }

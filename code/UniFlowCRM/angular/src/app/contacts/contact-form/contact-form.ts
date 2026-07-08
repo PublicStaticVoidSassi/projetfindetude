@@ -34,6 +34,7 @@ import { ToasterService, AbpVisibleDirective } from '@abp/ng.theme.shared';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AccountDto, AccountsService } from 'src/app/proxy/accounts';
+import { UsersLookup } from '../../shared/lookup-components';
 
 @Component({
   selector: 'app-contact-form',
@@ -41,8 +42,9 @@ import { AccountDto, AccountsService } from 'src/app/proxy/accounts';
     ReturnBtn,
     ReactiveFormsModule,
     LocalizationPipe,
-    AbpVisibleDirective
-],
+    AbpVisibleDirective,
+    UsersLookup
+  ],
   templateUrl: './contact-form.html',
 })
 export class ContactFormComponent implements OnInit {

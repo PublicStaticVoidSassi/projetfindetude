@@ -1037,7 +1037,7 @@
 											"top": 329,
 											"width": 221,
 											"height": 13,
-											"text": "Kestrel"
+											"text": "NGINX"
 										},
 										{
 											"_type": "LabelView",
@@ -4293,7 +4293,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGe9LKn3IW68oU="
 					},
-					"name": "Kestrel",
+					"name": "NGINX",
 					"stereotype": "executionEnvironment"
 				},
 				{

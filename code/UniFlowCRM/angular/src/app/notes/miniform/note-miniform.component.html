@@ -1,4 +1,4 @@
-<button class="btn btn-outline-warning btn-sm me-2" (click)="openModal()">{{'::Add:Note'|abpLocalization}}</button>
+<button *abpPermission='"UniFlowCRM.Note.Create"' class="btn btn-outline-warning btn-sm me-2" (click)="openModal()">{{'::Add:Note'|abpLocalization}}</button>
 <abp-modal [(visible)]="isModalOpen">
   <ng-template #abpHeader>
    header

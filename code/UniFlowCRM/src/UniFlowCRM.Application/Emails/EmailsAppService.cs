@@ -1,17 +1,19 @@
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Calls;
 using UniFlowCRM.Contacts;
 using UniFlowCRM.Leads;
 using UniFlowCRM.Opportunities;
+using UniFlowCRM.Permissions;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
+using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
 namespace UniFlowCRM.Emails;
@@ -41,7 +43,8 @@ public class EmailJoined
     }
 }
 
-[Authorize]
+[Authorize(UniFlowCRMPermissions.Email.Default)]
+
 public class EmailsAppService :
 CrudAppService<Email,
 EmailDto,
@@ -58,6 +61,7 @@ CreateUpdateEmailDto
     public IRepository<Opportunity, Guid> OpportunitesRepository { get; }
 
     private readonly EmailManager _emailManager;
+    private readonly IPermissionChecker permissionChecker;
 
     public EmailsAppService(
         IRepository<Email, Guid> repository,
@@ -67,7 +71,8 @@ CreateUpdateEmailDto
         IRepository<Contact, Guid> contactsRepository,
         IRepository<Opportunity, Guid> opportunitysRepository
 ,
-        EmailManager emailManager) : base(repository)
+        EmailManager emailManager,
+        IPermissionChecker permissionChecker) : base(repository)
     {
         LeadsRepository = leadsRepository;
         UsersRepository = usersRepository;
@@ -75,9 +80,10 @@ CreateUpdateEmailDto
         ContactsRepository = contactsRepository;
         OpportunitesRepository = opportunitysRepository;
         _emailManager = emailManager;
+        this.permissionChecker = permissionChecker;
     }
 
-
+    [Authorize(UniFlowCRMPermissions.Email.Send)]
     public async Task SendEmailAsync(Guid id, CancellationToken ct = default)
     {
         Email email = await Repository.GetAsync(id, cancellationToken: ct);
@@ -89,9 +95,16 @@ CreateUpdateEmailDto
 
     public override async Task<PagedResultDto<EmailDto>> GetListAsync(EmailRequestDto input)
     {
-        var emails = (await Repository.GetQueryableAsync())
+        var emails = (await Repository.GetQueryableAsync());
 
-                .Where((e) =>
+        // view own only
+        if (!await permissionChecker.IsGrantedAsync(UniFlowCRM.Permissions.UniFlowCRMPermissions.Email.ViewAll))
+        {
+            emails = emails.Where(a => a.CreatorId == CurrentUser.Id || a.OwnerID == CurrentUser.Id);
+        }
+        //
+
+        emails = emails.Where((e) =>
                     input.filter == null || e.Subject.ToLower().Contains(input.filter)
                 )
           .OrderBy(input.Sorting ?? "creationtime desc")
@@ -174,7 +187,7 @@ CreateUpdateEmailDto
                             : ObjectMapper.Map<IdentityUser, IdentityUserDto>(modifier),
                     };
         var dto = (await AsyncExecuter.ToListAsync(query)).Select(e => e.ToDto()).ToList();
-        var count = await Repository.GetCountAsync();
+        var count = await AsyncExecuter.CountAsync(query);
         return new PagedResultDto<EmailDto>(count, dto);
     }
     public override async Task<EmailDto> GetAsync(Guid id)

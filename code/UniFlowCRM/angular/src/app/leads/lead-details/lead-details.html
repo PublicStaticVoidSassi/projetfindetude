@@ -5,7 +5,7 @@
       <app-return-btn></app-return-btn>
       <note-miniform [id]="lead.id" isFor="lead"></note-miniform>
       <create-opp-btn for="lead" [id]="lead.id"></create-opp-btn>
-      <button class="btn btn-brand btn-sm" [disabled]="lead.status===LeadStatus.Converted"
+      <button *abpPermission='"UniFlowCRM.Lead.Convert"' class="btn btn-brand btn-sm" [disabled]="lead.status===LeadStatus.Converted"
         (click)="convert()">{{"::Lead:Convert"|abpLocalization}}</button>
     </div>
     <h1 class="mb-1 text-brand">
@@ -151,7 +151,7 @@
 <!-- notes -->
 
 
-<div class="card">
+<div class="card" *abpPermission='"UniFlowCRM.Note"'>
   <div class="card-header display-6">
     {{'::Notes'|abpLocalization}}
   </div>

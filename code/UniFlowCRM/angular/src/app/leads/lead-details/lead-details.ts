@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Leads } from '../../proxy';
-import { LocalizationPipe } from '@abp/ng.core';
+import { LocalizationPipe, PermissionDirective } from '@abp/ng.core';
 import { DatePipe } from '@angular/common';
 import { ReturnBtn } from '../../shared/return-btn/return-btn';
 import { NoteMiniUi } from '../../notes/note-mini-ui/note-mini-ui';
@@ -20,7 +20,8 @@ import { MiniOpportunity } from "src/app/shared/mini-opportunity/mini-opportunit
     RouterLink,
     NoteMiniUi,
     NoteMiniform,
-    MiniOpportunity
+    MiniOpportunity,
+    PermissionDirective
   ],
   templateUrl: 'lead-details.html'
 })

@@ -1,19 +1,21 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Text;
 using System.Threading.Tasks;
+using UniFlowCRM.Accounts;
+using UniFlowCRM.Contacts;
+using UniFlowCRM.EmailAddresses;
+using UniFlowCRM.Permissions;
+using UniFlowCRM.PhoneNumbers;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
-using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Domain.Entities;
-using UniFlowCRM.Accounts;
-using UniFlowCRM.EmailAddresses;
-using UniFlowCRM.PhoneNumbers;
+using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
-using UniFlowCRM.Contacts;
-using Microsoft.AspNetCore.Authorization;
 
 namespace UniFlowCRM.Leads
 {
@@ -25,7 +27,7 @@ namespace UniFlowCRM.Leads
         public IdentityUserDto? Creator { get; set; }
         public IdentityUserDto? LastModifier { get; set; }
     }
-    [Authorize]
+[Authorize(UniFlowCRMPermissions.Lead.Default)]
     public class LeadsAppService :
         CrudAppService<Lead, LeadDto, Guid, LeadRequestDto, CreateUpdateLeadDto>
         , ILeadsAppService
@@ -33,16 +35,20 @@ namespace UniFlowCRM.Leads
         private readonly IRepository<IdentityUser, Guid> _userRepository;
         private readonly IRepository<Account, Guid> _accountsRepository;
         private readonly IRepository<Contact, Guid> _contactRepository;
+        private IPermissionChecker permissionChecker;
+
         public LeadsAppService(
             IRepository<Lead, Guid> repository,
             IRepository<Account, Guid> accountsRepository,
             IRepository<IdentityUser, Guid> userRepository
 ,
-            IRepository<Contact, Guid> contactRepository) : base(repository)
+            IRepository<Contact, Guid> contactRepository,
+            IPermissionChecker permissionChecker) : base(repository)
         {
             _userRepository = userRepository;
             _accountsRepository = accountsRepository;
             _contactRepository = contactRepository;
+            this.permissionChecker = permissionChecker;
         }
 
         private async Task<IQueryable<LeadJoined>> GetQueryableAsync(Guid id)
@@ -86,8 +92,14 @@ namespace UniFlowCRM.Leads
         }
         private async Task<IQueryable<LeadJoined>> GetQueryableAsync(LeadRequestDto input)
         {
-            var leads = (await Repository.GetQueryableAsync())
-                .OrderBy(input.Sorting ?? "creationTime desc")
+            var leads = (await Repository.GetQueryableAsync());
+            // view own only
+            if (!await permissionChecker.IsGrantedAsync(UniFlowCRMPermissions.Lead.ViewAll))
+            {
+                leads = leads.Where(a => a.CreatorId == CurrentUser.Id || a.UserID == CurrentUser.Id);
+            }
+            //
+            leads = leads.OrderBy(input.Sorting ?? "creationTime desc")
                 .Where(e =>
                     (input.filter == null) ||
                     e.FirstName.ToLower().Contains(input.filter) ||
@@ -158,7 +170,7 @@ namespace UniFlowCRM.Leads
                     return result;
                 }
             ).ToList();
-            var count = await Repository.GetCountAsync();
+            var count = await AsyncExecuter.CountAsync(query);
             return new PagedResultDto<LeadDto>(
                 count,
                 result
@@ -186,6 +198,8 @@ namespace UniFlowCRM.Leads
                 lead.AssignToUser(CurrentUser.Id!.Value);
             return lead;
         }
+        [Authorize(UniFlowCRMPermissions.Lead.Create)]
+
         public override async Task<LeadDto> CreateAsync(CreateUpdateLeadDto input)
         {
             Lead lead = new Lead(input.Id, input.FirstName);
@@ -193,6 +207,8 @@ namespace UniFlowCRM.Leads
             await Repository.InsertAsync(lead);
             return ObjectMapper.Map<Lead, LeadDto>(lead);
         }
+        [Authorize(UniFlowCRMPermissions.Lead.Edit)]
+
         public override async Task<LeadDto> UpdateAsync(Guid id, CreateUpdateLeadDto input)
         {
             Lead? lead = await Repository.FindAsync(id) ?? throw new EntityNotFoundException();
@@ -200,6 +216,8 @@ namespace UniFlowCRM.Leads
             await Repository.UpdateAsync(lead);
             return ObjectMapper.Map<Lead, LeadDto>(lead);
         }
+        [Authorize(UniFlowCRMPermissions.Lead.Convert)]
+
         public async Task<ContactDto> ConvertAsync(Guid id)
         {
             var lead = await Repository.GetAsync(id);

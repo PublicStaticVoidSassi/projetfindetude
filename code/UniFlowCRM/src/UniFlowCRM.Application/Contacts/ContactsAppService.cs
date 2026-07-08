@@ -1,18 +1,20 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Addresses;
 using UniFlowCRM.EmailAddresses;
 using UniFlowCRM.Leads;
+using UniFlowCRM.Permissions;
 using UniFlowCRM.PhoneNumbers;
 using UniFlowCRM.URLs;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
+using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
@@ -41,14 +43,18 @@ namespace UniFlowCRM.Contacts
         private readonly IRepository<IdentityUser, Guid> _userRepository;
         private readonly IRepository<Account, Guid> _accountsRepository;
         private readonly IRepository<Lead, Guid> _leadRepository;
+        private IPermissionChecker permissionChecker;
+
         public ContactsAppService(IRepository<Contact, Guid> repository,
         IRepository<IdentityUser, Guid> userRepository,
         IRepository<Account, Guid> accountsRepository,
-        IRepository<Lead, Guid> leadRepository) : base(repository)
+        IRepository<Lead, Guid> leadRepository,
+        IPermissionChecker permissionChecker) : base(repository)
         {
             _userRepository = userRepository;
             _accountsRepository = accountsRepository;
             _leadRepository = leadRepository;
+            this.permissionChecker = permissionChecker;
         }
 
         public override async Task<ContactDto> GetAsync(Guid id)
@@ -77,7 +83,7 @@ namespace UniFlowCRM.Contacts
                     return result;
                 }
             ).ToList();
-            var count = await Repository.GetCountAsync();
+            var count = await AsyncExecuter.CountAsync(query);
             return new PagedResultDto<ContactDto>(
                 count,
                 result
@@ -121,8 +127,16 @@ namespace UniFlowCRM.Contacts
         }
         private async Task<IQueryable<ContactJoined>> GetQueryableAsync(ContactRequestDto input)
         {
-            var contacts = (await Repository.GetQueryableAsync())
-                    .Where(e =>
+            var contacts = (await Repository.GetQueryableAsync());
+
+            // view own only
+            if (!await permissionChecker.IsGrantedAsync(UniFlowCRMPermissions.Contact.ViewAll))
+            {
+                contacts = contacts.Where(a => a.CreatorId == CurrentUser.Id || a.UserID == CurrentUser.Id);
+            }
+            //
+
+            contacts = contacts.Where(e =>
                     (input.filter == null) ||
                     e.FirstName.ToLower().Contains(input.filter) ||
                     (!string.IsNullOrEmpty(e.MiddleName) && e.MiddleName.ToLower().Contains(input.filter)) ||

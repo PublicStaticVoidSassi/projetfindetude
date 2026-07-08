@@ -1,15 +1,17 @@
-using Volo.Abp.Application.Services;
-using Volo.Abp.Application.Dtos;
-using Volo.Abp.Domain.Repositories;
-using Volo.Abp.Identity;
-using UniFlowCRM.Leads;
-using UniFlowCRM.Accounts;
-using UniFlowCRM.Contacts;
-
+using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
+using UniFlowCRM.Accounts;
+using UniFlowCRM.Contacts;
+using UniFlowCRM.Leads;
+using UniFlowCRM.Permissions;
+using Volo.Abp.Application.Dtos;
+using Volo.Abp.Application.Services;
+using Volo.Abp.Authorization.Permissions;
+using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Identity;
 namespace UniFlowCRM.Opportunities;
 
 public class OpportunityJoined
@@ -22,7 +24,8 @@ public class OpportunityJoined
     public IdentityUserDto? Creator { get; set; }
     public IdentityUserDto? LastModifier { get; set; }
 }
-[Microsoft.AspNetCore.Authorization.Authorize]
+[Authorize(UniFlowCRMPermissions.Opportunity.Default)]
+
 public class OpportunitiesAppService : CrudAppService<
                                    Opportunity,
                                    OpportunityDto,
@@ -35,6 +38,7 @@ public class OpportunitiesAppService : CrudAppService<
     private readonly IRepository<Lead, Guid> _leadRepository;
     private readonly IRepository<Contact, Guid> _contactRepository;
     private readonly ILeadsAppService leadappservice;
+    private readonly IPermissionChecker permissionChecker;
 
     public OpportunitiesAppService(
         IRepository<Opportunity, Guid> r,
@@ -43,18 +47,28 @@ public class OpportunitiesAppService : CrudAppService<
         IRepository<Lead, Guid> l,
         IRepository<Contact, Guid> c,
         ILeadsAppService leadappservice // bad practice
-        ) : base(r)
+,
+        IPermissionChecker permissionChecker) : base(r)
     {
         _userRepository = u;
         _leadRepository = l;
         _contactRepository = c;
         this.leadappservice = leadappservice;
         _accountRepository = a;
+        this.permissionChecker = permissionChecker;
     }
     private async Task<IQueryable<OpportunityJoined>> GetQueryableAsync(OpportunityRequestDto input)
     {
-        var opportunities = (await Repository.GetQueryableAsync())
-                .Where((e) =>
+        var opportunities = (await Repository.GetQueryableAsync());
+
+        // view own only
+        if (!await permissionChecker.IsGrantedAsync(UniFlowCRMPermissions.Opportunity.ViewAll))
+        {
+            opportunities = opportunities.Where(a => a.CreatorId == CurrentUser.Id || a.UserID == CurrentUser.Id);
+        }
+        //
+
+        opportunities = opportunities.Where((e) =>
                     input.filter == null || e.Name.ToLower().Contains(input.filter)
                 )
                 .OrderBy(input.Sorting ?? "creationTime desc")
@@ -244,6 +258,7 @@ public class OpportunitiesAppService : CrudAppService<
 
         return opportunity;
     }
+    [Authorize(UniFlowCRMPermissions.Opportunity.Create)]
     public override async Task<OpportunityDto> CreateAsync(CreateUpdateOpportunityDto input)
     {
         var opportunity = new Opportunity(
@@ -259,6 +274,8 @@ public class OpportunitiesAppService : CrudAppService<
         opportunity = await Repository.InsertAsync(opportunity);
         return ObjectMapper.Map<Opportunity, OpportunityDto>(opportunity);
     }
+    [Authorize(UniFlowCRMPermissions.Opportunity.Edit)]
+
     public override async Task<OpportunityDto> UpdateAsync(Guid id, CreateUpdateOpportunityDto input)
     {
         var opportunity = await Repository.GetAsync(id);
@@ -308,7 +325,7 @@ public class OpportunitiesAppService : CrudAppService<
             dto.Modifier = res.LastModifier;
             return dto;
         }).ToList();
-        var count = await Repository.GetCountAsync();
+        var count = await AsyncExecuter.CountAsync(query);
 
 
         return new PagedResultDto<OpportunityDto>(
@@ -320,6 +337,7 @@ public class OpportunitiesAppService : CrudAppService<
     {
         await this.leadappservice.ConvertAsync(id);
     }
+    [Authorize(UniFlowCRMPermissions.Opportunity.Close)]
     public async Task<OpportunityDto> CloseAsync(Guid id, bool won)
     {
         var opp = await Repository.GetAsync(id);

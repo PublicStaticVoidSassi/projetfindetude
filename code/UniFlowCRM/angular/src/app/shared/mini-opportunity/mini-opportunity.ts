@@ -1,11 +1,14 @@
 import { Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { PermissionDirective } from '@abp/ng.core';
 
 @Component({
   selector: 'create-opp-btn',
-  imports: [],
+  imports: [
+    PermissionDirective
+  ],
   template: `
-<button class="btn btn-sm btn-brand me-2" (click)="redirect()">
+<button *abpPermission='"UniFlowCRM.Opportunity.Create"' class="btn btn-sm btn-brand me-2" (click)="redirect()">
 créer une opportunités
 </button>
 `

@@ -3,14 +3,14 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EmailsService } from '../../proxy/emails/emails.service';
 import { CommonModule } from '@angular/common';
 import { ThemeSharedModule, ConfirmationService, ToasterService, Confirmation } from '@abp/ng.theme.shared';
-import { LocalizationPipe } from '@abp/ng.core';
+import { LocalizationPipe, PermissionDirective } from '@abp/ng.core';
 import { ReturnBtn } from '../../shared/return-btn/return-btn';
 import { EmailStatus, emailStatusOptions } from '../../proxy/emails';
 
 @Component({
   selector: 'app-email-details',
   standalone: true,
-  imports: [CommonModule, ThemeSharedModule, LocalizationPipe, ReturnBtn, RouterLink],
+  imports: [CommonModule, ThemeSharedModule, LocalizationPipe, ReturnBtn, RouterLink, PermissionDirective],
   templateUrl: './email-details.component.html',
 })
 export class EmailDetailsComponent implements OnInit {

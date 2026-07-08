@@ -10,13 +10,16 @@ using UniFlowCRM.EmailAddresses;
 using UniFlowCRM.Leads;
 using UniFlowCRM.Moneys;
 using UniFlowCRM.Opportunities;
+using UniFlowCRM.Permission;
 using UniFlowCRM.PhoneNumbers;
 using UniFlowCRM.URLs;
+using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Guids;
 using Volo.Abp.Identity;
+using Volo.Abp.PermissionManagement;
 using Volo.Abp.Users;
 
 namespace UniFlowCRM;
@@ -32,6 +35,7 @@ public class UniFlowCRMDataSeederContributor
     private readonly IRepository<Lead, Guid> _leadRepository;
     private readonly IRepository<Contact, Guid> _contactRepository;
     private readonly IRepository<Opportunity, Guid> _opportunityRepository;
+    private readonly IPermissionDataSeeder _permissionDataSeeder;
     public UniFlowCRMDataSeederContributor(
         IRepository<IdentityUser, Guid> u,
         IRepository<Opportunity, Guid> opportunityRepository,
@@ -39,7 +43,8 @@ public class UniFlowCRMDataSeederContributor
         IRepository<Lead, Guid> leadRepository,
         IRepository<Account, Guid> accountRepository,
         IGuidGenerator gg,
-        IRepository<IdentityRole, Guid> roleRepository)
+        IRepository<IdentityRole, Guid> roleRepository,
+        IPermissionDataSeeder permissionDataSeeder)
     {
         // _bookRepository = bookRepository;
         _guidGenerator = gg;
@@ -50,6 +55,7 @@ public class UniFlowCRMDataSeederContributor
         _contactRepository = contactRepository;
         _opportunityRepository = opportunityRepository;
         _roleRepository = roleRepository;
+        _permissionDataSeeder = permissionDataSeeder;
     }
 
     public async Task SeedAsync(DataSeedContext context)
@@ -579,24 +585,42 @@ public class UniFlowCRMDataSeederContributor
         //    );
         //}
     }
+    public async Task SeedPermsAsync(DataSeedContext context)
+    {
+        string[] defaultManagerPerms = { };
+        var roleProvider = RolePermissionValueProvider.ProviderName;
+
+
+        await _permissionDataSeeder.SeedAsync(roleProvider,DefaultRolesPerms.SalesmanName,DefaultRolesPerms.DefaultMarketairePerms);
+        await _permissionDataSeeder.SeedAsync(roleProvider,DefaultRolesPerms.ManagerName,DefaultRolesPerms.DefaultManagerPerms);
+
+    }
     public async Task SeedRolesAsync(DataSeedContext context)
     {
         if (await _roleRepository.GetCountAsync() > 1)
         {
             return;
         }
-        var rMarketaire = new IdentityRole(_guidGenerator.Create(), "Marketaire")
+        var rMarketaire = new IdentityRole(_guidGenerator.Create(), DefaultRolesPerms.SalesmanName)
         {
             IsDefault = true,
             IsPublic = true,
             IsStatic = true
         };
-        var rDirecteur = new IdentityRole(_guidGenerator.Create(), "Directeur")
+        var rDirecteur = new IdentityRole(_guidGenerator.Create(), DefaultRolesPerms.ManagerName)
         {
             IsDefault = false,
             IsPublic = true,
             IsStatic = true
         };
         await _roleRepository.InsertManyAsync([rMarketaire,rDirecteur]);
+        try
+        {
+            await SeedPermsAsync(context);
+        }
+        catch
+        {
+
+        }
     }
 }

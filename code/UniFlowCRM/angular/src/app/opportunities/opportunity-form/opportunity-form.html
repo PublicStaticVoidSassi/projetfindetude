@@ -191,18 +191,8 @@ formControlName="contactID"></contacts-lookup>
 
         <!-- Owner -->
         <div class="col-3">
-          <label class="form-label">
-            {{ '::Opportunity:Owner' | abpLocalization }}
-          </label>
+          <users-lookup  formControlName="userID"></users-lookup>
 
-          <select class="form-select" formControlName="userID">
-            <option [ngValue]="null"></option>
-            @for (u of users; track u.id) {
-              <option [value]="u.id">
-                {{ u.userName }}
-              </option>
-            }
-          </select>
         </div>
 
         <!-- closed at -->

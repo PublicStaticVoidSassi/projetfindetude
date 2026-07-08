@@ -12,6 +12,7 @@
       <div class="col-md-6 text-end">
         <button
           class="btn btn-brand btn-sm"
+          *abpPermission='"UniFlowCRM.Meeting.Create"'
           type="button"
           (click)="create()"
         >
@@ -76,6 +77,7 @@
 
               <button
                 ngbDropdownItem
+                *abpPermission='"UniFlowCRM.Meeting.Edit"'
                 (click)="edit(row.id)"
               >
                 {{ '::Edit' | abpLocalization }}
@@ -83,6 +85,7 @@
 
               <button
                 ngbDropdownItem
+                *abpPermission='"UniFlowCRM.Meeting.Delete"'
                 (click)="delete(row.id)"
               >
                 {{ '::Delete' | abpLocalization }}

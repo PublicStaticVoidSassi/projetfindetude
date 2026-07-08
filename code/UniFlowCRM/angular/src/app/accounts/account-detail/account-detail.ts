@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Accounts } from '../../proxy';
-import { LocalizationPipe } from '@abp/ng.core';
+import { LocalizationPipe, PermissionDirective } from '@abp/ng.core';
 import { DatePipe } from '@angular/common';
 import { myCurrencyPipe } from '../../shared/currency-pipe';
 import { AccountIndustryPipe, AccountTypePipe } from '../pipes';
@@ -13,7 +13,7 @@ import { MiniOpportunity } from "../../shared/mini-opportunity/mini-opportunity"
 //import { AccountsService } from '../../proxy/accounts';
 @Component({
   standalone: true,
-  imports: [ReturnBtn, LocalizationPipe, DatePipe, myCurrencyPipe, AccountTypePipe, AccountIndustryPipe, NoteMiniform, NoteMiniUi, MiniOpportunity],
+  imports: [ReturnBtn, LocalizationPipe, DatePipe, myCurrencyPipe, AccountTypePipe, AccountIndustryPipe, NoteMiniform, NoteMiniUi, MiniOpportunity, PermissionDirective],
   templateUrl: 'account-detail.html'
 })
 export class AccountDetailsComponent implements OnInit {

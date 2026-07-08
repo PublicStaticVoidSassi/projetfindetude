@@ -23,6 +23,7 @@ function configureRoutes() {
       iconClass: 'fas fa-building',
       order: 10,
       layout: eLayoutType.application,
+      requiredPolicy: 'UniFlowCRM.Account',
       parentName: '::Menu:CRM:Objects'
     },
     {
@@ -31,6 +32,7 @@ function configureRoutes() {
       iconClass: 'fas fa-user',
       order: 20,
       layout: eLayoutType.application,
+      requiredPolicy: 'UniFlowCRM.Lead',
       parentName: '::Menu:CRM:Objects'
 
     },
@@ -40,6 +42,7 @@ function configureRoutes() {
       iconClass: 'fas fa-id-card',
       order: 30,
       layout: eLayoutType.application,
+      requiredPolicy: 'UniFlowCRM.Contact',
       parentName: '::Menu:CRM:Objects'
 
     },
@@ -49,6 +52,7 @@ function configureRoutes() {
       iconClass: 'fas fa-handshake',
       order: 40,
       layout: eLayoutType.application,
+      requiredPolicy: 'UniFlowCRM.Opportunity',
       parentName: '::Menu:CRM:Sales'
 
     },
@@ -57,6 +61,7 @@ function configureRoutes() {
       name: '::Menu:Calls',
       iconClass: 'fas fa-phone',
       layout: eLayoutType.application,
+      requiredPolicy: 'UniFlowCRM.Call',
       parentName: "::Menu:CRM:Activities",
     },
     {
@@ -64,6 +69,7 @@ function configureRoutes() {
       name: '::Menu:Meetings',
       iconClass: 'fas fa-users',
       layout: eLayoutType.application,
+      requiredPolicy: 'UniFlowCRM.Meeting',
       parentName: "::Menu:CRM:Activities",
     },
     {
@@ -71,6 +77,7 @@ function configureRoutes() {
       name: '::Menu:Tasks',
       iconClass: 'fas fa-random',
       layout: eLayoutType.application,
+      requiredPolicy: 'UniFlowCRM.Task',
       parentName: "::Menu:CRM:Activities",
     },
     {
@@ -78,6 +85,7 @@ function configureRoutes() {
       name: '::Menu:Emails',
       iconClass: 'fas fa-envelope',
       layout: eLayoutType.application,
+      requiredPolicy: 'UniFlowCRM.Email',
       parentName: "::Menu:CRM:Extras",
     },
     // {

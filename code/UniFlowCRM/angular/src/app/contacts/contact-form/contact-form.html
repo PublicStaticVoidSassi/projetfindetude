@@ -150,15 +150,7 @@
 
         <!-- Assigned User -->
         <div class="col-md-6">
-          <label class="form-label">{{ '::Contact:AssignTo' | abpLocalization }}</label>
-
-          <select class="form-select" formControlName="userID">
-            @for (user of users; track user.id) {
-              <option [ngValue]="user.id">
-                {{ user.userName }}
-              </option>
-            }
-          </select>
+          <users-lookup  formControlName="userID"></users-lookup>
         </div>
 
         <!-- Lead

@@ -1,18 +1,19 @@
+using Microsoft.AspNetCore.Authorization;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Contacts;
 using UniFlowCRM.Leads;
 using UniFlowCRM.Opportunities;
+using UniFlowCRM.Permissions;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
+using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
-
-using System.Linq;
-using System.Linq.Dynamic.Core;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
 namespace UniFlowCRM.Calls;
 
 public class CallJoined
@@ -40,7 +41,7 @@ public class CallJoined
     }
 }
 
-[Authorize]
+[Authorize(UniFlowCRMPermissions.Call.Default)]
 public class CallsAppService : CrudAppService<Call, CallDto, Guid, CallRequestDto, CreateUpdateCallDto>, ICallAppService
 {
     private readonly IRepository<Account, Guid> _accountRepository;
@@ -48,21 +49,25 @@ public class CallsAppService : CrudAppService<Call, CallDto, Guid, CallRequestDt
     private readonly IRepository<Contact, Guid> _contactRepository;
     private readonly IRepository<Opportunity, Guid> _opportunityRepository;
     private readonly IRepository<IdentityUser, Guid> _userRepository;
+    private readonly IPermissionChecker permissionChecker;
+
     public CallsAppService(
         IRepository<Call, Guid> repository,
         IRepository<Account, Guid> accountRepository,
         IRepository<Lead, Guid> leadRepository,
         IRepository<Contact, Guid> contactRepository,
         IRepository<Opportunity, Guid> opportunityRepository,
-        IRepository<IdentityUser, Guid> userRepository) : base(repository)
+        IRepository<IdentityUser, Guid> userRepository,
+        IPermissionChecker permissionChecker) : base(repository)
     {
         _accountRepository = accountRepository;
         _leadRepository = leadRepository;
         _contactRepository = contactRepository;
         _opportunityRepository = opportunityRepository;
         _userRepository = userRepository;
+        this.permissionChecker = permissionChecker;
     }
-
+    [Authorize(UniFlowCRMPermissions.Call.Create)]
     public override Task<CallDto> CreateAsync(CreateUpdateCallDto input)
     {
         return base.CreateAsync(input);
@@ -156,15 +161,23 @@ public class CallsAppService : CrudAppService<Call, CallDto, Guid, CallRequestDt
     }
     public override async Task<PagedResultDto<CallDto>> GetListAsync(CallRequestDto input)
     {
-        var calls = (await Repository.GetQueryableAsync())
-          .Where((e) =>
+        var query = await Repository.GetQueryableAsync();
+
+        // view own only
+        if (!await permissionChecker.IsGrantedAsync(UniFlowCRM.Permissions.UniFlowCRMPermissions.Call.ViewAll))
+        {
+            query = query.Where(a => a.CreatorId == CurrentUser.Id || a.OwnerID == CurrentUser.Id);
+        }
+        //
+
+        query = query.Where((e) =>
               input.filter == null || e.Name.ToLower().Contains(input.filter)
           )
           .OrderBy(input.Sorting ?? "creationTime desc")
           .Skip(input.SkipCount)
-          .Take(input.MaxResultCount)
-          .ToList();
-        var count = await Repository.GetCountAsync();
+          .Take(input.MaxResultCount);
+        var calls = await AsyncExecuter.ToListAsync(query);
+        var count = await AsyncExecuter.CountAsync(query);
         return new PagedResultDto<CallDto>(count, ObjectMapper.Map<
             List<Call>,
             List<CallDto>>(calls));

@@ -17,7 +17,7 @@ import {
 } from '@abp/ng.identity/proxy';
 import {
   ConfigStateService,
-  LocalizationPipe
+  LocalizationPipe, PermissionService
 } from '@abp/ng.core';
 
 @Component({
@@ -57,13 +57,14 @@ export class UsersLookup
   users: IdentityUserDto[] = [];
 
   value: string | null = null;
-
+  private readonly permissionManager = inject(PermissionService);
   private readonly identityUserService =
     inject(IdentityUserService);
   private role = inject(ConfigStateService)
   listdisabled: boolean = false;
   isGuest():boolean {
-    return !this.role.getAll().currentUser.roles.includes("admin") && !this.role.getAll().currentUser.roles.includes("Directeur");
+    return !this.permissionManager.getGrantedPolicy("UniFlowCRM.AssignOthers");
+    // return !this.role.getAll().currentUser.roles.includes("admin") && !this.role.getAll().currentUser.roles.includes("Directeur");
   }
 
   ngOnInit() {

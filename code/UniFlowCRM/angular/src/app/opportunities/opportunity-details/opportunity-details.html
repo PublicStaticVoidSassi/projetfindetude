@@ -6,8 +6,8 @@
   <app-return-btn></app-return-btn>
   <note-miniform [id]="opportunity.id" isFor="opportunity"></note-miniform>
   @if (opportunity.stage !== OpportunityStage.ClosedWon && opportunity.stage !== OpportunityStage.ClosedLost && canClose()){
-  <button class="btn btn-sm btn-success me-2" (click)="close('won')">{{'::Opportunity:Win'|abpLocalization}}</button>
-  <button class="btn btn-sm btn-danger" (click)="close('lost')">{{'::Opportunity:Lose'|abpLocalization}}</button>
+  <button *abpPermission='"UniFlowCRM.Opportunity.Close"' class="btn btn-sm btn-success me-2" (click)="close('won')">{{'::Opportunity:Win'|abpLocalization}}</button>
+  <button *abpPermission='"UniFlowCRM.Opportunity.Close"' class="btn btn-sm btn-danger" (click)="close('lost')">{{'::Opportunity:Lose'|abpLocalization}}</button>
   }
   </div>
     <h1 class="mb-1 text-brand">
@@ -141,7 +141,7 @@
   </div>
 
 </div>
-<div class="card">
+<div class="card" *abpPermission='"UniFlowCRM.Note"'>
   <div class="card-header display-6">
     {{'::Notes'|abpLocalization}}
   </div>
