@@ -2839,9 +2839,9 @@
 									},
 									"font": "Arial;13;0",
 									"parentStyle": false,
-									"left": 244,
+									"left": 239,
 									"top": 612,
-									"width": 41.53271484375,
+									"width": 50.20361328125,
 									"height": 13,
 									"alpha": -1.5698478539546608,
 									"distance": 40.85339643163099,
@@ -2849,7 +2849,7 @@
 										"$ref": "AAAAAAGe9M1SHIz6wRc="
 									},
 									"edgePosition": 1,
-									"text": "+HTTP"
+									"text": "+HTTPS"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -4151,7 +4151,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGe9LoqYodG/iw="
 							},
-							"name": "HTTP",
+							"name": "HTTPS",
 							"end1": {
 								"_type": "UMLAssociationEnd",
 								"_id": "AAAAAAGe9M1SG4z3uOY=",

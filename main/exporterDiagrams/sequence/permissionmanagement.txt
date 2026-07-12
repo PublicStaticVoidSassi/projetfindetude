@@ -1,0 +1,23 @@
+@startuml
+title Gestion des permissions
+
+actor Utilisateur
+participant Frontend
+participant Backend
+database "Base de données" as BDD
+
+Utilisateur -> Frontend : Accéder à la page de gestion des permissions
+Frontend -> Backend : Demander les permissions
+Backend -> BDD : Récupérer les permissions
+BDD --> Backend : Retourner les permissions
+Backend --> Frontend : Envoyer les permissions
+Frontend --> Utilisateur : Afficher les permissions
+
+Utilisateur -> Frontend : Modifier les permissions\n(cocher/décocher des cases\npour des rôles ou des utilisateurs)
+Frontend -> Backend : Envoyer les modifications
+Backend -> BDD : Enregistrer les modifications
+BDD --> Backend : Confirmation de l'enregistrement
+Backend --> Frontend : Retourner le succès de l'opération
+Frontend --> Utilisateur : Afficher un message de confirmation
+
+@enduml
