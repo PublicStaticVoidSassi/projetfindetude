@@ -1,4 +1,4 @@
-import type { EntityDto, FullAuditedEntityDto } from '@abp/ng.core';
+import type { EntityDto, FullAuditedEntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 import type { CallStatus } from './call-status.enum';
 import type { CallDirection } from './call-direction.enum';
 import type { AccountDto } from '../accounts/models';
@@ -23,6 +23,10 @@ export interface CallDto extends FullAuditedEntityDto<string> {
   owner?: IdentityUserDto | null;
   creator?: IdentityUserDto | null;
   modifier?: IdentityUserDto | null;
+}
+
+export interface CallRequestDto extends PagedAndSortedResultRequestDto {
+  filter?: string | null;
 }
 
 export interface CreateUpdateCallDto extends EntityDto<string> {

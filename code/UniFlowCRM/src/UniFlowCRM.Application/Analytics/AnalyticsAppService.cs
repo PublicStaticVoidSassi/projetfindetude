@@ -35,7 +35,38 @@ namespace UniFlowCRM.Analytics
             return ObjectMapper.Map<Income, IncomeDto>(await _dashboardRepository.GetIncomeAsync(ct));
         }
 
+        public async Task<List<AccountPerIndustryDto>> GetAccountPerIndustryAsync()
+        {
+            return (await _accountRepository.GetQueryableAsync())
+              .GroupBy(a => a.Industry)
+              .Select(a => new AccountPerIndustryDto()
+              {
+                  Industry = a.Key ?? AccountIndustry.Other,
+                  Count = a.Count()
+              }).ToList();
+        }
+        public async Task<List<AccountPerTypeDto>> GetAccountPerTypeAsync()
+        {
+            return (await _accountRepository.GetQueryableAsync())
+              .GroupBy(a => a.Type)
+              .Select(a => new AccountPerTypeDto()
+              {
+                  Type = a.Key,
+                  Count = a.Count()
+              }).ToList();
+        }
 
+        public async Task<List<LeadsPerSourceDto>> GetLeadsPerSourceAsync()
+        {
+            var q = (await _leadRepository.GetQueryableAsync())
+              .GroupBy(l => l.Source)
+              .Select(r => new LeadsPerSourceDto
+              {
+                  Source = r.Key,
+                  Count = r.Count()
+              });
+            return await AsyncExecuter.ToListAsync(q);
+        }
 
 
 

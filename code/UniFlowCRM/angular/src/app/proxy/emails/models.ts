@@ -1,4 +1,4 @@
-import type { EntityDto, FullAuditedEntityDto } from '@abp/ng.core';
+import type { EntityDto, FullAuditedEntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 import type { EmailStatus } from './email-status.enum';
 import type { AccountDto } from '../accounts/models';
 import type { ContactDto } from '../contacts/models';
@@ -40,4 +40,8 @@ export interface EmailDto extends FullAuditedEntityDto<string> {
   owner?: IdentityUserDto | null;
   creator?: IdentityUserDto | null;
   modifier?: IdentityUserDto | null;
+}
+
+export interface EmailRequestDto extends PagedAndSortedResultRequestDto {
+  filter?: string | null;
 }

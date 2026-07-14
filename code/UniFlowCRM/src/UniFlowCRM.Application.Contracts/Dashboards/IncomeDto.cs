@@ -1,5 +1,7 @@
 using Volo.Abp.Application.Dtos;
 
+namespace UniFlowCRM.Dashboards;
+
 public class IncomeDto : EntityDto
 {
     public decimal dzdincome { get; set; }

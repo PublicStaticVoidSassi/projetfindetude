@@ -1,4 +1,5 @@
 using Volo.Abp.Application.Dtos;
+namespace UniFlowCRM.Meetings;
 
 public class MeetingRequestDto : PagedAndSortedResultRequestDto
 {

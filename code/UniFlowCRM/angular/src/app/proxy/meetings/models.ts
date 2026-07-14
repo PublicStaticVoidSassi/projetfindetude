@@ -1,4 +1,4 @@
-import type { EntityDto, FullAuditedEntityDto } from '@abp/ng.core';
+import type { EntityDto, FullAuditedEntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 import type { MeetingStatus } from './meeting-status.enum';
 import type { AccountDto } from '../accounts/models';
 import type { ContactDto } from '../contacts/models';
@@ -34,4 +34,8 @@ export interface MeetingDto extends FullAuditedEntityDto<string> {
   owner?: IdentityUserDto | null;
   creator?: IdentityUserDto | null;
   modifier?: IdentityUserDto | null;
+}
+
+export interface MeetingRequestDto extends PagedAndSortedResultRequestDto {
+  filter?: string | null;
 }

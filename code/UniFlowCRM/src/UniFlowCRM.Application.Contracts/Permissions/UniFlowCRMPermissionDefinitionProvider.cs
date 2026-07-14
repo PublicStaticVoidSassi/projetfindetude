@@ -15,6 +15,7 @@ public class UniFlowCRMPermissionDefinitionProvider : PermissionDefinitionProvid
         //booksPermission.AddChild(UniFlowCRMPermissions.Books.Create, L("Permission:Books.Create"));
         //booksPermission.AddChild(UniFlowCRMPermissions.Books.Edit, L("Permission:Books.Edit"));
         //booksPermission.AddChild(UniFlowCRMPermissions.Books.Delete, L("Permission:Books.Delete"));
+        var AnalyticsPermission = myGroup.AddPermission(UniFlowCRMPermissions.Analytics.Default, L("Analytics:See"));
         var AssignPermission = myGroup.AddPermission(UniFlowCRMPermissions.Administration.Default, L("Permission:Assign"));
         var LeadPermission = myGroup.AddPermission(UniFlowCRMPermissions.Lead.Default, L("Permission:Lead"));
         LeadPermission.AddChild(UniFlowCRMPermissions.Lead.ViewAll, L("Permission:Books.ViewAll"));

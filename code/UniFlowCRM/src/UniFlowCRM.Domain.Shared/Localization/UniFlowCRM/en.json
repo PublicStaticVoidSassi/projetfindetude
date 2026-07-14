@@ -1,6 +1,7 @@
 {
   "Culture": "en",
   "Texts": {
+    "Analytics:See": "See analytics",
     "Permission:Lead": "Lead",
     "Permission:Account": "Account",
     "Permission:Contact": "Contact",

@@ -1,4 +1,5 @@
 using Volo.Abp.Application.Dtos;
+namespace UniFlowCRM.Emails;
 
 public class EmailRequestDto : PagedAndSortedResultRequestDto
 {
