@@ -1,0 +1,40 @@
+@startuml
+title Diagramme d'activité - Collecte des informations du client
+
+|Client|
+start
+
+:Se présente auprès du marketeur;
+:Exprime son besoin;
+
+|Marketeur|
+
+:Accueillir le client;
+:Expliquer l'objectif de l'entretien;
+:Poser des questions au client;
+
+|Client|
+
+:Répondre aux questions;
+:Fournir les informations demandées;
+
+|Marketeur|
+
+:Écouter les réponses;
+:Noter les informations recueillies;
+:Récapituler les informations au client;
+
+|Client|
+
+:Confirmer les informations;
+
+|Marketeur|
+
+:Remercier le client;
+
+|Client|
+:Clôturer l'entretien;
+
+stop
+
+@enduml

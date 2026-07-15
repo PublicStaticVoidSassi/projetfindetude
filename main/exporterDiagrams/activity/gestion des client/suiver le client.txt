@@ -1,0 +1,42 @@
+@startuml
+title Diagramme d'activité - Suivre les clients
+
+|Marketeur|
+start
+
+:Tenter de contacter le client;
+
+|Client|
+
+if (Le client est-il joignable\net accepte-t-il l'échange ?) then (Oui)
+
+    :Échanger avec le marketeur;
+    :Partager de nouvelles informations\net ses centres d'intérêt;
+
+    |Marketeur|
+
+    :Recueillir les informations;
+    :Identifier les besoins et les préférences;
+    :Proposer des publicités\net des réductions personnalisées;
+    :Définir les prochaines actions de suivi;
+
+    |Client|
+
+    :Prendre connaissance des propositions;
+
+    stop
+
+else (Non)
+
+    :Ne répond pas ou refuse\nles sollicitations;
+
+    |Marketeur|
+
+    :Constater que le suivi\nne peut pas être réalisé;
+    :Reporter ou interrompre\nles actions de suivi;
+
+    stop
+
+endif
+
+@enduml
