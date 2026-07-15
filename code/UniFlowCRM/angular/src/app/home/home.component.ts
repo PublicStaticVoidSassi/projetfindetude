@@ -1,14 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AuthService, LocalizationPipe, ConfigStateService } from '@abp/ng.core';
+import { AuthService, LocalizationPipe, ConfigStateService, PermissionDirective } from '@abp/ng.core';
 import { ChartModule } from 'primeng/chart';
 import { AnalyticsDto, AnalyticsService } from '../proxy/analytics';
 import { DashboardDto, IncomeDto } from '../proxy/dashboards/models';
-
+import {Leadsource} from '../shared/analytics/leadsource/leadsource';
+import {Accountindustry} from '../shared/analytics/accountindustry/accountindustry';
+import {Accounttype} from '../shared/analytics/accounttype/accounttype';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [ChartModule, LocalizationPipe]
+  imports: [ChartModule, LocalizationPipe, Leadsource, Accounttype, Accountindustry, PermissionDirective]
 })
 export class HomeComponent implements OnInit {
   private authService = inject(AuthService);
@@ -60,7 +62,7 @@ export class HomeComponent implements OnInit {
             this.dashboard.convertedleads
           ],
           backgroundColor: [
-            this.documentStyle.getPropertyValue('--bs-primary-bg-subtle'),
+            getComputedStyle(document.documentElement).getPropertyValue('--bs-primary-bg-subtle'),
             this.documentStyle.getPropertyValue('--bs-gray'),
             this.documentStyle.getPropertyValue('--bs-primary'),
             ,

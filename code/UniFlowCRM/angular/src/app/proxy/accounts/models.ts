@@ -52,3 +52,13 @@ export interface CreateUpdateAccountDto extends EntityDto<string> {
   employees?: number | null;
   userID?: string | null;
 }
+
+export interface AccountPerIndustryDto {
+  industry?: AccountIndustry;
+  count?: number;
+}
+
+export interface AccountPerTypeDto {
+  type?: AccountType;
+  count?: number;
+}

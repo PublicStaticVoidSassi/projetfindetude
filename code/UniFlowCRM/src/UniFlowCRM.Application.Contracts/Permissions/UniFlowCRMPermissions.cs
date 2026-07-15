@@ -13,6 +13,12 @@ public static class UniFlowCRMPermissions
     //    public const string Delete = Default + ".Delete";
     //}
 
+    // analytics
+    public static class Analytics
+    {
+        public const string Default = GroupName + ".See";
+    }
+
     // administration
     public static class Administration
     {

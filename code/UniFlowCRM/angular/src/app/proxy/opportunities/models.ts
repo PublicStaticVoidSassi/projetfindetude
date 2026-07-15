@@ -1,4 +1,4 @@
-import type { EntityDto, FullAuditedEntityDto } from '@abp/ng.core';
+import type { EntityDto, FullAuditedEntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 import type { Currency } from '../moneys/currency.enum';
 import type { OpportunityStage } from './opportunity-stage.enum';
 import type { OpportunityType } from './opportunity-type.enum';
@@ -46,4 +46,8 @@ export interface OpportunityDto extends FullAuditedEntityDto<string> {
   account?: AccountDto | null;
   contactID?: string | null;
   contact?: ContactDto | null;
+}
+
+export interface OpportunityRequestDto extends PagedAndSortedResultRequestDto {
+  filter?: string | null;
 }

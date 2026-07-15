@@ -1,6 +1,7 @@
 {
   "Culture": "fr",
   "Texts": {
+    "Analytics:See": "Consulter les rapports",
     "Permission:Assign": "l'affectation",
     "Permission:Lead": "gestion des prospects",
     "Permission:Account": "gestion des comptes",

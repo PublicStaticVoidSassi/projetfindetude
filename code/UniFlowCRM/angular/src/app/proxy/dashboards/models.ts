@@ -14,8 +14,9 @@ export interface DashboardDto extends EntityDto {
   totalcontacts?: number;
   totalopportunities?: number;
 }
+
 export interface IncomeDto extends EntityDto {
-  dzdincome?: number,
-  eurincome?: number,
-  usdincome?: number
+  dzdincome?: number;
+  eurincome?: number;
+  usdincome?: number;
 }

@@ -36,3 +36,8 @@ export interface LeadDto extends FullAuditedEntityDto<string> {
 export interface LeadRequestDto extends PagedAndSortedResultRequestDto {
   filter?: string | null;
 }
+
+export interface LeadsPerSourceDto {
+  source?: LeadSource;
+  count?: number;
+}

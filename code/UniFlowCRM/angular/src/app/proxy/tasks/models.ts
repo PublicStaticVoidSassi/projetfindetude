@@ -1,4 +1,4 @@
-import type { EntityDto, FullAuditedEntityDto } from '@abp/ng.core';
+import type { EntityDto, FullAuditedEntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 import type { TaskStatus } from './task-status.enum';
 import type { TaskPriority } from './task-priority.enum';
 import type { IdentityUserDto } from '../volo/abp/identity/models';
@@ -37,4 +37,8 @@ export interface TaskDto extends FullAuditedEntityDto<string> {
   contact?: ContactDto | null;
   opportunity?: OpportunityDto | null;
   lead?: LeadDto | null;
+}
+
+export interface TaskRequestDto extends PagedAndSortedResultRequestDto {
+  filter?: string | null;
 }

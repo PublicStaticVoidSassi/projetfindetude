@@ -1032,8 +1032,17 @@
                 "type": "UniFlowCRM.Accounts.AccountDto",
                 "typeSimple": "UniFlowCRM.Accounts.AccountDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                },
+                {
+                  "policy": "UniFlowCRM.Account",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Accounts.AccountDto,UniFlowCRM.Accounts.AccountDto,System.Guid,UniFlowCRM.Accounts.AccountRequestDto>"
             },
             "GetListAsyncByInput": {
@@ -1130,8 +1139,17 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Accounts.AccountDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Accounts.AccountDto>"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                },
+                {
+                  "policy": "UniFlowCRM.Account",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Accounts.AccountDto,UniFlowCRM.Accounts.AccountDto,System.Guid,UniFlowCRM.Accounts.AccountRequestDto>"
             },
             "CreateAsyncByInput": {
@@ -1168,8 +1186,17 @@
                 "type": "UniFlowCRM.Accounts.AccountDto",
                 "typeSimple": "UniFlowCRM.Accounts.AccountDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                },
+                {
+                  "policy": "UniFlowCRM.Account.Create",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<UniFlowCRM.Accounts.AccountDto,UniFlowCRM.Accounts.CreateUpdateAccountDto>"
             },
             "UpdateAsyncByIdAndInput": {
@@ -1226,8 +1253,17 @@
                 "type": "UniFlowCRM.Accounts.AccountDto",
                 "typeSimple": "UniFlowCRM.Accounts.AccountDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                },
+                {
+                  "policy": "UniFlowCRM.Account.Edit",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Accounts.AccountDto,System.Guid,UniFlowCRM.Accounts.CreateUpdateAccountDto>"
             },
             "DeleteAsyncById": {
@@ -1264,8 +1300,17 @@
                 "type": "System.Void",
                 "typeSimple": "System.Void"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                },
+                {
+                  "policy": "UniFlowCRM.Account.Delete",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
             }
           }
@@ -1300,8 +1345,13 @@
                 "type": "UniFlowCRM.Dashboards.DashboardDto",
                 "typeSimple": "UniFlowCRM.Dashboards.DashboardDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "UniFlowCRM.Analytics.AnalyticsAppService"
             },
             "GetIncomeAsyncByCt": {
@@ -1322,11 +1372,79 @@
               ],
               "parameters": [],
               "returnValue": {
-                "type": "IncomeDto",
-                "typeSimple": "IncomeDto"
+                "type": "UniFlowCRM.Dashboards.IncomeDto",
+                "typeSimple": "UniFlowCRM.Dashboards.IncomeDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
+              "implementFrom": "UniFlowCRM.Analytics.AnalyticsAppService"
+            },
+            "GetAccountPerIndustryAsync": {
+              "uniqueName": "GetAccountPerIndustryAsync",
+              "name": "GetAccountPerIndustryAsync",
+              "httpMethod": "GET",
+              "url": "api/app/analytics/account-per-industry",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<UniFlowCRM.Accounts.AccountPerIndustryDto>",
+                "typeSimple": "[UniFlowCRM.Accounts.AccountPerIndustryDto]"
+              },
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
+              "implementFrom": "UniFlowCRM.Analytics.AnalyticsAppService"
+            },
+            "GetAccountPerTypeAsync": {
+              "uniqueName": "GetAccountPerTypeAsync",
+              "name": "GetAccountPerTypeAsync",
+              "httpMethod": "GET",
+              "url": "api/app/analytics/account-per-type",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<UniFlowCRM.Accounts.AccountPerTypeDto>",
+                "typeSimple": "[UniFlowCRM.Accounts.AccountPerTypeDto]"
+              },
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
+              "implementFrom": "UniFlowCRM.Analytics.AnalyticsAppService"
+            },
+            "GetLeadsPerSourceAsync": {
+              "uniqueName": "GetLeadsPerSourceAsync",
+              "name": "GetLeadsPerSourceAsync",
+              "httpMethod": "GET",
+              "url": "api/app/analytics/leads-per-source",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<UniFlowCRM.Leads.LeadsPerSourceDto>",
+                "typeSimple": "[UniFlowCRM.Leads.LeadsPerSourceDto]"
+              },
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "UniFlowCRM.Analytics.AnalyticsAppService"
             },
             "GetAsync": {
@@ -1341,8 +1459,13 @@
                 "type": "UniFlowCRM.Analytics.AnalyticsDto",
                 "typeSimple": "UniFlowCRM.Analytics.AnalyticsDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "UniFlowCRM.Analytics.AnalyticsAppService"
             }
           }
@@ -1490,13 +1613,8 @@
                 "type": "UniFlowCRM.Books.BookDto",
                 "typeSimple": "UniFlowCRM.Books.BookDto"
               },
-              "allowAnonymous": false,
-              "authorizeDatas": [
-                {
-                  "policy": "UniFlowCRM.Books",
-                  "roles": null
-                }
-              ],
+              "allowAnonymous": null,
+              "authorizeDatas": [],
               "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Books.BookDto,UniFlowCRM.Books.BookDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
             },
             "GetListAsyncByInput": {
@@ -1557,13 +1675,8 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Books.BookDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Books.BookDto>"
               },
-              "allowAnonymous": false,
-              "authorizeDatas": [
-                {
-                  "policy": "UniFlowCRM.Books",
-                  "roles": null
-                }
-              ],
+              "allowAnonymous": null,
+              "authorizeDatas": [],
               "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Books.BookDto,UniFlowCRM.Books.BookDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
             },
             "CreateAsyncByInput": {
@@ -1600,17 +1713,8 @@
                 "type": "UniFlowCRM.Books.BookDto",
                 "typeSimple": "UniFlowCRM.Books.BookDto"
               },
-              "allowAnonymous": false,
-              "authorizeDatas": [
-                {
-                  "policy": "UniFlowCRM.Books",
-                  "roles": null
-                },
-                {
-                  "policy": "UniFlowCRM.Books.Create",
-                  "roles": null
-                }
-              ],
+              "allowAnonymous": null,
+              "authorizeDatas": [],
               "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<UniFlowCRM.Books.BookDto,UniFlowCRM.Books.CreateUpdateBookDto>"
             },
             "UpdateAsyncByIdAndInput": {
@@ -1667,17 +1771,8 @@
                 "type": "UniFlowCRM.Books.BookDto",
                 "typeSimple": "UniFlowCRM.Books.BookDto"
               },
-              "allowAnonymous": false,
-              "authorizeDatas": [
-                {
-                  "policy": "UniFlowCRM.Books",
-                  "roles": null
-                },
-                {
-                  "policy": "UniFlowCRM.Books.Edit",
-                  "roles": null
-                }
-              ],
+              "allowAnonymous": null,
+              "authorizeDatas": [],
               "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Books.BookDto,System.Guid,UniFlowCRM.Books.CreateUpdateBookDto>"
             },
             "DeleteAsyncById": {
@@ -1714,17 +1809,8 @@
                 "type": "System.Void",
                 "typeSimple": "System.Void"
               },
-              "allowAnonymous": false,
-              "authorizeDatas": [
-                {
-                  "policy": "UniFlowCRM.Books",
-                  "roles": null
-                },
-                {
-                  "policy": "UniFlowCRM.Books.Delete",
-                  "roles": null
-                }
-              ],
+              "allowAnonymous": null,
+              "authorizeDatas": [],
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
             }
           }
@@ -1763,9 +1849,9 @@
                   "parametersOnMethod": [
                     {
                       "name": "input",
-                      "typeAsString": "CallRequestDto, UniFlowCRM.Application.Contracts",
-                      "type": "CallRequestDto",
-                      "typeSimple": "CallRequestDto",
+                      "typeAsString": "UniFlowCRM.Calls.CallRequestDto, UniFlowCRM.Application.Contracts",
+                      "type": "UniFlowCRM.Calls.CallRequestDto",
+                      "typeSimple": "UniFlowCRM.Calls.CallRequestDto",
                       "isOptional": false,
                       "defaultValue": null
                     }
@@ -1872,8 +1958,17 @@
                 "type": "UniFlowCRM.Calls.CallDto",
                 "typeSimple": "UniFlowCRM.Calls.CallDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Call",
+                  "roles": null
+                },
+                {
+                  "policy": "UniFlowCRM.Call.Create",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<UniFlowCRM.Calls.CallDto,UniFlowCRM.Calls.CreateUpdateCallDto>"
             },
             "GetAsyncById": {
@@ -1910,9 +2005,14 @@
                 "type": "UniFlowCRM.Calls.CallDto",
                 "typeSimple": "UniFlowCRM.Calls.CallDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Calls.CallDto,UniFlowCRM.Calls.CallDto,System.Guid,CallRequestDto>"
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Call",
+                  "roles": null
+                }
+              ],
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Calls.CallDto,UniFlowCRM.Calls.CallDto,System.Guid,UniFlowCRM.Calls.CallRequestDto>"
             },
             "GetListAsyncByInput": {
               "uniqueName": "GetListAsyncByInput",
@@ -1923,9 +2023,9 @@
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "CallRequestDto, UniFlowCRM.Application.Contracts",
-                  "type": "CallRequestDto",
-                  "typeSimple": "CallRequestDto",
+                  "typeAsString": "UniFlowCRM.Calls.CallRequestDto, UniFlowCRM.Application.Contracts",
+                  "type": "UniFlowCRM.Calls.CallRequestDto",
+                  "typeSimple": "UniFlowCRM.Calls.CallRequestDto",
                   "isOptional": false,
                   "defaultValue": null
                 }
@@ -1984,9 +2084,14 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Calls.CallDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Calls.CallDto>"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Calls.CallDto,UniFlowCRM.Calls.CallDto,System.Guid,CallRequestDto>"
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Call",
+                  "roles": null
+                }
+              ],
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Calls.CallDto,UniFlowCRM.Calls.CallDto,System.Guid,UniFlowCRM.Calls.CallRequestDto>"
             },
             "UpdateAsyncByIdAndInput": {
               "uniqueName": "UpdateAsyncByIdAndInput",
@@ -2042,8 +2147,13 @@
                 "type": "UniFlowCRM.Calls.CallDto",
                 "typeSimple": "UniFlowCRM.Calls.CallDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Call",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Calls.CallDto,System.Guid,UniFlowCRM.Calls.CreateUpdateCallDto>"
             },
             "DeleteAsyncById": {
@@ -2080,8 +2190,13 @@
                 "type": "System.Void",
                 "typeSimple": "System.Void"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Call",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
             }
           }
@@ -2229,8 +2344,13 @@
                 "type": "UniFlowCRM.Contacts.ContactDto",
                 "typeSimple": "UniFlowCRM.Contacts.ContactDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Contacts.ContactDto,UniFlowCRM.Contacts.ContactDto,System.Guid,UniFlowCRM.Contacts.ContactRequestDto>"
             },
             "GetListAsyncByInput": {
@@ -2303,8 +2423,13 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Contacts.ContactDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Contacts.ContactDto>"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Contacts.ContactDto,UniFlowCRM.Contacts.ContactDto,System.Guid,UniFlowCRM.Contacts.ContactRequestDto>"
             },
             "CreateAsyncByInput": {
@@ -2341,8 +2466,13 @@
                 "type": "UniFlowCRM.Contacts.ContactDto",
                 "typeSimple": "UniFlowCRM.Contacts.ContactDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<UniFlowCRM.Contacts.ContactDto,UniFlowCRM.Contacts.CreateUpdateContactDto>"
             },
             "UpdateAsyncByIdAndInput": {
@@ -2399,8 +2529,13 @@
                 "type": "UniFlowCRM.Contacts.ContactDto",
                 "typeSimple": "UniFlowCRM.Contacts.ContactDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Contacts.ContactDto,System.Guid,UniFlowCRM.Contacts.CreateUpdateContactDto>"
             },
             "DeleteAsyncById": {
@@ -2437,8 +2572,13 @@
                 "type": "System.Void",
                 "typeSimple": "System.Void"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
             }
           }
@@ -2477,9 +2617,9 @@
                   "parametersOnMethod": [
                     {
                       "name": "input",
-                      "typeAsString": "EmailRequestDto, UniFlowCRM.Application.Contracts",
-                      "type": "EmailRequestDto",
-                      "typeSimple": "EmailRequestDto",
+                      "typeAsString": "UniFlowCRM.Emails.EmailRequestDto, UniFlowCRM.Application.Contracts",
+                      "type": "UniFlowCRM.Emails.EmailRequestDto",
+                      "typeSimple": "UniFlowCRM.Emails.EmailRequestDto",
                       "isOptional": false,
                       "defaultValue": null
                     }
@@ -2594,8 +2734,17 @@
                 "type": "System.Void",
                 "typeSimple": "System.Void"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Email",
+                  "roles": null
+                },
+                {
+                  "policy": "UniFlowCRM.Email.Send",
+                  "roles": null
+                }
+              ],
               "implementFrom": "UniFlowCRM.Emails.EmailsAppService"
             },
             "GetListAsyncByInput": {
@@ -2607,9 +2756,9 @@
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "EmailRequestDto, UniFlowCRM.Application.Contracts",
-                  "type": "EmailRequestDto",
-                  "typeSimple": "EmailRequestDto",
+                  "typeAsString": "UniFlowCRM.Emails.EmailRequestDto, UniFlowCRM.Application.Contracts",
+                  "type": "UniFlowCRM.Emails.EmailRequestDto",
+                  "typeSimple": "UniFlowCRM.Emails.EmailRequestDto",
                   "isOptional": false,
                   "defaultValue": null
                 }
@@ -2668,9 +2817,14 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Emails.EmailDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Emails.EmailDto>"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Emails.EmailDto,UniFlowCRM.Emails.EmailDto,System.Guid,EmailRequestDto>"
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Email",
+                  "roles": null
+                }
+              ],
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Emails.EmailDto,UniFlowCRM.Emails.EmailDto,System.Guid,UniFlowCRM.Emails.EmailRequestDto>"
             },
             "GetAsyncById": {
               "uniqueName": "GetAsyncById",
@@ -2706,9 +2860,14 @@
                 "type": "UniFlowCRM.Emails.EmailDto",
                 "typeSimple": "UniFlowCRM.Emails.EmailDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Emails.EmailDto,UniFlowCRM.Emails.EmailDto,System.Guid,EmailRequestDto>"
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Email",
+                  "roles": null
+                }
+              ],
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Emails.EmailDto,UniFlowCRM.Emails.EmailDto,System.Guid,UniFlowCRM.Emails.EmailRequestDto>"
             },
             "CreateAsyncByInput": {
               "uniqueName": "CreateAsyncByInput",
@@ -2744,8 +2903,13 @@
                 "type": "UniFlowCRM.Emails.EmailDto",
                 "typeSimple": "UniFlowCRM.Emails.EmailDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Email",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<UniFlowCRM.Emails.EmailDto,UniFlowCRM.Emails.CreateUpdateEmailDto>"
             },
             "UpdateAsyncByIdAndInput": {
@@ -2802,8 +2966,13 @@
                 "type": "UniFlowCRM.Emails.EmailDto",
                 "typeSimple": "UniFlowCRM.Emails.EmailDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Email",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Emails.EmailDto,System.Guid,UniFlowCRM.Emails.CreateUpdateEmailDto>"
             },
             "DeleteAsyncById": {
@@ -2840,8 +3009,13 @@
                 "type": "System.Void",
                 "typeSimple": "System.Void"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Email",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
             }
           }
@@ -2858,6 +3032,23 @@
               "type": "UniFlowCRM.Leads.ILeadsAppService",
               "name": "ILeadsAppService",
               "methods": [
+                {
+                  "name": "ConvertAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "UniFlowCRM.Contacts.ContactDto",
+                    "typeSimple": "UniFlowCRM.Contacts.ContactDto"
+                  }
+                },
                 {
                   "name": "GetAsync",
                   "parametersOnMethod": [
@@ -2989,8 +3180,13 @@
                 "type": "UniFlowCRM.Leads.LeadDto",
                 "typeSimple": "UniFlowCRM.Leads.LeadDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Lead",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Leads.LeadDto,UniFlowCRM.Leads.LeadDto,System.Guid,UniFlowCRM.Leads.LeadRequestDto>"
             },
             "GetListAsyncByInput": {
@@ -3063,8 +3259,13 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Leads.LeadDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Leads.LeadDto>"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Lead",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Leads.LeadDto,UniFlowCRM.Leads.LeadDto,System.Guid,UniFlowCRM.Leads.LeadRequestDto>"
             },
             "CreateAsyncByInput": {
@@ -3101,8 +3302,17 @@
                 "type": "UniFlowCRM.Leads.LeadDto",
                 "typeSimple": "UniFlowCRM.Leads.LeadDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Lead",
+                  "roles": null
+                },
+                {
+                  "policy": "UniFlowCRM.Lead.Create",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<UniFlowCRM.Leads.LeadDto,UniFlowCRM.Leads.CreateUpdateLeadDto>"
             },
             "UpdateAsyncByIdAndInput": {
@@ -3159,8 +3369,17 @@
                 "type": "UniFlowCRM.Leads.LeadDto",
                 "typeSimple": "UniFlowCRM.Leads.LeadDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Lead",
+                  "roles": null
+                },
+                {
+                  "policy": "UniFlowCRM.Lead.Edit",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Leads.LeadDto,System.Guid,UniFlowCRM.Leads.CreateUpdateLeadDto>"
             },
             "ConvertAsyncById": {
@@ -3197,9 +3416,18 @@
                 "type": "UniFlowCRM.Contacts.ContactDto",
                 "typeSimple": "UniFlowCRM.Contacts.ContactDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
-              "implementFrom": "UniFlowCRM.Leads.LeadsAppService"
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Lead",
+                  "roles": null
+                },
+                {
+                  "policy": "UniFlowCRM.Lead.Convert",
+                  "roles": null
+                }
+              ],
+              "implementFrom": "UniFlowCRM.Leads.ILeadsAppService"
             },
             "DeleteAsyncById": {
               "uniqueName": "DeleteAsyncById",
@@ -3235,8 +3463,13 @@
                 "type": "System.Void",
                 "typeSimple": "System.Void"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Lead",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
             }
           }
@@ -3275,9 +3508,9 @@
                   "parametersOnMethod": [
                     {
                       "name": "input",
-                      "typeAsString": "MeetingRequestDto, UniFlowCRM.Application.Contracts",
-                      "type": "MeetingRequestDto",
-                      "typeSimple": "MeetingRequestDto",
+                      "typeAsString": "UniFlowCRM.Meetings.MeetingRequestDto, UniFlowCRM.Application.Contracts",
+                      "type": "UniFlowCRM.Meetings.MeetingRequestDto",
+                      "typeSimple": "UniFlowCRM.Meetings.MeetingRequestDto",
                       "isOptional": false,
                       "defaultValue": null
                     }
@@ -3359,9 +3592,9 @@
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "MeetingRequestDto, UniFlowCRM.Application.Contracts",
-                  "type": "MeetingRequestDto",
-                  "typeSimple": "MeetingRequestDto",
+                  "typeAsString": "UniFlowCRM.Meetings.MeetingRequestDto, UniFlowCRM.Application.Contracts",
+                  "type": "UniFlowCRM.Meetings.MeetingRequestDto",
+                  "typeSimple": "UniFlowCRM.Meetings.MeetingRequestDto",
                   "isOptional": false,
                   "defaultValue": null
                 }
@@ -3420,9 +3653,14 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Meetings.MeetingDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Meetings.MeetingDto>"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Meetings.MeetingDto,UniFlowCRM.Meetings.MeetingDto,System.Guid,MeetingRequestDto>"
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Meetings.MeetingDto,UniFlowCRM.Meetings.MeetingDto,System.Guid,UniFlowCRM.Meetings.MeetingRequestDto>"
             },
             "GetAsyncById": {
               "uniqueName": "GetAsyncById",
@@ -3458,9 +3696,14 @@
                 "type": "UniFlowCRM.Meetings.MeetingDto",
                 "typeSimple": "UniFlowCRM.Meetings.MeetingDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Meetings.MeetingDto,UniFlowCRM.Meetings.MeetingDto,System.Guid,MeetingRequestDto>"
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Meetings.MeetingDto,UniFlowCRM.Meetings.MeetingDto,System.Guid,UniFlowCRM.Meetings.MeetingRequestDto>"
             },
             "CreateAsyncByInput": {
               "uniqueName": "CreateAsyncByInput",
@@ -3496,8 +3739,13 @@
                 "type": "UniFlowCRM.Meetings.MeetingDto",
                 "typeSimple": "UniFlowCRM.Meetings.MeetingDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<UniFlowCRM.Meetings.MeetingDto,UniFlowCRM.Meetings.CreateUpdateMeetingDto>"
             },
             "UpdateAsyncByIdAndInput": {
@@ -3554,8 +3802,13 @@
                 "type": "UniFlowCRM.Meetings.MeetingDto",
                 "typeSimple": "UniFlowCRM.Meetings.MeetingDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Meetings.MeetingDto,System.Guid,UniFlowCRM.Meetings.CreateUpdateMeetingDto>"
             },
             "DeleteAsyncById": {
@@ -3592,8 +3845,13 @@
                 "type": "System.Void",
                 "typeSimple": "System.Void"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
             }
           }
@@ -3833,8 +4091,13 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Notes.NoteDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Notes.NoteDto>"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Notes.NoteDto,UniFlowCRM.Notes.NoteDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
             },
             "GetAsyncById": {
@@ -3871,8 +4134,13 @@
                 "type": "UniFlowCRM.Notes.NoteDto",
                 "typeSimple": "UniFlowCRM.Notes.NoteDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Notes.NoteDto,UniFlowCRM.Notes.NoteDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
             },
             "UpdateAsyncByIdAndInput": {
@@ -3929,8 +4197,13 @@
                 "type": "UniFlowCRM.Notes.NoteDto",
                 "typeSimple": "UniFlowCRM.Notes.NoteDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Notes.NoteDto,System.Guid,UniFlowCRM.Notes.CreateUpdateNoteDto>"
             },
             "GetForLeadByLeadId": {
@@ -3967,8 +4240,13 @@
                 "type": "System.Collections.Generic.List<UniFlowCRM.Notes.NoteDto>",
                 "typeSimple": "[UniFlowCRM.Notes.NoteDto]"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "UniFlowCRM.Notes.INotesAppService"
             },
             "GetForContactByContactId": {
@@ -4005,8 +4283,13 @@
                 "type": "System.Collections.Generic.List<UniFlowCRM.Notes.NoteDto>",
                 "typeSimple": "[UniFlowCRM.Notes.NoteDto]"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "UniFlowCRM.Notes.INotesAppService"
             },
             "GetForAccountByAccountId": {
@@ -4043,8 +4326,13 @@
                 "type": "System.Collections.Generic.List<UniFlowCRM.Notes.NoteDto>",
                 "typeSimple": "[UniFlowCRM.Notes.NoteDto]"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "UniFlowCRM.Notes.INotesAppService"
             },
             "GetForOpportunityByOpportunityId": {
@@ -4081,8 +4369,13 @@
                 "type": "System.Collections.Generic.List<UniFlowCRM.Notes.NoteDto>",
                 "typeSimple": "[UniFlowCRM.Notes.NoteDto]"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "UniFlowCRM.Notes.INotesAppService"
             },
             "CreateAsyncByInput": {
@@ -4119,8 +4412,13 @@
                 "type": "UniFlowCRM.Notes.NoteDto",
                 "typeSimple": "UniFlowCRM.Notes.NoteDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<UniFlowCRM.Notes.NoteDto,UniFlowCRM.Notes.CreateUpdateNoteDto>"
             },
             "DeleteAsyncById": {
@@ -4157,8 +4455,13 @@
                 "type": "System.Void",
                 "typeSimple": "System.Void"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
             }
           }
@@ -4197,9 +4500,9 @@
                   "parametersOnMethod": [
                     {
                       "name": "input",
-                      "typeAsString": "OpportunityRequestDto, UniFlowCRM.Application.Contracts",
-                      "type": "OpportunityRequestDto",
-                      "typeSimple": "OpportunityRequestDto",
+                      "typeAsString": "UniFlowCRM.Opportunities.OpportunityRequestDto, UniFlowCRM.Application.Contracts",
+                      "type": "UniFlowCRM.Opportunities.OpportunityRequestDto",
+                      "typeSimple": "UniFlowCRM.Opportunities.OpportunityRequestDto",
                       "isOptional": false,
                       "defaultValue": null
                     }
@@ -4306,8 +4609,17 @@
                 "type": "UniFlowCRM.Opportunities.OpportunityDto",
                 "typeSimple": "UniFlowCRM.Opportunities.OpportunityDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Opportunity",
+                  "roles": null
+                },
+                {
+                  "policy": "UniFlowCRM.Opportunity.Create",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<UniFlowCRM.Opportunities.OpportunityDto,UniFlowCRM.Opportunities.CreateUpdateOpportunityDto>"
             },
             "UpdateAsyncByIdAndInput": {
@@ -4364,8 +4676,17 @@
                 "type": "UniFlowCRM.Opportunities.OpportunityDto",
                 "typeSimple": "UniFlowCRM.Opportunities.OpportunityDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Opportunity",
+                  "roles": null
+                },
+                {
+                  "policy": "UniFlowCRM.Opportunity.Edit",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Opportunities.OpportunityDto,System.Guid,UniFlowCRM.Opportunities.CreateUpdateOpportunityDto>"
             },
             "GetAsyncById": {
@@ -4402,9 +4723,14 @@
                 "type": "UniFlowCRM.Opportunities.OpportunityDto",
                 "typeSimple": "UniFlowCRM.Opportunities.OpportunityDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Opportunities.OpportunityDto,UniFlowCRM.Opportunities.OpportunityDto,System.Guid,OpportunityRequestDto>"
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Opportunity",
+                  "roles": null
+                }
+              ],
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Opportunities.OpportunityDto,UniFlowCRM.Opportunities.OpportunityDto,System.Guid,UniFlowCRM.Opportunities.OpportunityRequestDto>"
             },
             "GetListAsyncByInput": {
               "uniqueName": "GetListAsyncByInput",
@@ -4415,9 +4741,9 @@
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "OpportunityRequestDto, UniFlowCRM.Application.Contracts",
-                  "type": "OpportunityRequestDto",
-                  "typeSimple": "OpportunityRequestDto",
+                  "typeAsString": "UniFlowCRM.Opportunities.OpportunityRequestDto, UniFlowCRM.Application.Contracts",
+                  "type": "UniFlowCRM.Opportunities.OpportunityRequestDto",
+                  "typeSimple": "UniFlowCRM.Opportunities.OpportunityRequestDto",
                   "isOptional": false,
                   "defaultValue": null
                 }
@@ -4476,9 +4802,14 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Opportunities.OpportunityDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Opportunities.OpportunityDto>"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Opportunities.OpportunityDto,UniFlowCRM.Opportunities.OpportunityDto,System.Guid,OpportunityRequestDto>"
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Opportunity",
+                  "roles": null
+                }
+              ],
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Opportunities.OpportunityDto,UniFlowCRM.Opportunities.OpportunityDto,System.Guid,UniFlowCRM.Opportunities.OpportunityRequestDto>"
             },
             "CloseAsyncByIdAndWon": {
               "uniqueName": "CloseAsyncByIdAndWon",
@@ -4534,8 +4865,17 @@
                 "type": "UniFlowCRM.Opportunities.OpportunityDto",
                 "typeSimple": "UniFlowCRM.Opportunities.OpportunityDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Opportunity",
+                  "roles": null
+                },
+                {
+                  "policy": "UniFlowCRM.Opportunity.Close",
+                  "roles": null
+                }
+              ],
               "implementFrom": "UniFlowCRM.Opportunities.OpportunitiesAppService"
             },
             "DeleteAsyncById": {
@@ -4572,8 +4912,13 @@
                 "type": "System.Void",
                 "typeSimple": "System.Void"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Opportunity",
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
             }
           }
@@ -4612,9 +4957,9 @@
                   "parametersOnMethod": [
                     {
                       "name": "input",
-                      "typeAsString": "TaskRequestDto, UniFlowCRM.Application.Contracts",
-                      "type": "TaskRequestDto",
-                      "typeSimple": "TaskRequestDto",
+                      "typeAsString": "UniFlowCRM.Tasks.TaskRequestDto, UniFlowCRM.Application.Contracts",
+                      "type": "UniFlowCRM.Tasks.TaskRequestDto",
+                      "typeSimple": "UniFlowCRM.Tasks.TaskRequestDto",
                       "isOptional": false,
                       "defaultValue": null
                     }
@@ -4696,9 +5041,9 @@
               "parametersOnMethod": [
                 {
                   "name": "input",
-                  "typeAsString": "TaskRequestDto, UniFlowCRM.Application.Contracts",
-                  "type": "TaskRequestDto",
-                  "typeSimple": "TaskRequestDto",
+                  "typeAsString": "UniFlowCRM.Tasks.TaskRequestDto, UniFlowCRM.Application.Contracts",
+                  "type": "UniFlowCRM.Tasks.TaskRequestDto",
+                  "typeSimple": "UniFlowCRM.Tasks.TaskRequestDto",
                   "isOptional": false,
                   "defaultValue": null
                 }
@@ -4757,9 +5102,14 @@
                 "type": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Tasks.TaskDto>",
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<UniFlowCRM.Tasks.TaskDto>"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Tasks.TaskDto,UniFlowCRM.Tasks.TaskDto,System.Guid,TaskRequestDto>"
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Tasks.TaskDto,UniFlowCRM.Tasks.TaskDto,System.Guid,UniFlowCRM.Tasks.TaskRequestDto>"
             },
             "CreateAsyncByInput": {
               "uniqueName": "CreateAsyncByInput",
@@ -4795,8 +5145,13 @@
                 "type": "UniFlowCRM.Tasks.TaskDto",
                 "typeSimple": "UniFlowCRM.Tasks.TaskDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<UniFlowCRM.Tasks.TaskDto,UniFlowCRM.Tasks.CreateUpdateTaskDto>"
             },
             "GetAsyncById": {
@@ -4833,9 +5188,14 @@
                 "type": "UniFlowCRM.Tasks.TaskDto",
                 "typeSimple": "UniFlowCRM.Tasks.TaskDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Tasks.TaskDto,UniFlowCRM.Tasks.TaskDto,System.Guid,TaskRequestDto>"
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Tasks.TaskDto,UniFlowCRM.Tasks.TaskDto,System.Guid,UniFlowCRM.Tasks.TaskRequestDto>"
             },
             "UpdateAsyncByIdAndInput": {
               "uniqueName": "UpdateAsyncByIdAndInput",
@@ -4891,8 +5251,13 @@
                 "type": "UniFlowCRM.Tasks.TaskDto",
                 "typeSimple": "UniFlowCRM.Tasks.TaskDto"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Tasks.TaskDto,System.Guid,UniFlowCRM.Tasks.CreateUpdateTaskDto>"
             },
             "DeleteAsyncById": {
@@ -4929,8 +5294,13 @@
                 "type": "System.Void",
                 "typeSimple": "System.Void"
               },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
             }
           }
@@ -7895,120 +8265,6 @@
     }
   },
   "types": {
-    "CallRequestDto": {
-      "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "filter",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null,
-          "isNullable": true
-        }
-      ]
-    },
-    "EmailRequestDto": {
-      "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "filter",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null,
-          "isNullable": true
-        }
-      ]
-    },
-    "IncomeDto": {
-      "baseType": "Volo.Abp.Application.Dtos.EntityDto",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "dzdincome",
-          "jsonName": null,
-          "type": "System.Decimal",
-          "typeSimple": "number",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null,
-          "isNullable": false
-        },
-        {
-          "name": "eurincome",
-          "jsonName": null,
-          "type": "System.Decimal",
-          "typeSimple": "number",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null,
-          "isNullable": false
-        },
-        {
-          "name": "usdincome",
-          "jsonName": null,
-          "type": "System.Decimal",
-          "typeSimple": "number",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null,
-          "isNullable": false
-        }
-      ]
-    },
-    "MeetingRequestDto": {
-      "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "filter",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null,
-          "isNullable": true
-        }
-      ]
-    },
     "Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid": {
       "baseType": "System.Runtime.InteropServices.SafeHandle",
       "isEnum": false,
@@ -8038,28 +8294,6 @@
       "enumValues": null,
       "genericArguments": null,
       "properties": []
-    },
-    "OpportunityRequestDto": {
-      "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "filter",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null,
-          "isNullable": true
-        }
-      ]
     },
     "System.MarshalByRefObject": {
       "baseType": null,
@@ -8229,28 +8463,6 @@
           "maximum": null,
           "regex": null,
           "isNullable": false
-        }
-      ]
-    },
-    "TaskRequestDto": {
-      "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "filter",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null,
-          "isNullable": true
         }
       ]
     },
@@ -8579,6 +8791,76 @@
       ],
       "genericArguments": null,
       "properties": null
+    },
+    "UniFlowCRM.Accounts.AccountPerIndustryDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Industry",
+          "jsonName": null,
+          "type": "UniFlowCRM.Accounts.AccountIndustry",
+          "typeSimple": "enum",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        },
+        {
+          "name": "Count",
+          "jsonName": null,
+          "type": "System.Int64",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        }
+      ]
+    },
+    "UniFlowCRM.Accounts.AccountPerTypeDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Type",
+          "jsonName": null,
+          "type": "UniFlowCRM.Accounts.AccountType",
+          "typeSimple": "enum",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        },
+        {
+          "name": "Count",
+          "jsonName": null,
+          "type": "System.Int64",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        }
+      ]
     },
     "UniFlowCRM.Accounts.AccountRequestDto": {
       "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
@@ -9468,6 +9750,28 @@
           "jsonName": null,
           "type": "Volo.Abp.Identity.IdentityUserDto",
           "typeSimple": "Volo.Abp.Identity.IdentityUserDto",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": true
+        }
+      ]
+    },
+    "UniFlowCRM.Calls.CallRequestDto": {
+      "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "filter",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -10533,6 +10837,54 @@
         }
       ]
     },
+    "UniFlowCRM.Dashboards.IncomeDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "dzdincome",
+          "jsonName": null,
+          "type": "System.Decimal",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        },
+        {
+          "name": "eurincome",
+          "jsonName": null,
+          "type": "System.Decimal",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        },
+        {
+          "name": "usdincome",
+          "jsonName": null,
+          "type": "System.Decimal",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        }
+      ]
+    },
     "UniFlowCRM.Emails.CreateUpdateEmailDto": {
       "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
       "isEnum": false,
@@ -10931,6 +11283,28 @@
           "jsonName": null,
           "type": "Volo.Abp.Identity.IdentityUserDto",
           "typeSimple": "Volo.Abp.Identity.IdentityUserDto",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": true
+        }
+      ]
+    },
+    "UniFlowCRM.Emails.EmailRequestDto": {
+      "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "filter",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -11340,6 +11714,41 @@
       "genericArguments": null,
       "properties": null
     },
+    "UniFlowCRM.Leads.LeadsPerSourceDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Source",
+          "jsonName": null,
+          "type": "UniFlowCRM.Leads.LeadSource",
+          "typeSimple": "enum",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        },
+        {
+          "name": "Count",
+          "jsonName": null,
+          "type": "System.Int64",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        }
+      ]
+    },
     "UniFlowCRM.Leads.LeadStatus": {
       "baseType": "System.Enum",
       "isEnum": true,
@@ -11682,6 +12091,28 @@
           "jsonName": null,
           "type": "Volo.Abp.Identity.IdentityUserDto",
           "typeSimple": "Volo.Abp.Identity.IdentityUserDto",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": true
+        }
+      ]
+    },
+    "UniFlowCRM.Meetings.MeetingRequestDto": {
+      "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "filter",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -12469,6 +12900,28 @@
         }
       ]
     },
+    "UniFlowCRM.Opportunities.OpportunityRequestDto": {
+      "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "filter",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": true
+        }
+      ]
+    },
     "UniFlowCRM.Opportunities.OpportunityStage": {
       "baseType": "System.Enum",
       "isEnum": true,
@@ -12908,6 +13361,28 @@
       ],
       "genericArguments": null,
       "properties": null
+    },
+    "UniFlowCRM.Tasks.TaskRequestDto": {
+      "baseType": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "filter",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": true
+        }
+      ]
     },
     "UniFlowCRM.Tasks.TaskStatus": {
       "baseType": "System.Enum",

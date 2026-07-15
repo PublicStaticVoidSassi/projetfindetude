@@ -1,0 +1,72 @@
+# Mémoire TODO Checklist
+
+-   [x] **INTRODUCTION GÉNÉRALE**
+
+-   [x] **Etude Prealable**
+    -   [x] Présentation du domaine de l'informatique de gestion
+    -   [x] Problématique existante au sein de l'organisme
+    -   [x] Limites du système actuel (s'il existe)
+    -   [x] Solution proposée (application informatique)
+    -   [x] Objectifs du projet
+    -   [x] Structure du mémoire
+-   [ ] **CHAPITRE 1 : ANALYSE DES BESOINS**
+    -   [x] Méthodologie utilisée
+        -   [x] Méthode UP (Unified Process)
+        -   [x] Langage UML
+            -   [x] Diagramme de cas d'utilisation
+            -   [x] Diagramme d'activité
+            -   [x] Diagramme de classes
+            -   [x] Diagramme de séquence
+            -   [x] Diagramme de déploiement
+    -   [ ] Présentation de l'organisme d'accueil
+        -   [x] intro
+        -   [ ] Historique
+        -   [ ] Organisation interne
+        -   [x] Activités principales
+        -   [ ] Organigramme général
+    -   [ ] Identification des besoins
+        -   [-] Diagramme de cas d'utilisation global
+        -   [ ] Identification du champ d'étude
+        -   [-] Besoins fonctionnels
+        -   [-] Besoins non fonctionnels
+        -   [-] Contraintes techniques
+    -   [ ] Modélisation détaillée des besoins
+        -   [ ] Présentation détaillée des cas d'utilisation
+            -   [ ] Description textuelle
+            -   [ ] Scénario nominal
+            -   [ ] Scénarios alternatifs
+        -   [ ] Présentation détaillée des diagrammes d'activité
+    -   [x] Critiques et propositions d'amélioration
+    -   [x] Conclusion du Chapitre 1
+-   [ ] **CHAPITRE 2 : CONCEPTION**
+    -   [-] Modélisation des données
+        -   [-] Dictionnaire de données brutes
+        -   [-] Épuration
+        -   [x] Dictionnaire de données épuré
+        -   [-] Règles de gestion
+        -   [x] Élaboration du diagramme de classes (normalisé)
+        -   [x] Transformation vers le Modèle Logique de Données (MLD)
+    -   [-] Diagrammes de séquence
+    -   [x] Conclusion du Chapitre 2
+-   [x] **CHAPITRE 3 : RÉALISATION**
+    -   [x] Environnement de développement
+        -   [x] Langage de programmation
+        -   [x] SGBD
+        -   [x] Outils et IDE
+    -   [x] Architecture du système
+        -   [x] Diagramme de déploiement
+        -   [x] Description de l'architecture
+    -   [x] Implémentation
+        -   [x] Captures d'écran de l'application
+        -   [x] Extraits de scripts SQL (création BDD, tables,
+            contraintes, vues)
+    -   [x] Conclusion du Chapitre 3
+-   [ ] **CONCLUSION GÉNÉRALE**
+    -   [ ] Bilan du projet
+    -   [ ] Objectifs atteints
+    -   [ ] Difficultés rencontrées
+    -   [ ] Perspectives futures
+-   [ ] **RÉFÉRENCES BIBLIOGRAPHIQUES**
+-   [ ] **ANNEXES**
+    -   [ ] Documentation UP/UML
+    -   [ ] Documents utilisés
