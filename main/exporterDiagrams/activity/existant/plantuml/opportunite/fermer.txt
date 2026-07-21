@@ -1,0 +1,25 @@
+@startuml
+title Activité - Fermer une opportunité
+
+|Directeur|
+start
+:Consulter l'opportunité;
+:Contacter sa client;
+
+|Client|
+:decide;
+
+if (Offre acceptée ?) then (Oui)
+
+    |Directeur|
+    :Marquer l'opportunité comme "Gagnée";
+
+else (Non)
+
+    |Directeur|
+    :Marquer l'opportunité comme "Perdue";
+
+endif
+
+stop
+@enduml

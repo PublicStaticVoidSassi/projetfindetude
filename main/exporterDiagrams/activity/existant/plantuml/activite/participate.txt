@@ -1,0 +1,46 @@
+@startuml
+
+
+|Marketeur|
+start
+
+:Consulter le planning;
+:Sélectionner une activité arrivée à échéance;
+
+if (Type d'activité ?) then (Appel)
+
+    :Appeler le client;
+
+    if (Le client répond ?) then (Oui)
+        :Marquer l'appel comme effectué;
+    else (Non)
+        :Marquer l'appel comme non effectué;
+    endif
+
+elseif (Réunion)
+
+    :Participer à la réunion;
+
+    if (Le client est présent ?) then (Oui)
+        :Marquer la réunion comme tenue;
+    else (Non)
+        :Marquer la réunion comme non tenue;
+    endif
+
+else (Tâche)
+
+    :Exécuter la tâche;
+
+    if (Résultat ?) then (Terminée)
+        :Marquer la tâche comme terminée;
+    elseif (Reportée)
+        :Reporter la tâche;
+    else (Annulée)
+        :Marquer la tâche comme annulée;
+    endif
+
+endif
+
+stop
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+
+
+|Directeur|
+start
+
+:Identifier les KPIs\net rapports nécessaires;
+:Demander les rapports;
+
+|BI Analyste|
+:Recevoir la demande;
+:Collecter les données nécessaires;
+:Vérifier et préparer les données;
+:Calculer les indicateurs (KPI);
+:Élaborer les graphiques;
+:Rédiger le rapport d'analyse;
+:Transmettre les résultats au Directeur;
+
+|Directeur|
+:Consulter les rapports;
+
+stop
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+
+|Marketeur|
+start
+
+:Sélectionner le type d'activité;
+
+if (Type ?) then (Appel)
+    :Saisir les informations de l'appel;
+elseif () then (Réunion)
+    :Saisir les informations de la réunion;
+else (Tâche)
+    :Saisir les informations de la tâche;
+endif
+
+:Choisir la date et l'heure;
+:choisir le responsable;
+:Enregistrer l'activité;
+
+
+
+stop
+
+@enduml

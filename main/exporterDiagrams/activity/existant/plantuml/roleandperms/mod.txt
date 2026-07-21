@@ -1,0 +1,20 @@
+@startuml
+
+|Directeur|
+start
+
+:Identifier qu'un rôle doit être créé,
+modifié ou supprimé;
+
+:Définir les responsabilités
+du rôle;
+
+:Mettre à jour la définition
+du rôle;
+
+:Informer les personnes concernées
+des changements;
+
+stop
+
+@enduml

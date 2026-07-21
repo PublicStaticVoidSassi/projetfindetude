@@ -1,0 +1,26 @@
+@startuml
+
+|Marketeur|
+start
+:Sélectionner une opportunité;
+:Contacter sa client;
+
+|Client|
+if (Répond ?) then (Oui)
+
+    :Communiquer les nouveaux besoins;
+
+    |Marketeur|
+    :Mettre à jour les informations;
+:Mettre à jour le statut de l'opportunité;
+
+else (Non)
+    |Client|
+     stop
+
+endif
+
+
+
+stop
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+
+|Marketeur|
+start
+:Préparer une opportunite;
+:la propose;
+
+|Client|
+
+
+if (Intéressé ?) then (Oui)
+    :confirm sa demarche;
+else (Non)
+    :la Refuser;
+    stop
+endif
+
+
+
+|Marketeur|
+:enregistre l'opportunité;
+
+stop
+@enduml

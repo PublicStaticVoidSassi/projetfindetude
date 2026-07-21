@@ -20,8 +20,10 @@
             <app-required-tag></app-required-tag>
           </label>
 
-          <input id="from" disabled="true" value='uniflowcrm67@gmail.com' type="email" class="form-control disabled"
-            formControlName="from" />
+          <input  data-toggle="tooltip" data-placement="bottom" title="pas disponible"  id="from" [attr.disabled]="(true)? true:false" value='uniflowcrm67@gmail.com' type="email" class="form-control disabled"
+          />
+          <!--            formControlName="from" -->
+
         </div>
 
         <!-- TO -->

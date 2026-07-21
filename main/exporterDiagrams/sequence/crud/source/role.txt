@@ -1,0 +1,70 @@
+@startuml
+title Diagramme de séquence - Gestion des rôles
+
+actor Directeur
+participant "Frontend" as Frontend
+participant "Backend" as Backend
+database "Base de données" as BDD
+
+Directeur -> Frontend : Accéder à l'application
+Frontend --> Directeur : Afficher la page de gestion des rôles
+
+alt Créer un rôle
+    Directeur -> Frontend : Saisir les informations du rôle
+    Frontend -> Backend : Envoyer la demande de création
+
+    alt Requête valide
+        Backend -> BDD : Insérer le nouveau rôle
+        BDD --> Backend : Confirmation de l'insertion
+        Backend --> Frontend : Création réussie
+        Frontend --> Directeur : Afficher le succès
+    else Requête invalide
+        Backend --> Frontend : Erreur de validation
+        Frontend --> Directeur : Afficher les erreurs de saisie
+    end
+
+else Consulter un rôle
+    Directeur -> Frontend : Demander les informations d'un rôle
+    Frontend -> Backend : Envoyer la demande de consultation
+    Backend -> BDD : Lire les informations du rôle
+    BDD --> Backend : Données trouvées
+    Backend --> Frontend : Retourner les données
+    Frontend --> Directeur : Afficher les informations
+
+else Modifier un rôle
+    Directeur -> Frontend : Soumettre les modifications
+    Frontend -> Backend : Envoyer la demande de modification
+
+    alt Requête valide
+        Backend -> BDD : Mettre à jour le rôle
+        BDD --> Backend : Confirmation de la mise à jour
+        Backend --> Frontend : Modification réussie
+        Frontend --> Directeur : Afficher le succès
+    else Requête invalide
+        Backend --> Frontend : Erreur de validation
+        Frontend --> Directeur : Afficher les erreurs de saisie
+    end
+
+else Supprimer un rôle
+    Directeur -> Frontend : Demander la suppression d'un rôle
+    Frontend -> Backend : Envoyer la demande de suppression
+    Backend -> BDD : Supprimer le rôle
+    BDD --> Backend : Confirmation de la suppression
+    Backend --> Frontend : Suppression réussie
+    Frontend --> Directeur : Confirmer la suppression
+
+else Assigner un rôle à un utilisateur
+    Directeur -> Frontend : Sélectionner un utilisateur et un rôle
+    Frontend -> Backend : Envoyer la demande d'affectation
+
+    
+        Backend -> BDD : Enregistrer l'association utilisateur-rôle
+        BDD --> Backend : Confirmation de l'affectation
+        Backend --> Frontend : Affectation réussie
+       Frontend --> Directeur : Afficher le succès
+
+    
+
+end
+
+@enduml

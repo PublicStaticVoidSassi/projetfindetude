@@ -1,0 +1,58 @@
+@startuml
+title Diagramme de séquence - CRUD sur les utilisateurs
+
+actor Directeur
+participant "Frontend" as Frontend
+participant "Backend" as Backend
+database "Base de données" as BDD
+
+Directeur -> Frontend : Accéder à l'application
+Frontend --> Directeur : Afficher la page de gestion des utilisateurs
+
+alt Créer un utilisateur
+    Directeur -> Frontend : Saisir les informations du nouvel utilisateur
+    Frontend -> Backend : Envoyer la demande de création
+
+    alt Requête valide
+        Backend -> BDD : Insérer le nouvel utilisateur
+        BDD --> Backend : Confirmation de l'insertion
+        Backend --> Frontend : Création réussie
+        Frontend --> Directeur : Afficher le succès
+    else Requête invalide
+        Backend --> Frontend : Erreur de validation
+        Frontend --> Directeur : Afficher les erreurs de saisie
+    end
+
+else Consulter un utilisateur
+    Directeur -> Frontend : Demander les informations d'un utilisateur
+    Frontend -> Backend : Envoyer la demande de consultation
+    Backend -> BDD : Lire les informations de l'utilisateur
+    BDD --> Backend : Données trouvées
+    Backend --> Frontend : Retourner les données
+    Frontend --> Directeur : Afficher les informations
+
+else Modifier un utilisateur
+    Directeur -> Frontend : Soumettre les modifications
+    Frontend -> Backend : Envoyer la demande de modification
+
+    alt Requête valide
+        Backend -> BDD : Mettre à jour l'utilisateur
+        BDD --> Backend : Confirmation de la mise à jour
+        Backend --> Frontend : Modification réussie
+        Frontend --> Directeur : Afficher le succès
+    else Requête invalide
+        Backend --> Frontend : Erreur de validation
+        Frontend --> Directeur : Afficher les erreurs de saisie
+    end
+
+else Supprimer un utilisateur
+    Directeur -> Frontend : Demander la suppression d'un utilisateur
+    Frontend -> Backend : Envoyer la demande de suppression
+    Backend -> BDD : Supprimer l'utilisateur
+    BDD --> Backend : Confirmation de la suppression
+    Backend --> Frontend : Suppression réussie
+    Frontend --> Directeur : Confirmer la suppression
+
+end
+
+@enduml

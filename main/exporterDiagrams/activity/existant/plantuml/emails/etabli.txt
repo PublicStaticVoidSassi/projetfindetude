@@ -1,0 +1,20 @@
+@startuml
+
+|Marketeur|
+start
+
+:Créer un nouvel e-mail;
+
+:Saisir le ou les destinataires;
+:Saisir le destinataire en copie (CC) (optionnel);
+:Saisir le destinataire en copie cachée (CCI) (optionnel);
+
+:Renseigner l'objet;
+:Rédiger le contenu du message;
+
+
+:Enregistrer le brouillon;
+
+stop
+
+@enduml

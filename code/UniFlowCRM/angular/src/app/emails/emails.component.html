@@ -2,17 +2,21 @@
   <div class="card-header">
     <div class="row">
       <div class="col col-md-6">
-        <h5 class="card-title">{{ '::Menu:Emails' | abpLocalization }}</h5>
+        <h1 >{{ '::Menu:Emails' | abpLocalization }}</h1>
       </div>
-      <div class="text-end col col-md-6">
-        <button class="btn btn-brand btn-sm me-2" type="button"
-                *abpPermission='"UniFlowCRM.Email.Create"'
-                (click)="create()">
-          <i class="fa fa-plus me-1"></i>
-          <span>{{ '::Object:Add' | abpLocalization }}</span>
-        </button>
-<!--        <app-return-btn></app-return-btn>-->
-      </div>
+
+  </div>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-brand btn-sm me-2" type="button"
+              *abpPermission='"UniFlowCRM.Email.Create"'
+              (click)="create()">
+        <i class="fa fa-plus me-1"></i>
+        <span>
+<!--            {{ '::Object:Add' | abpLocalization }}-->
+            Rédiger un e-mail
+          </span>
+      </button>
+      <!--        <app-return-btn></app-return-btn>-->
     </div>
   </div>
   <div class="card-body">

@@ -1,0 +1,32 @@
+@startuml
+title Diagramme de séquence - Attribution des permissions
+
+actor Directeur
+participant "Frontend" as Frontend
+participant "Backend" as Backend
+database "Base de données" as BDD
+
+Directeur -> Frontend : Accéder à la gestion des permissions
+Frontend --> Directeur : Afficher les utilisateurs, rôles et permissions
+
+alt Attribuer des permissions à un utilisateur
+    Directeur -> Frontend : Cocher les permissions souhaitées
+    Directeur -> Frontend : Valider les modifications
+    Frontend -> Backend : Envoyer les permissions sélectionnées
+    Backend -> BDD : Mettre à jour les permissions de l'utilisateur
+    BDD --> Backend : Confirmation de la mise à jour
+    Backend --> Frontend : Attribution réussie
+    Frontend --> Directeur : Afficher le succès
+
+else Attribuer des permissions à un rôle
+    Directeur -> Frontend : Cocher les permissions souhaitées
+    Directeur -> Frontend : Valider les modifications
+    Frontend -> Backend : Envoyer les permissions sélectionnées
+    Backend -> BDD : Mettre à jour les permissions du rôle
+    BDD --> Backend : Confirmation de la mise à jour
+    Backend --> Frontend : Attribution réussie
+    Frontend --> Directeur : Afficher le succès
+
+end
+
+@enduml

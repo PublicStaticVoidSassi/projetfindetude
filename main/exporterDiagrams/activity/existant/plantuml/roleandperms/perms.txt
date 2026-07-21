@@ -1,0 +1,20 @@
+@startuml
+
+|Directeur|
+start
+
+:Identifier un rôle
+ou un marketeur;
+
+:Analyser les besoins d'accès;
+
+:Déterminer les permissions
+qui doivent etre changees;
+
+:Mettre à jour les permissions;
+
+:Informer les personnes;
+
+stop
+
+@enduml

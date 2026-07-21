@@ -33,6 +33,7 @@ namespace UniFlowCRM.Leads
         , ILeadsAppService
     {
         private readonly IRepository<IdentityUser, Guid> _userRepository;
+        private readonly ILeadsManager leadManager;
         private readonly IRepository<Account, Guid> _accountsRepository;
         private readonly IRepository<Contact, Guid> _contactRepository;
         private IPermissionChecker permissionChecker;
@@ -40,12 +41,13 @@ namespace UniFlowCRM.Leads
         public LeadsAppService(
             IRepository<Lead, Guid> repository,
             IRepository<Account, Guid> accountsRepository,
-            IRepository<IdentityUser, Guid> userRepository
-,
+            IRepository<IdentityUser, Guid> userRepository,
+            ILeadsManager _leadManager,
             IRepository<Contact, Guid> contactRepository,
             IPermissionChecker permissionChecker) : base(repository)
         {
             _userRepository = userRepository;
+            leadManager = _leadManager;
             _accountsRepository = accountsRepository;
             _contactRepository = contactRepository;
             this.permissionChecker = permissionChecker;
@@ -220,16 +222,8 @@ namespace UniFlowCRM.Leads
 
         public async Task<ContactDto> ConvertAsync(Guid id)
         {
-            var lead = await Repository.GetAsync(id);
-            lead.Convert();
-            var contact = new Contact(GuidGenerator.Create(), lead.FirstName);
-            contact.SetLastName(lead.LastName);
-            contact.SetEmail(lead.Email);
-            contact.AssignUser(lead.UserID);
-            contact.AssignLead(lead.Id);
-            contact.AssignAccount(lead.AccountID);
-            contact.SetSource(ContactSource.ConvertedFromLead);
-            contact = await _contactRepository.InsertAsync(contact);
+            var newContactId = await leadManager.ConvertAsync(id);
+            var contact = await _contactRepository.GetAsync(newContactId);
             return ObjectMapper.Map<Contact, ContactDto>(contact);
         }
     }

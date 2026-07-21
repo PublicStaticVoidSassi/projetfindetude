@@ -1,0 +1,22 @@
+@startuml
+
+
+|Marketeur|
+start
+
+:Retirer le dossier du client;
+:Consulter l'ensemble des notes du dossier;
+
+if (Une information précise est recherchée ?) then (Oui)
+    :Parcourir les notes;
+    :Rechercher la notes contenant l'information souhaitée;
+    :Consulter les notes trouvée;
+else (Non)
+    :Lire les notes dans l'ordre chronologique;
+endif
+
+
+
+stop
+
+@enduml

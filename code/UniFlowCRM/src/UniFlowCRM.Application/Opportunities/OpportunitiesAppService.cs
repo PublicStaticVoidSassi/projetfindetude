@@ -37,7 +37,7 @@ public class OpportunitiesAppService : CrudAppService<
     private readonly IRepository<Account, Guid> _accountRepository;
     private readonly IRepository<Lead, Guid> _leadRepository;
     private readonly IRepository<Contact, Guid> _contactRepository;
-    private readonly ILeadsAppService leadappservice;
+    private readonly ILeadsManager leadsManager;
     private readonly IPermissionChecker permissionChecker;
 
     public OpportunitiesAppService(
@@ -46,14 +46,13 @@ public class OpportunitiesAppService : CrudAppService<
         IRepository<Account, Guid> a,
         IRepository<Lead, Guid> l,
         IRepository<Contact, Guid> c,
-        ILeadsAppService leadappservice // bad practice
-,
+        ILeadsManager leadsManager,
         IPermissionChecker permissionChecker) : base(r)
     {
         _userRepository = u;
         _leadRepository = l;
         _contactRepository = c;
-        this.leadappservice = leadappservice;
+        this.leadsManager = leadsManager;
         _accountRepository = a;
         this.permissionChecker = permissionChecker;
     }
@@ -335,7 +334,7 @@ public class OpportunitiesAppService : CrudAppService<
     }
     private async Task ConvertOpportunitysLead(Guid id)
     {
-        await this.leadappservice.ConvertAsync(id);
+        await this.leadsManager.ConvertAsync(id);
     }
     [Authorize(UniFlowCRMPermissions.Opportunity.Close)]
     public async Task<OpportunityDto> CloseAsync(Guid id, bool won)

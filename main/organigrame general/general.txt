@@ -1,0 +1,29 @@
+@startwbs
+* Direction General
+** Direction Technique
+*** Division Data
+**** pole BDD / BD
+**** pole BI / IA
+**** pole ERP
+*** Division Dev
+**** Pole DEV web
+**** Pole DEV mobile
+**** Pole DEV low code
+*** Division Infra
+**** Pole OS
+**** Pole Collaboration
+**** Pole DevOps
+** Direction Formation
+*** ITComp Academy
+*** ITComp Technology
+** Direction Commerciale
+*** Services
+*** Formations
+*** Marketing
+** Administration Generale
+*** Finances & compatibilite
+*** Relations banques
+*** Ressources Humaines
+*** Logistiques
+
+@endwbs

@@ -1,0 +1,13 @@
+@startuml
+|Directeur|
+start
+
+:Identifier le marketeur;
+:Analyser ses responsabilités;
+:Choisir le rôle approprié;
+:Attribuer le rôle à le marketeur;
+:l'Informer de son nouveau rôle;
+
+stop
+
+@enduml

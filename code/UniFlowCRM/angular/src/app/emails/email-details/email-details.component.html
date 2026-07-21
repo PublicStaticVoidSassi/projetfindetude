@@ -41,6 +41,7 @@
                 *abpPermission='"UniFlowCRM.Email.Send"'
                 [disabled]="email().status === EmailStatus.Sent"
                 (click)="send()">
+          <i class="fa fa-send me-1"></i>
           {{ '::Email:Send' | abpLocalization }}
         </button>
       </div>
@@ -283,5 +284,6 @@
       }
 
     </div>
+  </div>
   </div>
 </div>

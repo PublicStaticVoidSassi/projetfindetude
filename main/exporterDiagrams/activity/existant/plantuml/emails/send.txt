@@ -1,0 +1,21 @@
+@startuml
+
+|Marketeur|
+start
+
+:Accéder au module de messagerie;
+:Sélectionner un e-mail rédigé;
+:Cliquer sur "Envoyer";
+
+|Fournisseur email|
+:Recevoir la demande d'envoi;
+:Traiter l'envoi du message;
+:Distribuer l'e-mail aux destinataires;
+:Retourner le résultat de l'envoi;
+
+|Marketeur|
+:Consulter le résultat de l'envoi;
+
+stop
+
+@enduml

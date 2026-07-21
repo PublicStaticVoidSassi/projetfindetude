@@ -1,0 +1,22 @@
+@startuml
+title Diagramme d'activité - Rédiger une note après un échange avec un client
+
+|Marketeur|
+start
+
+:Contacter le client;
+
+|Client|
+:Exprimer ses besoins, questions et remarques;
+
+|Marketeur|
+:Recueillir les informations importantes;
+:Accéder à la fiche du client;
+:Noter les besoins, objections et actions à prévoir;
+
+
+:La note est ajoutée à l'historique du client;
+
+stop
+
+@enduml
