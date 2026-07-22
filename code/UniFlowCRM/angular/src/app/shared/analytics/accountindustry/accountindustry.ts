@@ -8,7 +8,7 @@ import { AnalyticsService } from 'src/app/proxy/analytics';
   selector: 'app-accountindustry',
   imports: [ChartModule],
   template: `
-    <div class="card shadow p-2">
+    <div class="card kpi-card p-2">
     <p-chart
     type="doughnut"
     [data]="data"
@@ -53,7 +53,7 @@ async ngOnInit() {
                 text: 'Comptes Par Secteur'
             }
         }
-       
+
     };
     };
 

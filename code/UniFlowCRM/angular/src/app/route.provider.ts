@@ -86,7 +86,55 @@ function configureRoutes() {
       iconClass: 'fas fa-envelope',
       layout: eLayoutType.application,
       requiredPolicy: 'UniFlowCRM.Email',
-      parentName: "::Menu:CRM:Extras",
+      order: 31,
+      // parentName: "::Menu:CRM:Extras",
+    },
+    {
+      // path: '/Analytics',
+      name: '::Menu:Analytics',
+      iconClass: 'fas fa-chart-pie',
+      layout: eLayoutType.application,
+      requiredPolicy: 'UniFlowCRM.See',
+      order: 32,
+      // parentName: "::Menu:CRM:Extras",
+    },
+    {
+      path: '/Analytics/Accounts',
+      name: '::Menu:Analytics:Accounts',
+      iconClass: 'fas fa-building',
+      order: 10,
+      layout: eLayoutType.application,
+      requiredPolicy: 'UniFlowCRM.Account',
+      parentName: '::Menu:Analytics'
+    },
+    {
+      path: '/Analytics/Leads',
+      name: '::Menu:Analytics:Leads',
+      iconClass: 'fas fa-user',
+      order: 20,
+      layout: eLayoutType.application,
+      requiredPolicy: 'UniFlowCRM.Lead',
+      parentName: '::Menu:Analytics'
+
+    },
+    {
+      path: '/Analytics/Contacts',
+      name: '::Menu:Analytics:Contacts',
+      iconClass: 'fas fa-id-card',
+      order: 30,
+      layout: eLayoutType.application,
+      requiredPolicy: 'UniFlowCRM.Contact',
+      parentName: '::Menu:Analytics'
+
+    },
+    {
+      path: '/Analytics/Opportunities',
+      name: '::Menu:Analytics:Opportunities',
+      iconClass: 'fas fa-handshake',
+      layout: eLayoutType.application,
+      requiredPolicy: 'UniFlowCRM.Opportunity',
+      parentName: '::Menu:Analytics'
+
     },
     // {
     //   path: '/Notes',

@@ -1,0 +1,33 @@
+<div class="my-sidebar">
+
+  @for (item of (menuItems$ | async); track item.name) {
+
+    @if (item.children?.length) {
+
+      <details>
+        <summary>
+          <i [class]="item.iconClass"></i>
+          {{ item.name | abpLocalization }}
+        </summary>
+
+        @for (child of item.children; track child.path) {
+          <a [routerLink]="child.path">
+            <i [class]="child.iconClass"></i>
+            {{ child.name | abpLocalization }}
+          </a>
+        }
+
+      </details>
+
+    } @else {
+
+      <a [routerLink]="item.path">
+        <i [class]="item.iconClass"></i>
+        {{ item.name | abpLocalization }}
+      </a>
+
+    }
+
+  }
+
+</div>

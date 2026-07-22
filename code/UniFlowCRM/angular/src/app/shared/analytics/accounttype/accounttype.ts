@@ -8,7 +8,7 @@ import { AnalyticsService } from 'src/app/proxy/analytics';
   selector: 'app-accounttype',
   imports: [ChartModule],
   template: `
-    <div class="card shadow p-2">
+    <div class="card kpi-card p-2">
     <p-chart
     type="pie"
     [data]="data"

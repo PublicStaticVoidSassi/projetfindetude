@@ -2,6 +2,11 @@
   "Culture": "fr",
   "Texts": {
     "Analytics:See": "Consulter les rapports",
+    "Menu:Analytics": "Les analytiques",
+    "Menu:Analytics:Accounts": "Comptes",
+    "Menu:Analytics:Contacts": "Contacts",
+    "Menu:Analytics:Leads": "Prospects",
+    "Menu:Analytics:Opportunities": "Opportunités",
     "Permission:Assign": "l'affectation",
     "Permission:Lead": "gestion des prospects",
     "Permission:Account": "gestion des comptes",

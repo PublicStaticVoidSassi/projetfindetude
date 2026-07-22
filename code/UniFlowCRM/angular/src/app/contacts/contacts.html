@@ -1,20 +1,18 @@
 <div class="card">
   <div class="card-header">
-    <h1>{{ '::Contacts' | abpLocalization }}</h1>
+    <h1 class="title" >{{ '::Contacts' | abpLocalization }}</h1>
   </div>
 
-  <div class="d-flex justify-content-end px-1">
-    <button *abpPermission='"UniFlowCRM.Contact"'  (click)="create()" class="btn btn-brand btn-sm me-2">
-      <i class="fa fa-add"></i>
-      {{ '::Object:Add' | abpLocalization }}
-    </button>
-  </div>
 
   <div class="card-body">
-    <div class="row">
-      <div class="col-4">
-        <input type="text" class="form-control" (ngModelChange)="search()"  [(ngModel)]="searchName" [placeholder]="'::Contact'|abpLocalization"/>
-      </div>
+    <div class="d-flex justify-content-between mb-3">
+        <input type="text" class="form-control w-50" (ngModelChange)="search()"  [(ngModel)]="searchName" [placeholder]="'Rechercher'"/>
+        <button *abpPermission='"UniFlowCRM.Contact"'  (click)="create()" class="btn btn-brand btn-sm">
+          <i class="fa fa-add"></i>
+<!--          {{ '::Object:Add' | abpLocalization }}-->
+          ajouter un contact
+        </button>
+
     </div>
     <ngx-datatable
       [rows]="contacts.items"

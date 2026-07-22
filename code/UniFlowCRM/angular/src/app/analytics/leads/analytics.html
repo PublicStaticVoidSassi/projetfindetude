@@ -1,0 +1,53 @@
+  <p class="display-4 text-brand mb-2">Vos Prospects</p>
+
+  <div class="row">
+    <div class="col d-flex justify-content-around flex-column">
+      <div class="card border-0 shadow-sm kpi-card">
+        <div class="card-body px-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <h6 class="text-muted text-uppercase fs-7 fw-semibold mb-1" style="letter-spacing: 0.5px;">Prospects Totales</h6>
+              <h2 class="fw-bold mb-0">{{dashboard.totalleads}}</h2>
+            </div>
+            <div class="bg-secondary-subtle text-white p-3 rounded-3 fs-3 lh-1">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card border-0 shadow-sm kpi-card">
+        <div class="card-body px-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <h6 class="text-muted text-uppercase fs-7 fw-semibold mb-1" style="letter-spacing: 0.5px;">Prospects convertis</h6>
+              <h2 class="fw-bold mb-0">{{dashboard.convertedleads}}</h2>
+            </div>
+            <div class="bg-secondary-subtle text-white p-3 rounded-3 fs-3 lh-1">
+              <i class="fas fa-check"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card border-0 shadow-sm kpi-card">
+        <div class="card-body px-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <h6 class="text-muted text-uppercase fs-7 fw-semibold mb-1" style="letter-spacing: 0.5px;">Prospects perdus</h6>
+              <h2 class="fw-bold mb-0">{{dashboard.deadleads}}</h2>
+            </div>
+            <div class="bg-secondary-subtle text-white p-3 rounded-3 fs-3 lh-1">
+              <i class="fas fa-skull"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="card kpi-card">
+        <p-chart type="pie" [data]="leaddata" [options]="ldOptions" />
+      </div>
+    </div>
+  </div>
+  <div>
+    <app-leadsource></app-leadsource>
+  </div>

@@ -8,6 +8,13 @@ export const APP_ROUTES: Routes = [
     loadComponent: () => import('./home/home.component').then(c => c.HomeComponent),
   },
   {
+    path: 'Analytics',
+    loadChildren: () =>
+      import('./analytics/analytics.routes')
+        .then(c => c.ROUTES),
+    canActivate: [authGuard, permissionGuard]
+  },
+  {
     path: 'Accounts',
     loadChildren: () =>
       import('./accounts/accounts.routes')
