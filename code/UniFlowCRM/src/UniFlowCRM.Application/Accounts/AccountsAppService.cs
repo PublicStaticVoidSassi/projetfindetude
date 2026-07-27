@@ -174,6 +174,10 @@ namespace UniFlowCRM.Accounts
                 .AddStreet(input.Street)
                 .AddPostalCode(input.PostalCode)
             );
+            if (input.CampaignId != null)
+            {
+                acc.CampaignId = input.CampaignId;
+            }
             return acc;
         }
 

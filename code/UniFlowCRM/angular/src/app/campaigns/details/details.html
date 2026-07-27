@@ -1,0 +1,245 @@
+<div class="container-fluid">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+      <h2 class="mb-1">{{ campaign.name }}</h2>
+
+      <span class="badge bg-primary">
+        {{ '::Campaigne:Status:'+campaign.status | abpLocalization}}
+      </span>
+    </div>
+
+<!--    <div class="text-end text-muted small">-->
+<!--      <div>Created {{ campaign.creationTime | date:'medium' }}</div>-->
+<!--      <div>Last modified {{ campaign.lastModificationTime | date:'medium' }}</div>-->
+<!--    </div>-->
+    @if (campaign.endDate && (campaign.endDate | date:'yyyy-MM-dd') > (today | date:'yyyy-MM-dd')) {
+      @if(campaign.status !== CampaignStatus.active){
+        <button (click)="activate()" class="btn btn-success btn-sm">
+          Activer
+        </button>
+      }@else{
+        <button (click)="deactivate()" class="btn btn-danger btn-sm">
+          Disactiver
+        </button>
+      }
+    }
+
+  </div>
+
+  <div class="row g-4">
+
+    <!-- Left Column -->
+    <div class="col-lg-8">
+
+      @if(campaign.description){
+      <!-- Description -->
+      <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+          <h5 class="mb-0">Description</h5>
+        </div>
+
+        <div class="card-body">
+
+          <p class="mb-0">
+            {{ campaign.description || 'No description provided.' }}
+          </p>
+
+        </div>
+
+      </div>
+      }
+      <!-- Budget -->
+      <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+          <h5 class="mb-0">Budget</h5>
+        </div>
+
+        <div class="card-body">
+
+          <div class="row">
+
+            <div class="col-md-6">
+
+              <h6>Allocated Budget</h6>
+
+              <h4 class="text-primary">
+                {{ campaign.budgetValue | number:'1.2-2' }}
+                {{ Currency[campaign.budgetCurrency] }}
+              </h4>
+
+            </div>
+
+            <div class="col-md-6">
+
+              <h6>Cost So Far</h6>
+
+              <h4 class="text-danger">
+                {{ campaign.costSoFarValue || 0 | number:'1.2-2' }}
+                {{ Currency[campaign.costSoFarCurrency] }}
+              </h4>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Results -->
+      <div class="card shadow-sm">
+
+        <div class="card-header">
+          <h5 class="mb-0">Campaign Results</h5>
+        </div>
+
+        <div class="card-body p-0">
+
+          <table class="table table-hover mb-0">
+
+            <thead>
+
+            <tr>
+              <th></th>
+              <th class="text-center">Expected</th>
+              <th class="text-center">Reached</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr>
+              <td>Accounts</td>
+              <td class="text-center">{{ campaign.expectedAccounts }}</td>
+              <td class="text-center">{{ campaign.reachedAccounts }}</td>
+            </tr>
+
+            <tr>
+              <td>Leads</td>
+              <td class="text-center">{{ campaign.expectedLeads }}</td>
+              <td class="text-center">{{ campaign.reachedLeads }}</td>
+            </tr>
+
+            <tr>
+              <td>Contacts</td>
+              <td class="text-center">{{ campaign.expectedContacts }}</td>
+              <td class="text-center">{{ campaign.reachedContacts }}</td>
+            </tr>
+
+            <tr>
+              <td>Opportunities</td>
+              <td class="text-center">{{ campaign.expectedOpportunities }}</td>
+              <td class="text-center">{{ campaign.reachedOpportunities }}</td>
+            </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Right Column -->
+    <div class="col-lg-4">
+
+      <!-- Schedule -->
+      <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+          <h5 class="mb-0">Schedule</h5>
+        </div>
+
+        <div class="card-body">
+
+          <dl class="row mb-0">
+
+            <dt class="col-5">Start</dt>
+            <dd class="col-7">
+              {{ campaign.startDate | date }}
+            </dd>
+
+            <dt class="col-5">End</dt>
+            <dd class="col-7">
+              {{ campaign.endDate | date }}
+            </dd>
+
+          </dl>
+
+        </div>
+
+      </div>
+
+      <!-- Owner -->
+      <div class="card shadow-sm mb-4">
+
+        <div class="card-header">
+          <h5 class="mb-0">Ownership</h5>
+        </div>
+
+        <div class="card-body">
+
+          <dl class="row mb-0">
+
+            <dt class="col-5">Owner</dt>
+            <dd class="col-7">
+              {{ campaign.owner?.userName }}
+            </dd>
+
+            <dt class="col-5">Assigned To</dt>
+            <dd class="col-7">
+              {{ campaign.assignedTo }}
+            </dd>
+
+          </dl>
+
+        </div>
+
+      </div>
+
+      <!-- Metadata -->
+      <div class="card shadow-sm">
+
+        <div class="card-header">
+          <h5 class="mb-0">Metadata</h5>
+        </div>
+
+        <div class="card-body">
+
+          <dl class="row mb-0">
+
+            <dt class="col-5">ID</dt>
+            <dd class="col-7">{{ campaign.id }}</dd>
+
+            <dt class="col-5">Creator</dt>
+            <dd class="col-7">{{ campaign.creatorId }}</dd>
+
+            <dt class="col-5">Created</dt>
+            <dd class="col-7">
+              {{ campaign.creationTime | date:'medium' }}
+            </dd>
+
+            <dt class="col-5">Modified</dt>
+            <dd class="col-7">
+              {{ campaign.lastModificationTime | date:'medium' }}
+            </dd>
+
+          </dl>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

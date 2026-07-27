@@ -29,7 +29,7 @@ namespace UniFlowCRM.Accounts
         public decimal? RevenueAmount { get; set; }
         public Currency? RevenueCurrency { get; set; }
         public int? Employees { get; set; }
-
+        public Guid? CampaignId { get; set; }
         public Guid? UserID { get; set; } // user fk
     }
 }

@@ -30,6 +30,8 @@ public class Account : FullAuditedAggregateRoot<Guid>
     public int? Employees { get; private set; }
 
     public Guid UserID { get; private set; } // user fk
+    public Guid? CampaignId { get; set; }
+
 
     protected Account() { }
 

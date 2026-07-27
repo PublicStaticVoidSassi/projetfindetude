@@ -1,6 +1,11 @@
 {
   "Culture": "fr",
   "Texts": {
+    "Menu:Campaigns": "Campagnes",
+    "Campaigne:Status:1": "prévu",
+    "Campaigne:Status:2": "actif",
+    "Campaigne:Status:3": "inactif",
+    "Campaigne:Status:4": "terminé",
     "Analytics:See": "Consulter les rapports",
     "Menu:Analytics": "Les analytiques",
     "Menu:Analytics:Accounts": "Comptes",

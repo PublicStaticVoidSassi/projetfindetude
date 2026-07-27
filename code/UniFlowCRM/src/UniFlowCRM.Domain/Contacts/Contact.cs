@@ -31,6 +31,8 @@ namespace UniFlowCRM.Contacts
         public Guid UserID { get; private set; } // user FK
         public Guid? LeadID { get; private set; }
         public Guid? AccountID { get; private set; } // Account FK
+        public Guid? CampaignId { get; set; }
+
 
 
         public Contact(

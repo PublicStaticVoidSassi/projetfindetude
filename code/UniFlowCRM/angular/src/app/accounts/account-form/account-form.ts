@@ -14,13 +14,14 @@ import { AccountsService } from '../../proxy/accounts/accounts.service';
 import { ToasterService } from '@abp/ng.theme.shared';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersLookup } from '../../shared/lookup-components';
+import { CampaignsLookup } from '../../shared/lookup-components/campagne-lookup';
 // import { AccountIndustry } from '../../proxy/accounts/account-industry.enum';
 // enum AccountType = Accounts.AccountType;
 
 @Component({
   selector: 'app-account-form',
   templateUrl: './account-form.html',
-  imports: [ReturnBtn, ReactiveFormsModule, LocalizationPipe, ReturnBtn, UsersLookup]
+  imports: [ReturnBtn, ReactiveFormsModule, LocalizationPipe, ReturnBtn, UsersLookup, CampaignsLookup]
 })
 export class AccountFormComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -64,7 +65,7 @@ export class AccountFormComponent implements OnInit {
     revenueCurrency: [Currency.DZD],
 
     employees: [1],
-
+    campaignId: [null],
     userID: [null, Validators.required],
   });
 
@@ -95,7 +96,7 @@ export class AccountFormComponent implements OnInit {
   }
 
   submit(): void {
-    const dto = this.form.value as CreateUpdateAccountDto;
+    const dto = this.form.value;// as CreateUpdateAccountDto;
 
     if (!this.isUpdate) {
       this.accountsService.create(dto).subscribe(res => {

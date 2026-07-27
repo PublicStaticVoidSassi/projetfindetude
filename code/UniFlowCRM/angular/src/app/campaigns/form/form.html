@@ -1,0 +1,211 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <div class="card shadow-sm">
+
+    <div class="card-header">
+      <h4 class="title">campagne: {{form.get('name')?.value}}</h4>
+    </div>
+
+    <div class="card-body">
+
+      <!-- Basic Information -->
+      <div class="row g-3">
+
+        <div class="col-md-6">
+          <label class="form-label">Nom de campagne</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="name">
+
+<!--          <div-->
+<!--            class="text-danger small mt-1"-->
+<!--            *ngIf="form.get('name')?.touched && form.get('name')?.invalid">-->
+<!--            Campaign name is required.-->
+<!--          </div>-->
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">L'état de campagne</label>
+
+          <select class="form-select" formControlName="status">
+<!--            <option [ngValue]="null">Select status</option>-->
+@for(status of statuses; track status.key){
+  <option [value]="status.value">{{'::Campaigne:Status:'+status.value|abpLocalization}}</option>
+}
+          </select>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">description</label>
+
+          <textarea
+            rows="4"
+            class="form-control"
+            formControlName="description">
+          </textarea>
+        </div>
+
+      </div>
+
+      <hr>
+
+      <!-- Budget -->
+      <h5 class="mb-3">budget</h5>
+
+      <div class="row g-3">
+
+        <div class="col-md-4">
+          <label class="form-label">montant</label>
+
+          <input
+            type="number"
+            class="form-control"
+            formControlName="budgetValue">
+        </div>
+
+        <div class="col-md-2">
+          <label class="form-label">devise</label>
+
+          <select
+            class="form-select"
+            formControlName="budgetCurrency">
+@for(currency of currencies;track currency.value){
+    <option [value]="currency.value">{{ currency.key }}</option>
+}
+
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">coût réel</label>
+
+          <input
+            type="number"
+            class="form-control"
+            formControlName="costSoFarValue">
+        </div>
+
+        <div class="col-md-2">
+          <label class="form-label">devise</label>
+
+          <select
+            class="form-select"
+            formControlName="costSoFarCurrency">
+            @for(currency of currencies;track currency.value){
+              <option [value]="currency.value">{{ currency.key }}</option>
+            }
+
+          </select>
+        </div>
+
+      </div>
+
+      <hr>
+
+      <!-- Expected Results -->
+      <h5 class="mb-3">Les attentes</h5>
+
+      <div class="row g-3">
+
+        <div class="col-md-3">
+          <label class="form-label">Comptes</label>
+
+          <input
+            type="number"
+            class="form-control"
+            formControlName="expectedAccounts">
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Prospects</label>
+
+          <input
+            type="number"
+            class="form-control"
+            formControlName="expectedLeads">
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Contacts</label>
+
+          <input
+            type="number"
+            class="form-control"
+            formControlName="expectedContacts">
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Opportunités</label>
+
+          <input
+            type="number"
+            class="form-control"
+            formControlName="expectedOpportunities">
+        </div>
+
+      </div>
+
+      <hr>
+
+      <!-- Schedule -->
+      <h5 class="mb-3">PLannification</h5>
+
+      <div class="row g-3">
+
+        <div class="col-md-6">
+          <label class="form-label">date de debut</label>
+
+          <input
+            type="date"
+            class="form-control"
+            formControlName="startDate">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">date fin</label>
+
+          <input
+            type="date"
+            class="form-control"
+            formControlName="endDate">
+        </div>
+
+      </div>
+
+      <hr>
+
+      <!-- Assignment -->
+      <h5 class="mb-3">affectation</h5>
+
+      <div class="row">
+
+        <div class="col-md-6">
+          <users-lookup formControlName="assignedTo"></users-lookup>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="card-footer text-end">
+
+      <button
+        class="btn btn-outline-danger me-2 btn-sm"
+        type="reset">
+        Reset
+      </button>
+
+      <button
+        class="btn btn-primary btn-sm"
+        type="submit"
+        [disabled]="form.invalid">
+        soumettre
+      </button>
+
+    </div>
+
+  </div>
+
+</form>

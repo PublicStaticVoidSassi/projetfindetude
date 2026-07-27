@@ -47,6 +47,16 @@ function configureRoutes() {
 
     },
     {
+      path: '/Campaigns',
+      name: '::Menu:Campaigns',
+      iconClass: 'fas fa-handshake', // todo
+      order: 41,
+      layout: eLayoutType.application,
+      requiredPolicy: 'UniFlowCRM.Opportunity', // todo
+      parentName: '::Menu:CRM:Sales'
+
+    },
+    {
       path: '/Opportunities',
       name: '::Menu:Opportunities',
       iconClass: 'fas fa-handshake',

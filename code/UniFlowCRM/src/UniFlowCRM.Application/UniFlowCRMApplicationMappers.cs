@@ -15,8 +15,65 @@ using UniFlowCRM.Tasks;
 using UniFlowCRM.Meetings;
 using UniFlowCRM.Emails;
 using UniFlowCRM.Dashboards;
+using UniFlowCRM.Campaigns;
+using System.Diagnostics.Tracing;
 
 namespace UniFlowCRM;
+
+// campaigns mapper
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+public partial class DtoToCampaignMapper : MapperBase<CreateUpdateCampaignDto, Campaign>
+{
+    public override Campaign Map(CreateUpdateCampaignDto source) {
+        return new Campaign(
+            source.Name,
+            source.Description,
+            source.Status,
+            source.StartDate,
+            source.EndDate,
+            source.AssignedTo,
+            new Moneys.Money(source.BudgetValue, source.BudgetCurrency),
+            new Moneys.Money(source.CostSoFarValue, source.CostSoFarCurrency),
+            source.ExpectedAccounts,
+            source.ExpectedLeads,
+            source.ExpectedContacts,
+            source.ExpectedOpportunities
+            );
+    }
+
+    public override partial void Map(CreateUpdateCampaignDto source, Campaign destination);
+}
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+public partial class CampaignToDtoMapper : MapperBase<Campaign, CampaignDto>
+{
+    public override CampaignDto Map(Campaign source)
+    {
+        return new CampaignDto() {
+            Id = source.Id,
+            Name = source.Name,
+            Description = source.Description,
+            Status = source.Status,
+            StartDate = source.StartDate,
+            EndDate = source.EndDate,
+            AssignedTo = source.AssignedTo,
+            BudgetValue = source.Budget.Value,
+            BudgetCurrency = source.Budget.Currency,
+            CostSoFarValue = source.CostSoFar.Value,
+            CostSoFarCurrency = source.CostSoFar.Currency,
+            ExpectedAccounts = source.ExpectedAccounts,
+            ExpectedLeads = source.ExpectedLeads,
+            ExpectedContacts = source.ExpectedContacts,
+            ExpectedOpportunities = source.ExpectedOpportunities,
+            ReachedAccounts = source.ReachedAccounts,
+            ReachedLeads = source.ReachedLeads,
+            ReachedContacts = source.ReachedContacts,
+            ReachedOpportunities = source.ReachedOpportunities,
+        };
+    }
+
+    public override partial void Map(Campaign source, CampaignDto destination);
+}
+
 
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 

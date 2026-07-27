@@ -25,6 +25,7 @@ using UniFlowCRM.Calls;
 using UniFlowCRM.Meetings;
 using UniFlowCRM.Emails;
 using UniFlowCRM.Dashboards;
+using UniFlowCRM.Campaigns;
 
 
 namespace UniFlowCRM.EntityFrameworkCore;
@@ -48,6 +49,7 @@ public class UniFlowCRMDbContext :
     public DbSet<Call> Calls { get; set; }
     public DbSet<Meeting> Meetings { get; set; }
     public DbSet<Email> Emails { get; set; }
+    public DbSet<Campaign> Campaigns { get; set; }
     #region Entities from the modules
 
     /* Notice: We only implemented IIdentityProDbContext 
@@ -107,6 +109,8 @@ public class UniFlowCRMDbContext :
                 UniFlowCRMConsts.DbSchema);
             b.ConfigureByConvention();
             b.HasOne<IdentityUser>().WithMany().HasForeignKey(l => l.UserID).IsRequired();
+            b.HasOne<Campaign>().WithMany().HasForeignKey(l => l.CampaignId).IsRequired(false);
+
             b.Property(l => l.Email)
             .HasConversion(
                 v => v == null ? null : v.ToString(), // write
@@ -144,6 +148,7 @@ public class UniFlowCRMDbContext :
             b.ConfigureByConvention();
             b.HasOne<IdentityUser>().WithMany().HasForeignKey(l => l.UserID).IsRequired();
             b.HasOne<Account>().WithMany().HasForeignKey(l => l.AccountID).IsRequired(false);
+            b.HasOne<Campaign>().WithMany().HasForeignKey(l => l.CampaignId).IsRequired(false);
             b.Property(l => l.Email)
             .HasConversion(
                 v => v == null ? null : v.ToString(), // write
@@ -164,6 +169,8 @@ public class UniFlowCRMDbContext :
                 b.HasOne<Lead>().WithMany().HasForeignKey(c => c.LeadID).IsRequired(false);
                 b.HasOne<IdentityUser>().WithMany().HasForeignKey(l => l.UserID).IsRequired();
                 b.HasOne<Account>().WithMany().HasForeignKey(l => l.AccountID).IsRequired(false);
+                b.HasOne<Campaign>().WithMany().HasForeignKey(l => l.CampaignId).IsRequired(false);
+
                 b.Property(l => l.Email)
                 .HasConversion(
                     v => v == null ? null : v.ToString(), // write
@@ -199,6 +206,8 @@ public class UniFlowCRMDbContext :
                 b.HasOne<Account>().WithMany().HasForeignKey(l => l.AccountID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
                 b.HasOne<Lead>().WithMany().HasForeignKey(l => l.LeadID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
                 b.HasOne<Contact>().WithMany().HasForeignKey(l => l.ContactID).IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+                b.HasOne<Campaign>().WithMany().HasForeignKey(l => l.CampaignId).IsRequired(false);
+
                 b.OwnsOne<Moneys.Money>(l => l.Amount, r =>
                 {
                     r.Property(r => r.Value).HasColumnName("AmountValue");
@@ -278,7 +287,28 @@ public class UniFlowCRMDbContext :
         });
         #endregion
 
-
+        #region Campaign
+        builder.Entity<Campaign>(b => {
+            b.ToTable(UniFlowCRMConsts.DbTablePrefix + "Campaigns",
+                UniFlowCRMConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasOne<IdentityUser>().WithMany().HasForeignKey(c => c.AssignedTo).IsRequired(true);
+            b.OwnsOne<Moneys.Money>(l => l.Budget, r =>
+            {
+                r.Property(r => r.Value).HasColumnName("BudgetValue");
+                r.Property(r => r.Currency).HasColumnName("BudgetCurrency");
+            });
+            b.OwnsOne<Moneys.Money>(l => l.CostSoFar, r =>
+            {
+                r.Property(r => r.Value).HasColumnName("CostValue");
+                r.Property(r => r.Currency).HasColumnName("CostCurrency");
+            });
+            b.Ignore(c => c.ReachedLeads);
+            b.Ignore(c => c.ReachedAccounts);
+            b.Ignore(c => c.ReachedContacts);
+            b.Ignore(c => c.ReachedOpportunities);
+        });
+        #endregion
 
 
     }

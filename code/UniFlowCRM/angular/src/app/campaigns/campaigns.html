@@ -1,0 +1,96 @@
+<div class="card">
+  <div class="card-header">
+    <h1 class="title" >
+      {{ '::Campaigns' | abpLocalization }}
+    </h1>
+  </div>
+
+
+  <div class="card-body">
+    <div class="d-flex justify-content-between mb-3">
+      <input type="text" class="form-control w-50" (ngModelChange)="search()"  [(ngModel)]="searchName" [placeholder]="'Rechercher'"/>
+      <button *abpPermission='"UniFlowCRM.Contact"'  (click)="create()" class="btn btn-brand btn-sm">
+        <i class="fa fa-add"></i>
+        <!--          {{ '::Object:Add' | abpLocalization }}-->
+        ajouter un campaign
+      </button>
+    </div>
+    <ngx-datatable
+      [rows]="campaigns.items"
+      [count]="campaigns.totalCount"
+      [list]="list"
+      default
+    >
+
+      <!-- ACTIONS -->
+      <ngx-datatable-column [sortable]="false">
+        <ng-template ngx-datatable-cell-template let-row="row">
+
+          <div ngbDropdown container="body" class="d-inline-block">
+            <button
+              class="btn btn-brand btn-sm dropdown-toggle"
+              ngbDropdownToggle
+            >
+              <i class="fa fa-cog me-1"></i>
+              {{ '::Actions' | abpLocalization }}
+            </button>
+
+            <div ngbDropdownMenu>
+
+              <button ngbDropdownItem (click)="openDetails(row.id)">
+                <i class="fa fa-plus-circle p-1 rounded-5"></i>
+                {{ '::Action:Info' | abpLocalization }}
+              </button>
+
+              <button *abpPermission='"UniFlowCRM.Contact.Delete"' ngbDropdownItem (click)="delete(row.id)">
+                <i class="fa fa-trash p-1  rounded-5"></i>
+                {{ '::Action:Delete' | abpLocalization }}
+              </button>
+
+              <button *abpPermission='"UniFlowCRM.Contact.Edit"' ngbDropdownItem (click)="edit(row.id)">
+                <i class="fa fa-pen p-1  rounded-5"></i>
+                {{ '::Action:Edit' | abpLocalization }}
+              </button>
+
+            </div>
+          </div>
+
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!-- NAME -->
+      <ngx-datatable-column
+        [name]="'Nom'"
+        prop="name">
+      </ngx-datatable-column>
+      <ngx-datatable-column
+        [name]="'Etat'"
+        prop="status">
+        <ng-template ngx-datatable-cell-template let-row="row">
+          {{'::Campaigne:Status:'+row.status | abpLocalization}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column
+        [name]="'Date Debut'"
+        prop="startDate">
+        <ng-template ngx-datatable-cell-template let-row="row">
+          {{row.startDate | shortDateTime}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column
+        [name]="'Date fin'"
+        prop="endDate">
+        <ng-template ngx-datatable-cell-template let-row="row">
+          {{row.endDate | shortDateTime}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column
+        [name]="'Responsable'"
+        prop="assignedTo">
+        <ng-template ngx-datatable-cell-template let-row="row">
+          {{row.owner?.username}}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

@@ -21,6 +21,7 @@ public class Lead : FullAuditedAggregateRoot<Guid>
 
     public Guid UserID { get; private set; } // user FK
     public Guid? AccountID { get; private set; } // Account FK
+    public Guid? CampaignId { get; set; }
     public Lead(
             Guid id,
             string firstName,

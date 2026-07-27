@@ -29,6 +29,8 @@ namespace UniFlowCRM.Opportunities
         public Guid? LeadID { get; protected set; }
         public Guid? AccountID { get; protected set; }
         public Guid? ContactID { get; protected set; }
+        public Guid? CampaignId { get; set; }
+
         //TODO:    
         public Opportunity(Guid id) : base(id)
         {

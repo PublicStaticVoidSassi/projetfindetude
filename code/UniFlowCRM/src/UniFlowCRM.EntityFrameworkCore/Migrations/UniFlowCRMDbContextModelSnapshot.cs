@@ -29,6 +29,9 @@ namespace UniFlowCRM.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CampaignId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
@@ -107,6 +110,8 @@ namespace UniFlowCRM.Migrations
                         .HasColumnName("Website");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CampaignId");
 
                     b.HasIndex("UserID");
 
@@ -215,12 +220,101 @@ namespace UniFlowCRM.Migrations
                     b.ToTable("calls", "CRM");
                 });
 
+            modelBuilder.Entity("UniFlowCRM.Campaigns.Campaign", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AssignedTo")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
+                        .HasColumnName("ConcurrencyStamp");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ExpectedAccounts")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExpectedContacts")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExpectedLeads")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExpectedOpportunities")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ExtraProperties")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ExtraProperties");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssignedTo");
+
+                    b.ToTable("Campaigns", "CRM");
+                });
+
             modelBuilder.Entity("UniFlowCRM.Contacts.Contact", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("AccountID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CampaignId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -315,6 +409,8 @@ namespace UniFlowCRM.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AccountID");
+
+                    b.HasIndex("CampaignId");
 
                     b.HasIndex("LeadID");
 
@@ -486,6 +582,9 @@ namespace UniFlowCRM.Migrations
                     b.Property<Guid?>("AccountID")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CampaignId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .IsRequired()
@@ -558,6 +657,8 @@ namespace UniFlowCRM.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AccountID");
+
+                    b.HasIndex("CampaignId");
 
                     b.HasIndex("UserID");
 
@@ -751,6 +852,9 @@ namespace UniFlowCRM.Migrations
                     b.Property<Guid?>("AccountID")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CampaignId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime?>("ClosedAt")
                         .HasColumnType("datetime2");
 
@@ -827,6 +931,8 @@ namespace UniFlowCRM.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AccountID");
+
+                    b.HasIndex("CampaignId");
 
                     b.HasIndex("ContactID");
 
@@ -2812,6 +2918,10 @@ namespace UniFlowCRM.Migrations
 
             modelBuilder.Entity("UniFlowCRM.Accounts.Account", b =>
                 {
+                    b.HasOne("UniFlowCRM.Campaigns.Campaign", null)
+                        .WithMany()
+                        .HasForeignKey("CampaignId");
+
                     b.HasOne("Volo.Abp.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserID")
@@ -2896,11 +3006,72 @@ namespace UniFlowCRM.Migrations
                         .HasForeignKey("OwnerID");
                 });
 
+            modelBuilder.Entity("UniFlowCRM.Campaigns.Campaign", b =>
+                {
+                    b.HasOne("Volo.Abp.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("AssignedTo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("UniFlowCRM.Moneys.Money", "Budget", b1 =>
+                        {
+                            b1.Property<Guid>("CampaignId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<int>("Currency")
+                                .HasColumnType("int")
+                                .HasColumnName("BudgetCurrency");
+
+                            b1.Property<decimal>("Value")
+                                .HasColumnType("decimal(18,2)")
+                                .HasColumnName("BudgetValue");
+
+                            b1.HasKey("CampaignId");
+
+                            b1.ToTable("Campaigns", "CRM");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CampaignId");
+                        });
+
+                    b.OwnsOne("UniFlowCRM.Moneys.Money", "CostSoFar", b1 =>
+                        {
+                            b1.Property<Guid>("CampaignId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<int>("Currency")
+                                .HasColumnType("int")
+                                .HasColumnName("CostCurrency");
+
+                            b1.Property<decimal>("Value")
+                                .HasColumnType("decimal(18,2)")
+                                .HasColumnName("CostValue");
+
+                            b1.HasKey("CampaignId");
+
+                            b1.ToTable("Campaigns", "CRM");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CampaignId");
+                        });
+
+                    b.Navigation("Budget")
+                        .IsRequired();
+
+                    b.Navigation("CostSoFar")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("UniFlowCRM.Contacts.Contact", b =>
                 {
                     b.HasOne("UniFlowCRM.Accounts.Account", null)
                         .WithMany()
                         .HasForeignKey("AccountID");
+
+                    b.HasOne("UniFlowCRM.Campaigns.Campaign", null)
+                        .WithMany()
+                        .HasForeignKey("CampaignId");
 
                     b.HasOne("UniFlowCRM.Leads.Lead", null)
                         .WithMany()
@@ -2973,6 +3144,10 @@ namespace UniFlowCRM.Migrations
                         .WithMany()
                         .HasForeignKey("AccountID");
 
+                    b.HasOne("UniFlowCRM.Campaigns.Campaign", null)
+                        .WithMany()
+                        .HasForeignKey("CampaignId");
+
                     b.HasOne("Volo.Abp.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserID")
@@ -3028,6 +3203,10 @@ namespace UniFlowCRM.Migrations
                         .WithMany()
                         .HasForeignKey("AccountID")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("UniFlowCRM.Campaigns.Campaign", null)
+                        .WithMany()
+                        .HasForeignKey("CampaignId");
 
                     b.HasOne("UniFlowCRM.Contacts.Contact", null)
                         .WithMany()

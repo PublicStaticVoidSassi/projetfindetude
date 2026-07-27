@@ -15,6 +15,17 @@ export const APP_ROUTES: Routes = [
     canActivate: [authGuard, permissionGuard]
   },
   {
+    path: 'Campaigns',
+    loadChildren: () =>
+      import('./campaigns/campaigns.routes')
+        .then(c => c.ROUTES),
+
+    // loadChildren: () =>
+    //   import('./campaigns/campaigns.routes')
+    //     .then(c => c.ROUTES),
+    // canActivate: [authGuard, permissionGuard]
+  },
+  {
     path: 'Accounts',
     loadChildren: () =>
       import('./accounts/accounts.routes')
