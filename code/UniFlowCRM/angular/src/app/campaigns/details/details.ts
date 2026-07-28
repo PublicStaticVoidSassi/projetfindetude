@@ -6,6 +6,7 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import {Currency} from '../../proxy/moneys/currency.enum'
 import { ToasterService } from '@abp/ng.theme.shared';
 
+
 @Component({
   selector: 'app-details',
   imports: [

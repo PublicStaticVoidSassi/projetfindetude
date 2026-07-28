@@ -12,9 +12,12 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace UniFlowCRM.Campaigns
 {
+    
+     
+
     public class CampaignsRepository(IDbContextProvider<UniFlowCRMDbContext> dbContextProvider) : EfCoreRepository<UniFlowCRMDbContext, Campaign, Guid>(dbContextProvider), ICampaignsRepository
     {
-        public override async Task<Campaign?> FindAsync(Guid id, bool includeDetails = true, CancellationToken cancellationToken = default)
+        public async Task<Campaign?> FindJoinedAsync(Guid id, bool includeDetails = true, CancellationToken cancellationToken = default)
         {
             var dbContext = await GetDbContextAsync();
 
@@ -46,9 +49,9 @@ namespace UniFlowCRM.Campaigns
             var entity = await AsyncExecuter.FirstOrDefaultAsync(query);
             return entity;
         }
-        public override async Task<Campaign> GetAsync(Guid id, bool includeDetails = true, CancellationToken cancellationToken = default)
+        public async Task<Campaign> GetJoinedAsync(Guid id, bool includeDetails = true, CancellationToken cancellationToken = default)
         {
-            return await this.FindAsync(id, includeDetails, cancellationToken) ?? throw new EntityNotFoundException();
+            return await this.FindJoinedAsync(id, includeDetails, cancellationToken) ?? throw new EntityNotFoundException();
         }
         public override async Task<List<Campaign>> GetListAsync(bool includeDetails = false, CancellationToken cancellationToken = default)
         {

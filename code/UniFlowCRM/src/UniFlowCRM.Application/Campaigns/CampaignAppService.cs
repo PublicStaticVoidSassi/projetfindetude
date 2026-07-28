@@ -14,13 +14,16 @@ namespace UniFlowCRM.Campaigns
         CrudAppService<Campaign, CampaignDto, Guid, CampaignResultRequestDto, CreateUpdateCampaignDto>
         , ICampaignAppService
     {
+        private readonly ICampaignsRepository repository;
+
         public CampaignAppService(ICampaignsRepository repository) : base(repository)
         {
+            this.repository = repository;
         }
-        public override Task<CampaignDto> GetAsync(Guid id)
-        {
-            return base.GetAsync(id);
-        }
+        //public override Task<CampaignDto> GetAsync(Guid id)
+        //{
+        //    return base.GetAsync(id);
+        //}
         public async Task<bool> ActivateAsync(Guid id)
         {
             var obj = await Repository.GetAsync(id);
@@ -49,6 +52,11 @@ namespace UniFlowCRM.Campaigns
             q = q.Where(c => c.Status == CampaignStatus.active);
             var dtos = q.ToList();
             return ObjectMapper.Map<List<Campaign>, List<CampaignDto>>(dtos);
+        }
+        public override async Task<CampaignDto> GetAsync(Guid id)
+        {
+            var obj = await repository.GetJoinedAsync(id);
+            return ObjectMapper.Map<Campaign, CampaignDto>(obj);
         }
         public override async Task<PagedResultDto<CampaignDto>> GetListAsync(CampaignResultRequestDto input)
         {

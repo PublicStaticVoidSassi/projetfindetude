@@ -1,3 +1,8 @@
+@import "tailwindcss";
+@import "@keenthemes/ktui/dist/styles.css";
+
+@import "./ktUI.css";
+
 /* You can add global styles to this file, and also import other style files */
 :root {
   // theme
@@ -52,9 +57,9 @@
 }
 
 
-*:not(i){
-  font-family: 'Seek' !important;
-}
+//*:not(i){
+//  font-family: 'Seek' !important;
+//}
 
 
 // sidebar
