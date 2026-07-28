@@ -21,5 +21,6 @@ namespace UniFlowCRM.Leads
 
         public Guid? UserID { get; set; } // user FK
         public Guid? AccountID { get; set; } // Account FK
+        public Guid? CampaignId { get; set; }
     }
 }

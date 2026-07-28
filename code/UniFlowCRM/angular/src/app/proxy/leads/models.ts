@@ -15,6 +15,7 @@ export interface CreateUpdateLeadDto extends EntityDto<string> {
   email?: string | null;
   userID?: string | null;
   accountID?: string | null;
+  campaignId?: string | null;
 }
 
 export interface LeadDto extends FullAuditedEntityDto<string> {
@@ -31,6 +32,7 @@ export interface LeadDto extends FullAuditedEntityDto<string> {
   modifier?: IdentityUserDto | null;
   account?: AccountDto | null;
   accountID?: string | null;
+  campaignId?: string | null;
 }
 
 export interface LeadRequestDto extends PagedAndSortedResultRequestDto {

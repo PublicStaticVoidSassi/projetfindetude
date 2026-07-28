@@ -38,6 +38,7 @@ import { ToasterService } from '@abp/ng.theme.shared';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountDto, AccountsService } from 'src/app/proxy/accounts';
 import { AccountsLookup, UsersLookup } from '../../shared/lookup-components';
+import { CampaignsLookup } from '../../shared/lookup-components/campagne-lookup';
 
 @Component({
   selector: 'app-lead-form',
@@ -47,7 +48,8 @@ import { AccountsLookup, UsersLookup } from '../../shared/lookup-components';
     LocalizationPipe,
     AccountsLookup,
     // NgxValidateCoreModule,
-    UsersLookup
+    UsersLookup,
+    CampaignsLookup
   ],
   templateUrl: './lead-form.html',
   styleUrl: './lead-form.scss',
@@ -93,6 +95,7 @@ export class LeadFormComponent implements OnInit {
     userID: [null],
 
     accountID: [null],
+    campaignId:[null]
 
   });
 
@@ -171,6 +174,7 @@ export class LeadFormComponent implements OnInit {
 
   }
 
+  protected readonly LeadSource = LeadSource;
 }
 // @Component({
 //   selector: 'app-lead-form',

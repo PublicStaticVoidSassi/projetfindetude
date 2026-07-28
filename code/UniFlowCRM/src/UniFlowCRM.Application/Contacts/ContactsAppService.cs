@@ -67,6 +67,7 @@ namespace UniFlowCRM.Contacts
             dto.Owner = joineddto.Owner;
             dto.Modifier = joineddto.LastModifier;
             dto.Creator = joineddto.Creator;
+            dto.CampaignId = joineddto.Contact.CampaignId;
             return dto;
         }
         public override async Task<PagedResultDto<ContactDto>> GetListAsync(ContactRequestDto input)
@@ -80,6 +81,7 @@ namespace UniFlowCRM.Contacts
                     result.Owner = e.Owner;
                     result.Creator = e.Creator;
                     result.Modifier = e.LastModifier;
+                    result.CampaignId = e.Contact.CampaignId;
                     return result;
                 }
             ).ToList();
@@ -123,6 +125,10 @@ namespace UniFlowCRM.Contacts
                 con.AssignAccount(input.AccountID);
             if (input.LeadID is not null)
                 con.AssignLead(input.LeadID);
+            if (input.CampaignId is not null)
+            {
+                con.CampaignId = input.CampaignId;
+            }
             return con;
         }
         private async Task<IQueryable<ContactJoined>> GetQueryableAsync(ContactRequestDto input)

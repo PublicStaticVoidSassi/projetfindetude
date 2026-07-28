@@ -253,7 +253,10 @@ public class OpportunitiesAppService : CrudAppService<
         opportunity.SetAccount(input.AccountID);
 
         opportunity.SetContact(input.ContactID);
-
+        if (input.CampaignId is not null)
+        {
+            opportunity.CampaignId = input.CampaignId;
+        }
 
         return opportunity;
     }

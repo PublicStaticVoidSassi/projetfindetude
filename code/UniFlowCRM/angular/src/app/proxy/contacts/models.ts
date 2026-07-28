@@ -30,6 +30,7 @@ export interface ContactDto extends FullAuditedEntityDto<string> {
   lead?: LeadDto | null;
   accountID?: string | null;
   account?: AccountDto | null;
+  campaignId?: string | null;
 }
 
 export interface ContactRequestDto extends PagedAndSortedResultRequestDto {
@@ -58,4 +59,5 @@ export interface CreateUpdateContactDto extends EntityDto<string> {
   userID?: string | null;
   leadID?: string | null;
   accountID?: string | null;
+  campaignId?: string | null;
 }

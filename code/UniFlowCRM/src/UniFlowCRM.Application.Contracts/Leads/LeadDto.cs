@@ -26,5 +26,6 @@ namespace UniFlowCRM.Leads
         public IdentityUserDto? Modifier { get; set; }
         public AccountDto? Account { get; set; }
         public Guid? AccountID { get; set; } // Account FK
+        public Guid? CampaignId { get; set; }
     }
 }

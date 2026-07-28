@@ -26,16 +26,17 @@ import {
 } from '../../proxy/opportunities';
 import { opportunityStageOptions } from '../../proxy/opportunities/opportunity-stage.enum'
 import { IdentityUserDto, IdentityUserService } from '@abp/ng.identity/proxy';
-import { LeadsService, LeadDto } from '../../proxy/leads';
+import { LeadsService, LeadDto, LeadSource } from '../../proxy/leads';
 import { AccountsService, AccountDto } from '../../proxy/accounts';
 import { ContactDto, ContactsService } from '../../proxy/contacts';
+import { CampaignsLookup } from '../../shared/lookup-components/campagne-lookup';
 @Component({
   selector: 'app-opportunity-form',
   standalone: true,
   imports: [AccountsLookup, ContactsLookup, LeadsLookup,
     ReturnBtn,
     ReactiveFormsModule,
-    LocalizationPipe, UsersLookup
+    LocalizationPipe, UsersLookup, CampaignsLookup
   ],
   templateUrl: './opportunity-form.html',
   styleUrl: './opportunity-form.scss',
@@ -80,6 +81,7 @@ export class OpportunityFormComponent implements OnInit {
     leadID: [this.route.snapshot.queryParamMap.get('leadID')],
     accountID: [this.route.snapshot.queryParamMap.get('accountID')],
     contactID: [this.route.snapshot.queryParamMap.get('contactID')],
+    campaignId: [null]
   });
 
   get isUpdate(): boolean {
@@ -105,6 +107,8 @@ export class OpportunityFormComponent implements OnInit {
         contactID: this.route.snapshot.queryParamMap.get('contactID'),
       });
     }, 1000);
+
+
 
   }
 
@@ -139,4 +143,5 @@ export class OpportunityFormComponent implements OnInit {
   }
 
   protected readonly opportunityStageOptions = opportunityStageOptions;
+  protected readonly LeadSource = LeadSource;
 }

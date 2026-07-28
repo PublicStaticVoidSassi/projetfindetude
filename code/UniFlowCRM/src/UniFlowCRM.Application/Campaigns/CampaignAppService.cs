@@ -17,6 +17,10 @@ namespace UniFlowCRM.Campaigns
         public CampaignAppService(ICampaignsRepository repository) : base(repository)
         {
         }
+        public override Task<CampaignDto> GetAsync(Guid id)
+        {
+            return base.GetAsync(id);
+        }
         public async Task<bool> ActivateAsync(Guid id)
         {
             var obj = await Repository.GetAsync(id);

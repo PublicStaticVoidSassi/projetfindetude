@@ -25,6 +25,15 @@ public static class UniFlowCRMPermissions
         public const string Default = GroupName + ".AssignOthers";
     }
 
+    public static class Campaign
+    {
+        public const string Default = GroupName + ".Campaign";
+        public const string ViewAll = Default + ".ViewAll";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+        public const string Convert = Default + ".Convert";
+    }
 
     public static class Lead
     {

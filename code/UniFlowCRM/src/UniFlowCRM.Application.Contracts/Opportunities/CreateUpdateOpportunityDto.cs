@@ -19,4 +19,5 @@ public class CreateUpdateOpportunityDto : EntityDto<Guid>
     public Guid? LeadID { get; set; }
     public Guid? AccountID { get; set; }
     public Guid? ContactID { get; set; }
+    public Guid? CampaignId { get; set; }
 }

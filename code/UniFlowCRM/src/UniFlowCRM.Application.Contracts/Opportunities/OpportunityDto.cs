@@ -29,4 +29,5 @@ public class OpportunityDto : FullAuditedEntityDto<Guid>
     public AccountDto? Account { get; set; }
     public Guid? ContactID { get; set; }
     public ContactDto? Contact { get; set; }
+    public Guid? CampaignId { get; set; }
 }

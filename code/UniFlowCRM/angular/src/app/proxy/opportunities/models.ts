@@ -23,6 +23,7 @@ export interface CreateUpdateOpportunityDto extends EntityDto<string> {
   leadID?: string | null;
   accountID?: string | null;
   contactID?: string | null;
+  campaignId?: string | null;
 }
 
 export interface OpportunityDto extends FullAuditedEntityDto<string> {
@@ -46,6 +47,7 @@ export interface OpportunityDto extends FullAuditedEntityDto<string> {
   account?: AccountDto | null;
   contactID?: string | null;
   contact?: ContactDto | null;
+  campaignId?: string | null;
 }
 
 export interface OpportunityRequestDto extends PagedAndSortedResultRequestDto {

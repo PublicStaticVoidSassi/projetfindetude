@@ -52,7 +52,7 @@ function configureRoutes() {
       iconClass: 'fas fa-handshake', // todo
       order: 41,
       layout: eLayoutType.application,
-      requiredPolicy: 'UniFlowCRM.Opportunity', // todo
+      requiredPolicy: 'UniFlowCRM.Campaign',
       parentName: '::Menu:CRM:Sales'
 
     },

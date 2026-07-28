@@ -35,8 +35,9 @@
     <div class="col-lg-8">
 
       @if(campaign.description){
+        <div class="row">
       <!-- Description -->
-      <div class="card shadow-sm mb-4">
+      <div class="card shadow-sm mb-4 w-100">
 
         <div class="card-header">
           <h5 class="mb-0">Description</h5>
@@ -51,21 +52,22 @@
         </div>
 
       </div>
+        </div>
       }
       <!-- Budget -->
-      <div class="card shadow-sm mb-4">
+      <div class="mb-4">
 
-        <div class="card-header">
-          <h5 class="mb-0">Budget</h5>
+        <div class="">
+          <h5 class="mb-0 title">Budget</h5>
         </div>
 
-        <div class="card-body">
+        <div class="">
 
           <div class="row">
 
-            <div class="col-md-6">
+            <div class="col card py-2 px-1 rounded kpi-card">
 
-              <h6>Allocated Budget</h6>
+              <h6>budget alloué</h6>
 
               <h4 class="text-primary">
                 {{ campaign.budgetValue | number:'1.2-2' }}
@@ -74,15 +76,21 @@
 
             </div>
 
-            <div class="col-md-6">
+            <div class="col">
 
-              <h6>Cost So Far</h6>
+              <h6>coût réel</h6>
 
               <h4 class="text-danger">
                 {{ campaign.costSoFarValue || 0 | number:'1.2-2' }}
                 {{ Currency[campaign.costSoFarCurrency] }}
               </h4>
 
+            </div>
+            <div class="col">
+              <h6>Budget consommé</h6>
+              <h4 [className]="(campaign.costSoFarValue/campaign.budgetValue>0.7)?'text-danger':'text-success'">
+              {{(campaign.costSoFarValue/campaign.budgetValue) * 100 | number }} %
+              </h4>
             </div>
 
           </div>
@@ -95,7 +103,7 @@
       <div class="card shadow-sm">
 
         <div class="card-header">
-          <h5 class="mb-0">Campaign Results</h5>
+          <h5 class="mb-0">Résultats de la campagne</h5>
         </div>
 
         <div class="card-body p-0">
@@ -106,34 +114,34 @@
 
             <tr>
               <th></th>
-              <th class="text-center">Expected</th>
-              <th class="text-center">Reached</th>
+              <th class="text-center">prévu</th>
+              <th class="text-center">actuel</th>
             </tr>
 
             </thead>
 
             <tbody>
 
-            <tr>
-              <td>Accounts</td>
+            <tr [className]="(campaign.expectedAccounts>campaign.reachedAccounts)?'table-danger':'table-success'">
+              <td>Comptes</td>
               <td class="text-center">{{ campaign.expectedAccounts }}</td>
               <td class="text-center">{{ campaign.reachedAccounts }}</td>
             </tr>
 
-            <tr>
-              <td>Leads</td>
+            <tr [className]="(campaign.expectedLeads>campaign.reachedLeads)?'table-danger':'table-success'">
+              <td>Prospects</td>
               <td class="text-center">{{ campaign.expectedLeads }}</td>
               <td class="text-center">{{ campaign.reachedLeads }}</td>
             </tr>
 
-            <tr>
+            <tr [className]="(campaign.expectedContacts>campaign.reachedContacts)?'table-danger':'table-success'">
               <td>Contacts</td>
               <td class="text-center">{{ campaign.expectedContacts }}</td>
               <td class="text-center">{{ campaign.reachedContacts }}</td>
             </tr>
 
-            <tr>
-              <td>Opportunities</td>
+            <tr [className]="(campaign.expectedOpportunities>campaign.reachedOpportunities)?'table-danger':'table-success'">
+              <td>Opportunités</td>
               <td class="text-center">{{ campaign.expectedOpportunities }}</td>
               <td class="text-center">{{ campaign.reachedOpportunities }}</td>
             </tr>

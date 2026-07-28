@@ -112,6 +112,11 @@
             }
           </select>
         </div>
+        @if(form.get("source").value == ContactSource.Campaign){
+          <div class="col">
+            <campaigns-lookup formControlName="campaignId"></campaigns-lookup>
+          </div>
+        }
 
         <!-- Country -->
         <div class="col-md-3">

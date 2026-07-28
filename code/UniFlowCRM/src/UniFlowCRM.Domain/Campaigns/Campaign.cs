@@ -27,7 +27,26 @@ namespace UniFlowCRM.Campaigns
         public DateTime EndDate { get; set; }
         public Guid AssignedTo { get; set; }
 
-        public Campaign(string name, string description, CampaignStatus status, DateTime startDate, DateTime endDate, Guid assignedTo, Money budget, Money costSoFar, int expectedAccounts, int expectedLeads, int expectedContacts, int expectedOpportunities, int reachedAccounts = 0, int reachedLeads = 0, int reachedContacts = 0, int reachedOpportunities =0)
+        public Campaign(Guid id, string name, string description, CampaignStatus status, DateTime startDate, DateTime endDate, Guid assignedTo, Money budget, Money costSoFar, int expectedAccounts, int expectedLeads, int expectedContacts, int expectedOpportunities, int reachedAccounts = 0, int reachedLeads = 0, int reachedContacts = 0, int reachedOpportunities =0): base(id)
+        {
+            Name = name;
+            Description = description;
+            Status = status;
+            StartDate = startDate;
+            EndDate = endDate;
+            AssignedTo = assignedTo;
+            Budget = budget;
+            CostSoFar = costSoFar;
+            ExpectedAccounts = expectedAccounts;
+            ExpectedLeads = expectedLeads;
+            ExpectedContacts = expectedContacts;
+            ExpectedOpportunities = expectedOpportunities;
+            ReachedAccounts = reachedAccounts;
+            ReachedLeads = reachedLeads;
+            ReachedContacts = reachedContacts;
+            ReachedOpportunities = reachedOpportunities;
+        }
+        public Campaign(string name, string description, CampaignStatus status, DateTime startDate, DateTime endDate, Guid assignedTo, Money budget, Money costSoFar, int expectedAccounts, int expectedLeads, int expectedContacts, int expectedOpportunities, int reachedAccounts = 0, int reachedLeads = 0, int reachedContacts = 0, int reachedOpportunities = 0)
         {
             Name = name;
             Description = description;

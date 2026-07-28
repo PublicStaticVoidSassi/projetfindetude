@@ -13,6 +13,7 @@
     "Menu:Analytics:Leads": "Prospects",
     "Menu:Analytics:Opportunities": "Opportunités",
     "Permission:Assign": "l'affectation",
+    "Permission:Campaign": "gestion des campagnes",
     "Permission:Lead": "gestion des prospects",
     "Permission:Account": "gestion des comptes",
     "Permission:Contact": "gestion des contact",

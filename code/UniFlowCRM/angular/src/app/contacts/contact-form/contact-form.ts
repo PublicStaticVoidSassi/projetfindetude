@@ -35,6 +35,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AccountDto, AccountsService } from 'src/app/proxy/accounts';
 import { UsersLookup } from '../../shared/lookup-components';
+import { CampaignsLookup } from '../../shared/lookup-components/campagne-lookup';
+import { LeadSource } from '../../proxy/leads';
 
 @Component({
   selector: 'app-contact-form',
@@ -43,7 +45,8 @@ import { UsersLookup } from '../../shared/lookup-components';
     ReactiveFormsModule,
     LocalizationPipe,
     AbpVisibleDirective,
-    UsersLookup
+    UsersLookup,
+    CampaignsLookup
   ],
   templateUrl: './contact-form.html',
 })
@@ -97,6 +100,7 @@ export class ContactFormComponent implements OnInit {
     userID: [null],
     // leadID: [null],
     accountID: [null],
+    campaignId:[null],
 
   });
 
@@ -150,4 +154,7 @@ export class ContactFormComponent implements OnInit {
 
     }
   }
+
+  protected readonly LeadSource = LeadSource;
+  protected readonly ContactSource = ContactSource;
 }

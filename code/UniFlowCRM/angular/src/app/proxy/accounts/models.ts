@@ -50,8 +50,8 @@ export interface CreateUpdateAccountDto extends EntityDto<string> {
   revenueAmount?: number | null;
   revenueCurrency?: Currency | null;
   employees?: number | null;
-  userID?: string | null;
   campaignId?: string | null;
+  userID?: string | null;
 }
 
 export interface AccountPerIndustryDto {

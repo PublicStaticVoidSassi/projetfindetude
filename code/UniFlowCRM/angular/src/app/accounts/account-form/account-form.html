@@ -143,13 +143,13 @@
         </div>
 
         <!-- Revenue -->
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label class="form-label">{{ '::Account:RevenueAmount' | abpLocalization }}</label>
           <input class="form-control" type="number" formControlName="revenueAmount" />
         </div>
 
         <!-- Currency -->
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label class="form-label">{{ '::Account:RevenueCurrency' | abpLocalization }}</label>
           <select class="form-select" formControlName="revenueCurrency">
             @for (currency of currencies; track currency.value) {
@@ -161,7 +161,7 @@
         </div>
 
         <!-- Assign -->
-        <div class="col-md-6">
+        <div class="col-12">
           <users-lookup  formControlName="userID"></users-lookup>
 <!--          <select class="form-select" formControlName="userID">-->
 <!--            @for (user of users; track user.id) {-->

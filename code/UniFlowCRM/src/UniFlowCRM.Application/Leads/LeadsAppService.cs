@@ -198,6 +198,10 @@ namespace UniFlowCRM.Leads
                 lead.AssignToUser((Guid)input.UserID);
             else
                 lead.AssignToUser(CurrentUser.Id!.Value);
+            if (input.CampaignId is not null)
+            {
+                lead.CampaignId = input.CampaignId;
+            }
             return lead;
         }
         [Authorize(UniFlowCRMPermissions.Lead.Create)]

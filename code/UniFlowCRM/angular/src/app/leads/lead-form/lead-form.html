@@ -108,7 +108,7 @@
           </div>
 
           <!-- Status -->
-          <div class="col-md-3">
+          <div class="col">
             <label class="form-label">
               {{ '::Lead:Status' | abpLocalization }}
             </label>
@@ -123,24 +123,29 @@
           </div>
 
           <!-- Source -->
-          <div class="col-md-3">
-            <label class="form-label">
-              {{ '::Lead:Source' | abpLocalization }}
-            </label>
 
-            <select class="form-select" formControlName="source">
+            <div class="col">
+              <label class="form-label">
+                {{ '::Lead:Source' | abpLocalization }}
+              </label>
 
-              @for (source of leadSources; track source.value) {
+              <select class="form-select" formControlName="source">
 
-                <option [value]="source.value">
-                  {{ '::Lead:Source:' + source.value | abpLocalization }}
-                </option>
+                @for (source of leadSources; track source.value) {
 
-              }
+                  <option [value]="source.value">
+                    {{ '::Lead:Source:' + source.value | abpLocalization }}
+                  </option>
 
-            </select>
+                }
+
+              </select>
+            </div>
+          @if(form.get("source").value == LeadSource.Campaign){
+          <div class="col">
+            <campaigns-lookup formControlName="campaignId"></campaigns-lookup>
           </div>
-
+          }
           <!-- Assigned User -->
           <div class="col-md-6">
             <users-lookup formControlName="userID"></users-lookup>
