@@ -1,22 +1,23 @@
-using System;
-using System.Globalization;
 using Riok.Mapperly.Abstractions;
-using Volo.Abp.Mapperly;
-using UniFlowCRM.Books;
+using System;
+using System.Diagnostics.Tracing;
+using System.Globalization;
 using UniFlowCRM.Accounts;
+using UniFlowCRM.Books;
 using UniFlowCRM.Calls;
+using UniFlowCRM.Campaigns;
 using UniFlowCRM.Contacts;
+using UniFlowCRM.Dashboards;
 using UniFlowCRM.EmailAddresses;
-using UniFlowCRM.Opportunities;
+using UniFlowCRM.Emails;
 using UniFlowCRM.Leads;
+using UniFlowCRM.Meetings;
+using UniFlowCRM.Moneys;
 using UniFlowCRM.Notes;
+using UniFlowCRM.Opportunities;
 using UniFlowCRM.PhoneNumbers;
 using UniFlowCRM.Tasks;
-using UniFlowCRM.Meetings;
-using UniFlowCRM.Emails;
-using UniFlowCRM.Dashboards;
-using UniFlowCRM.Campaigns;
-using System.Diagnostics.Tracing;
+using Volo.Abp.Mapperly;
 
 namespace UniFlowCRM;
 
@@ -24,52 +25,37 @@ namespace UniFlowCRM;
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 public partial class DtoToCampaignMapper : MapperBase<CreateUpdateCampaignDto, Campaign>
 {
-    public override Campaign Map(CreateUpdateCampaignDto source) {
-        return new Campaign(
-            source.Name,
-            source.Description,
-            source.Status,
-            source.StartDate,
-            source.EndDate,
-            source.AssignedTo,
-            new Moneys.Money(source.BudgetValue, source.BudgetCurrency),
-            new Moneys.Money(source.CostSoFarValue, source.CostSoFarCurrency),
-            source.ExpectedAccounts,
-            source.ExpectedLeads,
-            source.ExpectedContacts,
-            source.ExpectedOpportunities
-            );
+    public override Campaign Map(CreateUpdateCampaignDto source)
+    {
+        var target = new Campaign(
+        id: source.Id,
+        name: source.Name,
+        description: source.Description,
+        status: source.Status,
+        expectedAccounts: source.ExpectedAccounts,
+        expectedLeads: source.ExpectedLeads,
+        expectedContacts: source.ExpectedContacts,
+        expectedOpportunities: source.ExpectedOpportunities,
+        startDate: source.StartDate,
+        endDate: source.EndDate,
+        assignedTo: source.AssignedTo,
+        budget: new Money(value:source.BudgetValue,currency:source.BudgetCurrency),
+        costSoFar: new Money(value:source.CostSoFarValue,currency:source.CostSoFarCurrency)
+        );
+        return target;
     }
 
     public override partial void Map(CreateUpdateCampaignDto source, Campaign destination);
+    
 }
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 public partial class CampaignToDtoMapper : MapperBase<Campaign, CampaignDto>
 {
-    public override CampaignDto Map(Campaign source)
-    {
-        return new CampaignDto() {
-            Id = source.Id,
-            Name = source.Name,
-            Description = source.Description,
-            Status = source.Status,
-            StartDate = source.StartDate,
-            EndDate = source.EndDate,
-            AssignedTo = source.AssignedTo,
-            BudgetValue = source.Budget.Value,
-            BudgetCurrency = source.Budget.Currency,
-            CostSoFarValue = source.CostSoFar.Value,
-            CostSoFarCurrency = source.CostSoFar.Currency,
-            ExpectedAccounts = source.ExpectedAccounts,
-            ExpectedLeads = source.ExpectedLeads,
-            ExpectedContacts = source.ExpectedContacts,
-            ExpectedOpportunities = source.ExpectedOpportunities,
-            ReachedAccounts = source.ReachedAccounts,
-            ReachedLeads = source.ReachedLeads,
-            ReachedContacts = source.ReachedContacts,
-            ReachedOpportunities = source.ReachedOpportunities,
-        };
-    }
+    [MapProperty(nameof(Campaign.Budget.Value), nameof(CampaignDto.BudgetValue))]
+    [MapProperty(nameof(Campaign.Budget.Currency), nameof(CampaignDto.BudgetCurrency))]
+    [MapProperty(nameof(Campaign.CostSoFar.Value), nameof(CampaignDto.CostSoFarValue))]
+    [MapProperty(nameof(Campaign.CostSoFar.Currency), nameof(CampaignDto.CostSoFarCurrency))]
+    public override partial CampaignDto Map(Campaign source);
 
     public override partial void Map(Campaign source, CampaignDto destination);
 }

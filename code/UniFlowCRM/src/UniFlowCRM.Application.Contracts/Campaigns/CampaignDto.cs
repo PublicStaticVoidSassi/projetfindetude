@@ -29,5 +29,8 @@ namespace UniFlowCRM.Campaigns
         public DateTime EndDate { get; set; }
         public Guid AssignedTo { get; set; }
         public IdentityUserDto Owner { get; set; }
+        public IdentityUserDto Creator { get; set; }
+        public IdentityUserDto Modifier { get; set; }
+
     }
 }

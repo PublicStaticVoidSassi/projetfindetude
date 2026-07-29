@@ -45,6 +45,11 @@ namespace UniFlowCRM.Campaigns
             ReachedLeads = reachedLeads;
             ReachedContacts = reachedContacts;
             ReachedOpportunities = reachedOpportunities;
+
+            if (EndDate < DateTime.Now)
+            {
+                status = CampaignStatus.completed;
+            }
         }
         public Campaign(string name, string description, CampaignStatus status, DateTime startDate, DateTime endDate, Guid assignedTo, Money budget, Money costSoFar, int expectedAccounts, int expectedLeads, int expectedContacts, int expectedOpportunities, int reachedAccounts = 0, int reachedLeads = 0, int reachedContacts = 0, int reachedOpportunities = 0)
         {
@@ -64,6 +69,10 @@ namespace UniFlowCRM.Campaigns
             ReachedLeads = reachedLeads;
             ReachedContacts = reachedContacts;
             ReachedOpportunities = reachedOpportunities;
+            if (EndDate < DateTime.Now)
+            {
+                status = CampaignStatus.completed;
+            }
         }
 
 

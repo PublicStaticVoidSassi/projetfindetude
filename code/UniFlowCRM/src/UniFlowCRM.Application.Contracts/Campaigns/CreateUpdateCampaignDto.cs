@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using UniFlowCRM.Moneys;
+using Volo.Abp.Application.Dtos;
 using Volo.Abp.Identity;
 
 namespace UniFlowCRM.Campaigns
 {
-    public class CreateUpdateCampaignDto
+    public class CreateUpdateCampaignDto: EntityDto<Guid>
     {
         public string Name { get; set; }
         public string Description { get; set; }

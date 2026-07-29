@@ -327,7 +327,7 @@ public class OpportunitiesAppService : CrudAppService<
             dto.Modifier = res.LastModifier;
             return dto;
         }).ToList();
-        var count = await AsyncExecuter.CountAsync(query);
+        var count = await Repository.CountAsync();
 
 
         return new PagedResultDto<OpportunityDto>(

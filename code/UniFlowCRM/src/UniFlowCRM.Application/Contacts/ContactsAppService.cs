@@ -85,7 +85,7 @@ namespace UniFlowCRM.Contacts
                     return result;
                 }
             ).ToList();
-            var count = await AsyncExecuter.CountAsync(query);
+            var count = await Repository.CountAsync();
             return new PagedResultDto<ContactDto>(
                 count,
                 result

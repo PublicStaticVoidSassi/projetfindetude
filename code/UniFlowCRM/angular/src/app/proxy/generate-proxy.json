@@ -2402,6 +2402,44 @@
               "authorizeDatas": [],
               "implementFrom": "UniFlowCRM.Campaigns.CampaignAppService"
             },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/app/campaign/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "UniFlowCRM.Campaigns.CampaignDto",
+                "typeSimple": "UniFlowCRM.Campaigns.CampaignDto"
+              },
+              "allowAnonymous": null,
+              "authorizeDatas": [],
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Campaigns.CampaignDto,UniFlowCRM.Campaigns.CampaignDto,System.Guid,UniFlowCRM.Campaigns.CampaignResultRequestDto>"
+            },
             "GetListAsyncByInput": {
               "uniqueName": "GetListAsyncByInput",
               "name": "GetListAsync",
@@ -2609,44 +2647,6 @@
               "allowAnonymous": null,
               "authorizeDatas": [],
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
-            },
-            "GetAsyncById": {
-              "uniqueName": "GetAsyncById",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/app/campaign/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "UniFlowCRM.Campaigns.CampaignDto",
-                "typeSimple": "UniFlowCRM.Campaigns.CampaignDto"
-              },
-              "allowAnonymous": null,
-              "authorizeDatas": [],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Campaigns.CampaignDto,UniFlowCRM.Campaigns.CampaignDto,System.Guid,UniFlowCRM.Campaigns.CampaignResultRequestDto>"
             }
           }
         },
@@ -10696,6 +10696,32 @@
         },
         {
           "name": "Owner",
+          "jsonName": null,
+          "type": "Volo.Abp.Identity.IdentityUserDto",
+          "typeSimple": "Volo.Abp.Identity.IdentityUserDto",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        },
+        {
+          "name": "Creator",
+          "jsonName": null,
+          "type": "Volo.Abp.Identity.IdentityUserDto",
+          "typeSimple": "Volo.Abp.Identity.IdentityUserDto",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null,
+          "isNullable": false
+        },
+        {
+          "name": "Modifier",
           "jsonName": null,
           "type": "Volo.Abp.Identity.IdentityUserDto",
           "typeSimple": "Volo.Abp.Identity.IdentityUserDto",

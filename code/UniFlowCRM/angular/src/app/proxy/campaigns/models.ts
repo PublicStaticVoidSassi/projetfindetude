@@ -23,6 +23,8 @@ export interface CampaignDto extends FullAuditedEntityDto<string> {
   endDate?: string;
   assignedTo?: string;
   owner?: IdentityUserDto;
+  creator?: IdentityUserDto;
+  modifier?: IdentityUserDto;
 }
 
 export interface CampaignResultRequestDto extends PagedAndSortedResultRequestDto {

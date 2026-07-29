@@ -207,7 +207,7 @@ namespace UniFlowCRM.Accounts
                 dto.Modifier = res.LastModifier;
                 return dto;
             }).ToList();
-            var count = await AsyncExecuter.CountAsync(q);
+            var count = await Repository.CountAsync();
             return new PagedResultDto<AccountDto>(count, dtos);
         }
         [Authorize(UniFlowCRMPermissions.Account.Create)]

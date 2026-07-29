@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Identity;
 
 namespace UniFlowCRM.Campaigns
 {
@@ -15,10 +16,12 @@ namespace UniFlowCRM.Campaigns
         , ICampaignAppService
     {
         private readonly ICampaignsRepository repository;
+        private readonly IIdentityUserRepository userRepository;
 
-        public CampaignAppService(ICampaignsRepository repository) : base(repository)
+        public CampaignAppService(ICampaignsRepository repository, IIdentityUserRepository userRepository) : base(repository)
         {
             this.repository = repository;
+            this.userRepository = userRepository;
         }
         //public override Task<CampaignDto> GetAsync(Guid id)
         //{
@@ -56,7 +59,11 @@ namespace UniFlowCRM.Campaigns
         public override async Task<CampaignDto> GetAsync(Guid id)
         {
             var obj = await repository.GetJoinedAsync(id);
-            return ObjectMapper.Map<Campaign, CampaignDto>(obj);
+            var dto = ObjectMapper.Map<Campaign, CampaignDto>(obj);
+            dto.Owner = ObjectMapper.Map<IdentityUser,IdentityUserDto>(await userRepository.GetAsync(dto.AssignedTo));
+            if (dto.CreatorId != Guid.Empty && dto.CreatorId != null) dto.Creator = ObjectMapper.Map<IdentityUser,IdentityUserDto>(await userRepository.FindAsync((Guid)dto.CreatorId));
+            if (dto.LastModifierId != Guid.Empty && dto.LastModifierId != null) dto.Modifier = ObjectMapper.Map<IdentityUser,IdentityUserDto>(await userRepository.FindAsync((Guid)dto.LastModifierId));
+            return dto;
         }
         public override async Task<PagedResultDto<CampaignDto>> GetListAsync(CampaignResultRequestDto input)
         {

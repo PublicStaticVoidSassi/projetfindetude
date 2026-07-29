@@ -130,7 +130,7 @@
       <!-- Results -->
       <h1 class="title">Les Resultats:</h1>
       <div class="grid w-full space-y-5">
-        <div class="kt-card">
+        <div class="kt-card kpi-card bg-white p-0">
           <div
             id="kt_datatable_basic"
             class="kt-card-table"
@@ -138,7 +138,7 @@
             data-kt-datatable-page-size="5"
             data-kt-datatable-state-save="true"
           >
-            <div class="kt-table-wrapper kt-scrollable">
+            <div class="">
               <table class="kt-table" data-kt-datatable-table="true">
                 <thead>
                 <tr>
@@ -186,8 +186,13 @@
           </div>
         </div>
       </div>
+
+    </div>
+
+    <!-- Right Column -->
+    <div class="col-lg-4">
+
       @if(campaign.description){
-        <div class="row">
           <!-- Description -->
           <div class="card shadow-sm mb-4 w-100">
 
@@ -198,36 +203,32 @@
             <div class="card-body">
 
               <p class="mb-0">
-                {{ campaign.description || 'No description provided.' }}
+                {{ campaign.description }}
               </p>
 
             </div>
 
           </div>
-        </div>
       }
-    </div>
 
-    <!-- Right Column -->
-    <div class="col-lg-4">
 
       <!-- Schedule -->
       <div class="card shadow-sm mb-4">
 
         <div class="card-header">
-          <h5 class="mb-0">Schedule</h5>
+          <h5 class="mb-0">L'emploi de temps</h5>
         </div>
 
         <div class="card-body">
 
           <dl class="row mb-0">
 
-            <dt class="col-5">Start</dt>
+            <dt class="col-5">Date Debut</dt>
             <dd class="col-7">
               {{ campaign.startDate | date }}
             </dd>
 
-            <dt class="col-5">End</dt>
+            <dt class="col-5">Date Fin</dt>
             <dd class="col-7">
               {{ campaign.endDate | date }}
             </dd>
@@ -242,21 +243,14 @@
       <div class="card shadow-sm mb-4">
 
         <div class="card-header">
-          <h5 class="mb-0">Ownership</h5>
+          <h5 class="mb-0">Le responsable</h5>
         </div>
 
         <div class="card-body">
 
-          <dl class="row mb-0">
-
-            <dt class="col-5">Owner</dt>
+          <dl class="row mb-0 lead">
             <dd class="col-7">
-              {{ campaign.owner?.userName }}
-            </dd>
-
-            <dt class="col-5">Assigned To</dt>
-            <dd class="col-7">
-              {{ campaign.assignedTo }}
+              {{'@'+campaign.owner?.userName }}
             </dd>
 
           </dl>
@@ -269,28 +263,29 @@
       <div class="card shadow-sm">
 
         <div class="card-header">
-          <h5 class="mb-0">Metadata</h5>
+          <h5 class="mb-0">Audit</h5>
         </div>
 
         <div class="card-body">
 
           <dl class="row mb-0">
+            <dt class="col-5">Crée par</dt>
+            <dd class="col-7">{{ '@'+campaign.creator.userName }}</dd>
 
-            <dt class="col-5">ID</dt>
-            <dd class="col-7">{{ campaign.id }}</dd>
-
-            <dt class="col-5">Creator</dt>
-            <dd class="col-7">{{ campaign.creatorId }}</dd>
-
-            <dt class="col-5">Created</dt>
+            <dt class="col-5">Crée le</dt>
             <dd class="col-7">
               {{ campaign.creationTime | date:'medium' }}
             </dd>
-
-            <dt class="col-5">Modified</dt>
+            @if(campaign.lastModificationTime){
+            <dt class="col-5">Modifié par</dt>
             <dd class="col-7">
               {{ campaign.lastModificationTime | date:'medium' }}
             </dd>
+            <dt class="col-5">Modifié le</dt>
+            <dd class="col-7">
+              {{'@'+campaign.modifier.userName}}
+            </dd>
+            }
 
           </dl>
 

@@ -43,7 +43,12 @@ namespace UniFlowCRM.Campaigns
                             reachedOpportunities: dbContext.Opportunities.Count(o => o.CampaignId == ca.Id)
                             )
                         {
-
+                            CreationTime= ca.CreationTime,
+                            CreatorId= ca.CreatorId,
+                            LastModificationTime= ca.LastModificationTime,
+                            LastModifierId= ca.LastModifierId,
+                            DeletionTime= ca.DeletionTime,
+                            DeleterId= ca.DeleterId,
                         };
             //Console.WriteLine(query.ToString());
             var entity = await AsyncExecuter.FirstOrDefaultAsync(query);
