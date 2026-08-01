@@ -1,9 +1,9 @@
 import { Environment } from '@abp/ng.core';
 
-const baseUrl = 'http://localhost:4200';
+const baseUrl = 'https://www.uniflowcrm.dz';
 
 const oAuthConfig = {
-  issuer: 'https://localhost:44308/',
+  issuer: 'https://backend.uniflowcrm.dz:8443/',
   redirectUri: baseUrl,
   clientId: 'UniFlowCRM_App',
   responseType: 'code',
@@ -21,7 +21,7 @@ export const environment = {
   oAuthConfig,
   apis: {
     default: {
-      url: 'https://localhost:44308',
+      url: 'https://backend.uniflowcrm.dz:8443/',
       rootNamespace: 'UniFlowCRM',
     },
     AbpAccountPublic: {
