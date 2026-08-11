@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using UniFlowCRM.Accounts;
+using UniFlowCRM.Activities;
 using UniFlowCRM.Calls;
 using UniFlowCRM.Contacts;
 using UniFlowCRM.Leads;
@@ -54,6 +55,7 @@ IMeetingAppService
     private readonly IRepository<Contact, Guid> _contactRepository;
     private readonly IRepository<Opportunity, Guid> _opportunityRepository;
     private readonly IRepository<IdentityUser, Guid> _userRepository;
+    private readonly IActivityManager _activityManager;
     private readonly IPermissionChecker permissionChecker;
 
     public MeetingsAppService(IRepository<Meeting, Guid> repository,
@@ -62,7 +64,7 @@ IMeetingAppService
         IRepository<Contact, Guid> contactRepository,
         IRepository<Opportunity, Guid> opportunityRepository,
         IRepository<IdentityUser, Guid> userRepository,
-        IPermissionChecker permissionChecker) : base(repository)
+        IPermissionChecker permissionChecker, IActivityManager activityManager) : base(repository)
     {
         _accountRepository = accountRepository;
         _leadRepository = leadRepository;
@@ -70,7 +72,23 @@ IMeetingAppService
         _opportunityRepository = opportunityRepository;
         _userRepository = userRepository;
         this.permissionChecker = permissionChecker;
+        _activityManager = activityManager;
     }
+
+    public override async Task<MeetingDto> CreateAsync(CreateUpdateMeetingDto input)
+    {
+        await _activityManager.CheckTimeAvailableAsync(input.OwnerID, input.StartTime, input.EndTime);
+
+        return await base.CreateAsync(input);
+    }
+
+    public override async Task<MeetingDto> UpdateAsync(Guid id, CreateUpdateMeetingDto input)
+    {
+        await _activityManager.CheckTimeAvailableAsync(input.OwnerID, input.StartTime, input.EndTime);
+
+        return await base.UpdateAsync(id, input);
+    }
+
     public override async Task<PagedResultDto<MeetingDto>> GetListAsync(MeetingRequestDto input)
     {
         var q = await Repository.GetQueryableAsync();

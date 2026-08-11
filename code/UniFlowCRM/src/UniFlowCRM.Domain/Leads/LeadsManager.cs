@@ -28,7 +28,7 @@ namespace UniFlowCRM.Leads
             contact.AssignAccount(lead.AccountID);
             contact.SetSource(ContactSource.ConvertedFromLead);
             contact = await _contactRepository.InsertAsync(contact);
-            return contactId;
+            return contact.Id;
         }
     }
 }

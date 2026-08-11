@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using UniFlowCRM.Permissions;
 using Volo.Abp.Identity;
 
@@ -11,26 +8,16 @@ namespace UniFlowCRM.Permission
     public static class DefaultRolesPerms
     {
         public static string ManagerName = "Directeur";
-        public static string SalesmanName = "Marketaire";
+        public static string SalesmanName = "Marketeur";
+        public static string SupportName = "Support";
 
-        public static string[] DefaultMarketairePerms = {
+        public static string[] DefaultSupportPerms = {
         IdentityPermissions.Users.Default, // gotta see the users;
         UniFlowCRMPermissions.Lead.Default,
-        UniFlowCRMPermissions.Lead.Create,
-        UniFlowCRMPermissions.Lead.Edit,
-        UniFlowCRMPermissions.Lead.Delete,
         UniFlowCRMPermissions.Account.Default,
-        UniFlowCRMPermissions.Account.Create,
-        UniFlowCRMPermissions.Account.Edit,
-        UniFlowCRMPermissions.Account.Delete,
         UniFlowCRMPermissions.Contact.Default,
-        UniFlowCRMPermissions.Contact.Create,
-        UniFlowCRMPermissions.Contact.Edit,
-        UniFlowCRMPermissions.Contact.Delete,
         UniFlowCRMPermissions.Opportunity.Default,
-        UniFlowCRMPermissions.Opportunity.Create,
-        UniFlowCRMPermissions.Opportunity.Edit,
-        UniFlowCRMPermissions.Opportunity.Delete,
+        UniFlowCRMPermissions.Campaign.Default,
         UniFlowCRMPermissions.Task.Default,
         UniFlowCRMPermissions.Task.Create,
         UniFlowCRMPermissions.Task.Edit,
@@ -49,15 +36,30 @@ namespace UniFlowCRM.Permission
         UniFlowCRMPermissions.Email.Delete,
         UniFlowCRMPermissions.Note.Default,
         UniFlowCRMPermissions.Note.Create
+
         };
+        public static string[] DefaultMarketairePerms = DefaultSupportPerms.Concat(new[]{
+        UniFlowCRMPermissions.Lead.Create,
+        UniFlowCRMPermissions.Lead.Edit,
+        UniFlowCRMPermissions.Lead.Delete,
+        UniFlowCRMPermissions.Account.Create,
+        UniFlowCRMPermissions.Account.Edit,
+        UniFlowCRMPermissions.Account.Delete,
+        UniFlowCRMPermissions.Contact.Create,
+        UniFlowCRMPermissions.Contact.Edit,
+        UniFlowCRMPermissions.Contact.Delete,
+        UniFlowCRMPermissions.Opportunity.Create,
+        UniFlowCRMPermissions.Opportunity.Edit,
+        UniFlowCRMPermissions.Opportunity.Delete,
+                }).ToArray();
         public static string[] DefaultManagerPerms = DefaultMarketairePerms.Concat(
                     new[] {
                 UniFlowCRMPermissions.Lead.Convert,
                 UniFlowCRMPermissions.Opportunity.Close,
                 UniFlowCRMPermissions.Email.Send,
-                
+
                     }
-                    ).Concat(IdentityPermissions.GetAll())
+                    ) // Concat(IdentityPermissions.GetAll())
             .ToArray();
     }
 }

@@ -1,4 +1,4 @@
-<div class="flex-grow-1">
+<div [className]="(isHidden)?'d-none':'flex-grow-1'">
 
         <!-- Header -->
         <div class="d-flex justify-content-between align-items-center">
@@ -24,6 +24,124 @@
         >
           <strong class="d-block">{{note.title}} :</strong>
           {{note.content}}
+@if(isOwner){
+          <div class="d-flex justify-content-end">
+<button (click)="delete()" class="py-1 px-2 bg-danger text-white btn-sm rounded me-2">
+  <i class="fa fa-trash"></i>
+</button>
+<button (click)="edit()" class="py-1 px-2 bg-info text-white rounded  btn-sm ">
+  <i class="fa fa-pen"></i>
+</button>
+
+</div>
+}
         </div>
 
       </div>
+
+
+    <!-- update modal -->
+<!-- @if(isModalOpen){ -->
+    <abp-modal [(visible)]="isModalOpen">
+  <ng-template #abpHeader>
+   
+  </ng-template>
+
+  <ng-template #abpBody>
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-12 mb-3">
+          <label for="title" class="form-label">
+            <!-- {{ '::Title' | abpLocalization }} -->
+              Titre
+          </label>
+          <app-required-tag></app-required-tag>
+
+          <input
+            id="title"
+            type="text"
+            class="form-control"
+            formControlName="title"
+            maxlength="128"
+            [value]="note.title"
+          />
+
+
+
+
+        <div class="row" >
+          <div class="col mb-3">
+            <label for="type" class="form-label">
+              {{ '::Type' | abpLocalization }}
+            </label>
+            <app-required-tag></app-required-tag>
+
+            <select
+              id="type"
+              class="form-select"
+              formControlName="type"
+              [value]="note.type"
+            >
+            @for(t of NoteTypeOptions;track t.value){
+              <option
+                [value]="t.value"
+              >
+                {{ t.key }}
+              </option>
+            }
+              
+            </select>
+
+
+          </div>
+          <div class="col-6 d-flex flex-column justify-content-end d-none">
+
+          </div>
+        </div>
+        <div class="col-12 mb-3">
+          <label for="content" class="form-label">
+            {{ '::Content' | abpLocalization }}
+          </label>
+          <app-required-tag></app-required-tag>
+
+          <textarea
+            id="content"
+            class="form-control"
+            formControlName="content"
+            rows="6"
+            required
+            [value]="note.content"
+          ></textarea>
+
+          
+        </div>
+      </div>
+
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <div class="text-end">
+      <button
+        type="reset"
+        class="btn btn-outline-danger btn-sm me-2"
+      >
+        {{ '::Cancel' | abpLocalization }}
+      </button>
+
+      <button
+        type="submit"
+        class="btn btn-brand btn-sm"
+        [disabled]="form.invalid"
+        (click)="save()"
+      >
+        <i class="fa fa-check me-1"></i>
+
+        {{ '::Save' | abpLocalization }}
+      </button>
+    </div>
+  </ng-template>
+
+</abp-modal>
+<!-- } -->

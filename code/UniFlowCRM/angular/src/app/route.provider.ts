@@ -49,7 +49,7 @@ function configureRoutes() {
     {
       path: '/Campaigns',
       name: '::Menu:Campaigns',
-      iconClass: 'fas fa-handshake', // todo
+      iconClass: 'fas fa-feed', // todo
       order: 41,
       layout: eLayoutType.application,
       requiredPolicy: 'UniFlowCRM.Campaign',

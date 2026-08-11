@@ -12,8 +12,8 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace UniFlowCRM.Campaigns
 {
-    
-     
+
+
 
     public class CampaignsRepository(IDbContextProvider<UniFlowCRMDbContext> dbContextProvider) : EfCoreRepository<UniFlowCRMDbContext, Campaign, Guid>(dbContextProvider), ICampaignsRepository
     {
@@ -21,7 +21,7 @@ namespace UniFlowCRM.Campaigns
         {
             var dbContext = await GetDbContextAsync();
 
-            var query = from ca in dbContext.Campaigns.AsNoTracking()
+            var query = from ca in dbContext.Campaigns // .AsNoTracking()
                         where ca.Id == id
                         select new Campaign(
                             id: ca.Id,
@@ -31,8 +31,8 @@ namespace UniFlowCRM.Campaigns
                             startDate: ca.StartDate,
                             endDate: ca.EndDate,
                             assignedTo: ca.AssignedTo,
-                            budget: ca.Budget,
-                            costSoFar: ca.CostSoFar,
+                            budget: new Moneys.Money(ca.Budget.Value, ca.Budget.Currency),
+                            costSoFar: new Moneys.Money(ca.CostSoFar.Value, ca.CostSoFar.Currency),
                             expectedAccounts: ca.ExpectedAccounts,
                             expectedLeads: ca.ExpectedLeads,
                             expectedContacts: ca.ExpectedContacts,
@@ -43,12 +43,12 @@ namespace UniFlowCRM.Campaigns
                             reachedOpportunities: dbContext.Opportunities.Count(o => o.CampaignId == ca.Id)
                             )
                         {
-                            CreationTime= ca.CreationTime,
-                            CreatorId= ca.CreatorId,
-                            LastModificationTime= ca.LastModificationTime,
-                            LastModifierId= ca.LastModifierId,
-                            DeletionTime= ca.DeletionTime,
-                            DeleterId= ca.DeleterId,
+                            CreationTime = ca.CreationTime,
+                            CreatorId = ca.CreatorId,
+                            LastModificationTime = ca.LastModificationTime,
+                            LastModifierId = ca.LastModifierId,
+                            DeletionTime = ca.DeletionTime,
+                            DeleterId = ca.DeleterId,
                         };
             //Console.WriteLine(query.ToString());
             var entity = await AsyncExecuter.FirstOrDefaultAsync(query);
@@ -64,6 +64,7 @@ namespace UniFlowCRM.Campaigns
 
             var query = from ca in dbContext.Campaigns
                         select new Campaign(
+                            id: ca.Id,
                             name: ca.Name,
                             description: ca.Description,
                             status: ca.Status,

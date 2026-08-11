@@ -11,6 +11,6 @@ namespace UniFlowCRM.Leads
         LeadRequestDto,
         CreateUpdateLeadDto>
     {
-        Task<ContactDto> ConvertAsync(Guid id);
+        Task<Guid> ConvertAsync(Guid id);
     }
 }

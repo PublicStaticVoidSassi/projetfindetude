@@ -17,7 +17,7 @@ export interface CreateUpdateMeetingDto extends EntityDto<string> {
   contactID?: string | null;
   opportunityID?: string | null;
   leadID?: string | null;
-  ownerID?: string | null;
+  ownerID?: string;
 }
 
 export interface MeetingDto extends FullAuditedEntityDto<string> {

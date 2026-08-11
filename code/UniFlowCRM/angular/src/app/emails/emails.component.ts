@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import {LocalizationPipe} from '@abp/ng.core';
-import { EmailDto } from '../proxy/emails';
+import { EmailDto, EmailStatus } from '../proxy/emails';
 import { ReturnBtn } from '../shared/return-btn/return-btn';
 
 @Component({
@@ -22,8 +22,9 @@ export class EmailsComponent implements OnInit {
   private readonly confirmation = inject(ConfirmationService);
   private readonly toaster = inject(ToasterService);
   public readonly list = inject(ListService);
-
+  
   items = {} as PagedResultDto<EmailDto>;
+EmailStatus = EmailStatus;
   ngOnInit() {
     const streamCreator = (query: PagedAndSortedResultRequestDto) => this.emailService.getList(query);
 

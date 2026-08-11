@@ -1,7 +1,7 @@
 <button *abpPermission='"UniFlowCRM.Note.Create"' class="btn btn-outline-warning btn-sm me-2" (click)="openModal()">{{'::Add:Note'|abpLocalization}}</button>
 <abp-modal [(visible)]="isModalOpen">
   <ng-template #abpHeader>
-   header
+   
   </ng-template>
 
   <ng-template #abpBody>
@@ -9,7 +9,8 @@
       <div class="row">
         <div class="col-12 mb-3">
           <label for="title" class="form-label">
-            {{ '::Title' | abpLocalization }}
+            <!-- {{ '::Title' | abpLocalization }} -->
+              Titre
           </label>
           <app-required-tag></app-required-tag>
 
@@ -26,7 +27,7 @@
 
 
         <div class="row" >
-          <div class="col-md-6 mb-3">
+          <div class="col mb-3">
             <label for="type" class="form-label">
               {{ '::Type' | abpLocalization }}
             </label>
@@ -47,7 +48,7 @@
 
 
           </div>
-          <div class="col-6 d-flex flex-column justify-content-end">
+          <div class="col-6 d-flex flex-column justify-content-end d-none">
           @switch (isFor){
             @case ('lead'){
               <leads-lookup [disabled]="true" [id]="id" formControlName="leadId"></leads-lookup>

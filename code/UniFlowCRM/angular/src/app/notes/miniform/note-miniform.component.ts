@@ -4,7 +4,7 @@ import { ModalCloseDirective, ModalComponent, Toaster, ToasterService } from '@a
 import { NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { bookTypeOptions } from '../../proxy/books';
-import { CreateUpdateNoteDto, NotesService, NoteType, noteTypeOptions } from '../../proxy/notes';
+import { CreateUpdateNoteDto, NotesService,NoteDto, NoteType, noteTypeOptions } from '../../proxy/notes';
 import { AccountsLookup, ContactsLookup, LeadsLookup, OpportunitiesLookup } from '../../shared/lookup-components';
 import { RequiredTag } from '../../shared/required-tag/required-tag';
 
@@ -30,6 +30,7 @@ import { RequiredTag } from '../../shared/required-tag/required-tag';
 export class NoteMiniform {
   @Input() isFor!: 'lead' | 'account' | 'contact' | 'opportunity';
   @Input() id!: string;
+  // @Input() noteDto?: NoteDto;
   private readonly fb = inject(FormBuilder);
   notesService = inject(NotesService);
   toaster = inject(ToasterService);
@@ -79,12 +80,16 @@ export class NoteMiniform {
   save() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.toaster.success(this.form.errors.toString());
+      // this.toaster.success(this.form.errors?.toString());
       return;
     }
 
 
-    const dto = this.form.getRawValue();
+    var dto = this.form.getRawValue();
+    // hack
+    if (this.isFor === 'contact'){
+      dto = {...dto, contactId:this.id}
+    }
 
     let request = this.notesService.create(dto);
 
@@ -93,7 +98,10 @@ export class NoteMiniform {
         this.toaster.success('::SuccessfullySaved');
         this.form.reset();
         this.isModalOpen = false;
-        location.reload();
+        setTimeout(()=>{
+
+          // location.reload();
+        },500);
       },
       error: err => {
         this.toaster.error(err.message);

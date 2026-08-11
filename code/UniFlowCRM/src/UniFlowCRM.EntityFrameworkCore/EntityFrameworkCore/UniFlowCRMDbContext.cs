@@ -26,6 +26,8 @@ using UniFlowCRM.Meetings;
 using UniFlowCRM.Emails;
 using UniFlowCRM.Dashboards;
 using UniFlowCRM.Campaigns;
+using System.Threading;
+using UniFlowCRM.Expirables;
 
 
 namespace UniFlowCRM.EntityFrameworkCore;
@@ -80,7 +82,14 @@ public class UniFlowCRMDbContext :
     {
 
     }
-
+    public override async System.Threading.Tasks.Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        foreach (var entry in ChangeTracker.Entries<IExpirable>())
+        {
+            entry.Entity.ExpireIfNeeded();
+        }
+        return await base.SaveChangesAsync(cancellationToken);
+    }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         #region defaults
@@ -288,7 +297,8 @@ public class UniFlowCRMDbContext :
         #endregion
 
         #region Campaign
-        builder.Entity<Campaign>(b => {
+        builder.Entity<Campaign>(b =>
+        {
             b.ToTable(UniFlowCRMConsts.DbTablePrefix + "Campaigns",
                 UniFlowCRMConsts.DbSchema);
             b.ConfigureByConvention();

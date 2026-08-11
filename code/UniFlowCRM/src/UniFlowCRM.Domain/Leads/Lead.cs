@@ -110,6 +110,14 @@ public class Lead : FullAuditedAggregateRoot<Guid>
             throw new BusinessException("Error:Lead:AlreadyConverted");
         }
     }
+    public void Qualify()
+    {
+        if (Status == LeadStatus.Qualified)
+        {
+            throw new UserFriendlyException("Il est deja qualife!");
+        }
+        Status = LeadStatus.Qualified;
+    }
 
     protected Lead() { } // one day EF wont need this. but its not today
 }

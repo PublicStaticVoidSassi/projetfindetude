@@ -1971,6 +1971,69 @@
               ],
               "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<UniFlowCRM.Calls.CallDto,UniFlowCRM.Calls.CreateUpdateCallDto>"
             },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/app/calls/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "UniFlowCRM.Calls.CreateUpdateCallDto, UniFlowCRM.Application.Contracts",
+                  "type": "UniFlowCRM.Calls.CreateUpdateCallDto",
+                  "typeSimple": "UniFlowCRM.Calls.CreateUpdateCallDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "UniFlowCRM.Calls.CreateUpdateCallDto",
+                  "typeSimple": "UniFlowCRM.Calls.CreateUpdateCallDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "UniFlowCRM.Calls.CallDto",
+                "typeSimple": "UniFlowCRM.Calls.CallDto"
+              },
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Call",
+                  "roles": null
+                }
+              ],
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Calls.CallDto,System.Guid,UniFlowCRM.Calls.CreateUpdateCallDto>"
+            },
             "GetAsyncById": {
               "uniqueName": "GetAsyncById",
               "name": "GetAsync",
@@ -2092,69 +2155,6 @@
                 }
               ],
               "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Calls.CallDto,UniFlowCRM.Calls.CallDto,System.Guid,UniFlowCRM.Calls.CallRequestDto>"
-            },
-            "UpdateAsyncByIdAndInput": {
-              "uniqueName": "UpdateAsyncByIdAndInput",
-              "name": "UpdateAsync",
-              "httpMethod": "PUT",
-              "url": "api/app/calls/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "input",
-                  "typeAsString": "UniFlowCRM.Calls.CreateUpdateCallDto, UniFlowCRM.Application.Contracts",
-                  "type": "UniFlowCRM.Calls.CreateUpdateCallDto",
-                  "typeSimple": "UniFlowCRM.Calls.CreateUpdateCallDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "UniFlowCRM.Calls.CreateUpdateCallDto",
-                  "typeSimple": "UniFlowCRM.Calls.CreateUpdateCallDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "UniFlowCRM.Calls.CallDto",
-                "typeSimple": "UniFlowCRM.Calls.CallDto"
-              },
-              "allowAnonymous": false,
-              "authorizeDatas": [
-                {
-                  "policy": "UniFlowCRM.Call",
-                  "roles": null
-                }
-              ],
-              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Calls.CallDto,System.Guid,UniFlowCRM.Calls.CreateUpdateCallDto>"
             },
             "DeleteAsyncById": {
               "uniqueName": "DeleteAsyncById",
@@ -3494,8 +3494,8 @@
                     }
                   ],
                   "returnValue": {
-                    "type": "UniFlowCRM.Contacts.ContactDto",
-                    "typeSimple": "UniFlowCRM.Contacts.ContactDto"
+                    "type": "System.Guid",
+                    "typeSimple": "string"
                   }
                 },
                 {
@@ -3862,8 +3862,8 @@
                 }
               ],
               "returnValue": {
-                "type": "UniFlowCRM.Contacts.ContactDto",
-                "typeSimple": "UniFlowCRM.Contacts.ContactDto"
+                "type": "System.Guid",
+                "typeSimple": "string"
               },
               "allowAnonymous": false,
               "authorizeDatas": [
@@ -3877,6 +3877,49 @@
                 }
               ],
               "implementFrom": "UniFlowCRM.Leads.ILeadsAppService"
+            },
+            "QualifyAsyncById": {
+              "uniqueName": "QualifyAsyncById",
+              "name": "QualifyAsync",
+              "httpMethod": "POST",
+              "url": "api/app/leads/{id}/qualify",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": "UniFlowCRM.Lead",
+                  "roles": null
+                }
+              ],
+              "implementFrom": "UniFlowCRM.Leads.LeadsAppService"
             },
             "DeleteAsyncById": {
               "uniqueName": "DeleteAsyncById",
@@ -4032,6 +4075,112 @@
             }
           ],
           "actions": {
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/app/meetings",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "UniFlowCRM.Meetings.CreateUpdateMeetingDto, UniFlowCRM.Application.Contracts",
+                  "type": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
+                  "typeSimple": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
+                  "typeSimple": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "UniFlowCRM.Meetings.MeetingDto",
+                "typeSimple": "UniFlowCRM.Meetings.MeetingDto"
+              },
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<UniFlowCRM.Meetings.MeetingDto,UniFlowCRM.Meetings.CreateUpdateMeetingDto>"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/app/meetings/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "UniFlowCRM.Meetings.CreateUpdateMeetingDto, UniFlowCRM.Application.Contracts",
+                  "type": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
+                  "typeSimple": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
+                  "typeSimple": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "UniFlowCRM.Meetings.MeetingDto",
+                "typeSimple": "UniFlowCRM.Meetings.MeetingDto"
+              },
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Meetings.MeetingDto,System.Guid,UniFlowCRM.Meetings.CreateUpdateMeetingDto>"
+            },
             "GetListAsyncByInput": {
               "uniqueName": "GetListAsyncByInput",
               "name": "GetListAsync",
@@ -4153,112 +4302,6 @@
                 }
               ],
               "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Meetings.MeetingDto,UniFlowCRM.Meetings.MeetingDto,System.Guid,UniFlowCRM.Meetings.MeetingRequestDto>"
-            },
-            "CreateAsyncByInput": {
-              "uniqueName": "CreateAsyncByInput",
-              "name": "CreateAsync",
-              "httpMethod": "POST",
-              "url": "api/app/meetings",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "UniFlowCRM.Meetings.CreateUpdateMeetingDto, UniFlowCRM.Application.Contracts",
-                  "type": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
-                  "typeSimple": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
-                  "typeSimple": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "UniFlowCRM.Meetings.MeetingDto",
-                "typeSimple": "UniFlowCRM.Meetings.MeetingDto"
-              },
-              "allowAnonymous": false,
-              "authorizeDatas": [
-                {
-                  "policy": null,
-                  "roles": null
-                }
-              ],
-              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<UniFlowCRM.Meetings.MeetingDto,UniFlowCRM.Meetings.CreateUpdateMeetingDto>"
-            },
-            "UpdateAsyncByIdAndInput": {
-              "uniqueName": "UpdateAsyncByIdAndInput",
-              "name": "UpdateAsync",
-              "httpMethod": "PUT",
-              "url": "api/app/meetings/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "input",
-                  "typeAsString": "UniFlowCRM.Meetings.CreateUpdateMeetingDto, UniFlowCRM.Application.Contracts",
-                  "type": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
-                  "typeSimple": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
-                  "typeSimple": "UniFlowCRM.Meetings.CreateUpdateMeetingDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "UniFlowCRM.Meetings.MeetingDto",
-                "typeSimple": "UniFlowCRM.Meetings.MeetingDto"
-              },
-              "allowAnonymous": false,
-              "authorizeDatas": [
-                {
-                  "policy": null,
-                  "roles": null
-                }
-              ],
-              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Meetings.MeetingDto,System.Guid,UniFlowCRM.Meetings.CreateUpdateMeetingDto>"
             },
             "DeleteAsyncById": {
               "uniqueName": "DeleteAsyncById",
@@ -5603,49 +5646,6 @@
               ],
               "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<UniFlowCRM.Tasks.TaskDto,UniFlowCRM.Tasks.CreateUpdateTaskDto>"
             },
-            "GetAsyncById": {
-              "uniqueName": "GetAsyncById",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/app/tasks/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "UniFlowCRM.Tasks.TaskDto",
-                "typeSimple": "UniFlowCRM.Tasks.TaskDto"
-              },
-              "allowAnonymous": false,
-              "authorizeDatas": [
-                {
-                  "policy": null,
-                  "roles": null
-                }
-              ],
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Tasks.TaskDto,UniFlowCRM.Tasks.TaskDto,System.Guid,UniFlowCRM.Tasks.TaskRequestDto>"
-            },
             "UpdateAsyncByIdAndInput": {
               "uniqueName": "UpdateAsyncByIdAndInput",
               "name": "UpdateAsync",
@@ -5708,6 +5708,49 @@
                 }
               ],
               "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<UniFlowCRM.Tasks.TaskDto,System.Guid,UniFlowCRM.Tasks.CreateUpdateTaskDto>"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/app/tasks/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "UniFlowCRM.Tasks.TaskDto",
+                "typeSimple": "UniFlowCRM.Tasks.TaskDto"
+              },
+              "allowAnonymous": false,
+              "authorizeDatas": [
+                {
+                  "policy": null,
+                  "roles": null
+                }
+              ],
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<UniFlowCRM.Tasks.TaskDto,UniFlowCRM.Tasks.TaskDto,System.Guid,UniFlowCRM.Tasks.TaskRequestDto>"
             },
             "DeleteAsyncById": {
               "uniqueName": "DeleteAsyncById",
@@ -10324,28 +10367,28 @@
         {
           "name": "StartTime",
           "jsonName": null,
-          "type": "System.DateTime?",
-          "typeSimple": "string?",
+          "type": "System.DateTime",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
           "minimum": null,
           "maximum": null,
           "regex": null,
-          "isNullable": true
+          "isNullable": false
         },
         {
           "name": "EndTime",
           "jsonName": null,
-          "type": "System.DateTime?",
-          "typeSimple": "string?",
+          "type": "System.DateTime",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
           "minimum": null,
           "maximum": null,
           "regex": null,
-          "isNullable": true
+          "isNullable": false
         },
         {
           "name": "Duration",
@@ -10441,15 +10484,15 @@
         {
           "name": "OwnerID",
           "jsonName": null,
-          "type": "System.Guid?",
-          "typeSimple": "string?",
+          "type": "System.Guid",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
           "minimum": null,
           "maximum": null,
           "regex": null,
-          "isNullable": true
+          "isNullable": false
         }
       ]
     },
@@ -10776,7 +10819,7 @@
       "properties": null
     },
     "UniFlowCRM.Campaigns.CreateUpdateCampaignDto": {
-      "baseType": null,
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
       "isEnum": false,
       "enumNames": null,
       "enumValues": null,
@@ -12781,7 +12824,7 @@
       "isEnum": true,
       "enumNames": [
         "New",
-        "Assigned",
+        "Qualified",
         "InProcess",
         "Converted",
         "Recycled",
@@ -12938,15 +12981,15 @@
         {
           "name": "OwnerID",
           "jsonName": null,
-          "type": "System.Guid?",
-          "typeSimple": "string?",
+          "type": "System.Guid",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
           "minimum": null,
           "maximum": null,
           "regex": null,
-          "isNullable": true
+          "isNullable": false
         }
       ]
     },
@@ -14103,28 +14146,28 @@
         {
           "name": "StartTime",
           "jsonName": null,
-          "type": "System.DateTime?",
-          "typeSimple": "string?",
+          "type": "System.DateTime",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
           "minimum": null,
           "maximum": null,
           "regex": null,
-          "isNullable": true
+          "isNullable": false
         },
         {
           "name": "EndTime",
           "jsonName": null,
-          "type": "System.DateTime?",
-          "typeSimple": "string?",
+          "type": "System.DateTime",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
           "minimum": null,
           "maximum": null,
           "regex": null,
-          "isNullable": true
+          "isNullable": false
         },
         {
           "name": "CompletedAt",
@@ -14142,15 +14185,15 @@
         {
           "name": "OwnerID",
           "jsonName": null,
-          "type": "System.Guid?",
-          "typeSimple": "string?",
+          "type": "System.Guid",
+          "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
           "minimum": null,
           "maximum": null,
           "regex": null,
-          "isNullable": true
+          "isNullable": false
         },
         {
           "name": "AccountID",

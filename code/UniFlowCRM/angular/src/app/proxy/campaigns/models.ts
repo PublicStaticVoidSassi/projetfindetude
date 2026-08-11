@@ -1,4 +1,4 @@
-import type { FullAuditedEntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
+import type { EntityDto, FullAuditedEntityDto, PagedAndSortedResultRequestDto } from '@abp/ng.core';
 import type { CampaignStatus } from './campaign-status.enum';
 import type { Currency } from '../moneys/currency.enum';
 import type { IdentityUserDto } from '../volo/abp/identity/models';
@@ -31,8 +31,8 @@ export interface CampaignResultRequestDto extends PagedAndSortedResultRequestDto
   name?: string | null;
 }
 
-export interface CreateUpdateCampaignDto {
-  name?: string;
+export interface CreateUpdateCampaignDto extends EntityDto<string> {
+  name?: string|null;
   description?: string;
   status?: CampaignStatus;
   budgetValue?: number;

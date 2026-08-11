@@ -93,6 +93,25 @@ public class Account : FullAuditedAggregateRoot<Guid>
         this.SetRevenue(revenue);
         this.SetEmployees(employees);
     }
+    public Account(
+    Guid id,
+    string name,
+    Guid userId,
+    string? description,
+    AccountType type,
+    AccountIndustry? industry,
+    PhoneNumber? phone,
+    PhoneNumber? fax,
+    EmailAddress? email,
+    URL? website,
+    Address? address,
+    Money? revenue,
+    int? employees,
+    Guid? campaignId
+    ) : this(id, name, userId, description, type, industry, phone, fax, email, website, address, revenue, employees)
+    {
+        this.CampaignId = campaignId;
+    }
     public void SetName(string name)
     {
         Check.NotNullOrWhiteSpace(

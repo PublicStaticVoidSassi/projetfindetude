@@ -3,10 +3,17 @@
   <div class="card-body">
     <div class="d-flex justify-content-end">
       <app-return-btn></app-return-btn>
+      @if(lead.status !== LeadStatus.Converted){
       <note-miniform [id]="lead.id" isFor="lead"></note-miniform>
       <create-opp-btn for="lead" [id]="lead.id"></create-opp-btn>
-      <button *abpPermission='"UniFlowCRM.Lead.Convert"' class="btn btn-brand btn-sm" [disabled]="lead.status===LeadStatus.Converted"
+      <button *abpPermission='"UniFlowCRM.Lead.Convert"' class="btn btn-brand btn-sm me-2"
+        [disabled]="lead.status===LeadStatus.Converted"
         (click)="convert()">{{"::Lead:Convert"|abpLocalization}}</button>
+      @if(lead.status !== LeadStatus.Qualified){
+      <button class="btn btn-primary btn-sm" (click)="qualify()">Qualifier</button>
+      }}
+
+
     </div>
     <h1 class="mb-1 text-brand">
       {{ lead.firstName }} {{ lead.lastName }}

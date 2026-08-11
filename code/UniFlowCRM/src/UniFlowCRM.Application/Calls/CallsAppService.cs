@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using UniFlowCRM.Accounts;
+using UniFlowCRM.Activities;
 using UniFlowCRM.Contacts;
 using UniFlowCRM.Leads;
 using UniFlowCRM.Opportunities;
@@ -49,6 +50,7 @@ public class CallsAppService : CrudAppService<Call, CallDto, Guid, CallRequestDt
     private readonly IRepository<Contact, Guid> _contactRepository;
     private readonly IRepository<Opportunity, Guid> _opportunityRepository;
     private readonly IRepository<IdentityUser, Guid> _userRepository;
+    private readonly IActivityManager _activityManager;
     private readonly IPermissionChecker permissionChecker;
 
     public CallsAppService(
@@ -58,7 +60,7 @@ public class CallsAppService : CrudAppService<Call, CallDto, Guid, CallRequestDt
         IRepository<Contact, Guid> contactRepository,
         IRepository<Opportunity, Guid> opportunityRepository,
         IRepository<IdentityUser, Guid> userRepository,
-        IPermissionChecker permissionChecker) : base(repository)
+        IPermissionChecker permissionChecker, IActivityManager activityManager) : base(repository)
     {
         _accountRepository = accountRepository;
         _leadRepository = leadRepository;
@@ -66,11 +68,20 @@ public class CallsAppService : CrudAppService<Call, CallDto, Guid, CallRequestDt
         _opportunityRepository = opportunityRepository;
         _userRepository = userRepository;
         this.permissionChecker = permissionChecker;
+        _activityManager = activityManager;
     }
     [Authorize(UniFlowCRMPermissions.Call.Create)]
-    public override Task<CallDto> CreateAsync(CreateUpdateCallDto input)
+    public override async Task<CallDto> CreateAsync(CreateUpdateCallDto input)
     {
-        return base.CreateAsync(input);
+        await _activityManager.CheckTimeAvailableAsync(input.OwnerID, input.StartTime, input.EndTime);
+        return await base.CreateAsync(input);
+    }
+
+    public override async Task<CallDto> UpdateAsync(Guid id, CreateUpdateCallDto input)
+    {
+        await _activityManager.CheckTimeAvailableAsync(input.OwnerID, input.StartTime, input.EndTime);
+
+        return await base.UpdateAsync(id, input);
     }
 
     public override async Task<CallDto> GetAsync(Guid id)

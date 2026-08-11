@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using UniFlowCRM.Accounts;
 using UniFlowCRM.Addresses;
 using UniFlowCRM.Books;
+using UniFlowCRM.Campaigns;
 using UniFlowCRM.Contacts;
 using UniFlowCRM.EmailAddresses;
 using UniFlowCRM.Leads;
@@ -35,6 +36,7 @@ public class UniFlowCRMDataSeederContributor
     private readonly IRepository<Lead, Guid> _leadRepository;
     private readonly IRepository<Contact, Guid> _contactRepository;
     private readonly IRepository<Opportunity, Guid> _opportunityRepository;
+    private readonly IRepository<Campaign, Guid> _campaignRepository;
     private readonly IPermissionDataSeeder _permissionDataSeeder;
     public UniFlowCRMDataSeederContributor(
         IRepository<IdentityUser, Guid> u,
@@ -44,7 +46,8 @@ public class UniFlowCRMDataSeederContributor
         IRepository<Account, Guid> accountRepository,
         IGuidGenerator gg,
         IRepository<IdentityRole, Guid> roleRepository,
-        IPermissionDataSeeder permissionDataSeeder)
+        IPermissionDataSeeder permissionDataSeeder,
+        IRepository<Campaign, Guid> campaignRepository)
     {
         // _bookRepository = bookRepository;
         _guidGenerator = gg;
@@ -56,6 +59,7 @@ public class UniFlowCRMDataSeederContributor
         _opportunityRepository = opportunityRepository;
         _roleRepository = roleRepository;
         _permissionDataSeeder = permissionDataSeeder;
+        _campaignRepository = campaignRepository;
     }
 
     public async Task SeedAsync(DataSeedContext context)
@@ -65,8 +69,36 @@ public class UniFlowCRMDataSeederContributor
         {
             return;
         }
+        var rnd = new Random();
         // getting the admin user
         IdentityUser defaultUser = await _userRepository.FindAsync(e => e.UserName == "admin") ?? throw new Exception("default user not found");
+        // seeding Campaigns
+
+
+        var seedCampaigns = new List<Campaign>
+{
+    new Campaign(_guidGenerator.Create(), "Offre Saint-Valentin", "Campagne promotionnelle pour les couples", CampaignStatus.completed, new DateTime(2026, 02, 05), new DateTime(2026, 02, 15), defaultUser.Id, new Money(20000, Currency.DZD), new Money(19500, Currency.DZD), 90, 88, 140, 135),
+    new Campaign(_guidGenerator.Create(), "Foire d'Automne", "Présentation des nouveautés de la saison", CampaignStatus.active, new DateTime(2026, 09, 10), new DateTime(2026, 10, 10), defaultUser.Id, new Money(85000, Currency.DZD), new Money(40000, Currency.DZD), 350, 180, 500, 240),
+    new Campaign(_guidGenerator.Create(), "Campagne Aid El Fitr", "Promotions spéciales pour les fêtes de l'Aïd", CampaignStatus.planned, new DateTime(2027, 04, 01), new DateTime(2027, 04, 05), defaultUser.Id, new Money(140000, Currency.DZD), new Money(0, Currency.DZD), 700, 0, 1100, 0),
+    new Campaign(_guidGenerator.Create(), "Webinaire B2B Immo", "Génération de leads pour le secteur immobilier", CampaignStatus.active, new DateTime(2026, 06, 15), new DateTime(2026, 07, 15), defaultUser.Id, new Money(25000, Currency.DZD), new Money(10000, Currency.DZD), 120, 45, 300, 110),
+    new Campaign(_guidGenerator.Create(), "Liquidation Annuelle", "Vente promotionnelle massive sur tout le site", CampaignStatus.completed, new DateTime(2025, 05, 01), new DateTime(2025, 05, 15), defaultUser.Id, new Money(55000, Currency.DZD), new Money(56000, Currency.DZD), 250, 290, 400, 430),
+    new Campaign(_guidGenerator.Create(), "Sponsor Championnat Local", "Amélioration de la notoriété de marque locale", CampaignStatus.active, new DateTime(2026, 03, 01), new DateTime(2026, 11, 30), defaultUser.Id, new Money(160000, Currency.DZD), new Money(90000, Currency.DZD), 800, 420, 0, 0),
+    new Campaign(_guidGenerator.Create(), "Cyber Monday Dz", "Remises exclusives sur les produits tech", CampaignStatus.planned, new DateTime(2026, 11, 30), new DateTime(2026, 12, 01), defaultUser.Id, new Money(40000, Currency.DZD), new Money(0, Currency.DZD), 450, 0, 750, 0),
+    new Campaign(_guidGenerator.Create(), "Réactivation SMS", "Relance des clients inactifs par messagerie", CampaignStatus.completed, new DateTime(2025, 03, 10), new DateTime(2025, 03, 15), defaultUser.Id, new Money(10000, Currency.DZD), new Money(9500, Currency.DZD), 150, 165, 210, 240),
+    new Campaign(_guidGenerator.Create(), "Partenariat Influenceurs Tech", "Vidéos de déballage et tests de produits", CampaignStatus.active, new DateTime(2026, 07, 01), new DateTime(2026, 09, 01), defaultUser.Id, new Money(95000, Currency.DZD), new Money(60000, Currency.DZD), 500, 310, 700, 420),
+    new Campaign(_guidGenerator.Create(), "Campagne Fin d'Année 2026", "Offres groupées pour le réveillon", CampaignStatus.planned, new DateTime(2026, 12, 15), new DateTime(2026, 12, 31), defaultUser.Id, new Money(110000, Currency.DZD), new Money(0, Currency.DZD), 650, 0, 900, 0),
+    new Campaign(_guidGenerator.Create(), "Promo Spéciale Été", "Cible le lancement des produits estivaux", CampaignStatus.active, new DateTime(2025, 06, 01), new DateTime(2025, 08, 31), defaultUser.Id, new Money(50000, Currency.DZD), new Money(42000, Currency.DZD), 150, 135, 200, 185),
+    new Campaign(_guidGenerator.Create(), "Déstockage d'Hiver", "Liquidation des stocks de fin d'année", CampaignStatus.completed, new DateTime(2024, 12, 01), new DateTime(2025, 01, 15), defaultUser.Id, new Money(30000, Currency.DZD), new Money(31000, Currency.DZD), 80, 95, 120, 140),
+    new Campaign(_guidGenerator.Create(), "Campagne de Ramadan", "Opération marketing spéciale pour le mois sacré", CampaignStatus.planned, new DateTime(2027, 03, 01), new DateTime(2027, 04, 02), defaultUser.Id, new Money(120000, Currency.DZD), new Money(0, Currency.DZD), 500, 0, 800, 0),
+    new Campaign(_guidGenerator.Create(), "Rentrée Scolaire 2026", "Campagne ciblant les étudiants et les parents", CampaignStatus.active, new DateTime(2026, 08, 15), new DateTime(2026, 09, 30), defaultUser.Id, new Money(45000, Currency.DZD), new Money(20000, Currency.DZD), 220, 110, 310, 150),
+    new Campaign(_guidGenerator.Create(), "Blitz Black Friday", "Opération agressive sur un week-end de remises", CampaignStatus.planned, new DateTime(2026, 11, 25), new DateTime(2026, 11, 30), defaultUser.Id, new Money(75000, Currency.DZD), new Money(0, Currency.DZD), 600, 0, 1200, 0),
+    new Campaign(_guidGenerator.Create(), "Croissance Réseaux Sociaux", "Notoriété de marque via des influenceurs", CampaignStatus.active, new DateTime(2026, 01, 10), new DateTime(2026, 12, 31), defaultUser.Id, new Money(60000, Currency.DZD), new Money(35000, Currency.DZD), 1000, 650, 0, 0),
+    new Campaign(_guidGenerator.Create(), "Salon Tech Expo", "Sponsorisation et marketing sur stand physique", CampaignStatus.completed, new DateTime(2025, 10, 05), new DateTime(2025, 10, 08), defaultUser.Id, new Money(200000, Currency.DZD), new Money(205000, Currency.DZD), 50, 48, 150, 165),
+    new Campaign(_guidGenerator.Create(), "Newsletter Email V2", "Réengagement des prospects froids", CampaignStatus.active, new DateTime(2026, 05, 01), new DateTime(2026, 07, 01), defaultUser.Id, new Money(15000, Currency.DZD), new Money(12000, Currency.DZD), 300, 290, 450, 410),
+    new Campaign(_guidGenerator.Create(), "Lancement Nouvel An", "Campagne d'abonnements pour janvier", CampaignStatus.completed, new DateTime(2026, 01, 01), new DateTime(2026, 01, 31), defaultUser.Id, new Money(35000, Currency.DZD), new Money(35000, Currency.DZD), 180, 210, 250, 295),
+    new Campaign(_guidGenerator.Create(), "Vente Flash Printemps", "Remises exceptionnelles pendant 48 heures", CampaignStatus.planned, new DateTime(2027, 04, 12), new DateTime(2027, 04, 14), defaultUser.Id, new Money(25000, Currency.DZD), new Money(0, Currency.DZD), 400, 0, 600, 0)
+};
+        await _campaignRepository.InsertManyAsync(seedCampaigns);
         // seedings accounts 
         var accounts = new List<Account>();
 
@@ -83,6 +115,12 @@ public class UniFlowCRMDataSeederContributor
             Money? revenue = null
         )
         {
+            bool hasCampagin = rnd.Next(0, 1) == 1;
+            Guid? campaignId = null;
+            if (hasCampagin)
+            {
+                campaignId = seedCampaigns[rnd.Next(seedCampaigns.Count) - 1].Id;
+            }
             return new Account(
                 _guidGenerator.Create(),
                 name,
@@ -96,8 +134,13 @@ public class UniFlowCRMDataSeederContributor
                 null,
                 address,
                 revenue,
-                employees
-            );
+                employees,
+                campaignId: campaignId
+            )
+            {
+                CreationTime = DateTime.Now,
+                CreatorId = defaultUser.Id
+            };
         }
 
         // Core companies
@@ -193,7 +236,6 @@ public class UniFlowCRMDataSeederContributor
 
         await _accountRepository.InsertManyAsync(accounts);
         // leads
-        var rnd = new Random();
 
         var leads = new List<Lead>
 {
@@ -328,237 +370,237 @@ public class UniFlowCRMDataSeederContributor
 
         // contacts
 
-        var contacts = new List<Contact>
-{
-    new Contact(Guid.NewGuid(), "Omar", "Ali", "Benkhelifa",
-        "Key decision maker in enterprise deal",
-        ContactStatus.Active, ContactSource.PublicRelations,
-        new PhoneNumber("555111111", "+213"),
-        new PhoneNumber("555111112", "+213"),
-        new EmailAddress("omar.benkhelifa@corp.com"),
-        new URL("https://corp-example.com"),
-        null,
-        "IT Director",
-        "Information Technology",
-        defaultUser.Id,
-        null,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-
-    new Contact(Guid.NewGuid(), "Sara", null, "Mansouri",
-        "Marketing lead contact",
-        ContactStatus.Active, ContactSource.Campaign,
-        new PhoneNumber("+213 555222222"),
-        null,
-        new EmailAddress("sara.mansouri@marketing.com"),
-        new URL("https://marketing-example.com"),
-        null,
-        "Marketing Manager",
-        "Marketing",
-        defaultUser.Id,
-        leads[rnd.Next(leads.Count)].Id,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-
-    new Contact(Guid.NewGuid(), "Yacine", null, "Khelifi",
-        "Follow-up from conference",
-        ContactStatus.Active, ContactSource.Conference,
-        new PhoneNumber("555333333", "+213"),
-        null,
-        new EmailAddress("yacine.khelifi@demo.com"),
-        null,
-        null,
-        "Business Analyst",
-        "Sales",
-        defaultUser.Id,
-        leads[rnd.Next(leads.Count)].Id,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-
-    new Contact(Guid.NewGuid(), "Amina", null, "Zohra",
-        "Interested in CRM demo",
-        ContactStatus.Active, ContactSource.Campaign,
-        new PhoneNumber("555444444", "+213"),
-        null,
-        new EmailAddress("amina.zohra@demo.com"),
-        null,
-        null,
-        "Product Manager",
-        "Product",
-        defaultUser.Id,
-        leads[rnd.Next(leads.Count)].Id,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-
-    new Contact(Guid.NewGuid(), "Karim", null, "Boudiaf",
-        "Enterprise inquiry",
-        ContactStatus.Active, ContactSource.Email,
-        new PhoneNumber("555555555", "+213"),
-        null,
-        new EmailAddress("karim.boudiaf@demo.com"),
-        null,
-        null,
-        "CTO",
-        "Engineering",
-        defaultUser.Id,
-        leads[rnd.Next(leads.Count)].Id,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-
-    new Contact(Guid.NewGuid(), "Lina", null, "Ferhat",
-        "Pricing request",
-        ContactStatus.Active, ContactSource.Email,
-        new PhoneNumber("555666666", "+213"),
-        null,
-        new EmailAddress("lina.ferhat@demo.com"),
-        null,
-        null,
-        "Sales Rep",
-        "Sales",
-        defaultUser.Id,
-        leads[rnd.Next(leads.Count)].Id,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-
-    new Contact(Guid.NewGuid(), "Rachid", null, "Benali",
-        "Technical discussion lead",
-        ContactStatus.Active, ContactSource.Conference,
-        new PhoneNumber("555777777", "+213"),
-        null,
-        new EmailAddress("rachid.benali@demo.com"),
-        null,
-        null,
-        "Engineer",
-        "IT",
-        defaultUser.Id,
-        leads[rnd.Next(leads.Count)].Id,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-
-    new Contact(Guid.NewGuid(), "Nour", null, "Kaci",
-        "Webinar follow-up",
-        ContactStatus.Active, ContactSource.Conference,
-        new PhoneNumber("555888888", "+213"),
-        null,
-        new EmailAddress("nour.kaci@demo.com"),
-        null,
-        null,
-        "Consultant",
-        "Business",
-        defaultUser.Id,
-        leads[rnd.Next(leads.Count)].Id,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-
-    new Contact(Guid.NewGuid(), "Imane", null, "Saidi",
-        "Follow-up required",
-        ContactStatus.Active, ContactSource.Email,
-        new PhoneNumber("555999999", "+213"),
-        null,
-        new EmailAddress("imane.saidi@demo.com"),
-        null,
-        null,
-        "HR Manager",
-        "HR",
-        defaultUser.Id,
-        leads[rnd.Next(leads.Count)].Id,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-
-    new Contact(Guid.NewGuid(), "Walid", null, "Cherif",
-        "Demo request",
-        ContactStatus.Active, ContactSource.Email,
-        new PhoneNumber("555101010", "+213"),
-        null,
-        new EmailAddress("walid.cherif@demo.com"),
-        null,
-        null,
-        "Developer",
-        "Engineering",
-        defaultUser.Id,
-        leads[rnd.Next(leads.Count)].Id,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-
-    new Contact(Guid.NewGuid(), "Hichem", null, "Belaid",
-        null,
-        ContactStatus.Active, ContactSource.TradeShow,
-        new PhoneNumber("555111001", "+213"),
-        null,
-        new EmailAddress("hichem.belaid@demo.com"),
-        null,
-        null,
-        "Analyst",
-        "Finance",
-        defaultUser.Id,
-        leads[rnd.Next(leads.Count)].Id,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-
-    new Contact(Guid.NewGuid(), "Sami", null, "Meziane",
-        null,
-        ContactStatus.Active, ContactSource.Email,
-        new PhoneNumber("555111002", "+213"),
-        null,
-        new EmailAddress("sami.meziane@demo.com"),
-        null,
-        null,
-        "Director",
-        "Operations",
-        defaultUser.Id,
-        leads[rnd.Next(leads.Count)].Id,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-
-    new Contact(Guid.NewGuid(), "Nabil", null, "Farhi",
-        null,
-        ContactStatus.Active, ContactSource.Conference,
-        new PhoneNumber("555111003", "+213"),
-        null,
-        new EmailAddress("nabil.farhi@demo.com"),
-        null,
-        null,
-        "Engineer",
-        "IT",
-        defaultUser.Id,
-        leads[rnd.Next(leads.Count)].Id,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-
-    new Contact(Guid.NewGuid(), "Yasmine", null, "Djebbar",
-        null,
-        ContactStatus.Active, ContactSource.Employee,
-        new PhoneNumber("555111004", "+213"),
-        null,
-        new EmailAddress("yasmine.djebbar@demo.com"),
-        null,
-        null,
-        "Consultant",
-        "Sales",
-        defaultUser.Id,
-        leads[rnd.Next(leads.Count)].Id,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-
-    new Contact(Guid.NewGuid(), "Adel", null, "Brahimi",
-        null,
-        ContactStatus.Active, ContactSource.Email,
-        new PhoneNumber("555111005", "+213"),
-        null,
-        new EmailAddress("adel.brahimi@demo.com"),
-        null,
-        null,
-        "CTO",
-        "Tech",
-        defaultUser.Id,
-        leads[rnd.Next(leads.Count)].Id,
-        accounts[rnd.Next(accounts.Count)].Id
-    ),
-};
-        Console.WriteLine("seeding contacts");
-        await _contactRepository.InsertManyAsync(contacts);
+        //         var contacts = new List<Contact>
+        // {
+        //     new Contact(Guid.NewGuid(), "Omar", "Ali", "Benkhelifa",
+        //         "Key decision maker in enterprise deal",
+        //         ContactStatus.Active, ContactSource.PublicRelations,
+        //         new PhoneNumber("555111111", "+213"),
+        //         new PhoneNumber("555111112", "+213"),
+        //         new EmailAddress("omar.benkhelifa@corp.com"),
+        //         new URL("https://corp-example.com"),
+        //         null,
+        //         "IT Director",
+        //         "Information Technology",
+        //         defaultUser.Id,
+        //         null,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        //
+        //     new Contact(Guid.NewGuid(), "Sara", null, "Mansouri",
+        //         "Marketing lead contact",
+        //         ContactStatus.Active, ContactSource.Campaign,
+        //         new PhoneNumber("+213 555222222"),
+        //         null,
+        //         new EmailAddress("sara.mansouri@marketing.com"),
+        //         new URL("https://marketing-example.com"),
+        //         null,
+        //         "Marketing Manager",
+        //         "Marketing",
+        //         defaultUser.Id,
+        //         leads[rnd.Next(leads.Count)].Id,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        //
+        //     new Contact(Guid.NewGuid(), "Yacine", null, "Khelifi",
+        //         "Follow-up from conference",
+        //         ContactStatus.Active, ContactSource.Conference,
+        //         new PhoneNumber("555333333", "+213"),
+        //         null,
+        //         new EmailAddress("yacine.khelifi@demo.com"),
+        //         null,
+        //         null,
+        //         "Business Analyst",
+        //         "Sales",
+        //         defaultUser.Id,
+        //         leads[rnd.Next(leads.Count)].Id,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        //
+        //     new Contact(Guid.NewGuid(), "Amina", null, "Zohra",
+        //         "Interested in CRM demo",
+        //         ContactStatus.Active, ContactSource.Campaign,
+        //         new PhoneNumber("555444444", "+213"),
+        //         null,
+        //         new EmailAddress("amina.zohra@demo.com"),
+        //         null,
+        //         null,
+        //         "Product Manager",
+        //         "Product",
+        //         defaultUser.Id,
+        //         leads[rnd.Next(leads.Count)].Id,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        //
+        //     new Contact(Guid.NewGuid(), "Karim", null, "Boudiaf",
+        //         "Enterprise inquiry",
+        //         ContactStatus.Active, ContactSource.Email,
+        //         new PhoneNumber("555555555", "+213"),
+        //         null,
+        //         new EmailAddress("karim.boudiaf@demo.com"),
+        //         null,
+        //         null,
+        //         "CTO",
+        //         "Engineering",
+        //         defaultUser.Id,
+        //         leads[rnd.Next(leads.Count)].Id,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        //
+        //     new Contact(Guid.NewGuid(), "Lina", null, "Ferhat",
+        //         "Pricing request",
+        //         ContactStatus.Active, ContactSource.Email,
+        //         new PhoneNumber("555666666", "+213"),
+        //         null,
+        //         new EmailAddress("lina.ferhat@demo.com"),
+        //         null,
+        //         null,
+        //         "Sales Rep",
+        //         "Sales",
+        //         defaultUser.Id,
+        //         leads[rnd.Next(leads.Count)].Id,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        //
+        //     new Contact(Guid.NewGuid(), "Rachid", null, "Benali",
+        //         "Technical discussion lead",
+        //         ContactStatus.Active, ContactSource.Conference,
+        //         new PhoneNumber("555777777", "+213"),
+        //         null,
+        //         new EmailAddress("rachid.benali@demo.com"),
+        //         null,
+        //         null,
+        //         "Engineer",
+        //         "IT",
+        //         defaultUser.Id,
+        //         leads[rnd.Next(leads.Count)].Id,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        //
+        //     new Contact(Guid.NewGuid(), "Nour", null, "Kaci",
+        //         "Webinar follow-up",
+        //         ContactStatus.Active, ContactSource.Conference,
+        //         new PhoneNumber("555888888", "+213"),
+        //         null,
+        //         new EmailAddress("nour.kaci@demo.com"),
+        //         null,
+        //         null,
+        //         "Consultant",
+        //         "Business",
+        //         defaultUser.Id,
+        //         leads[rnd.Next(leads.Count)].Id,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        //
+        //     new Contact(Guid.NewGuid(), "Imane", null, "Saidi",
+        //         "Follow-up required",
+        //         ContactStatus.Active, ContactSource.Email,
+        //         new PhoneNumber("555999999", "+213"),
+        //         null,
+        //         new EmailAddress("imane.saidi@demo.com"),
+        //         null,
+        //         null,
+        //         "HR Manager",
+        //         "HR",
+        //         defaultUser.Id,
+        //         leads[rnd.Next(leads.Count)].Id,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        //
+        //     new Contact(Guid.NewGuid(), "Walid", null, "Cherif",
+        //         "Demo request",
+        //         ContactStatus.Active, ContactSource.Email,
+        //         new PhoneNumber("555101010", "+213"),
+        //         null,
+        //         new EmailAddress("walid.cherif@demo.com"),
+        //         null,
+        //         null,
+        //         "Developer",
+        //         "Engineering",
+        //         defaultUser.Id,
+        //         leads[rnd.Next(leads.Count)].Id,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        //
+        //     new Contact(Guid.NewGuid(), "Hichem", null, "Belaid",
+        //         null,
+        //         ContactStatus.Active, ContactSource.TradeShow,
+        //         new PhoneNumber("555111001", "+213"),
+        //         null,
+        //         new EmailAddress("hichem.belaid@demo.com"),
+        //         null,
+        //         null,
+        //         "Analyst",
+        //         "Finance",
+        //         defaultUser.Id,
+        //         leads[rnd.Next(leads.Count)].Id,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        //
+        //     new Contact(Guid.NewGuid(), "Sami", null, "Meziane",
+        //         null,
+        //         ContactStatus.Active, ContactSource.Email,
+        //         new PhoneNumber("555111002", "+213"),
+        //         null,
+        //         new EmailAddress("sami.meziane@demo.com"),
+        //         null,
+        //         null,
+        //         "Director",
+        //         "Operations",
+        //         defaultUser.Id,
+        //         leads[rnd.Next(leads.Count)].Id,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        //
+        //     new Contact(Guid.NewGuid(), "Nabil", null, "Farhi",
+        //         null,
+        //         ContactStatus.Active, ContactSource.Conference,
+        //         new PhoneNumber("555111003", "+213"),
+        //         null,
+        //         new EmailAddress("nabil.farhi@demo.com"),
+        //         null,
+        //         null,
+        //         "Engineer",
+        //         "IT",
+        //         defaultUser.Id,
+        //         leads[rnd.Next(leads.Count)].Id,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        //
+        //     new Contact(Guid.NewGuid(), "Yasmine", null, "Djebbar",
+        //         null,
+        //         ContactStatus.Active, ContactSource.Employee,
+        //         new PhoneNumber("555111004", "+213"),
+        //         null,
+        //         new EmailAddress("yasmine.djebbar@demo.com"),
+        //         null,
+        //         null,
+        //         "Consultant",
+        //         "Sales",
+        //         defaultUser.Id,
+        //         leads[rnd.Next(leads.Count)].Id,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        //
+        //     new Contact(Guid.NewGuid(), "Adel", null, "Brahimi",
+        //         null,
+        //         ContactStatus.Active, ContactSource.Email,
+        //         new PhoneNumber("555111005", "+213"),
+        //         null,
+        //         new EmailAddress("adel.brahimi@demo.com"),
+        //         null,
+        //         null,
+        //         "CTO",
+        //         "Tech",
+        //         defaultUser.Id,
+        //         leads[rnd.Next(leads.Count)].Id,
+        //         accounts[rnd.Next(accounts.Count)].Id
+        //     ),
+        // };
+        // Console.WriteLine("seeding contacts");
+        // await _contactRepository.InsertManyAsync(contacts);
         // seeding roles:
-        
+
 
         //if (await _bookRepository.GetCountAsync() <= 0)
         //{
@@ -591,8 +633,9 @@ public class UniFlowCRMDataSeederContributor
         var roleProvider = RolePermissionValueProvider.ProviderName;
 
 
-        await _permissionDataSeeder.SeedAsync(roleProvider,DefaultRolesPerms.SalesmanName,DefaultRolesPerms.DefaultMarketairePerms);
-        await _permissionDataSeeder.SeedAsync(roleProvider,DefaultRolesPerms.ManagerName,DefaultRolesPerms.DefaultManagerPerms);
+        await _permissionDataSeeder.SeedAsync(roleProvider, DefaultRolesPerms.SalesmanName, DefaultRolesPerms.DefaultMarketairePerms);
+        await _permissionDataSeeder.SeedAsync(roleProvider, DefaultRolesPerms.SupportName, DefaultRolesPerms.DefaultSupportPerms);
+        await _permissionDataSeeder.SeedAsync(roleProvider, DefaultRolesPerms.ManagerName, DefaultRolesPerms.DefaultManagerPerms);
 
     }
     public async Task SeedRolesAsync(DataSeedContext context)
@@ -601,6 +644,12 @@ public class UniFlowCRMDataSeederContributor
         {
             return;
         }
+        var rSupport = new IdentityRole(_guidGenerator.Create(), DefaultRolesPerms.SupportName)
+        {
+            IsDefault = false,
+            IsPublic = true,
+            IsStatic = true
+        };
         var rMarketaire = new IdentityRole(_guidGenerator.Create(), DefaultRolesPerms.SalesmanName)
         {
             IsDefault = true,
@@ -613,7 +662,7 @@ public class UniFlowCRMDataSeederContributor
             IsPublic = true,
             IsStatic = true
         };
-        await _roleRepository.InsertManyAsync([rMarketaire,rDirecteur]);
+        await _roleRepository.InsertManyAsync([rMarketaire, rDirecteur, rSupport]);
         try
         {
             await SeedPermsAsync(context);

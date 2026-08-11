@@ -58,7 +58,7 @@ export class OpportunitiesComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly confirm = inject(ConfirmationService);
   private readonly toaster = inject(ToasterService);
-
+  OpportunityStatus = OpportunityStage;
   List = inject(ListService);
 
   opportunities = {} as PagedResultDto<OpportunityDto>;
@@ -116,19 +116,19 @@ export class OpportunitiesComponent implements OnInit {
   // search
   searchName: string | null = null;
   loading = false;
-  lastQuery : any = {skipCount:0,maxResultCount:10};
+  lastQuery: any = { skipCount: 0, maxResultCount: 10 };
 
-  async search(){
-    if (this.loading){
+  async search() {
+    if (this.loading) {
       await new Promise(resolve => setTimeout(resolve, 100));
     }
     await new Promise(resolve => setTimeout(resolve, 100));
 
     this.loading = true;
-    console.log(this.lastQuery , this.searchName);
+    console.log(this.lastQuery, this.searchName);
     this._opportunitiesService.getList(
-      { ...this.lastQuery , filter: this.searchName } )
-      .subscribe(accounts => {this.opportunities=accounts;this.loading = false;});
+      { ...this.lastQuery, filter: this.searchName })
+      .subscribe(accounts => { this.opportunities = accounts; this.loading = false; });
 
   }
 

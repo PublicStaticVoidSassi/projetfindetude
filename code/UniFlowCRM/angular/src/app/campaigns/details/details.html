@@ -270,7 +270,7 @@
 
           <dl class="row mb-0">
             <dt class="col-5">Crée par</dt>
-            <dd class="col-7">{{ '@'+campaign.creator.userName }}</dd>
+            <dd class="col-7">{{ '@'+campaign.creator?.userName }}</dd>
 
             <dt class="col-5">Crée le</dt>
             <dd class="col-7">
@@ -283,7 +283,7 @@
             </dd>
             <dt class="col-5">Modifié le</dt>
             <dd class="col-7">
-              {{'@'+campaign.modifier.userName}}
+              {{'@'+campaign.modifier?.userName}}
             </dd>
             }
 

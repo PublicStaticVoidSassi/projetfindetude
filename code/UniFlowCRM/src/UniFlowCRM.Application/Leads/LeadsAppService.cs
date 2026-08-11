@@ -27,10 +27,10 @@ namespace UniFlowCRM.Leads
         public IdentityUserDto? Creator { get; set; }
         public IdentityUserDto? LastModifier { get; set; }
     }
-[Authorize(UniFlowCRMPermissions.Lead.Default)]
+    [Authorize(UniFlowCRMPermissions.Lead.Default)]
     public class LeadsAppService :
-        CrudAppService<Lead, LeadDto, Guid, LeadRequestDto, CreateUpdateLeadDto>
-        , ILeadsAppService
+            CrudAppService<Lead, LeadDto, Guid, LeadRequestDto, CreateUpdateLeadDto>
+            , ILeadsAppService
     {
         private readonly IRepository<IdentityUser, Guid> _userRepository;
         private readonly ILeadsManager leadManager;
@@ -224,11 +224,14 @@ namespace UniFlowCRM.Leads
         }
         [Authorize(UniFlowCRMPermissions.Lead.Convert)]
 
-        public async Task<ContactDto> ConvertAsync(Guid id)
+        public async Task<Guid> ConvertAsync(Guid id)
         {
-            var newContactId = await leadManager.ConvertAsync(id);
-            var contact = await _contactRepository.GetAsync(newContactId);
-            return ObjectMapper.Map<Contact, ContactDto>(contact);
+            return await leadManager.ConvertAsync(id);
+        }
+        public async Task QualifyAsync(Guid id)
+        {
+            var lead = await Repository.GetAsync(id);
+            lead.Qualify();
         }
     }
 }

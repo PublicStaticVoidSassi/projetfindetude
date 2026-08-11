@@ -12,10 +12,10 @@ export interface CreateUpdateTaskDto extends EntityDto<string> {
   description?: string | null;
   status?: TaskStatus;
   priority?: TaskPriority;
-  startTime?: string | null;
-  endTime?: string | null;
+  startTime?: string;
+  endTime?: string;
   completedAt?: string | null;
-  ownerID?: string | null;
+  ownerID?: string;
   accountID?: string | null;
   contactID?: string | null;
   opportunityID?: string | null;

@@ -1,15 +1,16 @@
 using System;
+using UniFlowCRM.Expirables;
 using Volo.Abp.Domain.Entities.Auditing;
 namespace UniFlowCRM.Tasks;
 // todo: protect setters
-public class Task : FullAuditedAggregateRoot<Guid>
+public class Task : FullAuditedAggregateRoot<Guid>, IExpirable
 {
     public string Name { get; set; }
     public string? Description { get; set; }
     public TaskStatus Status { get; set; }
     public TaskPriority Priority { get; set; }
-    public DateTime? StartTime { get; set; }
-    public DateTime? EndTime { get; set; }
+    public DateTime StartTime { get; set; }
+    public DateTime EndTime { get; set; }
     public DateTime? CompletedAt { get; set; }
 
     // Relations avec d'autres entités CRM
@@ -31,4 +32,11 @@ public class Task : FullAuditedAggregateRoot<Guid>
         Name = name;
     }
     private Task() { }
+    public void ExpireIfNeeded()
+    {
+        if (this.EndTime < DateTime.Now && this.Status != TaskStatus.Cancelled && this.Status != TaskStatus.Completed)
+        {
+            this.Status = TaskStatus.Deferred;
+        }
+    }
 }

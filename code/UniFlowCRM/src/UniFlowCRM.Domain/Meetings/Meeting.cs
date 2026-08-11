@@ -1,8 +1,9 @@
 using System;
+using UniFlowCRM.Expirables;
 using Volo.Abp.Domain.Entities.Auditing;
 namespace UniFlowCRM.Meetings;
 
-public class Meeting : FullAuditedAggregateRoot<Guid>
+public class Meeting : FullAuditedAggregateRoot<Guid>, IExpirable
 {
 
     public string Name { get; set; }
@@ -28,4 +29,11 @@ public class Meeting : FullAuditedAggregateRoot<Guid>
         Name = name;
     }
     private Meeting() { }
+    public void ExpireIfNeeded()
+    {
+        if (this.EndTime < DateTime.Now && this.Status != MeetingStatus.Held && this.Status != MeetingStatus.Cancelled)
+        {
+            this.Status = MeetingStatus.NotHeld;
+        }
+    }
 }

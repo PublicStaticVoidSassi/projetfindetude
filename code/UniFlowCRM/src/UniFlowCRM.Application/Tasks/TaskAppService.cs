@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using UniFlowCRM.Accounts;
+using UniFlowCRM.Activities;
 using UniFlowCRM.Calls;
 using UniFlowCRM.Contacts;
 using UniFlowCRM.Leads;
@@ -50,6 +51,7 @@ public class TasksAppService : CrudAppService<Task, TaskDto, Guid, TaskRequestDt
     private readonly IRepository<Contact, Guid> _contactRepository;
     private readonly IRepository<Opportunity, Guid> _opportunityRepository;
     private readonly IRepository<IdentityUser, Guid> _userRepository;
+    private readonly IActivityManager _activityManager;
     private readonly IPermissionChecker permissionChecker;
 
     public TasksAppService(
@@ -59,7 +61,7 @@ public class TasksAppService : CrudAppService<Task, TaskDto, Guid, TaskRequestDt
         IRepository<Contact, Guid> contactRepository,
         IRepository<Opportunity, Guid> opportunityRepository,
         IRepository<IdentityUser, Guid> userRepository,
-        IPermissionChecker permissionChecker) : base(repository)
+        IPermissionChecker permissionChecker, IActivityManager activityManager) : base(repository)
     {
         _accountRepository = accountRepository;
         _leadRepository = leadRepository;
@@ -67,6 +69,7 @@ public class TasksAppService : CrudAppService<Task, TaskDto, Guid, TaskRequestDt
         _opportunityRepository = opportunityRepository;
         _userRepository = userRepository;
         this.permissionChecker = permissionChecker;
+        _activityManager = activityManager;
     }
     public override async Task<PagedResultDto<TaskDto>> GetListAsync(TaskRequestDto input)
     {
@@ -90,10 +93,19 @@ public class TasksAppService : CrudAppService<Task, TaskDto, Guid, TaskRequestDt
         var count = await AsyncExecuter.CountAsync(q);
         return new PagedResultDto<TaskDto>(count, ObjectMapper.Map<List<Task>, List<TaskDto>>(dtos));
     }
-    public override Task<TaskDto> CreateAsync(CreateUpdateTaskDto input)
+    public override async Task<TaskDto> CreateAsync(CreateUpdateTaskDto input)
     {
-        return base.CreateAsync(input);
+        await _activityManager.CheckTimeAvailableAsync(input.OwnerID, input.StartTime, input.EndTime);
+        return await base.CreateAsync(input);
     }
+
+    public override async Task<TaskDto> UpdateAsync(Guid id, CreateUpdateTaskDto input)
+    {
+        await _activityManager.CheckTimeAvailableAsync(input.OwnerID, input.StartTime, input.EndTime);
+
+        return await base.UpdateAsync(id, input);
+    }
+
     public override async Task<TaskDto> GetAsync(Guid id)
     {
         var tasks = (await Repository.GetQueryableAsync()).Where(x => x.Id == id);

@@ -1,12 +1,18 @@
 <div class="card">
   <div class="card-header">
-    <div class="row">
-      <div class="col col-md-6 title">
+      <div class="col col-md-6 ">
         <h1 class="title" >{{ '::Menu:Emails' | abpLocalization }}</h1>
       </div>
 
   </div>
     <div class="d-flex justify-content-end">
+
+      <!--        <app-return-btn></app-return-btn>-->
+    <!-- </div> -->
+  </div>
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+        <input type="text" class="form-control w-50" (ngModelChange)="search()"  [(ngModel)]="searchName" placeholder="rechercher"/>
       <button class="btn btn-brand btn-sm me-2" type="button"
               *abpPermission='"UniFlowCRM.Email.Create"'
               (click)="create()">
@@ -16,14 +22,6 @@
             Rédiger un e-mail
           </span>
       </button>
-      <!--        <app-return-btn></app-return-btn>-->
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-4">
-        <input type="text" class="form-control" (ngModelChange)="search()"  [(ngModel)]="searchName" [placeholder]="'::Email'|abpLocalization"/>
-      </div>
     </div>
 
     <ngx-datatable [rows]="items.items" [count]="items.totalCount" [list]="list" default>
@@ -46,7 +44,9 @@
               <button ngbDropdownItem (click)="openDetails(row.id)">
                 {{ '::Details' | abpLocalization }}
               </button>
-              <button ngbDropdownItem
+              @if(row.status !== EmailStatus.Sent){
+
+                <button ngbDropdownItem
                       *abpPermission='"UniFlowCRM.Email.Edit"'
                       (click)="edit(row.id)">
                 {{ '::Edit' | abpLocalization }}
@@ -56,6 +56,7 @@
                       (click)="delete(row.id)">
                 {{ '::Delete' | abpLocalization }}
               </button>
+            }
             </div>
           </div>
         </ng-template>

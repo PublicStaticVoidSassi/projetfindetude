@@ -84,13 +84,13 @@
           {{row.endDate | shortDateTime}}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column
-        [name]="'Responsable'"
-        prop="assignedTo">
-        <ng-template ngx-datatable-cell-template let-row="row">
-          {{row.owner?.username}}
-        </ng-template>
-      </ngx-datatable-column>
+      <!-- <ngx-datatable-column -->
+      <!--   [name]="'Responsable'" -->
+      <!--   prop="assignedTo"> -->
+      <!--   <ng-template ngx-datatable-cell-template let-row="row"> -->
+      <!--     {{row.owner?.userName}} -->
+      <!--   </ng-template> -->
+      <!-- </ngx-datatable-column> -->
     </ngx-datatable>
   </div>
 </div>

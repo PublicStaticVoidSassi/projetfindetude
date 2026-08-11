@@ -16,5 +16,5 @@ public class CreateUpdateMeetingDto : EntityDto<Guid>
     public Guid? OpportunityID { get; set; }
     public Guid? LeadID { get; set; }
 
-    public Guid? OwnerID { get; set; }
+    public Guid OwnerID { get; set; }
 }

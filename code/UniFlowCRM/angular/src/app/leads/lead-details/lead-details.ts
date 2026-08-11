@@ -44,6 +44,7 @@ export class LeadDetailsComponent implements OnInit {
   ngOnInit() {
     this.load();
   }
+
   load() {
     this.route.params.subscribe(params => {
       this.id = params['id'];
@@ -56,9 +57,18 @@ export class LeadDetailsComponent implements OnInit {
     })
   }
   convert() {
-    console.log("entered");
-    this.leadsService.convert(this.id).subscribe(contact => {
-      this.toaster.success("::Lead:Converted", contact.id);
+    if (this.lead.status !== LeadStatus.Qualified) {
+      this.toaster.warn("le prospect doit etre qualifie");
+      return;
+    }
+    this.leadsService.convert(this.id).subscribe(() => {
+      this.toaster.success("prospect converti!");
+      this.load();
+    })
+  }
+  qualify() {
+    this.leadsService.qualify(this.id).subscribe(() => {
+      this.toaster.success("prospect qualifie!");
       this.load();
     })
   }

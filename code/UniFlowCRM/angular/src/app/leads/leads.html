@@ -8,7 +8,7 @@
     <div class="card-body">
       <div class="d-flex justify-content-between mb-3">
 
-          <input type="text" class="form-control w-50" (ngModelChange)="search()"  [(ngModel)]="searchName" [placeholder]="'::Lead'|abpLocalization"/>
+          <input type="text" class="form-control w-50" (ngModelChange)="search()"  [(ngModel)]="searchName" placeholder="rechercher"/>
         <button *abpPermission='"UniFlowCRM.Lead.Create"' (click)="create()" class="btn btn-brand btn-sm">
           <i class="fa fa-add"></i>
           <!--        {{ '::Object:Add' | abpLocalization }}-->
@@ -43,11 +43,12 @@
                   <i class="fa fa-trash p-1  rounded-5"></i>
                   {{ '::Action:Delete' | abpLocalization }}
                 </button>
-
+                @if(row.status !== LeadStatus.Converted){
                 <button *abpPermission='"UniFlowCRM.Lead.Edit"' ngbDropdownItem (click)="edit(row.id)">
                   <i class="fa fa-pen p-1   rounded-5"></i>
                   {{ '::Action:Edit' | abpLocalization }}
                 </button>
+                }
                 <button ngbDropdownItem (click)="openDetails(row.id)">
                   <i class="fa fa-plus-circle p-1   rounded-5"></i>
                   {{ '::Action:Info' | abpLocalization }}

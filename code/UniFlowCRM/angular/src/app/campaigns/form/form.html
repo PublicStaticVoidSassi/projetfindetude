@@ -25,17 +25,16 @@
 <!--          </div>-->
         </div>
 
-        <div class="col-md-6">
-          <label class="form-label">L'état de campagne</label>
-
-          <select class="form-select" formControlName="status">
-<!--            <option [ngValue]="null">Select status</option>-->
-@for(status of statuses; track status.key){
-  <option [value]="status.value">{{'::Campaigne:Status:'+status.value|abpLocalization}}</option>
-}
-          </select>
-        </div>
-
+<!--         <div class="col-md-6"> -->
+<!--           <label class="form-label">L'état de campagne</label> -->
+<!---->
+<!--           <select class="form-select" formControlName="status"> -->
+<!-- @for(status of statuses; track status.key){ -->
+<!--   <option [value]="status.value">{{'::Campaigne:Status:'+status.value|abpLocalization}}</option> -->
+<!-- } -->
+<!--           </select> -->
+<!--         </div> -->
+<!---->
         <div class="col-12">
           <label class="form-label">description</label>
 

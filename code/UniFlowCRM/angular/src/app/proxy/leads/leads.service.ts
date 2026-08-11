@@ -2,7 +2,6 @@ import type { CreateUpdateLeadDto, LeadDto, LeadRequestDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable, inject } from '@angular/core';
-import type { ContactDto } from '../contacts/models';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +12,9 @@ export class LeadsService {
   
 
   convert = (id: string, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, ContactDto>({
+    this.restService.request<any, string>({
       method: 'POST',
+      responseType: 'text',
       url: `/api/app/leads/${id}/convert`,
     },
     { apiName: this.apiName,...config });
@@ -50,6 +50,14 @@ export class LeadsService {
       method: 'GET',
       url: '/api/app/leads',
       params: { filter: input.filter, sorting: input.sorting, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  qualify = (id: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: `/api/app/leads/${id}/qualify`,
     },
     { apiName: this.apiName,...config });
   

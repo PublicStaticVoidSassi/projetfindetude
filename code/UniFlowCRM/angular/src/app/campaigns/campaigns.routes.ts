@@ -14,6 +14,10 @@ export const ROUTES: Routes = [
     path: 'form',
     component: Form
   },
+  {
+    path: 'form/:id',
+    component: Form
+  },
   // {
   //   path: 'form/:id',
   //   loadComponent: () =>

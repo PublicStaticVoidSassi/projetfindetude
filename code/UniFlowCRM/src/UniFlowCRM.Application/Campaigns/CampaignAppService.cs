@@ -32,7 +32,7 @@ namespace UniFlowCRM.Campaigns
             var obj = await Repository.GetAsync(id);
             if (obj.Status != CampaignStatus.active && obj.EndDate > DateTime.Now)
             {
-                obj.Status = CampaignStatus.active;
+                obj.Activate();
                 await Repository.UpdateAsync(obj);
                 return true;
             }
@@ -43,7 +43,7 @@ namespace UniFlowCRM.Campaigns
             var obj = await Repository.GetAsync(id);
             if (obj.Status != CampaignStatus.inactive && obj.EndDate > DateTime.Now)
             {
-                obj.Status = CampaignStatus.inactive;
+                obj.Deactivate();
                 await Repository.UpdateAsync(obj);
                 return true;
             }
@@ -60,9 +60,9 @@ namespace UniFlowCRM.Campaigns
         {
             var obj = await repository.GetJoinedAsync(id);
             var dto = ObjectMapper.Map<Campaign, CampaignDto>(obj);
-            dto.Owner = ObjectMapper.Map<IdentityUser,IdentityUserDto>(await userRepository.GetAsync(dto.AssignedTo));
-            if (dto.CreatorId != Guid.Empty && dto.CreatorId != null) dto.Creator = ObjectMapper.Map<IdentityUser,IdentityUserDto>(await userRepository.FindAsync((Guid)dto.CreatorId));
-            if (dto.LastModifierId != Guid.Empty && dto.LastModifierId != null) dto.Modifier = ObjectMapper.Map<IdentityUser,IdentityUserDto>(await userRepository.FindAsync((Guid)dto.LastModifierId));
+            dto.Owner = ObjectMapper.Map<IdentityUser, IdentityUserDto>(await userRepository.GetAsync(dto.AssignedTo));
+            if (dto.CreatorId != Guid.Empty && dto.CreatorId != null) dto.Creator = ObjectMapper.Map<IdentityUser, IdentityUserDto>(await userRepository.FindAsync((Guid)dto.CreatorId));
+            if (dto.LastModifierId != Guid.Empty && dto.LastModifierId != null) dto.Modifier = ObjectMapper.Map<IdentityUser, IdentityUserDto>(await userRepository.FindAsync((Guid)dto.LastModifierId));
             return dto;
         }
         public override async Task<PagedResultDto<CampaignDto>> GetListAsync(CampaignResultRequestDto input)
@@ -75,7 +75,7 @@ namespace UniFlowCRM.Campaigns
             q = q.OrderBy(input.Sorting ?? "CreationTime desc");
             q = q.Skip(input.SkipCount).Take(input.MaxResultCount);
             var dtos = q.ToList();
-            var count = q.Count();
+            var count = await Repository.GetCountAsync();
             return new PagedResultDto<CampaignDto>(count, ObjectMapper.Map<List<Campaign>, List<CampaignDto>>(dtos));
         }
     }
