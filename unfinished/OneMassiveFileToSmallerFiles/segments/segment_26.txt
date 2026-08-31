@@ -1,0 +1,22 @@
+@startuml
+title suppression d'un appels
+|USER| support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des appels;
+|systeme|
+:afficher la list des appels;
+|USER|
+:choisir un appels;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le appels;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml

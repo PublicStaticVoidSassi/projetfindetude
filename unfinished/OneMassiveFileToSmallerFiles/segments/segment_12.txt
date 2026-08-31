@@ -1,0 +1,27 @@
+@startuml
+title modification d'un contacts
+|USER| marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des contacts;
+|systeme|
+:afficher la list des contacts;
+|USER|
+:choisir un contacts;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:mettre a jour le contacts;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml

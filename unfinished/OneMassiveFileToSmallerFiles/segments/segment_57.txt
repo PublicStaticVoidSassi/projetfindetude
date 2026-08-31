@@ -1,0 +1,22 @@
+@startuml
+title suppression d'un roles
+|USER| admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des roles;
+|systeme|
+:afficher la list des roles;
+|USER|
+:choisir un roles;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (le role est static ) is (vrai) then
+:afficher quil est impossible de supprimer les roles statiques;
+end
+endif
+:masquer le role;
+:afficher un message du succes;
+end
+@enduml

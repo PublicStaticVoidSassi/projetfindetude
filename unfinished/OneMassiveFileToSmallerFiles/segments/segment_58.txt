@@ -1,0 +1,15 @@
+@startuml
+title voir les roles
+|USER| admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des roles;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les roles;
+:afficher la list;
+end
+@enduml

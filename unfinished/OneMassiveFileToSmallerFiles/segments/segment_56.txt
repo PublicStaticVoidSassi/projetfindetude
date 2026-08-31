@@ -1,0 +1,27 @@
+@startuml
+title modification d'un roles
+|USER| admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des roles;
+|systeme|
+:afficher la list des roles;
+|USER|
+:choisir un roles;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:mettre a jour le roles;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml

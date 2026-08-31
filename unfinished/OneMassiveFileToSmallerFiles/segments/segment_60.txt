@@ -1,0 +1,22 @@
+@startuml
+title ajouter des permissions a un utilisateur
+|USER| admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des utilisateurs;
+|systeme|
+:afficher la list des utilisateurs;
+|USER|
+:choisir le utilisateur a manipuler;
+:choisir les permissions a ajouter;
+:cocher les cases des permissions;
+:soumettre;
+|systeme|
+:mettre a jour l'utilisateur;
+:sauvgarder le changement;
+:afficher un message du succes;
+
+end
+
+@enduml

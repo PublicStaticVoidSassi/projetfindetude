@@ -1,0 +1,26 @@
+@startuml
+title creation d'un emails
+|USER| support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des emails;
+|systeme|
+:afficher la list des emails;
+|USER|
+:cliquer sur "Ajouter un emails";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau emails;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml

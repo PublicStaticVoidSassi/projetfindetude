@@ -1,0 +1,20 @@
+@startuml
+title Creation du profile
+|USER| utilisateur
+|USER|
+start
+:navigue a la page;
+|systeme|
+:afficher la formulaire;
+|USER|
+:entrer le nom et le mot de passe;
+|systeme|
+if (nom unique et email unique) is (faux) then
+:afficher l'erreur;
+end
+else (vrai)
+:creer le profile;
+:rediriger vers la page d'authentification;
+endif
+end
+@enduml

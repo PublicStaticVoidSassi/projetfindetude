@@ -1,0 +1,19 @@
+@startuml
+title voir les comptes
+|USER| marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des comptes;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les comptes;
+:les filtrer par la "search" (par default null);
+:les orderer par le colon choisi (par default date creation);
+:les filtrer par l'authorization d'utilisateur actuel;
+:appliquer la pagination (10 comptess par page);
+:afficher la list;
+end
+@enduml

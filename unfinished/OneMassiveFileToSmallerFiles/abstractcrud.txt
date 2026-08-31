@@ -1,0 +1,97 @@
+@startuml
+title creation d'un OBJECTXYZ
+swimlane USER as utilisateur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des OBJECTXYZ;
+|systeme|
+:afficher la list des OBJECTXYZ;
+|USER|
+:cliquer sur "Ajouter un OBJECTXYZ";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau OBJECTXYZ;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title modification d'un OBJECTXYZ
+swimlane USER as utilisateur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des OBJECTXYZ;
+|systeme|
+:afficher la list des OBJECTXYZ;
+|USER|
+:choisir un OBJECTXYZ;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:mettre a jour le OBJECTXYZ;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title suppression d'un OBJECTXYZ
+swimlane USER as utilisateur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des OBJECTXYZ;
+|systeme|
+:afficher la list des OBJECTXYZ;
+|USER|
+:choisir un OBJECTXYZ;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le OBJECTXYZ;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title voir les OBJECTXYZ
+swimlane USER as utilisateur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des OBJECTXYZ;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les OBJECTXYZ;
+:les filtrer par la "search" (par default null);
+:les orderer par le colon choisi (par default date creation);
+:les filtrer par l'authorization d'utilisateur actuel;
+:appliquer la pagination (10 OBJECTXYZs par page);
+:afficher la list;
+end
+@enduml

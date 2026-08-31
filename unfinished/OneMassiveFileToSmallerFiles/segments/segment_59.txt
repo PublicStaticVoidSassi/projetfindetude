@@ -1,0 +1,20 @@
+@startuml
+title ajouter des permissions a un role
+|USER| admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des roles;
+|systeme|
+:afficher la list des roles;
+|USER|
+:choisir le role a manipuler;
+:choisir les permission a ajouter;
+:cocher les cases des permissions;
+:soumettre;
+|systeme|
+:mettre a jour le role;
+:sauvgarder le changement;
+:afficher un message du succes;
+end
+@enduml

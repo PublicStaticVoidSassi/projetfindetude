@@ -1,0 +1,13 @@
+@startuml
+title Voir le profile
+|USER| utilisateur
+|USER|
+start
+:s'authentifier;
+:navigue a la page;
+|systeme|
+:determiner le profile d'utilisateur;
+:recuperer les information de ce dernier;
+:les afficher;
+end
+@enduml

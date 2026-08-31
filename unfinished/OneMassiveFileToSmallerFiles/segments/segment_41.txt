@@ -1,0 +1,27 @@
+@startuml
+title modification d'un emails
+|USER| support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des emails;
+|systeme|
+:afficher la list des emails;
+|USER|
+:choisir un emails;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if (email est envoye?) is (faux) then
+:mettre a jour le emails;
+:afficher un message du succes;
+else (vrai)
+:afficher que les email envoye ne pouvent pas etre modifiees;
+endif
+end
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+|Utilisateur|
+start
+:Authentifier;
+:Navigue ver la page de XYZXYZ;
+:Clique sur supprimer;
+
+|Système|
+:Supprimer XYZXYZ;
+:Confirmer la suppression;
+
+stop
+@enduml

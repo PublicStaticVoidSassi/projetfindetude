@@ -1,0 +1,25 @@
+@startuml
+title l'activation d'une campagne
+|USER| Marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des campagnes;
+:choisir le campagne a activer;
+:clique sur "activer";
+|systeme|
+if (utilisateur est authorize a activer les campagnes) is (oui) then
+if (date debut < date actuelle < date fin) is (oui) then
+:changer le status du campagne a "active";
+:sauvgarder le changement;
+:afficher un message du succes;
+else (non)
+:afficher l'erreur;
+end
+endif
+else (non)
+:afficher l'erreur;
+end
+endif
+end
+@enduml

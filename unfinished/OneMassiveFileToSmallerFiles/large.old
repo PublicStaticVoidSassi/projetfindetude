@@ -1,0 +1,1618 @@
+@startuml
+title Authentification
+swimlane USER as utilisateur
+|USER|
+start
+:navigue a la page;
+|systeme|
+:afficher la formulaire;
+|USER|
+:entrer le nom et le mot de passe;
+|systeme|
+if (Identifiants) is (incorrects) then
+:afficher l'erreur;
+end
+else (correct)
+:accorder l'accès;
+:rediriger vers la page d'accueil;
+endif
+end
+@enduml
+================
+@startuml
+title Creation du profile
+swimlane USER as utilisateur
+|USER|
+start
+:navigue a la page;
+|systeme|
+:afficher la formulaire;
+|USER|
+:entrer le nom et le mot de passe;
+|systeme|
+if (nom unique et email unique) is (faux) then
+:afficher l'erreur;
+end
+else (vrai)
+:creer le profile;
+:rediriger vers la page d'authentification;
+endif
+end
+@enduml
+================
+@startuml
+title Voir le profile
+swimlane USER as utilisateur
+|USER|
+start
+:s'authentifier;
+:navigue a la page;
+|systeme|
+:determiner le profile d'utilisateur;
+:recuperer les information de ce dernier;
+:les afficher;
+end
+@enduml
+================
+@startuml
+title Modification du profile
+swimlane USER as utilisateur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page;
+|systeme|
+:afficher la formulaire;
+|USER|
+:entrer les nouveau donnees;
+|systeme|
+if (les donnees sont acceptable?) is (faux) then
+:afficher l'erreur;
+end
+else (vrai)
+:enregistrer les nouveau donnees;
+:afficher un message de sucess;
+endif
+end
+@enduml
+
+================
+@startuml
+title creation d'un prospects
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des prospects;
+|systeme|
+:afficher la list des prospects;
+|USER|
+:cliquer sur "Ajouter un prospects";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire (nom, source etc...);
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau prospects;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title modification d'un prospects
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des prospects;
+|systeme|
+:afficher la list des prospects;
+|USER|
+:choisir un prospects;
+:cliquer sur "Modifier";
+if (prospect est converti) is (vrai) then
+|systeme|
+:afficher l'erreur (prospects convertis sont lecture seul);
+end
+|USER|
+endif
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:mettre a jour le prospects;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title suppression d'un prospects
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des prospects;
+|systeme|
+:afficher la list des prospects;
+|USER|
+:choisir un prospects;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le prospects;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title voir les prospects
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des prospects;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les prospects;
+:les filtrer par la "search" (par default null);
+:les orderer par le colon choisi (par default date creation);
+:les filtrer par l'authorization d'utilisateur actuel;
+:appliquer la pagination (10 prospectss par page);
+:afficher la list;
+end
+@enduml
+================
+@startuml
+title qualifier un prospect
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des prospect;
+:choisir le prospect a qualifier;
+:cliquer sur "qualifier";
+|systeme|
+if (utilisateur a le permission a qualifier) is (oui) then
+:change le status du prospect a "qualifier";
+:sauvgarder le changement;
+:afficher un message de sucess ;
+end
+else (non)
+:afficher un message d'erreur;
+end
+endif
+@enduml
+================
+@startuml
+title convertir un prospect
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des prospect;
+:choisir le prospect a convertir;
+:cliquer sur "convertir";
+|systeme|
+if (le prospect est qualifier) is (oui) then
+:change le status du prospect a "converti";
+:creer un contact avec les information du prospect;
+:sauvgarder le changement;
+:afficher un message de sucess ;
+end
+else (non)
+:afficher l'erreur;
+end
+endif
+@enduml================
+@startuml
+title creation d'un contacts
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des contacts;
+|systeme|
+:afficher la list des contacts;
+|USER|
+:cliquer sur "Ajouter un contacts";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau contacts;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title modification d'un contacts
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des contacts;
+|systeme|
+:afficher la list des contacts;
+|USER|
+:choisir un contacts;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:mettre a jour le contacts;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title suppression d'un contacts
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des contacts;
+|systeme|
+:afficher la list des contacts;
+|USER|
+:choisir un contacts;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le contacts;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title voir les contacts
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des contacts;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les contacts;
+:les filtrer par la "search" (par default null);
+:les orderer par le colon choisi (par default date creation);
+:les filtrer par l'authorization d'utilisateur actuel;
+:appliquer la pagination (10 contactss par page);
+:afficher la list;
+end
+@enduml
+
+================
+@startuml
+title creation d'un comptes
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des comptes;
+|systeme|
+:afficher la list des comptes;
+|USER|
+:cliquer sur "Ajouter un comptes";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau comptes;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title modification d'un comptes
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des comptes;
+|systeme|
+:afficher la list des comptes;
+|USER|
+:choisir un comptes;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:mettre a jour le comptes;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title suppression d'un comptes
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des comptes;
+|systeme|
+:afficher la list des comptes;
+|USER|
+:choisir un comptes;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le comptes;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title voir les comptes
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des comptes;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les comptes;
+:les filtrer par la "search" (par default null);
+:les orderer par le colon choisi (par default date creation);
+:les filtrer par l'authorization d'utilisateur actuel;
+:appliquer la pagination (10 comptess par page);
+:afficher la list;
+end
+@enduml
+
+================
+@startuml
+title creation d'un opportunites
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des opportunites;
+|systeme|
+:afficher la list des opportunites;
+|USER|
+:cliquer sur "Ajouter un opportunites";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau opportunites;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title modification d'un opportunites
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des opportunites;
+|systeme|
+:afficher la list des opportunites;
+|USER|
+:choisir un opportunites;
+:cliquer sur "Modifier";
+if (l'opportunite est cloture?) is (vrai) then
+|systeme|
+:afficher l'erreur (les opportunites cloturees sont lecture seul);
+end
+|USER|
+endif
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:mettre a jour le opportunites;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title suppression d'un opportunites
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des opportunites;
+|systeme|
+:afficher la list des opportunites;
+|USER|
+:choisir un opportunites;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le opportunites;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title voir les opportunites
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des opportunites;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les opportunites;
+:les filtrer par la "search" (par default null);
+:les orderer par le colon choisi (par default date creation);
+:les filtrer par l'authorization d'utilisateur actuel;
+:appliquer la pagination (10 opportunitess par page);
+:afficher la list;
+end
+@enduml
+================
+@startuml
+title cloturer une opportunity
+swimlane USER as Directeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des opportunites;
+:choisir l'opportunite a cloture;
+if () is (opportunite gagnee) then
+:cliquer sur "marquer comme gagnee";
+else (opportunite perdu)
+:cliquer sur "marquer comme perdu";
+endif
+|systeme|
+if (utilisateur a la permission de cloturer) is (oui) then
+if (opportunite gagnee) is (oui) then
+:ajouter sa valeur a le montant total d'equipe;
+endif
+if (opportunite creer avec un prospect) is (oui) then
+:convertir le prospect a un contact;
+endif
+:sauvgarder le changement d'opportunity;
+:afficher un message du succes;
+else (non)
+:afficher l'erreur;
+end
+endif
+end
+@enduml
+================
+@startuml
+title creation d'un appels
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des appels;
+|systeme|
+:afficher la list des appels;
+|USER|
+:cliquer sur "Ajouter un appels";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire (date debut, date fin, duree, telephone);
+:Choisissez un utilisateur pour effectuer l'appel;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if (utilisateur est occupé) is (faux) then
+:creer le nouveau appels;
+:afficher un message du succes;
+else (vrai)
+:afficher qu'il doit changer la period ou l'utilisateur;
+endif
+end
+@enduml
+================
+@startuml
+title modification d'un appels
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des appels;
+|systeme|
+:afficher la list des appels;
+|USER|
+:choisir un appels;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire (date debut, date fin, duree, telephone);
+:Choisissez un utilisateur pour effectuer l'appel;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if (utilisateur est occupé) is (faux) then
+:modifier l'appel;
+:afficher un message du succes;
+else (vrai)
+:afficher qu'il doit changer la period ou l'utilisateur;
+endif
+end
+@enduml
+================
+@startuml
+title suppression d'un appels
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des appels;
+|systeme|
+:afficher la list des appels;
+|USER|
+:choisir un appels;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le appels;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title voir les appels
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des appels;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les appels;
+:les filtrer par la "search" (par default null);
+:les orderer par le colon choisi (par default date creation);
+:les filtrer par l'authorization d'utilisateur actuel;
+:appliquer la pagination (10 appelss par page);
+:afficher la list;
+end
+@enduml
+
+================
+@startuml
+title creation d'un reunions
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des reunions;
+|systeme|
+:afficher la list des reunions;
+|USER|
+:cliquer sur "Ajouter un reunions";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire (date debut, date fin, location);
+:Choisissez un utilisateur pour assister à la réunion;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if (utilisateur est occupé) is (faux) then
+:creer le nouveau reunion;
+:afficher un message du succes;
+else (vrai)
+:afficher qu'il doit changer la period ou l'utilisateur;
+endif
+end
+@enduml
+================
+@startuml
+title modification d'un reunions
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des reunions;
+|systeme|
+:afficher la list des reunions;
+|USER|
+:choisir un reunions;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire (date debut, date fin, location);
+:Choisissez un utilisateur pour assister à la réunion;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if (utilisateur est occupé) is (faux) then
+:modifier la reunion;
+:afficher un message du succes;
+else (vrai)
+:afficher qu'il doit changer la period ou l'utilisateur;
+endif
+end
+@enduml
+================
+@startuml
+title suppression d'un reunions
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des reunions;
+|systeme|
+:afficher la list des reunions;
+|USER|
+:choisir un reunions;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le reunions;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title voir les reunions
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des reunions;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les reunions;
+:les filtrer par la "search" (par default null);
+:les orderer par le colon choisi (par default date creation);
+:les filtrer par l'authorization d'utilisateur actuel;
+:appliquer la pagination (10 reunionss par page);
+:afficher la list;
+end
+@enduml
+
+================
+@startuml
+title creation d'un taches
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des taches;
+|systeme|
+:afficher la list des taches;
+|USER|
+:cliquer sur "Ajouter un taches";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire (date debut, date fin, priorite);
+:Choisissez un utilisateur pour effectuer la tache;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if (utilisateur est occupé) is (faux) then
+:creer la tache;
+:afficher un message du succes;
+else (vrai)
+:afficher qu'il doit changer la period ou l'utilisateur;
+endif
+end
+@enduml
+================
+@startuml
+title modification d'un taches
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des taches;
+|systeme|
+:afficher la list des taches;
+|USER|
+:choisir un taches;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire (date debut, date fin, priorite);
+:Choisissez un utilisateur pour effectuer la tache;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if (utilisateur est occupé) is (faux) then
+:mettre a jour la tache;
+:afficher un message du succes;
+else (vrai)
+:afficher qu'il doit changer la period ou l'utilisateur;
+endif
+end
+@enduml
+================
+@startuml
+title suppression d'un taches
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des taches;
+|systeme|
+:afficher la list des taches;
+|USER|
+:choisir un taches;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le taches;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title voir les taches
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des taches;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les taches;
+:les filtrer par la "search" (par default null);
+:les orderer par le colon choisi (par default date creation);
+:les filtrer par l'authorization d'utilisateur actuel;
+:appliquer la pagination (10 tachess par page);
+:afficher la list;
+end
+@enduml
+
+================
+@startuml
+title creation d'un notes
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page d'un client ou opportunite;
+|systeme|
+:afficher la list des notes;
+|USER|
+:cliquer sur "Ajouter un notes";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire (title, type et details);
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau notes;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title modification d'un notes
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page d'un client ou opportunite;
+|systeme|
+:afficher la list des notes;
+|USER|
+:choisir un notes;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if (l'utilisateur est le propriétaire) is (vrai) then
+:mettre a jour le notes;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title suppression d'un notes
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page d'un client ou opportunite;
+|systeme|
+:afficher la list des notes;
+|USER|
+:choisir un notes;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (l'utilisateur est le propriétaire) is (vrai) then
+:masquer la note;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title voir les notes
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page d'un client ou opportunite;
+|systeme|
+:recuper les notes;
+:afficher la list;
+end
+@enduml
+
+================
+@startuml
+title creation d'un emails
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des emails;
+|systeme|
+:afficher la list des emails;
+|USER|
+:cliquer sur "Ajouter un emails";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau emails;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title modification d'un emails
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des emails;
+|systeme|
+:afficher la list des emails;
+|USER|
+:choisir un emails;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if (email est envoye?) is (faux) then
+:mettre a jour le emails;
+:afficher un message du succes;
+else (vrai)
+:afficher que les email envoye ne pouvent pas etre modifiees;
+endif
+end
+@enduml
+================
+@startuml
+title suppression d'un emails
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des emails;
+|systeme|
+:afficher la list des emails;
+|USER|
+:choisir un emails;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le emails;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title voir les emails
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des emails;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les emails;
+:les filtrer par la "search" (par default null);
+:les orderer par le colon choisi (par default date creation);
+:les filtrer par l'authorization d'utilisateur actuel;
+:appliquer la pagination (10 emailss par page);
+:afficher la list;
+end
+@enduml
+================
+@startuml
+title l'envoi d'un email
+swimlane USER as support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des emails;
+:choisir l'email a envoyer;
+:clique sur "envoyer";
+|systeme|
+if (utilisateur authorize a envoyer) is (oui) then
+   :envoyer l'email a le fournisseur;
+   if (fournisseur est disponible) is (oui) then
+      |fournisseur email|
+      if (address mail est juste) is (oui) then
+         :envoyer l'email a le destinataire;
+         |systeme|
+         :sauvgarder l'email comme "envoye";
+         :afficher un message de succes;
+         end
+      else (non)
+         |systeme|
+         :sauvgarde l'email comme "echec d'envoi";
+         :erreur "address mail incorrect";
+         end
+      endif
+   else (non)
+      :sauvgarde l'email comme "echec d'envoi";
+      :erreur "fournisseur mail indisponible";
+      end
+   endif
+else (non)
+|systeme|
+:affiche un erreur de permissions;
+end
+endif
+end
+
+@enduml
+================
+@startuml
+title creation d'un campagnes
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des campagnes;
+|systeme|
+:afficher la list des campagnes;
+|USER|
+:cliquer sur "Ajouter un campagnes";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau campagnes;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title modification d'un campagnes
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des campagnes;
+|systeme|
+:afficher la list des campagnes;
+|USER|
+:choisir un campagnes;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if (le campagne est termine) is (faux) then
+:mettre a jour le campagnes;
+:afficher un message du succes;
+else (vrai)
+:afficher que les campagnes termine sont lecture seul;
+endif
+end
+@enduml
+================
+@startuml
+title suppression d'un campagnes
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des campagnes;
+|systeme|
+:afficher la list des campagnes;
+|USER|
+:choisir un campagnes;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le campagnes;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title voir les campagnes
+swimlane USER as marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des campagnes;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les campagnes;
+:les filtrer par la "search" (par default null);
+:les orderer par le colon choisi (par default date creation);
+:les filtrer par l'authorization d'utilisateur actuel;
+:appliquer la pagination (10 campagness par page);
+:afficher la list;
+end
+@enduml
+================
+@startuml
+title l'activation d'une campagne
+swimlane USER as Marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des campagnes;
+:choisir le campagne a activer;
+:clique sur "activer";
+|systeme|
+if (utilisateur est authorize a activer les campagnes) is (oui) then
+if (date debut < date actuelle < date fin) is (oui) then
+:changer le status du campagne a "active";
+:sauvgarder le changement;
+:afficher un message du succes;
+else (non)
+:afficher l'erreur;
+end
+endif
+else (non)
+:afficher l'erreur;
+end
+endif
+end
+@enduml
+================
+@startuml
+title la disactivation d'une campagne
+swimlane USER as Marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des campagnes;
+:choisir le campagne a disactiver;
+:clique sur "disactiver";
+|systeme|
+if (utilisateur est authorize a disactiver les campagnes) is (oui) then
+if (date debut < date actuelle < date fin) is (oui) then
+if (le campagne est active) is (oui) then
+:changer le status du campagne a "disactive";
+:sauvgarder le changement;
+:afficher un message du succes;
+else (non)
+:afficher "le campagne est deja inactive";
+end
+endif
+else (non)
+:afficher l'erreur;
+end
+endif
+else (non)
+:afficher l'erreur;
+end
+endif
+end
+
+@enduml
+================
+@startuml
+title creation d'un utilisateurs
+swimlane USER as admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des utilisateurs;
+|systeme|
+:afficher la list des utilisateurs;
+|USER|
+:cliquer sur "Ajouter un utilisateurs";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau utilisateurs;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title modification d'un utilisateurs
+swimlane USER as admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des utilisateurs;
+|systeme|
+:afficher la list des utilisateurs;
+|USER|
+:choisir un utilisateurs;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:mettre a jour le utilisateurs;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title suppression d'un utilisateurs
+swimlane USER as admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des utilisateurs;
+|systeme|
+:afficher la list des utilisateurs;
+|USER|
+:choisir un utilisateurs;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le utilisateurs;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title voir les utilisateurs
+swimlane USER as admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des utilisateurs;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les utilisateurs;
+:les filtrer par la "search" (par default null);
+:les orderer par le colon choisi (par default date creation);
+:les filtrer par l'authorization d'utilisateur actuel;
+:appliquer la pagination (10 utilisateurss par page);
+:afficher la list;
+end
+@enduml
+
+================
+@startuml
+title creation d'un roles
+swimlane USER as admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des roles;
+|systeme|
+:afficher la list des roles;
+|USER|
+:cliquer sur "Ajouter un roles";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau roles;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title modification d'un roles
+swimlane USER as admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des roles;
+|systeme|
+:afficher la list des roles;
+|USER|
+:choisir un roles;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:mettre a jour le roles;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml
+================
+@startuml
+title suppression d'un roles
+swimlane USER as admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des roles;
+|systeme|
+:afficher la list des roles;
+|USER|
+:choisir un roles;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (le role est static ) is (vrai) then
+:afficher quil est impossible de supprimer les roles statiques;
+end
+endif
+:masquer le role;
+:afficher un message du succes;
+end
+@enduml
+================
+@startuml
+title voir les roles
+swimlane USER as admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des roles;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les roles;
+:afficher la list;
+end
+@enduml
+
+================
+@startuml
+title ajouter des permissions a un role
+swimlane USER as admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des roles;
+|systeme|
+:afficher la list des roles;
+|USER|
+:choisir le role a manipuler;
+:choisir les permission a ajouter;
+:cocher les cases des permissions;
+:soumettre;
+|systeme|
+:mettre a jour le role;
+:sauvgarder le changement;
+:afficher un message du succes;
+end
+@enduml
+================
+@startuml
+title ajouter des permissions a un utilisateur
+swimlane USER as admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des utilisateurs;
+|systeme|
+:afficher la list des utilisateurs;
+|USER|
+:choisir le utilisateur a manipuler;
+:choisir les permissions a ajouter;
+:cocher les cases des permissions;
+:soumettre;
+|systeme|
+:mettre a jour l'utilisateur;
+:sauvgarder le changement;
+:afficher un message du succes;
+
+end
+
+@enduml
+================
+@startuml
+title donner un utilisateur des roles
+swimlane USER as admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des utilisateurs;
+|systeme|
+:afficher la list des utilisateurs;
+|USER|
+:choisir le utilisateur a manipuler;
+:choisir les roles a changer;
+:cocher les cases des roles;
+:soumettre;
+|systeme|
+if (l'utilisateur a au moins un role) is (oui) then
+:mettre a jour l'utilisateur;
+:sauvgarder le changement;
+:afficher un message du succes;
+else (non)
+:erreur "un utilisateur doit avoir au moins un role";
+end
+endif
+end
+
+@enduml
+================
+@startuml
+title voir les analytics du prospects
+swimlane USER as directeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page;
+|systeme|
+if (utilisateur a la permission) is (non) then
+:afficher l'erreur du permission;
+end
+else (oui)
+:recuperer les donnees;
+:les filters et calculer (prospects par source...);
+:dessiner les analytiques;
+:afficher les resultats;
+endif
+end
+@enduml
+================
+@startuml
+title voir les analytics des contacts
+swimlane USER as directeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page;
+|systeme|
+if (utilisateur a la permission) is (non) then
+:afficher l'erreur du permission;
+end
+else (oui)
+:recuperer les donnees;
+:les filters et calculer (nbr contacts actives..);
+:dessiner les analytiques;
+:afficher les resultats;
+endif
+end
+@enduml
+================
+@startuml
+title voir les analytics des comptes
+swimlane USER as directeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page;
+|systeme|
+if (utilisateur a la permission) is (non) then
+:afficher l'erreur du permission;
+end
+else (oui)
+:recuperer les donnees;
+:les filters et calculer (comptes par secteur/type);
+:dessiner les analytiques;
+:afficher les resultats;
+endif
+end
+@enduml
+================
+@startuml
+title voir les analytics des opportunite
+swimlane USER as directeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page;
+|systeme|
+if (utilisateur a la permission) is (non) then
+:afficher l'erreur du permission;
+end
+else (oui)
+:recuperer les donnees;
+:les filters et calculer (opportunite gagnee/perdu);
+:Calculer les revenus de l'équipe (montant des opportunite gagnee);
+:dessiner les analytiques;
+:afficher les resultats;
+endif
+end
+@enduml
+================
+@startuml
+title voir les analytics de campagne
+swimlane USER as directeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page;
+|systeme|
+if (utilisateur a la permission) is (non) then
+:afficher l'erreur du permission;
+end
+else (oui)
+:recuperer les donnees (clients/opportunites attires...);
+:les filters et calculer (budget - cout reel...);
+:dessiner les analytiques;
+:afficher les resultats;
+endif
+end
+@enduml
+
+
+
+
+
+
+

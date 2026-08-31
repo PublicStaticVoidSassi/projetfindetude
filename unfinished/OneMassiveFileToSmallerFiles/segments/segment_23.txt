@@ -1,0 +1,29 @@
+@startuml
+title cloturer une opportunity
+|USER| Directeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des opportunites;
+:choisir l'opportunite a cloture;
+if () is (opportunite gagnee) then
+:cliquer sur "marquer comme gagnee";
+else (opportunite perdu)
+:cliquer sur "marquer comme perdu";
+endif
+|systeme|
+if (utilisateur a la permission de cloturer) is (oui) then
+if (opportunite gagnee) is (oui) then
+:ajouter sa valeur a le montant total d'equipe;
+endif
+if (opportunite creer avec un prospect) is (oui) then
+:convertir le prospect a un contact;
+endif
+:sauvgarder le changement d'opportunity;
+:afficher un message du succes;
+else (non)
+:afficher l'erreur;
+end
+endif
+end
+@enduml

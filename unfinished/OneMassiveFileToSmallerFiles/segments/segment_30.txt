@@ -1,0 +1,22 @@
+@startuml
+title suppression d'un reunions
+|USER| support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des reunions;
+|systeme|
+:afficher la list des reunions;
+|USER|
+:choisir un reunions;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le reunions;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml

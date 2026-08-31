@@ -1,0 +1,21 @@
+@startuml
+title Modification du profile
+|USER| utilisateur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page;
+|systeme|
+:afficher la formulaire;
+|USER|
+:entrer les nouveau donnees;
+|systeme|
+if (les donnees sont acceptable?) is (faux) then
+:afficher l'erreur;
+end
+else (vrai)
+:enregistrer les nouveau donnees;
+:afficher un message de sucess;
+endif
+end
+@enduml

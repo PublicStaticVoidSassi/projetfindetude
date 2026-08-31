@@ -1,0 +1,12 @@
+@startuml
+|Utilisateur|
+start
+:Authentifier;
+:Demander la liste des XYZXYZs;
+
+|Système|
+:Récupérer les XYZXYZs;
+:Afficher les XYZXYZs;
+
+stop
+@enduml

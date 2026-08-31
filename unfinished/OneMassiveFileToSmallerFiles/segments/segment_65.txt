@@ -1,0 +1,20 @@
+@startuml
+title voir les analytics des opportunite
+|USER| directeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page;
+|systeme|
+if (utilisateur a la permission) is (non) then
+:afficher l'erreur du permission;
+end
+else (oui)
+:recuperer les donnees;
+:les filters et calculer (opportunite gagnee/perdu);
+:Calculer les revenus de l'équipe (montant des opportunite gagnee);
+:dessiner les analytiques;
+:afficher les resultats;
+endif
+end
+@enduml

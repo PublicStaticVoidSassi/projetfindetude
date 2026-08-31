@@ -1,0 +1,22 @@
+@startuml
+title suppression d'un opportunites
+|USER| marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des opportunites;
+|systeme|
+:afficher la list des opportunites;
+|USER|
+:choisir un opportunites;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le opportunites;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml

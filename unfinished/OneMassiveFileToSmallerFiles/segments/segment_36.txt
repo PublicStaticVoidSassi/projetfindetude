@@ -1,0 +1,26 @@
+@startuml
+title creation d'un notes
+|USER| support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page d'un client ou opportunite;
+|systeme|
+:afficher la list des notes;
+|USER|
+:cliquer sur "Ajouter un notes";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire (title, type et details);
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau notes;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml

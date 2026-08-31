@@ -1,0 +1,27 @@
+@startuml
+title modification d'un utilisateurs
+|USER| admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des utilisateurs;
+|systeme|
+:afficher la list des utilisateurs;
+|USER|
+:choisir un utilisateurs;
+:cliquer sur "Modifier";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:mettre a jour le utilisateurs;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml

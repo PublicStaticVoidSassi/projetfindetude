@@ -1,0 +1,26 @@
+@startuml
+title creation d'un prospects
+|USER| marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des prospects;
+|systeme|
+:afficher la list des prospects;
+|USER|
+:cliquer sur "Ajouter un prospects";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire (nom, source etc...);
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau prospects;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+title creation d'un utilisateurs
+|USER| admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des utilisateurs;
+|systeme|
+:afficher la list des utilisateurs;
+|USER|
+:cliquer sur "Ajouter un utilisateurs";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau utilisateurs;
+:afficher un message du succes;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml

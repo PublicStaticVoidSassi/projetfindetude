@@ -1,0 +1,27 @@
+@startuml
+title creation d'un taches
+|USER| support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des taches;
+|systeme|
+:afficher la list des taches;
+|USER|
+:cliquer sur "Ajouter un taches";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire (date debut, date fin, priorite);
+:Choisissez un utilisateur pour effectuer la tache;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if (utilisateur est occupé) is (faux) then
+:creer la tache;
+:afficher un message du succes;
+else (vrai)
+:afficher qu'il doit changer la period ou l'utilisateur;
+endif
+end
+@enduml

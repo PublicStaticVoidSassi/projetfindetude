@@ -1,0 +1,22 @@
+@startuml
+title suppression d'un prospects
+|USER| marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des prospects;
+|systeme|
+:afficher la list des prospects;
+|USER|
+:choisir un prospects;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le prospects;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml

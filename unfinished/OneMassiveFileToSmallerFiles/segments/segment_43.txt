@@ -1,0 +1,19 @@
+@startuml
+title voir les emails
+|USER| support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des emails;
+:écrit le mot de recherche;
+:choisir le colon a trier;
+:choisir la page;
+|systeme|
+:recuper les emails;
+:les filtrer par la "search" (par default null);
+:les orderer par le colon choisi (par default date creation);
+:les filtrer par l'authorization d'utilisateur actuel;
+:appliquer la pagination (10 emailss par page);
+:afficher la list;
+end
+@enduml

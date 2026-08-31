@@ -1,0 +1,27 @@
+@startuml
+title creation d'un appels
+|USER| support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des appels;
+|systeme|
+:afficher la list des appels;
+|USER|
+:cliquer sur "Ajouter un appels";
+|systeme|
+:afficher la formulaire;
+|USER|
+:remplir la formulaire (date debut, date fin, duree, telephone);
+:Choisissez un utilisateur pour effectuer l'appel;
+:soumettre la formulaire;
+|systeme|
+:verifier les donnees;
+if (utilisateur est occupé) is (faux) then
+:creer le nouveau appels;
+:afficher un message du succes;
+else (vrai)
+:afficher qu'il doit changer la period ou l'utilisateur;
+endif
+end
+@enduml

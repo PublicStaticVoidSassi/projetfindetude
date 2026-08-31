@@ -1,0 +1,22 @@
+@startuml
+title suppression d'un contacts
+|USER| marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des contacts;
+|systeme|
+:afficher la list des contacts;
+|USER|
+:choisir un contacts;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le contacts;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml

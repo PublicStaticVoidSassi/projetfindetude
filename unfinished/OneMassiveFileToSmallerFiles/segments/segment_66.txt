@@ -1,0 +1,19 @@
+@startuml
+title voir les analytics de campagne
+|USER| directeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page;
+|systeme|
+if (utilisateur a la permission) is (non) then
+:afficher l'erreur du permission;
+end
+else (oui)
+:recuperer les donnees (clients/opportunites attires...);
+:les filters et calculer (budget - cout reel...);
+:dessiner les analytiques;
+:afficher les resultats;
+endif
+end
+@enduml

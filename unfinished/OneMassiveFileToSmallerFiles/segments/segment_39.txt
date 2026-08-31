@@ -1,0 +1,12 @@
+@startuml
+title voir les notes
+|USER| support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page d'un client ou opportunite;
+|systeme|
+:recuper les notes;
+:afficher la list;
+end
+@enduml

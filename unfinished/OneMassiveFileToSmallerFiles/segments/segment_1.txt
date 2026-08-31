@@ -1,0 +1,20 @@
+@startuml
+title Authentification
+|USER| utilisateur
+|USER|
+start
+:navigue a la page;
+|systeme|
+:afficher la formulaire;
+|USER|
+:entrer le nom et le mot de passe;
+|systeme|
+if (Identifiants) is (incorrects) then
+:afficher l'erreur;
+end
+else (correct)
+:accorder l'accès;
+:rediriger vers la page d'accueil;
+endif
+end
+@enduml

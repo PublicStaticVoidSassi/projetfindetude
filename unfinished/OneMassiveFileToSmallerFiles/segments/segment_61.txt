@@ -1,0 +1,26 @@
+@startuml
+title donner un utilisateur des roles
+|USER| admin
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des utilisateurs;
+|systeme|
+:afficher la list des utilisateurs;
+|USER|
+:choisir le utilisateur a manipuler;
+:choisir les roles a changer;
+:cocher les cases des roles;
+:soumettre;
+|systeme|
+if (l'utilisateur a au moins un role) is (oui) then
+:mettre a jour l'utilisateur;
+:sauvgarder le changement;
+:afficher un message du succes;
+else (non)
+:erreur "un utilisateur doit avoir au moins un role";
+end
+endif
+end
+
+@enduml

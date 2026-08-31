@@ -1,0 +1,22 @@
+@startuml
+title suppression d'un campagnes
+|USER| marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des campagnes;
+|systeme|
+:afficher la list des campagnes;
+|USER|
+:choisir un campagnes;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (la suppression est authorizee?) is (vrai) then
+:masquer le campagnes;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml

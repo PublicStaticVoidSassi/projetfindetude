@@ -1,0 +1,22 @@
+@startuml
+title suppression d'un notes
+|USER| support
+|USER|
+start
+:s'authentifier;
+:naviguer a la page d'un client ou opportunite;
+|systeme|
+:afficher la list des notes;
+|USER|
+:choisir un notes;
+:cliquer sur "Effacer";
+|systeme|
+:verifier les donnees;
+if (l'utilisateur est le propriétaire) is (vrai) then
+:masquer la note;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml

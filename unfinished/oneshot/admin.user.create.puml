@@ -1,0 +1,19 @@
+@startuml
+|Utilisateur|
+start
+:Authentifier;
+:Navigue vers la page de XYZXYZ;
+:Saisir les informations de XYZXYZ;
+
+|Système|
+:Valider les données;
+
+if (Données valides ?) then (Oui)
+    :Créer XYZXYZ;
+    :Confirmer la création;
+else (Non)
+    :Afficher une erreur;
+endif
+
+stop
+@enduml
