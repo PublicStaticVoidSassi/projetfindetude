@@ -24,7 +24,8 @@ public class UniFlowCRMPermissionDefinitionProvider : PermissionDefinitionProvid
         CampaignPermission.AddChild(UniFlowCRMPermissions.Campaign.Create, L("Permission:Books.Create"));
         CampaignPermission.AddChild(UniFlowCRMPermissions.Campaign.Edit, L("Permission:Books.Edit"));
         CampaignPermission.AddChild(UniFlowCRMPermissions.Campaign.Delete, L("Permission:Books.Delete"));
-        CampaignPermission.AddChild(UniFlowCRMPermissions.Campaign.Convert, L("Permission:Lead.Convert"));
+        CampaignPermission.AddChild(UniFlowCRMPermissions.Campaign.Activate, L("Permission:Campaign.Activate"));
+        CampaignPermission.AddChild(UniFlowCRMPermissions.Campaign.Deactivate, L("Permission:Campaign.Deactivate"));
 
         var LeadPermission = myGroup.AddPermission(UniFlowCRMPermissions.Lead.Default, L("Permission:Lead"));
         LeadPermission.AddChild(UniFlowCRMPermissions.Lead.ViewAll, L("Permission:Books.ViewAll"));
@@ -32,6 +33,7 @@ public class UniFlowCRMPermissionDefinitionProvider : PermissionDefinitionProvid
         LeadPermission.AddChild(UniFlowCRMPermissions.Lead.Edit, L("Permission:Books.Edit"));
         LeadPermission.AddChild(UniFlowCRMPermissions.Lead.Delete, L("Permission:Books.Delete"));
         LeadPermission.AddChild(UniFlowCRMPermissions.Lead.Convert, L("Permission:Lead.Convert"));
+        LeadPermission.AddChild(UniFlowCRMPermissions.Lead.Qualify, L("Permission:Lead.Qualify"));
 
         var AccountPermission = myGroup.AddPermission(UniFlowCRMPermissions.Account.Default, L("Permission:Account"));
         AccountPermission.AddChild(UniFlowCRMPermissions.Account.ViewAll, L("Permission:Books.ViewAll"));
@@ -79,8 +81,8 @@ public class UniFlowCRMPermissionDefinitionProvider : PermissionDefinitionProvid
 
         var NotePermission = myGroup.AddPermission(UniFlowCRMPermissions.Note.Default, L("Permission:Note"));
         NotePermission.AddChild(UniFlowCRMPermissions.Note.Create, L("Permission:Books.Create"));
-        //NotePermission.AddChild(UniFlowCRMPermissions.Note.Edit, L("Permission:Books.Edit"));
-        //NotePermission.AddChild(UniFlowCRMPermissions.Note.Delete, L("Permission:Books.Delete"));
+        NotePermission.AddChild(UniFlowCRMPermissions.Note.Edit, L("Permission:Books.Edit"));
+        NotePermission.AddChild(UniFlowCRMPermissions.Note.Delete, L("Permission:Books.Delete"));
 
 
 

@@ -26,10 +26,10 @@
           {{note.content}}
 @if(isOwner){
           <div class="d-flex justify-content-end">
-<button (click)="delete()" class="py-1 px-2 bg-danger text-white btn-sm rounded me-2">
+<button *abpPermission='"UniFlowCRM.Note.Delete"' (click)="delete()" class="py-1 px-2 bg-danger text-white btn-sm rounded me-2">
   <i class="fa fa-trash"></i>
 </button>
-<button (click)="edit()" class="py-1 px-2 bg-info text-white rounded  btn-sm ">
+<button *abpPermission='"UniFlowCRM.Note.Edit"' (click)="edit()" class="py-1 px-2 bg-info text-white rounded  btn-sm ">
   <i class="fa fa-pen"></i>
 </button>
 
@@ -44,7 +44,7 @@
 <!-- @if(isModalOpen){ -->
     <abp-modal [(visible)]="isModalOpen">
   <ng-template #abpHeader>
-   
+
   </ng-template>
 
   <ng-template #abpBody>
@@ -89,7 +89,7 @@
                 {{ t.key }}
               </option>
             }
-              
+
             </select>
 
 
@@ -113,7 +113,7 @@
             [value]="note.content"
           ></textarea>
 
-          
+
         </div>
       </div>
 

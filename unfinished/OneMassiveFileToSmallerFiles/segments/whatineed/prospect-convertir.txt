@@ -1,0 +1,21 @@
+@startuml
+title convertir un prospect
+|USER| marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer dans la page des prospect;
+:choisir le prospect à convertir;
+:cliquer sur "convertir";
+|systeme|
+if (le prospect est qualifie) is (oui) then
+:change le status du prospect à "converti";
+:creer un contact avec les information de prospect;
+:sauvgarder le changement;
+:afficher un message de succės;
+end
+else (non)
+:afficher l'erreur;
+end
+endif
+@enduml

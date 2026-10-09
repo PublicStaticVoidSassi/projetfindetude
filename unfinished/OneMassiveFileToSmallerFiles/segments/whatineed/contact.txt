@@ -1,0 +1,26 @@
+@startuml
+title Création d'un contact
+|USER| marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer dans la page des contacts;
+|systeme|
+:afficher la liste des contacts;
+|USER|
+:cliquer sur "ajouter un contact";
+|systeme|
+:afficher le formulaire;
+|USER|
+:remplir le formulaire;
+:soumettre le formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau contact;
+:afficher un message de succės;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml

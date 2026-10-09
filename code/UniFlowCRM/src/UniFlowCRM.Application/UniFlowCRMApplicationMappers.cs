@@ -39,14 +39,14 @@ public partial class DtoToCampaignMapper : MapperBase<CreateUpdateCampaignDto, C
         startDate: source.StartDate,
         endDate: source.EndDate,
         assignedTo: source.AssignedTo,
-        budget: new Money(value:source.BudgetValue,currency:source.BudgetCurrency),
-        costSoFar: new Money(value:source.CostSoFarValue,currency:source.CostSoFarCurrency)
+        budget: new Money(value: source.BudgetValue, currency: source.BudgetCurrency),
+        costSoFar: new Money(value: source.CostSoFarValue, currency: source.CostSoFarCurrency)
         );
         return target;
     }
 
     public override partial void Map(CreateUpdateCampaignDto source, Campaign destination);
-    
+
 }
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 public partial class CampaignToDtoMapper : MapperBase<Campaign, CampaignDto>
@@ -217,26 +217,37 @@ public partial class DtoToCall : MapperBase<CreateUpdateCallDto, Call>
 {
     public override Call Map(CreateUpdateCallDto source)
     {
-        return new Call(source.Id, source.Name)
-        {
-            Description = source.Description,
-            Status = source.Status,
-            Direction = source.Direction,
-            StartTime = source.StartTime,
-            EndTime = source.EndTime,
-            Duration = source.Duration,
-            PhoneNumber = (source.PhoneNumber is not null && source.PhoneCode is not null) ? new PhoneNumber(source.PhoneNumber, source.PhoneCode) : null,
-            AccountID = source.AccountID,
-            ContactID = source.ContactID,
-            OpportunityID = source.OpportunityID,
-            LeadID = source.LeadID,
-            OwnerID = source.OwnerID,
-        };
+        var target = new Call(source.Id, source.Name);
+        target.Description = source.Description;
+        target.Status = source.Status;
+        target.Direction = source.Direction;
+        target.StartTime = source.StartTime;
+        target.EndTime = source.EndTime;
+        target.Duration = source.Duration;
+        target.PhoneNumber = new PhoneNumber(source.PhoneNumber, source.PhoneCode);
+        target.AccountID = source.AccountID;
+        target.ContactID = source.ContactID;
+        target.OpportunityID = source.OpportunityID;
+        target.LeadID = source.LeadID;
+        target.OwnerID = source.OwnerID;
+        return target;
     }
 
     public override void Map(CreateUpdateCallDto source, Call destination)
     {
-        destination = this.Map(source);
+        destination.Name = source.Name;
+        destination.Description = source.Description;
+        destination.Status = source.Status;
+        destination.Direction = source.Direction;
+        destination.StartTime = source.StartTime;
+        destination.EndTime = source.EndTime;
+        destination.Duration = source.Duration;
+        destination.PhoneNumber = new PhoneNumber(source.PhoneNumber, source.PhoneCode);
+        destination.AccountID = source.AccountID;
+        destination.ContactID = source.ContactID;
+        destination.OpportunityID = source.OpportunityID;
+        destination.LeadID = source.LeadID;
+        destination.OwnerID = source.OwnerID;
     }
 }
 // Email

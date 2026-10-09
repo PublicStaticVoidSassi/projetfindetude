@@ -36,11 +36,11 @@
 <!--    </div>-->
     @if (campaign.endDate && (campaign.endDate | date:'yyyy-MM-dd') > (today | date:'yyyy-MM-dd')) {
       @if(campaign.status !== CampaignStatus.active){
-        <button (click)="activate()" class="btn btn-success btn-sm">
+        <button *abpPermission='"UniFlowCRM.Campaign.Activate"' (click)="activate()" class="btn btn-success btn-sm">
           Activer
         </button>
       }@else{
-        <button (click)="deactivate()" class="btn btn-danger btn-sm">
+        <button *abpPermission='"UniFlowCRM.Campaign.Deactivate"' (click)="deactivate()" class="btn btn-danger btn-sm">
           Disactiver
         </button>
       }

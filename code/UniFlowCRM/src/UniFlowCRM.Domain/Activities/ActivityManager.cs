@@ -18,6 +18,10 @@ public class ActivityManager
 {
     public async System.Threading.Tasks.Task CheckTimeAvailableAsync(Guid userid, DateTime start, DateTime end, CancellationToken ctx = default)
     {
+        if (end < start)
+        {
+            throw new UserFriendlyException($"La date debut '{start}' doit etre apres la date fin '{end}'");
+        }
         var meeting = (await meetingRepository.GetQueryableAsync())
             .FirstOrDefault(m => m.OwnerID == userid && start < m.EndTime && end > m.StartTime);
         var call = (await callRepository.GetQueryableAsync())

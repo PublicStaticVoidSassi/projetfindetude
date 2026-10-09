@@ -32,7 +32,8 @@ public static class UniFlowCRMPermissions
         public const string Create = Default + ".Create";
         public const string Edit = Default + ".Edit";
         public const string Delete = Default + ".Delete";
-        public const string Convert = Default + ".Convert";
+        public const string Activate = Default + ".Activate";
+        public const string Deactivate = Default + ".Deactivate";
     }
 
     public static class Lead
@@ -43,6 +44,7 @@ public static class UniFlowCRMPermissions
         public const string Edit = Default + ".Edit";
         public const string Delete = Default + ".Delete";
         public const string Convert = Default + ".Convert";
+        public const string Qualify = Default + ".Qualify";
     }
 
     public static class Account
@@ -115,8 +117,8 @@ public static class UniFlowCRMPermissions
     {
         public const string Default = GroupName + ".Note";
         public const string Create = Default + ".Create";
-        //public const string Edit = Default + ".Edit";
-        //public const string Delete = Default + ".Delete";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
     }
 
 

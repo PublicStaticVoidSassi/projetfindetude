@@ -31,7 +31,7 @@ namespace UniFlowCRM.Contacts
         public IdentityUserDto? LastModifier { get; set; }
     }
 
-    [Authorize]
+    [Authorize(UniFlowCRMPermissions.Contact.Default)]
     public class ContactsAppService :
       CrudAppService<
       Contact,
@@ -271,6 +271,7 @@ namespace UniFlowCRM.Contacts
 
             return query;
         }
+        [Authorize(UniFlowCRMPermissions.Contact.Create)]
         public override async Task<ContactDto> CreateAsync(CreateUpdateContactDto input)
         {
             Contact con = new Contact(input.Id, input.FirstName);
@@ -278,12 +279,18 @@ namespace UniFlowCRM.Contacts
             await Repository.InsertAsync(con);
             return ObjectMapper.Map<Contact, ContactDto>(con);
         }
+        [Authorize(UniFlowCRMPermissions.Contact.Edit)]
         public override async Task<ContactDto> UpdateAsync(Guid id, CreateUpdateContactDto input)
         {
             Contact con = await Repository.FindAsync(id) ?? throw new EntityNotFoundException();
             Initialize(con, input);
             await Repository.UpdateAsync(con);
             return ObjectMapper.Map<Contact, ContactDto>(con);
+        }
+        [Authorize(UniFlowCRMPermissions.Contact.Delete)]
+        public override async Task DeleteAsync(Guid id)
+        {
+            await base.DeleteAsync(id);
         }
     }
 }

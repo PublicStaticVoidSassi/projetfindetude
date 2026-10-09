@@ -1,0 +1,39 @@
+@startuml
+title envoyer un email
+|USER| support
+|USER|
+start
+:s'authentifier;
+:naviguer dans la page des emails;
+:choisir l'email a envoyer;
+:clique sur "envoyer";
+|systeme|
+if (utilisateur authorizé à envoyer) is (oui) then
+   :envoyer l'email a le fournisseur;
+   if (fournisseur est disponible) is (oui) then
+      |fournisseur email|
+      if (address mail est juste) is (oui) then
+         :envoyer l'email à le destinataire;
+         |systeme|
+         :sauvgarder l'email comme "envoyé";
+         :afficher un message de succės;
+         end
+      else (non)
+         |systeme|
+         :sauvgarde l'email comme "echec d'envoi";
+         :erreur "adresse mail incorrect";
+         end
+      endif
+   else (non)
+      :sauvgarde l'email comme "echec d'envoi";
+      :erreur "fournisseur mail indisponible";
+      end
+   endif
+else (non)
+|systeme|
+:affiche un erreur de permissions;
+end
+endif
+end
+
+@enduml

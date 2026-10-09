@@ -1,0 +1,26 @@
+@startuml
+title Creation d'une opportunitė
+|USER| marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des opportunites;
+|systeme|
+:afficher la liste des opportunites;
+|USER|
+:cliquer sur "ajouter une opportunitė";
+|systeme|
+:afficher le formulaire;
+|USER|
+:remplir le formulaire;
+:soumettre le formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer la nouvelle opportunitė;
+:afficher un message de succės;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml

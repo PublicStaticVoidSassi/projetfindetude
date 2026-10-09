@@ -14,8 +14,8 @@ public class Call : FullAuditedAggregateRoot<Guid>, IExpirable
     public CallDirection Direction { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
-    public int? Duration { get; set; }
-    public PhoneNumber? PhoneNumber { get; set; }
+    public int Duration { get; set; }
+    public PhoneNumber PhoneNumber { get; set; }
 
     // Relations avec d'autres entités CRM
     public Guid? AccountID { get; set; }
@@ -24,7 +24,7 @@ public class Call : FullAuditedAggregateRoot<Guid>, IExpirable
     public Guid? LeadID { get; set; }
 
     // Assignation
-    public Guid? OwnerID { get; set; }
+    public Guid OwnerID { get; set; }
     public Call(Guid id, string name) : base(id)
     {
         SetName(name);

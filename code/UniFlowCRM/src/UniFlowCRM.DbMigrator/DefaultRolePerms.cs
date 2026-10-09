@@ -42,6 +42,7 @@ namespace UniFlowCRM.Permission
         UniFlowCRMPermissions.Lead.Create,
         UniFlowCRMPermissions.Lead.Edit,
         UniFlowCRMPermissions.Lead.Delete,
+        UniFlowCRMPermissions.Lead.Qualify,
         UniFlowCRMPermissions.Account.Create,
         UniFlowCRMPermissions.Account.Edit,
         UniFlowCRMPermissions.Account.Delete,
@@ -57,6 +58,18 @@ namespace UniFlowCRM.Permission
                 UniFlowCRMPermissions.Lead.Convert,
                 UniFlowCRMPermissions.Opportunity.Close,
                 UniFlowCRMPermissions.Email.Send,
+                UniFlowCRMPermissions.Administration.Default,
+                UniFlowCRMPermissions.Analytics.Default,
+        UniFlowCRMPermissions.Lead.ViewAll,
+        UniFlowCRMPermissions.Contact.ViewAll,
+        UniFlowCRMPermissions.Account.ViewAll,
+        UniFlowCRMPermissions.Opportunity.ViewAll,
+        UniFlowCRMPermissions.Task.ViewAll,
+        UniFlowCRMPermissions.Call.ViewAll,
+        UniFlowCRMPermissions.Meeting.ViewAll,
+        UniFlowCRMPermissions.Email.ViewAll,
+        UniFlowCRMPermissions.Campaign.ViewAll,
+
 
                     }
                     ) // Concat(IdentityPermissions.GetAll())

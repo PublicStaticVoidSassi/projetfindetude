@@ -10,7 +10,7 @@
         [disabled]="lead.status===LeadStatus.Converted"
         (click)="convert()">{{"::Lead:Convert"|abpLocalization}}</button>
       @if(lead.status !== LeadStatus.Qualified){
-      <button class="btn btn-primary btn-sm" (click)="qualify()">Qualifier</button>
+      <button *abpPermission='"UniFlowCRM.Lead.Qualify"' class="btn btn-primary btn-sm" (click)="qualify()">Qualifier</button>
       }}
 
 

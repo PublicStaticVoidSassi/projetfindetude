@@ -299,20 +299,6 @@ public class OpportunitiesAppService : CrudAppService<
         return dto;
     }
 
-    /*private async Task<OpportunityDto> AddNavigationProperties(OpportunityDto dto)
-    {
-        if (dto.AccountID is not null)
-            dto.Account = ObjectMapper.Map<Account, AccountDto>(await _accountRepository.GetAsync((Guid)dto.AccountID));
-        if (dto.UserID is not null)
-            dto.User = ObjectMapper.Map<IdentityUser, IdentityUserDto>(
-                (await _userRepository.GetAsync((Guid)dto.UserID)));
-        if (dto.LeadID is not null)
-            dto.Lead = ObjectMapper.Map<Lead, LeadDto>(await _leadRepository.GetAsync((Guid)dto.LeadID));
-        if (dto.ContactID is not null)
-            dto.Contact = ObjectMapper.Map<Contact, ContactDto>(await _contactRepository.GetAsync((Guid)dto.ContactID));
-        return dto;
-    }*/
-
     public override async Task<PagedResultDto<OpportunityDto>> GetListAsync(OpportunityRequestDto input)
     {
         var query = (await GetQueryableAsync(input));
@@ -362,5 +348,10 @@ public class OpportunitiesAppService : CrudAppService<
         }
         await Repository.UpdateAsync(opp);
         return ObjectMapper.Map<Opportunity, OpportunityDto>(opp);
+    }
+    [Authorize(UniFlowCRMPermissions.Opportunity.Delete)]
+    public override async Task DeleteAsync(Guid id)
+    {
+        await base.DeleteAsync(id);
     }
 }

@@ -12,6 +12,7 @@ using UniFlowCRM.Contacts;
 using UniFlowCRM.Leads;
 //using UniFlowCRM.meetings;
 using UniFlowCRM.Opportunities;
+using UniFlowCRM.Permissions;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Authorization.Permissions;
@@ -74,20 +75,27 @@ IMeetingAppService
         this.permissionChecker = permissionChecker;
         _activityManager = activityManager;
     }
-
+    [Authorize(UniFlowCRMPermissions.Meeting.Create)]
     public override async Task<MeetingDto> CreateAsync(CreateUpdateMeetingDto input)
     {
         await _activityManager.CheckTimeAvailableAsync(input.OwnerID, input.StartTime, input.EndTime);
 
         return await base.CreateAsync(input);
     }
+    [Authorize(UniFlowCRMPermissions.Meeting.Delete)]
+    public override async Task DeleteAsync(Guid id)
+    {
+        await base.DeleteAsync(id);
+    }
 
+    [Authorize(UniFlowCRMPermissions.Meeting.Edit)]
     public override async Task<MeetingDto> UpdateAsync(Guid id, CreateUpdateMeetingDto input)
     {
         await _activityManager.CheckTimeAvailableAsync(input.OwnerID, input.StartTime, input.EndTime);
 
         return await base.UpdateAsync(id, input);
     }
+
 
     public override async Task<PagedResultDto<MeetingDto>> GetListAsync(MeetingRequestDto input)
     {

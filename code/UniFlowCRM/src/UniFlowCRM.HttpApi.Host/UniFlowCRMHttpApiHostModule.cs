@@ -283,7 +283,9 @@ public class UniFlowCRMHttpApiHostModule : AbpModule
 
         if (MultiTenancyConsts.IsEnabled)
         {
+#pragma warning disable CS0162
             app.UseMultiTenancy();
+#pragma warning restore CS0162
         }
 
         app.UseUnitOfWork();

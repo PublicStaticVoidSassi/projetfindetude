@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { LocalizationPipe, RoutesService } from '@abp/ng.core';
+import { LocalizationPipe, PermissionDirective, RoutesService } from '@abp/ng.core';
 import { ActivatedRoute } from '@angular/router';
 import { CampaignDto, CampaignService, CampaignStatus } from '../../proxy/campaigns';
 import { DatePipe, DecimalPipe } from '@angular/common';
@@ -10,6 +10,7 @@ import { ToasterService } from '@abp/ng.theme.shared';
 @Component({
   selector: 'app-details',
   imports: [
+    PermissionDirective,
     DatePipe,
     DecimalPipe,
     LocalizationPipe

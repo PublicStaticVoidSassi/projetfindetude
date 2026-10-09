@@ -1,0 +1,26 @@
+@startuml
+title crėation d'une campagne
+|USER| marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer dans la page des campagnes;
+|systeme|
+:afficher la liste des campagnes;
+|USER|
+:cliquer sur "ajouter une campagne";
+|systeme|
+:afficher le formulaire;
+|USER|
+:remplir le formulaire;
+:soumettre le formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer la nouvelle campagne;
+:afficher un message du succės;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml

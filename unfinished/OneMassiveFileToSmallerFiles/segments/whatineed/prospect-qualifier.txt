@@ -1,0 +1,20 @@
+@startuml
+title qualifier un prospect
+|USER| marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer dans la page des prospect;
+:choisir le prospect à qualifier;
+:cliquer sur "qualifier";
+|systeme|
+if (utilisateur a le permission à qualifier) is (oui) then
+:change le status du prospect à "qualifié";
+:sauvgarder le changement;
+:afficher un message de succės;
+end
+else (non)
+:afficher un message d'erreur;
+end
+endif
+@enduml

@@ -76,10 +76,31 @@ public class CallsAppService : CrudAppService<Call, CallDto, Guid, CallRequestDt
         await _activityManager.CheckTimeAvailableAsync(input.OwnerID, input.StartTime, input.EndTime);
         return await base.CreateAsync(input);
     }
-
+    [Authorize(UniFlowCRMPermissions.Call.Delete)]
+    public override async Task DeleteAsync(Guid id)
+    {
+        await base.DeleteAsync(id);
+    }
+    [Authorize(UniFlowCRMPermissions.Call.Edit)]
     public override async Task<CallDto> UpdateAsync(Guid id, CreateUpdateCallDto input)
     {
         await _activityManager.CheckTimeAvailableAsync(input.OwnerID, input.StartTime, input.EndTime);
+        // var call = await Repository.GetAsync(id);
+        // call.Description = input.Description;
+        // call.Direction = input.Direction;
+        // call.Duration = input.Duration;
+        // call.EndTime = input.EndTime;
+        // if (input.LeadID != null) call.LeadID = input.LeadID;
+        // if (input.ContactID != null) call.ContactID = input.ContactID;
+        // if (input.AccountID != null) call.AccountID = input.AccountID;
+        // if (input.OpportunityID != null) call.OpportunityID = input.OpportunityID;
+        // call.Name = input.Name;
+        // call.OwnerID = input.OwnerID;
+        // call.PhoneNumber = new PhoneNumbers.PhoneNumber(input.PhoneNumber, input.PhoneCode);
+        // call.StartTime = input.StartTime;
+        // call.Status = input.Status;
+        // call = await Repository.UpdateAsync(call);
+        // return ObjectMapper.Map<Call, CallDto>(call);
 
         return await base.UpdateAsync(id, input);
     }

@@ -214,7 +214,6 @@ namespace UniFlowCRM.Leads
             return ObjectMapper.Map<Lead, LeadDto>(lead);
         }
         [Authorize(UniFlowCRMPermissions.Lead.Edit)]
-
         public override async Task<LeadDto> UpdateAsync(Guid id, CreateUpdateLeadDto input)
         {
             Lead? lead = await Repository.FindAsync(id) ?? throw new EntityNotFoundException();
@@ -223,11 +222,11 @@ namespace UniFlowCRM.Leads
             return ObjectMapper.Map<Lead, LeadDto>(lead);
         }
         [Authorize(UniFlowCRMPermissions.Lead.Convert)]
-
         public async Task<Guid> ConvertAsync(Guid id)
         {
             return await leadManager.ConvertAsync(id);
         }
+        [Authorize(UniFlowCRMPermissions.Lead.Qualify)]
         public async Task QualifyAsync(Guid id)
         {
             var lead = await Repository.GetAsync(id);

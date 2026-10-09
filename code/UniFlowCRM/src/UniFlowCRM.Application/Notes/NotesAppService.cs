@@ -14,10 +14,11 @@ using Volo.Abp.Domain.Repositories;
 using System.Linq.Dynamic.Core;
 using Volo.Abp.Identity;
 using Microsoft.AspNetCore.Authorization;
+using UniFlowCRM.Permissions;
 
 namespace UniFlowCRM.Notes;
 
-[Authorize]
+[Authorize(UniFlowCRMPermissions.Note.Default)]
 public class NotesAppService : CrudAppService<Note, NoteDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateNoteDto>, INotesAppService
 {
     private readonly IRepository<IdentityUser, Guid> _userRepository;
@@ -247,8 +248,7 @@ public class NotesAppService : CrudAppService<Note, NoteDto, Guid, PagedAndSorte
                        : null
                };
     }
-    public override async Task<PagedResultDto<NoteDto>> GetListAsync(
-        PagedAndSortedResultRequestDto input)
+    public override async Task<PagedResultDto<NoteDto>> GetListAsync(PagedAndSortedResultRequestDto input)
     {
         var query = await GetQueryableAsync(input);
         //query = query
@@ -271,6 +271,12 @@ public class NotesAppService : CrudAppService<Note, NoteDto, Guid, PagedAndSorte
         return await AsyncExecuter.FirstAsync(query) ?? throw new EntityNotFoundException();
     }
 
+    [Authorize(UniFlowCRMPermissions.Note.Delete)]
+    public async override Task DeleteAsync(Guid id)
+    {
+        await base.DeleteAsync(id);
+    }
+    [Authorize(UniFlowCRMPermissions.Note.Edit)]
     public async override Task<NoteDto> UpdateAsync(Guid id, CreateUpdateNoteDto input)
     {
         var note = await Repository.GetAsync(id);

@@ -1,0 +1,31 @@
+@startuml
+title la disactivation d'une campagne
+|USER| Marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer a la page des campagnes;
+:choisir le campagne a disactiver;
+:cliquer sur "disactiver";
+|systeme|
+if (utilisateur est authorizé à disactiver les campagnes) is (oui) then
+if (date debut < date actuelle < date fin) is (oui) then
+if (la campagne est active) is (oui) then
+:changer le status du campagne a "disactivé";
+:sauvgarder le changement;
+:afficher un message du succės;
+else (non)
+:afficher "la campagne est deja idisactivé";
+end
+endif
+else (non)
+:afficher l'erreur;
+end
+endif
+else (non)
+:afficher l'erreur;
+end
+endif
+end
+
+@enduml

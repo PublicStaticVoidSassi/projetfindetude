@@ -10,12 +10,13 @@ using UniFlowCRM.Contacts;
 using UniFlowCRM.Dashboards;
 using UniFlowCRM.Leads;
 using UniFlowCRM.Opportunities;
+using UniFlowCRM.Permissions;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
 
 namespace UniFlowCRM.Analytics
 {
-    [Authorize]
+    [Authorize(UniFlowCRMPermissions.Analytics.Default)]
     public class AnalyticsAppService(
         IRepository<Lead, Guid> _leadRepository,
         IRepository<Account, Guid> _accountRepository,

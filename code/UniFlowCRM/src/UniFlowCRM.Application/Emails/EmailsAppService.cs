@@ -69,8 +69,7 @@ CreateUpdateEmailDto
         IRepository<IdentityUser, Guid> usersRepository,
         IRepository<Account, Guid> accountsRepository,
         IRepository<Contact, Guid> contactsRepository,
-        IRepository<Opportunity, Guid> opportunitysRepository
-,
+        IRepository<Opportunity, Guid> opportunitysRepository,
         EmailManager emailManager,
         IPermissionChecker permissionChecker) : base(repository)
     {
@@ -89,7 +88,16 @@ CreateUpdateEmailDto
         Email email = await Repository.GetAsync(id, cancellationToken: ct);
         await _emailManager.SendEmailAsync(email);
     }
-
+    [Authorize(UniFlowCRMPermissions.Email.Edit)]
+    public override async Task<EmailDto> UpdateAsync(Guid id, CreateUpdateEmailDto dto)
+    {
+        return await base.UpdateAsync(id, dto);
+    }
+    [Authorize(UniFlowCRMPermissions.Email.Delete)]
+    public override async Task DeleteAsync(Guid id)
+    {
+        await base.DeleteAsync(id);
+    }
 
 
 

@@ -1,0 +1,27 @@
+@startuml
+title modification d'un note
+|USER| support
+|USER|
+start
+:s'authentifier;
+:naviguer dans la page d'un client ou d'une opportunitė;
+|systeme|
+:afficher la liste des notes;
+|USER|
+:choisir une note;
+:cliquer sur "Modifier";
+|systeme|
+:afficher le formulaire;
+|USER|
+:remplir le formulaire;
+:soumettre le formulaire;
+|systeme|
+:verifier les donnees;
+if (l'utilisateur est le propriétaire) is (vrai) then
+:mettre a jour la note;
+:afficher un message du succes;
+else (faux)
+:afficher l'erreur;
+endif
+end
+@enduml

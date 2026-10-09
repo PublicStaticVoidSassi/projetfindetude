@@ -1,15 +1,15 @@
 import {
   Input,
   OnInit,
-  Component, 
-  ApplicationRef, 
-  EnvironmentInjector, 
-  createComponent, 
-  ComponentRef, 
+  Component,
+  ApplicationRef,
+  EnvironmentInjector,
+  createComponent,
+  ComponentRef,
   EmbeddedViewRef,
   inject
 } from '@angular/core';
-import { ConfigStateService, LocalizationPipe, ShortDateTimePipe } from '@abp/ng.core';
+import { ConfigStateService, LocalizationPipe,PermissionDirective, ShortDateTimePipe } from '@abp/ng.core';
 import { NoteDto, NotesService, NoteType,noteTypeOptions } from '../../proxy/notes';
 import { DatePipe, NgClass } from '@angular/common';
 import { Confirmation, ConfirmationService, ToasterService, AbpVisibleDirective, ModalComponent } from '@abp/ng.theme.shared';
@@ -19,6 +19,7 @@ import { FormBuilder, FormGroup,ReactiveFormsModule, Validators } from '@angular
 @Component({
   selector: 'app-note-mini-ui',
   imports: [
+    PermissionDirective,
     ReactiveFormsModule,
     LocalizationPipe,
     NgClass,
@@ -58,7 +59,7 @@ save() {
   fb = inject(FormBuilder);
   form: FormGroup = this.fb.group({});;
   isFor: undefined | 'lead' | 'account' | 'contact' | 'opportunity';
-  
+
   ngOnInit() {
     this.form = this.fb.group({
       // id: [null],
@@ -90,7 +91,7 @@ save() {
       contactId:      [this.note.contactId],
       opportunityId:  [this.note.opportunityId],
     });
-  
+
     setTimeout(()=>{
         this.isOwner = this.configState.getOne('currentUser').id === this.note.creator?.id;
         // console.log(this.configState.getOne('currentUser').id,this.note.creator?.id)

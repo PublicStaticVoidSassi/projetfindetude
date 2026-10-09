@@ -1,0 +1,27 @@
+@startuml
+title Creation d'une tâche
+|USER| support
+|USER|
+start
+:s'authentifier;
+:naviguer dans la page des tâches;
+|systeme|
+:afficher la liste des tâches;
+|USER|
+:cliquer sur "ajouter une tâche";
+|systeme|
+:afficher le formulaire;
+|USER|
+:remplir le formulaire (date debut, date fin, priorite);
+:Choisissez un utilisateur pour effectuer la tâche;
+:soumettre le formulaire;
+|systeme|
+:verifier les donnees;
+if (utilisateur est occupé) is (faux) then
+:creer la tâche;
+:afficher un message du succes;
+else (vrai)
+:afficher qu'il doit changer la pėriode ou l'utilisateur;
+endif
+end
+@enduml

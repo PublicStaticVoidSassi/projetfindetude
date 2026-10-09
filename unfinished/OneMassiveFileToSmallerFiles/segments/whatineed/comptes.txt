@@ -1,0 +1,26 @@
+@startuml
+title Création d'un compte
+|USER| marketeur
+|USER|
+start
+:s'authentifier;
+:naviguer dans la page des compte;
+|systeme|
+:afficher la list des comptes;
+|USER|
+:cliquer sur "Ajouter un compte";
+|systeme|
+:afficher le formulaire;
+|USER|
+:remplir le formulaire;
+:soumettre le formulaire;
+|systeme|
+:verifier les donnees;
+if () is (acceptable) then
+:creer le nouveau compte;
+:afficher un message du succės;
+else (inacceptable)
+:afficher l'erreur;
+endif
+end
+@enduml

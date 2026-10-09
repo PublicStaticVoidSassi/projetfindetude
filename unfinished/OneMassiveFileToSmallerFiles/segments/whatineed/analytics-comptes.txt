@@ -1,0 +1,19 @@
+@startuml
+title voir l'analytique des comptes
+|USER| directeur
+|USER|
+start
+:s'authentifier;
+:naviguer dans la page;
+|systeme|
+if (utilisateur a la permission) is (non) then
+:afficher l'erreur du permission;
+end
+else (oui)
+:récupérer les données;
+:les filters et calculer (comptes par secteur/type);
+:dessiner les analytiques;
+:afficher les resultats;
+endif
+end
+@enduml

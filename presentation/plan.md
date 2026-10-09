@@ -1,0 +1,37 @@
+- [x] title page
+- [x] sommaire
+- [x] company stuff
+  - [x] introduce the company
+    - [x] add picture
+  - [x] what the company does
+    - [x] fix the formatting
+- [x] describe uniflow
+- [x] problematique
+- [x] l'objective
+---
+
+- [x] define a CRM
+  - [x] Campagnes
+  - [x] Clients and their types
+    - [x] Contacts
+    - [x] leads and their cycle
+    - [x] Accounts
+  - [x] Opportunities
+- [x] actors
+  - [x] Marketeur, Directeur, Support
+  - [x] Admin, User
+- [x] use cases
+- [x] activities
+
+---
+- [x] class diagrams
+  - [x] zoom the important part
+- [x] MLD (fix primary and foreign keys)
+- [x] sequence diagrams
+- [x] extra features (emails, administration)
+
+---
+- [x] programming languages
+- [x] screenshots
+- [x] difficulities
+- [x] future

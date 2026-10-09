@@ -12,6 +12,7 @@ using UniFlowCRM.Calls;
 using UniFlowCRM.Contacts;
 using UniFlowCRM.Leads;
 using UniFlowCRM.Opportunities;
+using UniFlowCRM.Permissions;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Authorization.Permissions;
@@ -43,7 +44,7 @@ public class TaskJoined
         return res;
     }
 }
-[Authorize]
+[Authorize(UniFlowCRMPermissions.Task.Default)]
 public class TasksAppService : CrudAppService<Task, TaskDto, Guid, TaskRequestDto, CreateUpdateTaskDto>, ITaskAppService
 {
     private readonly IRepository<Account, Guid> _accountRepository;
@@ -93,17 +94,24 @@ public class TasksAppService : CrudAppService<Task, TaskDto, Guid, TaskRequestDt
         var count = await AsyncExecuter.CountAsync(q);
         return new PagedResultDto<TaskDto>(count, ObjectMapper.Map<List<Task>, List<TaskDto>>(dtos));
     }
+    [Authorize(UniFlowCRMPermissions.Task.Create)]
     public override async Task<TaskDto> CreateAsync(CreateUpdateTaskDto input)
     {
         await _activityManager.CheckTimeAvailableAsync(input.OwnerID, input.StartTime, input.EndTime);
         return await base.CreateAsync(input);
     }
 
+    [Authorize(UniFlowCRMPermissions.Task.Edit)]
     public override async Task<TaskDto> UpdateAsync(Guid id, CreateUpdateTaskDto input)
     {
         await _activityManager.CheckTimeAvailableAsync(input.OwnerID, input.StartTime, input.EndTime);
 
         return await base.UpdateAsync(id, input);
+    }
+    [Authorize(UniFlowCRMPermissions.Task.Delete)]
+    public override async System.Threading.Tasks.Task DeleteAsync(Guid id)
+    {
+        await base.DeleteAsync(id);
     }
 
     public override async Task<TaskDto> GetAsync(Guid id)

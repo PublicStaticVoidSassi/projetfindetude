@@ -29,7 +29,7 @@ namespace UniFlowCRM.Accounts
         public IdentityUserDto? Creator { get; set; }
         public IdentityUserDto? LastModifier { get; set; }
     }
-    [Authorize]
+    [Authorize(UniFlowCRMPermissions.Account.Default)]
     public class AccountsAppService : CrudAppService<Account, AccountDto, Guid, AccountRequestDto, CreateUpdateAccountDto>, IAccountsAppService
     {
         private readonly IRepository<IdentityUser, Guid> _userRepository;
@@ -41,7 +41,7 @@ namespace UniFlowCRM.Accounts
         }
         private async Task<IQueryable<AccountJoined>> GetQueryableAsync(AccountRequestDto input)
         {
-            
+
 
             var accounts = (await Repository.GetQueryableAsync());
             if (!string.IsNullOrEmpty(input.Name))
@@ -181,7 +181,6 @@ namespace UniFlowCRM.Accounts
             return acc;
         }
 
-        [Authorize(UniFlowCRMPermissions.Account.Default)]
         public override async Task<AccountDto> GetAsync(Guid id)
         {
             var query = await GetQueryableAsync(id);
@@ -192,7 +191,6 @@ namespace UniFlowCRM.Accounts
             dto.Modifier = res.LastModifier;
             return dto;
         }
-        [Authorize(UniFlowCRMPermissions.Account.Default)]
 
         public override async Task<PagedResultDto<AccountDto>> GetListAsync(AccountRequestDto input)
         {
